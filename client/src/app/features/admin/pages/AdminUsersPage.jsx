@@ -13,10 +13,10 @@ import {
     CleanupUsersDialog,
 } from '../components/UserActionDialogs/UserActionDialogs';
 import Drawer from '@/components/Shared/Feedback/Drawer/Drawer';
-import GlobeTrotterAdminNav from '@/app/features/analytics/components/GlobeTrotterAdminNav/GlobeTrotterAdminNav';
 import AdminFooter from '@/app/features/analytics/components/AdminFooter/AdminFooter';
 import { Users as UsersIcon } from 'lucide-react';
 import './AdminUsersPage.scss';
+
 
 function AdminUsersContent() {
     const {
@@ -90,9 +90,8 @@ function AdminUsersContent() {
 
     return (
         <div className="admin-users-page-container">
-            <GlobeTrotterAdminNav />
-
             <div className="admin-users-body-content">
+
                 <div className="admin-page-header">
                     <div className="title-group">
                         <div className="icon-wrapper">

@@ -12,7 +12,9 @@
         "test:jest:post": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/tests/community",
         "test:jest:trips": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/tests/trips --runInBand",
         "test:jest:trips:log": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/tests/trips --runInBand > test-trips.log 2>&1",
+        "seed": "node src/db/seed_realistic_data.js",
         "dev": "npx nodemon server.js",
+
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format:check": "prettier . --check",

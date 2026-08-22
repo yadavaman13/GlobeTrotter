@@ -10,19 +10,15 @@ import {
     Compass,
     TrendingUp,
     FileText,
-    Bot,
     ArrowUpRight,
     Calendar,
     DollarSign,
-    Shield,
-    CheckCircle2,
     Clock,
     RefreshCw,
 } from 'lucide-react';
-import GlobeTrotterAdminNav from '@/app/features/analytics/components/GlobeTrotterAdminNav/GlobeTrotterAdminNav';
+
 import AdminFooter from '@/app/features/analytics/components/AdminFooter/AdminFooter';
 import './AdminDashboardPage.scss';
-
 
 export function AdminDashboardPage() {
     const { user } = useAuth();
@@ -74,56 +70,34 @@ export function AdminDashboardPage() {
 
     return (
         <div className="admin-dashboard-page">
-            <GlobeTrotterAdminNav />
-
             <div className="admin-page-body-container">
-                {/* Header Hero Section */}
-                <div className="admin-hero-banner">
-                    <div className="hero-content">
-                        <div className="hero-badge">
-                            <Shield size={14} />
-                            <span>System Administration Console</span>
-                        </div>
-                        <h1 className="hero-title">
+                {/* Sleek Clean Page Header */}
+                <div className="admin-page-header">
+                    <div className="header-title-group">
+                        <span className="control-center-tag">SYSTEM ADMINISTRATION CONSOLE</span>
+                        <h1 className="main-page-title">
                             Welcome back, {user?.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : 'Administrator'}
                         </h1>
-                        <p className="hero-subtitle">
+                        <p className="page-subtitle">
                             Real-time platform overview, traveler management, catalog health, and itinerary metrics.
                         </p>
-
-                        <div className="system-health-indicators">
-                            <div className="health-pill live">
-                                <span className="dot" />
-                                <span>Server: Port 3000</span>
-                            </div>
-                            <div className="health-pill live">
-                                <span className="dot" />
-                                <span>PostgreSQL: Connected</span>
-                            </div>
-                            <div className="health-pill live">
-                                <span className="dot" />
-                                <span>Redis: Active</span>
-                            </div>
-                            <div className="health-pill protected">
-                                <CheckCircle2 size={13} />
-                                <span>Database Locked & Protected</span>
-                            </div>
-                        </div>
                     </div>
 
-                    <div className="hero-actions">
+                    <div className="header-actions">
                         <Button
                             variant="secondary"
                             size="sm"
                             onClick={() => fetchDashboardData(true)}
                             loading={refreshing}
-                            className="refresh-hero-btn"
+                            className="refresh-btn"
                         >
                             <RefreshCw size={14} className={refreshing ? 'spinning' : ''} />
                             <span>Refresh Data</span>
                         </Button>
                     </div>
                 </div>
+
+
 
                 {error && (
                     <div className="admin-error-alert">
@@ -261,24 +235,9 @@ export function AdminDashboardPage() {
                             </div>
                             <ArrowUpRight size={16} className="shortcut-arrow" />
                         </div>
-
-                        <div
-                            className="shortcut-card"
-                            onClick={() => navigate('/dashboard/admin/ai')}
-                        >
-                            <div className="shortcut-icon ai">
-                                <Bot size={22} />
-                            </div>
-                            <div className="shortcut-info">
-                                <h3 className="shortcut-title">AI Copilot</h3>
-                                <p className="shortcut-desc">
-                                    Test AI-driven travel recommendations and itinerary assistant.
-                                </p>
-                            </div>
-                            <ArrowUpRight size={16} className="shortcut-arrow" />
-                        </div>
                     </div>
                 </div>
+
 
                 {/* Live Recent Itineraries & Trending Snapshot Grid */}
                 <div className="admin-content-split-grid">

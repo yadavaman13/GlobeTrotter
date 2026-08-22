@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { AnalyticsProvider, useAnalyticsContext } from '../context/AnalyticsContext';
-import GlobeTrotterAdminNav from '../components/GlobeTrotterAdminNav/GlobeTrotterAdminNav';
 import SleekMetricCards from '../components/SleekMetricCards/SleekMetricCards';
 import InteractiveEChartsSection from '../components/InteractiveEChartsSection/InteractiveEChartsSection';
 import TripStatusDonutChart from '../components/TripStatusDonutChart/TripStatusDonutChart';
@@ -22,7 +21,6 @@ function InsightsContent() {
         exportReport,
     } = useAnalyticsContext();
 
-
     const [filterSearch, setFilterSearch] = useState('');
 
     const handleSearch = (e) => {
@@ -35,16 +33,8 @@ function InsightsContent() {
 
     return (
         <div className="analytics-insights-page">
-            {/* Top Navigation Bar matching reference */}
-            <GlobeTrotterAdminNav
-                searchValue={filterSearch}
-                onSearchChange={(v) => {
-                    setFilterSearch(v);
-                    if (setSearchQuery) setSearchQuery(v);
-                }}
-            />
-
             <main className="analytics-main-container">
+
                 {/* Header Section */}
                 <div className="analytics-hero-header">
                     <div className="hero-title-group">
