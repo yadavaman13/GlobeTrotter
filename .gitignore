@@ -6,3 +6,11 @@ node_modules/
 .todo
 # Ignore stylelint error output log
 client/stylelint-errors.txt
+seed.sql
+schema.sql
+pdf_text.txt
+globetrotter.pdf
+excalidraw_text.txt
+GlobeTrotter - 8 hours.excalidraw
+message.txt
+parse_excalidraw.py

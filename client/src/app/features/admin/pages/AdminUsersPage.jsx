@@ -13,7 +13,9 @@ import {
     CleanupUsersDialog,
 } from '../components/UserActionDialogs/UserActionDialogs';
 import Drawer from '@/components/Shared/Feedback/Drawer/Drawer';
-import { Users as UsersIcon, ShieldCheck } from 'lucide-react';
+import GlobeTrotterAdminNav from '@/app/features/analytics/components/GlobeTrotterAdminNav/GlobeTrotterAdminNav';
+import AdminFooter from '@/app/features/analytics/components/AdminFooter/AdminFooter';
+import { Users as UsersIcon } from 'lucide-react';
 import './AdminUsersPage.scss';
 
 function AdminUsersContent() {
@@ -26,15 +28,14 @@ function AdminUsersContent() {
         setPage,
         loading,
         error,
-        refetch,
     } = useAdminUsers();
 
     const {
         selectedUser,
-        loadingDetails,
         openUserDetails,
         closeUserDetails,
     } = useUserDetails();
+
 
     const {
         toggleActiveStatus,
@@ -89,98 +90,105 @@ function AdminUsersContent() {
 
     return (
         <div className="admin-users-page-container">
-            <div className="admin-page-header">
-                <div className="title-group">
-                    <div className="icon-wrapper">
-                        <UsersIcon size={24} />
-                    </div>
-                    <div>
-                        <h1 className="page-title">User Account Management</h1>
-                        <p className="page-subtitle">
-                            Oversee registered traveler accounts, permissions, account verification, and status.
-                        </p>
+            <GlobeTrotterAdminNav />
+
+            <div className="admin-users-body-content">
+                <div className="admin-page-header">
+                    <div className="title-group">
+                        <div className="icon-wrapper">
+                            <UsersIcon size={24} />
+                        </div>
+                        <div>
+                            <h1 className="page-title">User Account Management</h1>
+                            <p className="page-subtitle">
+                                Oversee registered traveler accounts, permissions, account verification, and status.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {error && (
-                <div className="admin-error-banner">
-                    <span>{error}</span>
-                </div>
-            )}
-
-            <UserFilters
-                filters={filters}
-                onFilterChange={updateFilterField}
-                onResetFilters={resetFilters}
-                onOpenCleanupDialog={() => setShowCleanupModal(true)}
-                loading={loading}
-            />
-
-            <UserTable
-                users={users}
-                pagination={pagination}
-                onPageChange={setPage}
-                onViewUser={openUserDetails}
-                onToggleActiveClick={(u) => setStatusModalUser(u)}
-                onToggleDeleteClick={(u) => setDeleteModalUser(u)}
-                onRoleChangeClick={(u) => setRoleModalUser(u)}
-                loading={loading}
-            />
-
-            {/* Slide-out User Profile & Stats Drawer */}
-            <Drawer
-                isOpen={Boolean(selectedUser)}
-                onClose={closeUserDetails}
-                title="Traveler Profile & Activity"
-                subtitle={selectedUser ? `${selectedUser.firstName} ${selectedUser.lastName}` : ''}
-                size="md"
-            >
-                {selectedUser && (
-                    <UserDetailsDrawer
-                        user={selectedUser}
-                        onClose={closeUserDetails}
-                        onToggleActive={(u) => setStatusModalUser(u)}
-                        onToggleDelete={(u) => setDeleteModalUser(u)}
-                        onChangeRole={(u) => setRoleModalUser(u)}
-                        actionLoading={actionLoading}
-                    />
+                {error && (
+                    <div className="admin-error-banner">
+                        <span>{error}</span>
+                    </div>
                 )}
-            </Drawer>
 
-            {/* Interactive Confirmation Modals */}
-            <StatusChangeDialog
-                isOpen={Boolean(statusModalUser)}
-                user={statusModalUser}
-                onClose={() => setStatusModalUser(null)}
-                onConfirm={handleConfirmStatus}
-                loading={actionLoading}
-            />
+                <UserFilters
+                    filters={filters}
+                    onFilterChange={updateFilterField}
+                    onResetFilters={resetFilters}
+                    onOpenCleanupDialog={() => setShowCleanupModal(true)}
+                    loading={loading}
+                />
 
-            <RoleChangeDialog
-                isOpen={Boolean(roleModalUser)}
-                user={roleModalUser}
-                onClose={() => setRoleModalUser(null)}
-                onConfirm={handleConfirmRole}
-                loading={actionLoading}
-            />
+                <UserTable
+                    users={users}
+                    pagination={pagination}
+                    onPageChange={setPage}
+                    onViewUser={openUserDetails}
+                    onToggleActiveClick={(u) => setStatusModalUser(u)}
+                    onToggleDeleteClick={(u) => setDeleteModalUser(u)}
+                    onRoleChangeClick={(u) => setRoleModalUser(u)}
+                    loading={loading}
+                />
 
-            <DeleteUserDialog
-                isOpen={Boolean(deleteModalUser)}
-                user={deleteModalUser}
-                onClose={() => setDeleteModalUser(null)}
-                onConfirm={handleConfirmDelete}
-                loading={actionLoading}
-            />
+                {/* Slide-out User Profile & Stats Drawer */}
+                <Drawer
+                    isOpen={Boolean(selectedUser)}
+                    onClose={closeUserDetails}
+                    title="Traveler Profile & Activity"
+                    subtitle={selectedUser ? `${selectedUser.firstName} ${selectedUser.lastName}` : ''}
+                    size="md"
+                >
+                    {selectedUser && (
+                        <UserDetailsDrawer
+                            user={selectedUser}
+                            onClose={closeUserDetails}
+                            onToggleActive={(u) => setStatusModalUser(u)}
+                            onToggleDelete={(u) => setDeleteModalUser(u)}
+                            onChangeRole={(u) => setRoleModalUser(u)}
+                            actionLoading={actionLoading}
+                        />
+                    )}
+                </Drawer>
 
-            <CleanupUsersDialog
-                isOpen={showCleanupModal}
-                onClose={() => setShowCleanupModal(false)}
-                onConfirm={handleConfirmCleanup}
-                loading={actionLoading}
-            />
+                {/* Interactive Confirmation Modals */}
+                <StatusChangeDialog
+                    isOpen={Boolean(statusModalUser)}
+                    user={statusModalUser}
+                    onClose={() => setStatusModalUser(null)}
+                    onConfirm={handleConfirmStatus}
+                    loading={actionLoading}
+                />
+
+                <RoleChangeDialog
+                    isOpen={Boolean(roleModalUser)}
+                    user={roleModalUser}
+                    onClose={() => setRoleModalUser(null)}
+                    onConfirm={handleConfirmRole}
+                    loading={actionLoading}
+                />
+
+                <DeleteUserDialog
+                    isOpen={Boolean(deleteModalUser)}
+                    user={deleteModalUser}
+                    onClose={() => setDeleteModalUser(null)}
+                    onConfirm={handleConfirmDelete}
+                    loading={actionLoading}
+                />
+
+                <CleanupUsersDialog
+                    isOpen={showCleanupModal}
+                    onClose={() => setShowCleanupModal(false)}
+                    onConfirm={handleConfirmCleanup}
+                    loading={actionLoading}
+                />
+
+                <AdminFooter />
+            </div>
         </div>
     );
+
 }
 
 export default function AdminUsersPage() {

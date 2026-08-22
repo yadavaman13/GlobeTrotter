@@ -9,34 +9,49 @@ export function AnalyticsProvider({ children }) {
     const [refreshing, setRefreshing] = useState(false);
     const [error, setError] = useState(null);
     const [lastUpdated, setLastUpdated] = useState(null);
+    const [timeframe, setTimeframe] = useState('30d'); // '7d' | '30d' | 'ytd'
+    const [searchQuery, setSearchQuery] = useState('');
 
-    const loadAnalytics = useCallback(async (isSilentRefresh = false) => {
-        if (isSilentRefresh) {
-            setRefreshing(true);
-        } else {
-            setLoading(true);
-        }
-        setError(null);
-
-        try {
-            const res = await fetchPlatformAnalytics();
-            if (res.success && res.data?.analytics) {
-                setAnalytics(res.data.analytics);
-                setLastUpdated(new Date());
+    const loadAnalytics = useCallback(
+        async (isSilentRefresh = false, overrideTimeframe = timeframe, overrideSearch = searchQuery) => {
+            if (isSilentRefresh) {
+                setRefreshing(true);
+            } else {
+                setLoading(true);
             }
-        } catch (err) {
-            console.error('Error loading platform analytics:', err);
-            setError(err.response?.data?.message || err.message || 'Failed to load analytics');
-        } finally {
-            setLoading(false);
-            setRefreshing(false);
-        }
-    }, []);
+            setError(null);
 
-    // Initial fetch on mount
+            try {
+                const res = await fetchPlatformAnalytics({
+                    timeframe: overrideTimeframe,
+                    search: overrideSearch,
+                });
+                if (res.success && res.data?.analytics) {
+                    setAnalytics(res.data.analytics);
+                    setLastUpdated(new Date());
+                }
+            } catch (err) {
+                console.error('Error loading platform analytics:', err);
+                setError(err.response?.data?.message || err.message || 'Failed to load analytics');
+            } finally {
+                setLoading(false);
+                setRefreshing(false);
+            }
+        },
+        [timeframe, searchQuery],
+    );
+
+    // Fetch on timeframe changes
     useEffect(() => {
-        loadAnalytics();
-    }, [loadAnalytics]);
+        loadAnalytics(false, timeframe, searchQuery);
+    }, [timeframe]);
+
+    const handleTimeframeChange = useCallback(
+        (newTf) => {
+            setTimeframe(newTf);
+        },
+        [],
+    );
 
     const handleExport = useCallback(
         (format = 'json') => {
@@ -51,7 +66,11 @@ export function AnalyticsProvider({ children }) {
         refreshing,
         error,
         lastUpdated,
-        refreshAnalytics: () => loadAnalytics(true),
+        timeframe,
+        searchQuery,
+        setTimeframe: handleTimeframeChange,
+        setSearchQuery,
+        refreshAnalytics: () => loadAnalytics(true, timeframe, searchQuery),
         exportReport: handleExport,
     };
 
@@ -65,3 +84,4 @@ export function useAnalyticsContext() {
     }
     return context;
 }
+

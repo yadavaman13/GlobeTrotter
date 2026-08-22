@@ -1,0 +1,149 @@
+@use '../../../../../styles/variables';
+
+$tab-crimson: #e11d48;
+$tab-bg: #f8fafc;
+$btn-hover-bg: #f1f5f9;
+
+.interactive-echarts-card {
+    background-color: variables.$color-white;
+    border: 1px solid variables.$color-gray-200;
+    border-radius: variables.$radius-lg;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 2%);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+        box-shadow: 0 8px 24px rgb(0 0 0 / 4%);
+        border-color: variables.$color-gray-300;
+    }
+
+    .echarts-header-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+
+        .view-selector-tabs {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: $tab-bg;
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid variables.$color-gray-200;
+
+            .view-tab-btn {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 14px;
+                border-radius: 8px;
+                border: none;
+                background: transparent;
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-caption-sm;
+                font-weight: 600;
+                color: variables.$color-gray-600;
+                cursor: pointer;
+                transition: all 0.15s ease;
+
+                &:hover {
+                    color: variables.$color-black;
+                }
+
+                &.active {
+                    background-color: variables.$color-white;
+                    color: $tab-crimson;
+                    box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+                }
+            }
+        }
+
+        .echarts-action-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .chart-type-toggle {
+                display: flex;
+                align-items: center;
+                background-color: $tab-bg;
+                border: 1px solid variables.$color-gray-200;
+                border-radius: 8px;
+                padding: 2px;
+
+                .type-btn {
+                    padding: 4px 10px;
+                    border-radius: 6px;
+                    border: none;
+                    background: transparent;
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-micro;
+                    font-weight: 600;
+                    color: variables.$color-gray-600;
+                    cursor: pointer;
+                    transition: all 0.15s ease;
+
+                    &:hover {
+                        color: variables.$color-black;
+                    }
+
+                    &.active {
+                        background-color: variables.$color-white;
+                        color: variables.$color-black;
+                        box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+                    }
+                }
+            }
+
+            .export-chart-btn {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 12px;
+                background-color: $tab-bg;
+                border: 1px solid variables.$color-gray-200;
+                border-radius: 8px;
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-micro;
+                font-weight: 600;
+                color: variables.$color-gray-700;
+                cursor: pointer;
+                transition: all 0.15s ease;
+
+                &:hover {
+                    background-color: $btn-hover-bg;
+                    color: variables.$color-black;
+                }
+            }
+        }
+    }
+
+    .echarts-canvas-container {
+        width: 100%;
+        height: 380px;
+    }
+}
+
+@media (width <= 768px) {
+    .interactive-echarts-card {
+        padding: 16px;
+
+        .echarts-header-toolbar {
+            flex-direction: column;
+            align-items: flex-start;
+
+            .view-selector-tabs {
+                width: 100%;
+                overflow-x: auto;
+            }
+        }
+
+        .echarts-canvas-container {
+            height: 300px;
+        }
+    }
+}

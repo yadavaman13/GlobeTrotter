@@ -7,21 +7,40 @@ const analyticsApiInstance = axios.create({
 
 /**
  * Fetch complete platform metrics aggregated across all business domains
+ * @param {object} [params]
+ * @param {'7d'|'30d'|'ytd'} [params.timeframe='30d']
+ * @param {string} [params.search='']
  */
-export async function fetchPlatformAnalytics() {
-    const response = await analyticsApiInstance.get('/analytics');
+export async function fetchPlatformAnalytics(params = {}) {
+    const { timeframe = '30d', search = '' } = params;
+    const response = await analyticsApiInstance.get('/analytics', {
+        params: { timeframe, search },
+    });
     return response.data;
 }
 
 export const getAdminAnalyticsApi = fetchPlatformAnalytics;
 
 /**
+ * Trigger PDF Analytics Export / Download
+ */
+export function downloadPdfReport(_analyticsData) {
+    window.print();
+}
+
+
+/**
  * Export analytics summary data as CSV or JSON format
- * @param {'csv'|'json'} [format='json']
+ * @param {'csv'|'json'|'pdf'} [format='json']
  * @param {object} analyticsData
  */
 export function downloadAnalyticsReport(format = 'json', analyticsData) {
     if (!analyticsData) return;
+
+    if (format === 'pdf') {
+        downloadPdfReport(analyticsData);
+        return;
+    }
 
     if (format === 'json') {
         const jsonStr = JSON.stringify(analyticsData, null, 2);
@@ -46,6 +65,7 @@ export function downloadAnalyticsReport(format = 'json', analyticsData) {
             ['Users', 'Deleted Users', analyticsData.users?.deleted || 0],
             ['Users', 'New Users (Last 30 Days)', analyticsData.users?.newThisMonth || 0],
             ['Trips', 'Total Trips Created', analyticsData.trips?.total || 0],
+            ['Trips', 'Public Itineraries', analyticsData.trips?.publicCount || 0],
             ['Trips', 'Average Duration (Days)', analyticsData.trips?.averageDurationDays || 0],
             ['Trips', 'Total Estimated Budget', analyticsData.trips?.totalBudgetAmount || 0],
             ['Trips', 'Average Budget Per Trip', analyticsData.trips?.averageBudgetAmount || 0],
@@ -65,3 +85,4 @@ export function downloadAnalyticsReport(format = 'json', analyticsData) {
         document.body.removeChild(link);
     }
 }
+

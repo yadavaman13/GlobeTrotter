@@ -1,4 +1,5 @@
-import { Users, Compass, IndianRupee, MapPin, TrendingUp, Sparkles } from 'lucide-react';
+import { Users, Compass, IndianRupee, MapPin } from 'lucide-react';
+
 import StatCard from '@/components/Shared/DataDisplay/StatCard/StatCard';
 import './KpiMetricsGrid.scss';
 

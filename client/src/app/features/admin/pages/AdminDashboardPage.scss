@@ -1,12 +1,25 @@
 @use '@/styles/variables' as variables;
 
+$page-bg: #fafaf9;
+
 .admin-dashboard-page {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: variables.$spacing-base;
+    min-height: 100vh;
+    background-color: $page-bg;
     box-sizing: border-box;
-    gap: variables.$spacing-base;
+
+    .admin-page-body-container {
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 32px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-base;
+    }
 
     .admin-hero-banner {
         display: flex;

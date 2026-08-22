@@ -1,11 +1,25 @@
 @use '@/styles/variables' as variables;
 
+$page-bg: #fafaf9;
+
 .admin-users-page-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: variables.$spacing-base;
+    min-height: 100vh;
+    background-color: $page-bg;
     box-sizing: border-box;
+
+
+    .admin-users-body-content {
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 32px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
 
     .admin-page-header {
         display: flex;

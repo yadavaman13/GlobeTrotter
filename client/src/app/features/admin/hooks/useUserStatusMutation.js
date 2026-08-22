@@ -28,7 +28,7 @@ export function useUserStatusMutation() {
             } catch (err) {
                 const msg = err.response?.data?.message || err.message || 'Failed to update user status';
                 setActionError(msg);
-                throw new Error(msg);
+                throw new Error(msg, { cause: err });
             } finally {
                 setActionLoading(false);
                 setMutating(false);
@@ -55,7 +55,7 @@ export function useUserStatusMutation() {
             } catch (err) {
                 const msg = err.response?.data?.message || err.message || 'Failed to update delete state';
                 setActionError(msg);
-                throw new Error(msg);
+                throw new Error(msg, { cause: err });
             } finally {
                 setActionLoading(false);
                 setMutating(false);
@@ -80,7 +80,7 @@ export function useUserStatusMutation() {
             } catch (err) {
                 const msg = err.response?.data?.message || err.message || 'Failed to update user role';
                 setActionError(msg);
-                throw new Error(msg);
+                throw new Error(msg, { cause: err });
             } finally {
                 setActionLoading(false);
                 setMutating(false);
@@ -104,12 +104,13 @@ export function useUserStatusMutation() {
         } catch (err) {
             const msg = err.response?.data?.message || err.message || 'Failed to clean up expired users';
             setActionError(msg);
-            throw new Error(msg);
+            throw new Error(msg, { cause: err });
         } finally {
             setActionLoading(false);
             setMutating(false);
         }
     }, [removeUsersFromList, setMutating]);
+
 
     return {
         toggleActiveStatus,

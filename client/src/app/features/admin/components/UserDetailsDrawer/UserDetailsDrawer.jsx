@@ -1,4 +1,4 @@
-import { User, Mail, Calendar, Compass, Bookmark, Shield, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
+import { Mail, Calendar, Compass, Bookmark, Shield, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
 import CircularAvatar from '@/components/Shared/DataDisplay/CircularAvatar/CircularAvatar';
 import Button from '@/components/Shared/Buttons/Button/Button';
 import { UserStatusBadge, UserRoleBadge } from '../UserStatusBadge/UserStatusBadge';
@@ -6,12 +6,13 @@ import './UserDetailsDrawer.scss';
 
 export function UserDetailsDrawer({
     user,
-    onClose,
+    _onClose,
     onToggleActive,
     onToggleDelete,
     onChangeRole,
     actionLoading,
 }) {
+
     if (!user) return null;
 
     const formattedCreatedAt = user.createdAt

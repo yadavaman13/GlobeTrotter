@@ -17,10 +17,12 @@ import {
     Shield,
     CheckCircle2,
     Clock,
-    Sparkles,
     RefreshCw,
 } from 'lucide-react';
+import GlobeTrotterAdminNav from '@/app/features/analytics/components/GlobeTrotterAdminNav/GlobeTrotterAdminNav';
+import AdminFooter from '@/app/features/analytics/components/AdminFooter/AdminFooter';
 import './AdminDashboardPage.scss';
+
 
 export function AdminDashboardPage() {
     const { user } = useAuth();
@@ -72,337 +74,344 @@ export function AdminDashboardPage() {
 
     return (
         <div className="admin-dashboard-page">
-            {/* Header Hero Section */}
-            <div className="admin-hero-banner">
-                <div className="hero-content">
-                    <div className="hero-badge">
-                        <Shield size={14} />
-                        <span>System Administration Console</span>
-                    </div>
-                    <h1 className="hero-title">
-                        Welcome back, {user?.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : 'Administrator'}
-                    </h1>
-                    <p className="hero-subtitle">
-                        Real-time platform overview, traveler management, catalog health, and itinerary metrics.
-                    </p>
+            <GlobeTrotterAdminNav />
 
-                    <div className="system-health-indicators">
-                        <div className="health-pill live">
-                            <span className="dot" />
-                            <span>Server: Port 3000</span>
+            <div className="admin-page-body-container">
+                {/* Header Hero Section */}
+                <div className="admin-hero-banner">
+                    <div className="hero-content">
+                        <div className="hero-badge">
+                            <Shield size={14} />
+                            <span>System Administration Console</span>
                         </div>
-                        <div className="health-pill live">
-                            <span className="dot" />
-                            <span>PostgreSQL: Connected</span>
-                        </div>
-                        <div className="health-pill live">
-                            <span className="dot" />
-                            <span>Redis: Active</span>
-                        </div>
-                        <div className="health-pill protected">
-                            <CheckCircle2 size={13} />
-                            <span>Database Locked & Protected</span>
-                        </div>
-                    </div>
-                </div>
+                        <h1 className="hero-title">
+                            Welcome back, {user?.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : 'Administrator'}
+                        </h1>
+                        <p className="hero-subtitle">
+                            Real-time platform overview, traveler management, catalog health, and itinerary metrics.
+                        </p>
 
-                <div className="hero-actions">
-                    <Button
-                        variant="secondary"
-                        size="sm"
-                        onClick={() => fetchDashboardData(true)}
-                        loading={refreshing}
-                        className="refresh-hero-btn"
-                    >
-                        <RefreshCw size={14} className={refreshing ? 'spinning' : ''} />
-                        <span>Refresh Data</span>
-                    </Button>
-                </div>
-            </div>
-
-            {error && (
-                <div className="admin-error-alert">
-                    <span>{error}</span>
-                </div>
-            )}
-
-            {/* Quick Stat Cards */}
-            <div className="admin-stats-grid">
-                <div
-                    className="stat-card clickable"
-                    onClick={() => navigate('/dashboard/admin/users')}
-                >
-                    <div className="stat-header">
-                        <div className="icon-wrapper users">
-                            <Users size={20} />
+                        <div className="system-health-indicators">
+                            <div className="health-pill live">
+                                <span className="dot" />
+                                <span>Server: Port 3000</span>
+                            </div>
+                            <div className="health-pill live">
+                                <span className="dot" />
+                                <span>PostgreSQL: Connected</span>
+                            </div>
+                            <div className="health-pill live">
+                                <span className="dot" />
+                                <span>Redis: Active</span>
+                            </div>
+                            <div className="health-pill protected">
+                                <CheckCircle2 size={13} />
+                                <span>Database Locked & Protected</span>
+                            </div>
                         </div>
-                        <ArrowUpRight size={16} className="arrow-icon" />
-                    </div>
-                    <div className="stat-body">
-                        <span className="stat-label">Total Travelers</span>
-                        <div className="stat-value">{loading ? '—' : userStats.total}</div>
-                        <span className="stat-footnote positive">
-                            +{userStats.newThisMonth} new this month
-                        </span>
-                    </div>
-                </div>
-
-                <div
-                    className="stat-card clickable"
-                    onClick={() => navigate('/dashboard/admin/analytics/insight')}
-                >
-                    <div className="stat-header">
-                        <div className="icon-wrapper trips">
-                            <MapPin size={20} />
-                        </div>
-                        <ArrowUpRight size={16} className="arrow-icon" />
-                    </div>
-                    <div className="stat-body">
-                        <span className="stat-label">Created Itineraries</span>
-                        <div className="stat-value">{loading ? '—' : tripStats.total}</div>
-                        <span className="stat-footnote">
-                            {tripStats.byStatus?.ongoing || 0} ongoing • {tripStats.byStatus?.planned || 0} planned
-                        </span>
-                    </div>
-                </div>
-
-                <div
-                    className="stat-card clickable"
-                    onClick={() => navigate('/dashboard/admin/analytics/insight')}
-                >
-                    <div className="stat-header">
-                        <div className="icon-wrapper financials">
-                            <DollarSign size={20} />
-                        </div>
-                        <ArrowUpRight size={16} className="arrow-icon" />
-                    </div>
-                    <div className="stat-body">
-                        <span className="stat-label">Recorded Expenses</span>
-                        <div className="stat-value">{loading ? '—' : formattedExpenses}</div>
-                        <span className="stat-footnote positive">Tracked across Indian trips</span>
-                    </div>
-                </div>
-
-                <div
-                    className="stat-card clickable"
-                    onClick={() => navigate('/dashboard/admin/analytics/insight')}
-                >
-                    <div className="stat-header">
-                        <div className="icon-wrapper catalog">
-                            <Compass size={20} />
-                        </div>
-                        <ArrowUpRight size={16} className="arrow-icon" />
-                    </div>
-                    <div className="stat-body">
-                        <span className="stat-label">Indian Catalog</span>
-                        <div className="stat-value">
-                            {loading ? '—' : `${catalogStats.totalCities} Cities`}
-                        </div>
-                        <span className="stat-footnote">
-                            {catalogStats.totalActivities} Curated Experiences
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            {/* Admin Command Center / Shortcuts */}
-            <div className="admin-shortcuts-section">
-                <h2 className="section-heading">Quick Actions & Navigation</h2>
-                <div className="shortcuts-grid">
-                    <div
-                        className="shortcut-card"
-                        onClick={() => navigate('/dashboard/admin/users')}
-                    >
-                        <div className="shortcut-icon users">
-                            <Users size={22} />
-                        </div>
-                        <div className="shortcut-info">
-                            <h3 className="shortcut-title">Manage Users</h3>
-                            <p className="shortcut-desc">
-                                Oversee registered accounts, assign roles, and handle verification.
-                            </p>
-                        </div>
-                        <ArrowUpRight size={16} className="shortcut-arrow" />
                     </div>
 
-                    <div
-                        className="shortcut-card"
-                        onClick={() => navigate('/dashboard/admin/analytics/insight')}
-                    >
-                        <div className="shortcut-icon analytics">
-                            <TrendingUp size={22} />
-                        </div>
-                        <div className="shortcut-info">
-                            <h3 className="shortcut-title">Platform Insights</h3>
-                            <p className="shortcut-desc">
-                                Explore status distributions, popular destinations, and expense ledgers.
-                            </p>
-                        </div>
-                        <ArrowUpRight size={16} className="shortcut-arrow" />
-                    </div>
-
-                    <div
-                        className="shortcut-card"
-                        onClick={() => navigate('/dashboard/admin/analytics/reports')}
-                    >
-                        <div className="shortcut-icon reports">
-                            <FileText size={22} />
-                        </div>
-                        <div className="shortcut-info">
-                            <h3 className="shortcut-title">PDF Reports</h3>
-                            <p className="shortcut-desc">
-                                Generate and download executive platform analytics in PDF format.
-                            </p>
-                        </div>
-                        <ArrowUpRight size={16} className="shortcut-arrow" />
-                    </div>
-
-                    <div
-                        className="shortcut-card"
-                        onClick={() => navigate('/dashboard/admin/ai')}
-                    >
-                        <div className="shortcut-icon ai">
-                            <Bot size={22} />
-                        </div>
-                        <div className="shortcut-info">
-                            <h3 className="shortcut-title">AI Copilot</h3>
-                            <p className="shortcut-desc">
-                                Test AI-driven travel recommendations and itinerary assistant.
-                            </p>
-                        </div>
-                        <ArrowUpRight size={16} className="shortcut-arrow" />
-                    </div>
-                </div>
-            </div>
-
-            {/* Live Recent Itineraries & Trending Snapshot Grid */}
-            <div className="admin-content-split-grid">
-                {/* Recent Platform Itineraries */}
-                <div className="admin-card recent-trips-card">
-                    <div className="card-header">
-                        <div>
-                            <h3 className="card-title">Recent Traveler Itineraries</h3>
-                            <span className="card-caption">
-                                Latest multi-city trips planned by travelers
-                            </span>
-                        </div>
+                    <div className="hero-actions">
                         <Button
-                            variant="ghost"
+                            variant="secondary"
                             size="sm"
-                            onClick={() => navigate('/dashboard/admin/analytics/insight')}
+                            onClick={() => fetchDashboardData(true)}
+                            loading={refreshing}
+                            className="refresh-hero-btn"
                         >
-                            View All
+                            <RefreshCw size={14} className={refreshing ? 'spinning' : ''} />
+                            <span>Refresh Data</span>
                         </Button>
                     </div>
-
-                    <div className="trips-table-wrapper">
-                        {tripStats.recent && tripStats.recent.length > 0 ? (
-                            <table className="recent-trips-table">
-                                <thead>
-                                    <tr>
-                                        <th>Itinerary Name</th>
-                                        <th>Traveler</th>
-                                        <th>Budget</th>
-                                        <th>Stops</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {tripStats.recent.map((trip) => {
-                                        const tripBudget = trip.budgetAmount
-                                            ? new Intl.NumberFormat('en-IN', {
-                                                  style: 'currency',
-                                                  currency: trip.budgetCurrency || 'INR',
-                                                  maximumFractionDigits: 0,
-                                              }).format(trip.budgetAmount)
-                                            : '—';
-
-                                        const getStatusVariant = (st) => {
-                                            switch (st) {
-                                                case 'completed':
-                                                    return 'success';
-                                                case 'ongoing':
-                                                    return 'info';
-                                                case 'planned':
-                                                    return 'primary';
-                                                default:
-                                                    return 'neutral';
-                                            }
-                                        };
-
-                                        return (
-                                            <tr key={trip.id}>
-                                                <td className="trip-name-cell">
-                                                    <span className="name">{trip.name}</span>
-                                                    <span className="dates">
-                                                        <Calendar size={12} />
-                                                        {trip.startDate} to {trip.endDate}
-                                                    </span>
-                                                </td>
-                                                <td>
-                                                    <div className="owner-cell">
-                                                        <span className="owner-name">{trip.ownerName}</span>
-                                                        <span className="owner-email">{trip.ownerEmail}</span>
-                                                    </div>
-                                                </td>
-                                                <td className="budget-cell">{tripBudget}</td>
-                                                <td className="stops-cell">{trip.stopCount} stops</td>
-                                                <td>
-                                                    <Badge
-                                                        variant={getStatusVariant(trip.status)}
-                                                        type="subtle"
-                                                    >
-                                                        {trip.status}
-                                                    </Badge>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-                        ) : (
-                            <div className="empty-trips-placeholder">
-                                <Clock size={28} />
-                                <p>No itineraries created yet.</p>
-                            </div>
-                        )}
-                    </div>
                 </div>
 
-                {/* Trending Catalog Snapshot */}
-                <div className="admin-card trending-snapshot-card">
-                    <div className="card-header">
-                        <div>
-                            <h3 className="card-title">Top Destinations Snapshot</h3>
-                            <span className="card-caption">Most frequented travel hubs</span>
+                {error && (
+                    <div className="admin-error-alert">
+                        <span>{error}</span>
+                    </div>
+                )}
+
+                {/* Quick Stat Cards */}
+                <div className="admin-stats-grid">
+                    <div
+                        className="stat-card clickable"
+                        onClick={() => navigate('/dashboard/admin/users')}
+                    >
+                        <div className="stat-header">
+                            <div className="icon-wrapper users">
+                                <Users size={20} />
+                            </div>
+                            <ArrowUpRight size={16} className="arrow-icon" />
+                        </div>
+                        <div className="stat-body">
+                            <span className="stat-label">Total Travelers</span>
+                            <div className="stat-value">{loading ? '—' : userStats.total}</div>
+                            <span className="stat-footnote positive">
+                                +{userStats.newThisMonth} new this month
+                            </span>
                         </div>
                     </div>
 
-                    <div className="destinations-mini-list">
-                        {catalogStats.popularCities && catalogStats.popularCities.length > 0 ? (
-                            catalogStats.popularCities.slice(0, 5).map((city, idx) => (
-                                <div key={city.id || idx} className="destination-mini-row">
-                                    <div className="rank-badge">#{idx + 1}</div>
-                                    <div className="dest-info">
-                                        <span className="dest-name">{city.name}</span>
-                                        <span className="dest-region">{city.region}, {city.country}</span>
-                                    </div>
-                                    <div className="dest-stats">
-                                        <span className="stops-pill">{city.visitCount} stops</span>
-                                        <span className="rating-pill">★ {city.popularity || '9.5'}</span>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <div className="empty-dest-placeholder">
-                                <p>Catalog destinations loading...</p>
+                    <div
+                        className="stat-card clickable"
+                        onClick={() => navigate('/dashboard/admin/analytics')}
+                    >
+                        <div className="stat-header">
+                            <div className="icon-wrapper trips">
+                                <MapPin size={20} />
                             </div>
-                        )}
+                            <ArrowUpRight size={16} className="arrow-icon" />
+                        </div>
+                        <div className="stat-body">
+                            <span className="stat-label">Created Itineraries</span>
+                            <div className="stat-value">{loading ? '—' : tripStats.total}</div>
+                            <span className="stat-footnote">
+                                {tripStats.byStatus?.ongoing || 0} ongoing • {tripStats.byStatus?.planned || 0} planned
+                            </span>
+                        </div>
+                    </div>
+
+                    <div
+                        className="stat-card clickable"
+                        onClick={() => navigate('/dashboard/admin/analytics')}
+                    >
+                        <div className="stat-header">
+                            <div className="icon-wrapper financials">
+                                <DollarSign size={20} />
+                            </div>
+                            <ArrowUpRight size={16} className="arrow-icon" />
+                        </div>
+                        <div className="stat-body">
+                            <span className="stat-label">Recorded Expenses</span>
+                            <div className="stat-value">{loading ? '—' : formattedExpenses}</div>
+                            <span className="stat-footnote positive">Tracked across Indian trips</span>
+                        </div>
+                    </div>
+
+                    <div
+                        className="stat-card clickable"
+                        onClick={() => navigate('/dashboard/admin/analytics')}
+                    >
+                        <div className="stat-header">
+                            <div className="icon-wrapper catalog">
+                                <Compass size={20} />
+                            </div>
+                            <ArrowUpRight size={16} className="arrow-icon" />
+                        </div>
+                        <div className="stat-body">
+                            <span className="stat-label">Indian Catalog</span>
+                            <div className="stat-value">
+                                {loading ? '—' : `${catalogStats.totalCities} Cities`}
+                            </div>
+                            <span className="stat-footnote">
+                                {catalogStats.totalActivities} Curated Experiences
+                            </span>
+                        </div>
                     </div>
                 </div>
+
+                {/* Admin Command Center / Shortcuts */}
+                <div className="admin-shortcuts-section">
+                    <h2 className="section-heading">Quick Actions & Navigation</h2>
+                    <div className="shortcuts-grid">
+                        <div
+                            className="shortcut-card"
+                            onClick={() => navigate('/dashboard/admin/users')}
+                        >
+                            <div className="shortcut-icon users">
+                                <Users size={22} />
+                            </div>
+                            <div className="shortcut-info">
+                                <h3 className="shortcut-title">Manage Users</h3>
+                                <p className="shortcut-desc">
+                                    Oversee registered accounts, assign roles, and handle verification.
+                                </p>
+                            </div>
+                            <ArrowUpRight size={16} className="shortcut-arrow" />
+                        </div>
+
+                        <div
+                            className="shortcut-card"
+                            onClick={() => navigate('/dashboard/admin/analytics')}
+                        >
+                            <div className="shortcut-icon analytics">
+                                <TrendingUp size={22} />
+                            </div>
+                            <div className="shortcut-info">
+                                <h3 className="shortcut-title">Platform Insights</h3>
+                                <p className="shortcut-desc">
+                                    Explore status distributions, popular destinations, and expense ledgers.
+                                </p>
+                            </div>
+                            <ArrowUpRight size={16} className="shortcut-arrow" />
+                        </div>
+
+                        <div
+                            className="shortcut-card"
+                            onClick={() => navigate('/dashboard/admin/analytics')}
+                        >
+                            <div className="shortcut-icon reports">
+                                <FileText size={22} />
+                            </div>
+                            <div className="shortcut-info">
+                                <h3 className="shortcut-title">PDF Reports</h3>
+                                <p className="shortcut-desc">
+                                    Generate and download executive platform analytics in PDF format.
+                                </p>
+                            </div>
+                            <ArrowUpRight size={16} className="shortcut-arrow" />
+                        </div>
+
+                        <div
+                            className="shortcut-card"
+                            onClick={() => navigate('/dashboard/admin/ai')}
+                        >
+                            <div className="shortcut-icon ai">
+                                <Bot size={22} />
+                            </div>
+                            <div className="shortcut-info">
+                                <h3 className="shortcut-title">AI Copilot</h3>
+                                <p className="shortcut-desc">
+                                    Test AI-driven travel recommendations and itinerary assistant.
+                                </p>
+                            </div>
+                            <ArrowUpRight size={16} className="shortcut-arrow" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Live Recent Itineraries & Trending Snapshot Grid */}
+                <div className="admin-content-split-grid">
+                    {/* Recent Platform Itineraries */}
+                    <div className="admin-card recent-trips-card">
+                        <div className="card-header">
+                            <div>
+                                <h3 className="card-title">Recent Traveler Itineraries</h3>
+                                <span className="card-caption">
+                                    Latest multi-city trips planned by travelers
+                                </span>
+                            </div>
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => navigate('/dashboard/admin/analytics')}
+                            >
+                                View All
+                            </Button>
+                        </div>
+
+                        <div className="trips-table-wrapper">
+                            {tripStats.recent && tripStats.recent.length > 0 ? (
+                                <table className="recent-trips-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Itinerary Name</th>
+                                            <th>Traveler</th>
+                                            <th>Budget</th>
+                                            <th>Stops</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {tripStats.recent.map((trip) => {
+                                            const tripBudget = trip.budgetAmount
+                                                ? new Intl.NumberFormat('en-IN', {
+                                                      style: 'currency',
+                                                      currency: trip.budgetCurrency || 'INR',
+                                                      maximumFractionDigits: 0,
+                                                  }).format(trip.budgetAmount)
+                                                : '—';
+
+                                            const getStatusVariant = (st) => {
+                                                switch (st) {
+                                                    case 'completed':
+                                                        return 'success';
+                                                    case 'ongoing':
+                                                        return 'info';
+                                                    case 'planned':
+                                                        return 'primary';
+                                                    default:
+                                                        return 'neutral';
+                                                }
+                                            };
+
+                                            return (
+                                                <tr key={trip.id}>
+                                                    <td className="trip-name-cell">
+                                                        <span className="name">{trip.name}</span>
+                                                        <span className="dates">
+                                                            <Calendar size={12} />
+                                                            {trip.startDate} to {trip.endDate}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div className="owner-cell">
+                                                            <span className="owner-name">{trip.ownerName}</span>
+                                                            <span className="owner-email">{trip.ownerEmail}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td className="budget-cell">{tripBudget}</td>
+                                                    <td className="stops-cell">{trip.stopCount} stops</td>
+                                                    <td>
+                                                        <Badge
+                                                            variant={getStatusVariant(trip.status)}
+                                                            type="subtle"
+                                                        >
+                                                            {trip.status}
+                                                        </Badge>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <div className="empty-trips-placeholder">
+                                    <Clock size={28} />
+                                    <p>No itineraries created yet.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Trending Catalog Snapshot */}
+                    <div className="admin-card trending-snapshot-card">
+                        <div className="card-header">
+                            <div>
+                                <h3 className="card-title">Top Destinations Snapshot</h3>
+                                <span className="card-caption">Most frequented travel hubs</span>
+                            </div>
+                        </div>
+
+                        <div className="destinations-mini-list">
+                            {catalogStats.popularCities && catalogStats.popularCities.length > 0 ? (
+                                catalogStats.popularCities.slice(0, 5).map((city, idx) => (
+                                    <div key={city.id || idx} className="destination-mini-row">
+                                        <div className="rank-badge">#{idx + 1}</div>
+                                        <div className="dest-info">
+                                            <span className="dest-name">{city.name}</span>
+                                            <span className="dest-region">{city.region}, {city.country}</span>
+                                        </div>
+                                        <div className="dest-stats">
+                                            <span className="stops-pill">{city.visitCount} stops</span>
+                                            <span className="rating-pill">★ {city.popularity || '9.5'}</span>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="empty-dest-placeholder">
+                                    <p>Catalog destinations loading...</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                <AdminFooter />
             </div>
         </div>
     );
+
 }
 
 export default AdminDashboardPage;
