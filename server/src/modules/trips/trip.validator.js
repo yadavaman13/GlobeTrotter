@@ -314,3 +314,23 @@ export const updateCostValidator = [
         .withMessage('Cost date must be a valid ISO date.'),
     validateRequest,
 ];
+
+// ----------------------------------------------------
+// TRIP SHARE VALIDATOR
+// ----------------------------------------------------
+
+export const shareTripValidator = [
+    body('email').optional().trim().isEmail().withMessage('Please provide a valid email address.'),
+    body('userId').optional().isUUID().withMessage('User ID must be a valid UUID.'),
+    body('sharedWithUserId')
+        .optional()
+        .isUUID()
+        .withMessage('Shared with user ID must be a valid UUID.'),
+    body().custom((value, { req }) => {
+        if (!req.body.email && !req.body.userId && !req.body.sharedWithUserId) {
+            throw new Error('Either user email or user ID is required to share a trip.');
+        }
+        return true;
+    }),
+    validateRequest,
+];

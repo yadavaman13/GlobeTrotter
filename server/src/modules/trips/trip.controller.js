@@ -7,6 +7,7 @@ import {
     getHydratedTripById,
     updateTripStatus as updateTripStatusDao,
     updateTripVisibility as updateTripVisibilityDao,
+    cloneTripTransaction,
 } from '../../dao/trip.dao.js';
 import { sendResponse } from '../../utils/response.utlis.js';
 
@@ -373,6 +374,38 @@ export async function updateTripVisibility(req, res) {
             message: 'Failed to update trip visibility.',
             success: false,
             error: error.message,
+        });
+    }
+}
+
+/**
+ * POST /api/trips/:tripId/clone
+ * Clone/Copy an existing trip into a new draft itinerary under the authenticated user
+ */
+export async function cloneTrip(req, res) {
+    try {
+        const tripId = req.params.tripId;
+        const customTitle = req.body?.name || req.body?.title;
+
+        const cloned = await cloneTripTransaction(tripId, req.user.id, customTitle);
+
+        return sendResponse({
+            res,
+            statusCode: 201,
+            message: 'Trip cloned successfully.',
+            success: true,
+            data: {
+                trip: cloned,
+            },
+        });
+    } catch (error) {
+        console.error('cloneTrip error:', error);
+        const statusCode = error.message === 'Source trip not found.' ? 404 : 500;
+        return sendResponse({
+            res,
+            statusCode,
+            message: error.message || 'Internal server error while cloning trip.',
+            success: false,
         });
     }
 }
