@@ -7,7 +7,7 @@ A specialized confirmation toast component for destructive operations, featuring
 ## 1. Import Path
 
 ```javascript
-import DeleteToast from "@/components/Shared/Feedback/DeleteToast/DeleteToast";
+import DeleteToast from '@/components/Shared/Feedback/DeleteToast/DeleteToast';
 ```
 
 ---
@@ -26,21 +26,17 @@ import DeleteToast from "@/components/Shared/Feedback/DeleteToast/DeleteToast";
 ## 3. Usage Example
 
 ```jsx
-import DeleteToast from "@/components/Shared/Feedback/DeleteToast/DeleteToast";
+import DeleteToast from '@/components/Shared/Feedback/DeleteToast/DeleteToast';
 
-export default function DeleteAction({
-  isDeleted,
-  handleUndoDelete,
-  handleCloseToast,
-}) {
-  if (!isDeleted) return null;
+export default function DeleteAction({ isDeleted, handleUndoDelete, handleCloseToast }) {
+    if (!isDeleted) return null;
 
-  return (
-    <DeleteToast
-      message="Lead deleted successfully"
-      onUndo={handleUndoDelete}
-      onDismiss={handleCloseToast}
-    />
-  );
+    return (
+        <DeleteToast
+            message="Lead deleted successfully"
+            onUndo={handleUndoDelete}
+            onDismiss={handleCloseToast}
+        />
+    );
 }
 ```

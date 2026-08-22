@@ -7,7 +7,7 @@ A custom date input selector supporting `DD-MM-YYYY` Indian/international date f
 ## 1. Import Path
 
 ```javascript
-import DatePicker from "@/components/Shared/Form/DatePicker/DatePicker";
+import DatePicker from '@/components/Shared/Form/DatePicker/DatePicker';
 ```
 
 ---
@@ -30,19 +30,19 @@ import DatePicker from "@/components/Shared/Form/DatePicker/DatePicker";
 ## 3. Usage Example
 
 ```jsx
-import { useState } from "react";
-import DatePicker from "@/components/Shared/Form/DatePicker/DatePicker";
+import { useState } from 'react';
+import DatePicker from '@/components/Shared/Form/DatePicker/DatePicker';
 
 export default function InvoiceFilter() {
-  const [dueDate, setDueDate] = useState("");
+    const [dueDate, setDueDate] = useState('');
 
-  return (
-    <DatePicker
-      label="Invoice Due Date"
-      value={dueDate}
-      onChange={setDueDate}
-      placeholder="DD-MM-YYYY"
-    />
-  );
+    return (
+        <DatePicker
+            label="Invoice Due Date"
+            value={dueDate}
+            onChange={setDueDate}
+            placeholder="DD-MM-YYYY"
+        />
+    );
 }
 ```

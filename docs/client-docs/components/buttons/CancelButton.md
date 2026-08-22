@@ -7,7 +7,7 @@ A pre-styled secondary button used for cancelling modal flows, form changes, and
 ## 1. Import Path
 
 ```javascript
-import CancelButton from "@/components/Shared/Buttons/CancelButton/CancelButton";
+import CancelButton from '@/components/Shared/Buttons/CancelButton/CancelButton';
 ```
 
 ---
@@ -27,15 +27,15 @@ import CancelButton from "@/components/Shared/Buttons/CancelButton/CancelButton"
 ## 3. Usage Example
 
 ```jsx
-import CancelButton from "@/components/Shared/Buttons/CancelButton/CancelButton";
-import SaveDetailsButton from "@/components/Shared/Buttons/SaveDetailsButton/SaveDetailsButton";
+import CancelButton from '@/components/Shared/Buttons/CancelButton/CancelButton';
+import SaveDetailsButton from '@/components/Shared/Buttons/SaveDetailsButton/SaveDetailsButton';
 
 export default function ModalActions({ onClose, onSave }) {
-  return (
-    <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
-      <CancelButton onClick={onClose} />
-      <SaveDetailsButton onClick={onSave}>Save Changes</SaveDetailsButton>
-    </div>
-  );
+    return (
+        <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+            <CancelButton onClick={onClose} />
+            <SaveDetailsButton onClick={onSave}>Save Changes</SaveDetailsButton>
+        </div>
+    );
 }
 ```

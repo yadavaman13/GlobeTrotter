@@ -7,7 +7,7 @@ A specialized primary action button used for committing form details, profile up
 ## 1. Import Path
 
 ```javascript
-import SaveDetailsButton from "@/components/Shared/Buttons/SaveDetailsButton/SaveDetailsButton";
+import SaveDetailsButton from '@/components/Shared/Buttons/SaveDetailsButton/SaveDetailsButton';
 ```
 
 ---
@@ -28,13 +28,13 @@ import SaveDetailsButton from "@/components/Shared/Buttons/SaveDetailsButton/Sav
 ## 3. Usage Example
 
 ```jsx
-import SaveDetailsButton from "@/components/Shared/Buttons/SaveDetailsButton/SaveDetailsButton";
+import SaveDetailsButton from '@/components/Shared/Buttons/SaveDetailsButton/SaveDetailsButton';
 
 export default function ProfileForm({ isSaving, onSave }) {
-  return (
-    <SaveDetailsButton type="submit" loading={isSaving} onClick={onSave}>
-      Save Profile
-    </SaveDetailsButton>
-  );
+    return (
+        <SaveDetailsButton type="submit" loading={isSaving} onClick={onSave}>
+            Save Profile
+        </SaveDetailsButton>
+    );
 }
 ```

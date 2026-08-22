@@ -7,7 +7,7 @@ A microphone audio recording button integrated with the browser Web Speech API f
 ## 1. Import Path
 
 ```javascript
-import { SpeechInput } from "@/components/ai-elements/speech-input/speech-input";
+import { SpeechInput } from '@/components/ai-elements/speech-input/speech-input';
 ```
 
 ---
@@ -24,9 +24,9 @@ import { SpeechInput } from "@/components/ai-elements/speech-input/speech-input"
 ## 3. Usage Example
 
 ```jsx
-import { SpeechInput } from "@/components/ai-elements/speech-input/speech-input";
+import { SpeechInput } from '@/components/ai-elements/speech-input/speech-input';
 
 export default function VoicePromptBar({ onAppendText }) {
-  return <SpeechInput onTranscript={(text) => onAppendText(text)} />;
+    return <SpeechInput onTranscript={(text) => onAppendText(text)} />;
 }
 ```

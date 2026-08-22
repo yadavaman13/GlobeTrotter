@@ -7,7 +7,7 @@ A multi-cell digit input component designed for OTP security codes. Automaticall
 ## 1. Import Path
 
 ```javascript
-import OtpInput from "@/components/Shared/Form/OtpInput/OtpInput";
+import OtpInput from '@/components/Shared/Form/OtpInput/OtpInput';
 ```
 
 ---
@@ -27,17 +27,17 @@ import OtpInput from "@/components/Shared/Form/OtpInput/OtpInput";
 ## 3. Usage Example
 
 ```jsx
-import { useState } from "react";
-import OtpInput from "@/components/Shared/Form/OtpInput/OtpInput";
+import { useState } from 'react';
+import OtpInput from '@/components/Shared/Form/OtpInput/OtpInput';
 
 export default function TwoFactorCode() {
-  const [code, setCode] = useState("");
+    const [code, setCode] = useState('');
 
-  return (
-    <div style={{ textAlign: "center" }}>
-      <p>Enter 6-digit verification code</p>
-      <OtpInput length={6} value={code} onChange={setCode} />
-    </div>
-  );
+    return (
+        <div style={{ textAlign: 'center' }}>
+            <p>Enter 6-digit verification code</p>
+            <OtpInput length={6} value={code} onChange={setCode} />
+        </div>
+    );
 }
 ```

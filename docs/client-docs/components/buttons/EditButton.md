@@ -7,7 +7,7 @@ A pre-styled secondary action button featuring an edit pencil icon used for inli
 ## 1. Import Path
 
 ```javascript
-import EditButton from "@/components/Shared/Buttons/EditButton/EditButton";
+import EditButton from '@/components/Shared/Buttons/EditButton/EditButton';
 ```
 
 ---
@@ -27,16 +27,16 @@ import EditButton from "@/components/Shared/Buttons/EditButton/EditButton";
 ## 3. Usage Example
 
 ```jsx
-import EditButton from "@/components/Shared/Buttons/EditButton/EditButton";
+import EditButton from '@/components/Shared/Buttons/EditButton/EditButton';
 
 export default function UserCard({ user, onEdit }) {
-  return (
-    <div className="user-card">
-      <h3>{user.name}</h3>
-      <EditButton size="sm" onClick={() => onEdit(user)}>
-        Edit Profile
-      </EditButton>
-    </div>
-  );
+    return (
+        <div className="user-card">
+            <h3>{user.name}</h3>
+            <EditButton size="sm" onClick={() => onEdit(user)}>
+                Edit Profile
+            </EditButton>
+        </div>
+    );
 }
 ```

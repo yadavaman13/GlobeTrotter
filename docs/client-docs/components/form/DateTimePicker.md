@@ -7,7 +7,7 @@ A combined date and time picker input component designed for scheduling calendar
 ## 1. Import Path
 
 ```javascript
-import DateTimePicker from "@/components/Shared/Form/DateTimePicker/DateTimePicker";
+import DateTimePicker from '@/components/Shared/Form/DateTimePicker/DateTimePicker';
 ```
 
 ---
@@ -27,18 +27,12 @@ import DateTimePicker from "@/components/Shared/Form/DateTimePicker/DateTimePick
 ## 3. Usage Example
 
 ```jsx
-import { useState } from "react";
-import DateTimePicker from "@/components/Shared/Form/DateTimePicker/DateTimePicker";
+import { useState } from 'react';
+import DateTimePicker from '@/components/Shared/Form/DateTimePicker/DateTimePicker';
 
 export default function MeetingScheduler() {
-  const [meetingTime, setMeetingTime] = useState("");
+    const [meetingTime, setMeetingTime] = useState('');
 
-  return (
-    <DateTimePicker
-      label="Schedule Demo"
-      value={meetingTime}
-      onChange={setMeetingTime}
-    />
-  );
+    return <DateTimePicker label="Schedule Demo" value={meetingTime} onChange={setMeetingTime} />;
 }
 ```

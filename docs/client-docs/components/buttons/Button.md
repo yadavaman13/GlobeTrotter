@@ -7,7 +7,7 @@ A versatile, high-performance base button primitive supporting multiple visual v
 ## 1. Import Path
 
 ```javascript
-import Button from "@/components/Shared/Buttons/Button/Button";
+import Button from '@/components/Shared/Buttons/Button/Button';
 ```
 
 ---
@@ -33,28 +33,28 @@ import Button from "@/components/Shared/Buttons/Button/Button";
 ### Primary Submit Button with Loading State
 
 ```jsx
-import Button from "@/components/Shared/Buttons/Button/Button";
-import { useAuth } from "@/app/features/auth/hooks/useAuth";
+import Button from '@/components/Shared/Buttons/Button/Button';
+import { useAuth } from '@/app/features/auth/hooks/useAuth';
 
 export default function SubmitExample() {
-  const { loading } = useAuth();
+    const { loading } = useAuth();
 
-  return (
-    <Button type="submit" variant="primary" size="lg" loading={loading}>
-      Save Changes
-    </Button>
-  );
+    return (
+        <Button type="submit" variant="primary" size="lg" loading={loading}>
+            Save Changes
+        </Button>
+    );
 }
 ```
 
 ### Secondary & Outlined Variants
 
 ```jsx
-<div style={{ display: "flex", gap: "12px" }}>
-  <Button variant="primary">Confirm</Button>
-  <Button variant="secondary">Cancel</Button>
-  <Button variant="outline">Learn More</Button>
-  <Button variant="danger">Delete Account</Button>
+<div style={{ display: 'flex', gap: '12px' }}>
+    <Button variant="primary">Confirm</Button>
+    <Button variant="secondary">Cancel</Button>
+    <Button variant="outline">Learn More</Button>
+    <Button variant="danger">Delete Account</Button>
 </div>
 ```
 
@@ -64,7 +64,7 @@ export default function SubmitExample() {
 
 - Stylesheet: `client/src/components/Shared/Buttons/Button/Button.scss`
 - Variables used:
-  - `$color-primary`, `$color-white`, `$color-gray-100`, `$color-gray-200`
-  - `$radius-small` (`10px`), `$radius-medium` (`16px`)
-  - `@include variables.transition-ease;`
-  - `.btn-shine` sweep animation on hover
+    - `$color-primary`, `$color-white`, `$color-gray-100`, `$color-gray-200`
+    - `$radius-small` (`10px`), `$radius-medium` (`16px`)
+    - `@include variables.transition-ease;`
+    - `.btn-shine` sweep animation on hover

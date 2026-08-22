@@ -26,155 +26,155 @@ All routes are prefixed with `/api/auth`, `/api/users`, or `/api/admin`.
 #### Public Endpoints
 
 - **`POST /api/auth/register`**
-  - **Description:** Registers a new user account.
-  - **Request Body:**
-    ```json
-    {
-      "name": "Jane Doe",
-      "email": "jane.doe@example.com",
-      "password": "strongpassword"
-    }
-    ```
-  - **Response (201 Created):** Sets HTTP-only secure cookie `token`.
-    ```json
-    {
-      "success": true,
-      "message": "User registered successfully",
-      "data": {
-        "user": {
-          "id": "uuid-v4-string",
-          "name": "Jane Doe",
-          "email": "jane.doe@example.com",
-          "role": "USER",
-          "isActive": true,
-          "emailVerified": false,
-          "createdAt": "timestamp",
-          "updatedAt": "timestamp"
+    - **Description:** Registers a new user account.
+    - **Request Body:**
+        ```json
+        {
+            "name": "Jane Doe",
+            "email": "jane.doe@example.com",
+            "password": "strongpassword"
         }
-      }
-    }
-    ```
+        ```
+    - **Response (201 Created):** Sets HTTP-only secure cookie `token`.
+        ```json
+        {
+            "success": true,
+            "message": "User registered successfully",
+            "data": {
+                "user": {
+                    "id": "uuid-v4-string",
+                    "name": "Jane Doe",
+                    "email": "jane.doe@example.com",
+                    "role": "USER",
+                    "isActive": true,
+                    "emailVerified": false,
+                    "createdAt": "timestamp",
+                    "updatedAt": "timestamp"
+                }
+            }
+        }
+        ```
 
 - **`POST /api/auth/login`**
-  - **Description:** Validates credentials and initializes a secure session.
-  - **Request Body:**
-    ```json
-    {
-      "email": "jane.doe@example.com",
-      "password": "strongpassword"
-    }
-    ```
-  - **Response (200 OK):** Sets HTTP-only secure cookie `token`. Returns standard user object payload.
+    - **Description:** Validates credentials and initializes a secure session.
+    - **Request Body:**
+        ```json
+        {
+            "email": "jane.doe@example.com",
+            "password": "strongpassword"
+        }
+        ```
+    - **Response (200 OK):** Sets HTTP-only secure cookie `token`. Returns standard user object payload.
 
 - **`POST /api/auth/logout`**
-  - **Description:** Invalidates the current session and blacklists the client JWT token.
-  - **Response (200 OK):** Clears cookie `token`.
-    ```json
-    {
-      "success": true,
-      "message": "User logged out successfully"
-    }
-    ```
+    - **Description:** Invalidates the current session and blacklists the client JWT token.
+    - **Response (200 OK):** Clears cookie `token`.
+        ```json
+        {
+            "success": true,
+            "message": "User logged out successfully"
+        }
+        ```
 
 #### Authenticated User Endpoints (Requires valid cookie `token`)
 
 - **`GET /api/auth/me`**
-  - **Description:** Retrieves profile data for the currently authenticated user.
-  - **Response (200 OK):** User object data.
+    - **Description:** Retrieves profile data for the currently authenticated user.
+    - **Response (200 OK):** User object data.
 
 - **`PATCH /api/auth/profile`**
-  - **Description:** Updates current user's profile details.
-  - **Request Body:**
-    ```json
-    {
-      "name": "Jane Updated",
-      "email": "jane.updated@example.com"
-    }
-    ```
-  - **Response (200 OK):** Returns updated user object.
+    - **Description:** Updates current user's profile details.
+    - **Request Body:**
+        ```json
+        {
+            "name": "Jane Updated",
+            "email": "jane.updated@example.com"
+        }
+        ```
+    - **Response (200 OK):** Returns updated user object.
 
 - **`PATCH /api/auth/change-password`**
-  - **Description:** Rotates the user's password.
-  - **Request Body:**
-    ```json
-    {
-      "currentPassword": "strongpassword",
-      "newPassword": "newstrongpassword"
-    }
-    ```
-  - **Response (200 OK):**
-    ```json
-    {
-      "success": true,
-      "message": "Password changed successfully"
-    }
-    ```
+    - **Description:** Rotates the user's password.
+    - **Request Body:**
+        ```json
+        {
+            "currentPassword": "strongpassword",
+            "newPassword": "newstrongpassword"
+        }
+        ```
+    - **Response (200 OK):**
+        ```json
+        {
+            "success": true,
+            "message": "Password changed successfully"
+        }
+        ```
 
 - **`DELETE /api/auth/account`**
-  - **Description:** Soft-deletes the logged-in user's account.
-  - **Response (200 OK):** Clears cookie `token`.
-    ```json
-    {
-      "success": true,
-      "message": "Account deleted successfully"
-    }
-    ```
+    - **Description:** Soft-deletes the logged-in user's account.
+    - **Response (200 OK):** Clears cookie `token`.
+        ```json
+        {
+            "success": true,
+            "message": "Account deleted successfully"
+        }
+        ```
 
 #### Admin Endpoints (Requires valid cookie `token` and role `admin`)
 
 - **`GET /api/auth/users`** (Also mapped to `GET /api/admin/users`)
-  - **Description:** Lists all registered users.
-  - **Query Parameters:**
-    - `includeDeleted=true` (Boolean, Optional: Include soft-deleted accounts)
-  - **Response (200 OK):**
-    ```json
-    {
-      "success": true,
-      "message": "Users retrieved successfully",
-      "data": {
-        "users": [ ... ]
-      }
-    }
-    ```
+    - **Description:** Lists all registered users.
+    - **Query Parameters:**
+        - `includeDeleted=true` (Boolean, Optional: Include soft-deleted accounts)
+    - **Response (200 OK):**
+        ```json
+        {
+          "success": true,
+          "message": "Users retrieved successfully",
+          "data": {
+            "users": [ ... ]
+          }
+        }
+        ```
 
 - **`GET /api/auth/users/:id`**
-  - **Description:** Retrieves a specific user's complete profile record.
-  - **Response (200 OK):** Complete user object.
+    - **Description:** Retrieves a specific user's complete profile record.
+    - **Response (200 OK):** Complete user object.
 
 - **`PATCH /api/auth/users/:id/role`**
-  - **Description:** Changes the role of the specified user.
-  - **Request Body:**
-    ```json
-    {
-      "role": "admin"
-    }
-    ```
-  - **Response (200 OK):** Updated user object.
+    - **Description:** Changes the role of the specified user.
+    - **Request Body:**
+        ```json
+        {
+            "role": "admin"
+        }
+        ```
+    - **Response (200 OK):** Updated user object.
 
 - **`DELETE /api/auth/users/:id`**
-  - **Description:** Admins can soft-delete any user account.
-  - **Response (200 OK):**
-    ```json
-    {
-      "success": true,
-      "message": "User soft-deleted successfully"
-    }
-    ```
+    - **Description:** Admins can soft-delete any user account.
+    - **Response (200 OK):**
+        ```json
+        {
+            "success": true,
+            "message": "User soft-deleted successfully"
+        }
+        ```
 
 ### Database Schemas Involved
 
 - **`users` ([`src/db/schema/users.schema.js`](../../server/src/db/schema/users.schema.js)):**
-  - `id`: UUID, Primary Key, Auto-generated.
-  - `firstName` / `lastName`: Text.
-  - `email`: Text, Unique Index.
-  - `password`: Text, Bcrypt hash.
-  - `profileImage`: Text.
-  - `role`: Enum (`user`, `admin`).
-  - `emailVerified`: Boolean.
-  - `isActive`: Boolean.
-  - `isDeleted`: Boolean.
-  - `deletedAt`: Timestamp with time zone.
-  - `recoveryExpiresAt`: Timestamp with time zone.
+    - `id`: UUID, Primary Key, Auto-generated.
+    - `firstName` / `lastName`: Text.
+    - `email`: Text, Unique Index.
+    - `password`: Text, Bcrypt hash.
+    - `profileImage`: Text.
+    - `role`: Enum (`user`, `admin`).
+    - `emailVerified`: Boolean.
+    - `isActive`: Boolean.
+    - `isDeleted`: Boolean.
+    - `deletedAt`: Timestamp with time zone.
+    - `recoveryExpiresAt`: Timestamp with time zone.
 
 ### Edge Cases Handled
 
@@ -202,73 +202,73 @@ Provides real-time conversational streaming and one-off chat replies utilizing G
 All routes are prefixed with `/api/ai`.
 
 - **`POST /api/ai/chat/stream`**
-  - **Description:** Starts real-time streaming response for a conversational query.
-  - **Request Body:**
-    ```json
-    {
-      "message": "User query text",
-      "chatId": "optional-uuid-string"
-    }
-    ```
-  - **Response (200 OK):** Chunked server-sent event (SSE) token stream containing markdown formatting.
+    - **Description:** Starts real-time streaming response for a conversational query.
+    - **Request Body:**
+        ```json
+        {
+            "message": "User query text",
+            "chatId": "optional-uuid-string"
+        }
+        ```
+    - **Response (200 OK):** Chunked server-sent event (SSE) token stream containing markdown formatting.
 
 - **`POST /api/ai/chat/once`**
-  - **Description:** Returns a full non-streaming AI response block.
-  - **Request Body:** Similar to `/chat/stream`.
-  - **Response (200 OK):**
-    ```json
-    {
-      "success": true,
-      "data": {
-        "response": "Full AI message text"
-      }
-    }
-    ```
+    - **Description:** Returns a full non-streaming AI response block.
+    - **Request Body:** Similar to `/chat/stream`.
+    - **Response (200 OK):**
+        ```json
+        {
+            "success": true,
+            "data": {
+                "response": "Full AI message text"
+            }
+        }
+        ```
 
 - **`GET /api/ai/chats`**
-  - **Description:** Retrieves all conversations associated with the logged-in user.
-  - **Response (200 OK):** List of chat objects.
+    - **Description:** Retrieves all conversations associated with the logged-in user.
+    - **Response (200 OK):** List of chat objects.
 
 - **`GET /api/ai/chats/:chatId`**
-  - **Description:** Retrieves a specific chat thread containing all messages.
-  - **Response (200 OK):** Detailed thread of query/response logs.
+    - **Description:** Retrieves a specific chat thread containing all messages.
+    - **Response (200 OK):** Detailed thread of query/response logs.
 
 - **`PATCH /api/ai/chats/:chatId`**
-  - **Description:** Renames the conversation thread title.
-  - **Request Body:**
-    ```json
-    {
-      "title": "New Thread Name"
-    }
-    ```
-  - **Response (200 OK):** Updated chat object.
+    - **Description:** Renames the conversation thread title.
+    - **Request Body:**
+        ```json
+        {
+            "title": "New Thread Name"
+        }
+        ```
+    - **Response (200 OK):** Updated chat object.
 
 - **`DELETE /api/ai/chats/:chatId`**
-  - **Description:** Permanently deletes a chat conversation and all related messages/files.
-  - **Response (200 OK):** Success message.
+    - **Description:** Permanently deletes a chat conversation and all related messages/files.
+    - **Response (200 OK):** Success message.
 
 - **`POST /api/ai/chat/upload`**
-  - **Description:** Uploads one or more message files to CDN storage (ImageKit) for context indexing.
-  - **Request Body:** Multi-part form data under `files` field.
-  - **Response (200 OK):** List of uploaded files metadata.
+    - **Description:** Uploads one or more message files to CDN storage (ImageKit) for context indexing.
+    - **Request Body:** Multi-part form data under `files` field.
+    - **Response (200 OK):** List of uploaded files metadata.
 
 ### Database Schemas Involved
 
 - **`chats` ([`src/db/schema/chats.schema.js`](../../server/src/db/schema/chats.schema.js)):**
-  - `id`: UUID, Primary Key.
-  - `userId`: UUID, Foreign Key reference to `users.id` (cascade delete).
-  - `title`: Text (defaults to `'New chat'`).
+    - `id`: UUID, Primary Key.
+    - `userId`: UUID, Foreign Key reference to `users.id` (cascade delete).
+    - `title`: Text (defaults to `'New chat'`).
 - **`messages` ([`src/db/schema/messages.schema.js`](../../server/src/db/schema/messages.schema.js)):**
-  - `id`: UUID, Primary Key.
-  - `chatId`: UUID, Foreign Key reference to `chats.id` (cascade delete).
-  - `content`: Text.
-  - `role`: Enum (`user`, `ai`).
+    - `id`: UUID, Primary Key.
+    - `chatId`: UUID, Foreign Key reference to `chats.id` (cascade delete).
+    - `content`: Text.
+    - `role`: Enum (`user`, `ai`).
 - **`files` ([`src/db/schema/files.schema.js`](../../server/src/db/schema/files.schema.js)):**
-  - `id`: UUID, Primary Key.
-  - `fileId`: ImageKit file reference ID.
-  - `name`: Text.
-  - `url`: Text.
-  - `messageId`: UUID, Foreign Key references `messages.id` (cascade delete).
+    - `id`: UUID, Primary Key.
+    - `fileId`: ImageKit file reference ID.
+    - `name`: Text.
+    - `url`: Text.
+    - `messageId`: UUID, Foreign Key references `messages.id` (cascade delete).
 
 ### Edge Cases Handled
 
@@ -294,40 +294,40 @@ Converts uploaded documents into structured semantic markdown, splits them into 
 All routes are prefixed with `/api/rag`.
 
 - **`POST /api/rag/admin/upload`**
-  - **Description:** Admin uploads an administrative reference document for global RAG lookup.
-  - **Request Body:** Multi-part form data containing the `file` field.
-  - **Response (200 OK):**
-    ```json
-    {
-      "success": true,
-      "message": "Global file uploaded and indexing initiated"
-    }
-    ```
+    - **Description:** Admin uploads an administrative reference document for global RAG lookup.
+    - **Request Body:** Multi-part form data containing the `file` field.
+    - **Response (200 OK):**
+        ```json
+        {
+            "success": true,
+            "message": "Global file uploaded and indexing initiated"
+        }
+        ```
 
 - **`DELETE /api/rag/admin/chunks`**
-  - **Description:** Clears all global and user-uploaded chunks from database caches and vector indices.
-  - **Response (200 OK):**
-    ```json
-    {
-      "success": true,
-      "message": "Vector indexing cache cleared"
-    }
-    ```
+    - **Description:** Clears all global and user-uploaded chunks from database caches and vector indices.
+    - **Response (200 OK):**
+        ```json
+        {
+            "success": true,
+            "message": "Vector indexing cache cleared"
+        }
+        ```
 
 ### Database Schemas Involved
 
 - **`rag_files` ([`src/db/schema/rag_files.schema.js`](../../server/src/db/schema/rag_files.schema.js)):**
-  - `id`: UUID, Primary Key.
-  - `fileId`: ImageKit identifier.
-  - `name` / `url` / `filePath`: Text.
-  - `processingStatus`: Enum (`pending`, `completed`, `failed`).
-  - `ragStatus`: Enum (`pending`, `completed`, `failed`).
+    - `id`: UUID, Primary Key.
+    - `fileId`: ImageKit identifier.
+    - `name` / `url` / `filePath`: Text.
+    - `processingStatus`: Enum (`pending`, `completed`, `failed`).
+    - `ragStatus`: Enum (`pending`, `completed`, `failed`).
 - **`chunks` ([`src/db/schema/chunks.schema.js`](../../server/src/db/schema/chunks.schema.js)):**
-  - `id`: UUID, Primary key.
-  - `fileId` / `ragFileId`: Foreign Keys referencing user files or admin global documents.
-  - `chatId`: Foreign Key referencing the specific chat thread boundary.
-  - `text` / `markdown`: Text chunk content.
-  - `metadata`: JSONB containing page boundaries and hierarchical headers.
+    - `id`: UUID, Primary key.
+    - `fileId` / `ragFileId`: Foreign Keys referencing user files or admin global documents.
+    - `chatId`: Foreign Key referencing the specific chat thread boundary.
+    - `text` / `markdown`: Text chunk content.
+    - `metadata`: JSONB containing page boundaries and hierarchical headers.
 
 ### Edge Cases Handled
 
@@ -353,28 +353,28 @@ Compiles application data and HTML layouts into static lightweight PDF document 
 All routes are prefixed with `/api/pdf`.
 
 - **`GET /api/pdf/invoice/:id`**
-  - **Description:** Compiles transaction details and generates an invoice PDF.
-  - **Query Parameters:**
-    - `inline=true` (Boolean, Optional: Streams the PDF inline to render directly in the browser instead of forcing an attachment download)
-  - **Response (200 OK):** Binary stream with `Content-Type: application/pdf`.
+    - **Description:** Compiles transaction details and generates an invoice PDF.
+    - **Query Parameters:**
+        - `inline=true` (Boolean, Optional: Streams the PDF inline to render directly in the browser instead of forcing an attachment download)
+    - **Response (200 OK):** Binary stream with `Content-Type: application/pdf`.
 
 - **`GET /api/pdf/invoice/:id/preview`**
-  - **Description:** Generates raw HTML markup preview of the invoice layout.
-  - **Response (200 OK):** Rendered HTML preview.
+    - **Description:** Generates raw HTML markup preview of the invoice layout.
+    - **Response (200 OK):** Rendered HTML preview.
 
 - **`GET /api/pdf/receipt/:id`**
-  - **Description:** Generates and downloads a payment receipt PDF.
-  - **Response (200 OK):** Binary PDF stream.
+    - **Description:** Generates and downloads a payment receipt PDF.
+    - **Response (200 OK):** Binary PDF stream.
 
 - **`POST /api/pdf/render`**
-  - **Description:** Accepts a raw custom HTML template and compiles it directly to a PDF buffer.
-  - **Request Body:**
-    ```json
-    {
-      "html": "<html><body><h1>Custom PDF Report</h1></body></html>"
-    }
-    ```
-  - **Response (200 OK):** Binary PDF stream.
+    - **Description:** Accepts a raw custom HTML template and compiles it directly to a PDF buffer.
+    - **Request Body:**
+        ```json
+        {
+            "html": "<html><body><h1>Custom PDF Report</h1></body></html>"
+        }
+        ```
+    - **Response (200 OK):** Binary PDF stream.
 
 ### Database Schemas Involved
 

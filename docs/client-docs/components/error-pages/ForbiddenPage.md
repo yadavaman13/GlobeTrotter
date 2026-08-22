@@ -7,7 +7,7 @@ A standardized full-page 403 Forbidden / Access Denied error view component with
 ## 1. Import Path
 
 ```javascript
-import ForbiddenPage from "@/components/Shared/ErrorPages/ForbiddenPage/ForbiddenPage";
+import ForbiddenPage from '@/components/Shared/ErrorPages/ForbiddenPage/ForbiddenPage';
 ```
 
 ---
@@ -24,11 +24,9 @@ import ForbiddenPage from "@/components/Shared/ErrorPages/ForbiddenPage/Forbidde
 ## 3. Usage Example
 
 ```jsx
-import ForbiddenPage from "@/components/Shared/ErrorPages/ForbiddenPage/ForbiddenPage";
+import ForbiddenPage from '@/components/Shared/ErrorPages/ForbiddenPage/ForbiddenPage';
 
 export default function AccessDenied() {
-  return (
-    <ForbiddenPage message="Administrator privileges are required for this CRM section." />
-  );
+    return <ForbiddenPage message="Administrator privileges are required for this CRM section." />;
 }
 ```

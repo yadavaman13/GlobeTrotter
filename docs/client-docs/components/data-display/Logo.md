@@ -7,7 +7,7 @@ The central application branding logo component supporting full, compact, icon-o
 ## 1. Import Path
 
 ```javascript
-import Logo from "@/components/Shared/DataDisplay/Logo/Logo";
+import Logo from '@/components/Shared/DataDisplay/Logo/Logo';
 ```
 
 ---
@@ -25,9 +25,9 @@ import Logo from "@/components/Shared/DataDisplay/Logo/Logo";
 ## 3. Usage Example
 
 ```jsx
-import Logo from "@/components/Shared/DataDisplay/Logo/Logo";
+import Logo from '@/components/Shared/DataDisplay/Logo/Logo';
 
 export default function AppHeader() {
-  return <Logo variant="full" size="md" />;
+    return <Logo variant="full" size="md" />;
 }
 ```

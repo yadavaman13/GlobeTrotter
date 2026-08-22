@@ -7,7 +7,7 @@ An accessible hover and focus popover tooltip primitive with directional positio
 ## 1. Import Path
 
 ```javascript
-import Tooltip from "@/components/Shared/DataDisplay/Tooltip/Tooltip";
+import Tooltip from '@/components/Shared/DataDisplay/Tooltip/Tooltip';
 ```
 
 ---
@@ -27,20 +27,20 @@ import Tooltip from "@/components/Shared/DataDisplay/Tooltip/Tooltip";
 ## 3. Usage Example
 
 ```jsx
-import Tooltip from "@/components/Shared/DataDisplay/Tooltip/Tooltip";
-import IconButton from "@/components/Shared/Buttons/IconButton/IconButton";
-import { HelpCircle } from "lucide-react";
+import Tooltip from '@/components/Shared/DataDisplay/Tooltip/Tooltip';
+import IconButton from '@/components/Shared/Buttons/IconButton/IconButton';
+import { HelpCircle } from 'lucide-react';
 
 export default function HelpTip() {
-  return (
-    <Tooltip
-      content="Calculated by averaging closed lead amounts over the last 30 days"
-      position="top"
-    >
-      <IconButton ariaLabel="Help Info" size="sm" variant="ghost">
-        <HelpCircle size={16} />
-      </IconButton>
-    </Tooltip>
-  );
+    return (
+        <Tooltip
+            content="Calculated by averaging closed lead amounts over the last 30 days"
+            position="top"
+        >
+            <IconButton ariaLabel="Help Info" size="sm" variant="ghost">
+                <HelpCircle size={16} />
+            </IconButton>
+        </Tooltip>
+    );
 }
 ```

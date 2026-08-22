@@ -7,10 +7,7 @@ A chip list component rendering uploaded files, PDF documents, and image thumbna
 ## 1. Import Path
 
 ```javascript
-import {
-  Attachments,
-  AttachmentItem,
-} from "@/components/ai-elements/attachments/attachments";
+import { Attachments, AttachmentItem } from '@/components/ai-elements/attachments/attachments';
 ```
 
 ---
@@ -28,9 +25,9 @@ import {
 ## 3. Usage Example
 
 ```jsx
-import { Attachments } from "@/components/ai-elements/attachments/attachments";
+import { Attachments } from '@/components/ai-elements/attachments/attachments';
 
 export default function AttachedFilesList({ files, handleRemoveFile }) {
-  return <Attachments attachments={files} onRemove={handleRemoveFile} />;
+    return <Attachments attachments={files} onRemove={handleRemoveFile} />;
 }
 ```

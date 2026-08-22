@@ -7,7 +7,7 @@ A syntax-highlighted code container supporting multi-language syntax formatting,
 ## 1. Import Path
 
 ```javascript
-import { CodeBlock } from "@/components/ai-elements/code-block/code-block";
+import { CodeBlock } from '@/components/ai-elements/code-block/code-block';
 ```
 
 ---
@@ -26,14 +26,11 @@ import { CodeBlock } from "@/components/ai-elements/code-block/code-block";
 ## 3. Usage Example
 
 ```jsx
-import { CodeBlock } from "@/components/ai-elements/code-block/code-block";
+import { CodeBlock } from '@/components/ai-elements/code-block/code-block';
 
 export default function SnippetDisplay({ snippet }) {
-  return (
-    <CodeBlock
-      code={`const res = await axios.post('/api/ai/stream');`}
-      language="javascript"
-    />
-  );
+    return (
+        <CodeBlock code={`const res = await axios.post('/api/ai/stream');`} language="javascript" />
+    );
 }
 ```

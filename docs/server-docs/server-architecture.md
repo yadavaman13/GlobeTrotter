@@ -19,9 +19,9 @@ The Apex backend is built as a production-grade, modular Node.js application usi
 - **Vector Search DB:** [Pinecone DB](https://www.pinecone.io/) for document indexing and metadata-scoped chunk lookups.
 - **Document Parsing:** [LlamaIndex Cloud Parser](https://cloud.llamaindex.ai/) (LlamaParse) for converting rich format files (PDFs, spreadsheets) into structured semantic markdown.
 - **External Integrations:**
-  - **Razorpay:** Transaction management, signature checking, and refunds.
-  - **ImageKit:** CDN and asset storage hosting for user avatars and processed RAG files.
-  - **Gmail API & Nodemailer:** Email verification, recovery OTPs, and system notification deliveries.
+    - **Razorpay:** Transaction management, signature checking, and refunds.
+    - **ImageKit:** CDN and asset storage hosting for user avatars and processed RAG files.
+    - **Gmail API & Nodemailer:** Email verification, recovery OTPs, and system notification deliveries.
 - **HTML-to-PDF Engine:** `html-pdf-lite` (powered by PDFKit and `@resvg/resvg-js` rasterizers) producing Chromium-free, rapid-rendering, and lightweight PDFs.
 
 ---
@@ -156,32 +156,32 @@ erDiagram
 ### Table Definitions & Structure
 
 1. **`users` (`users.schema.js`):**
-   - **Fields:** `id` (UUID PK), `firstName`, `lastName`, `email` (Unique Index), `password` (bcrypt), `profileImage`, `role` (Enum: `user`, `admin`), `emailVerified` (Boolean), `isActive` (Boolean), `isDeleted` (Boolean), `deletedAt`, `recoveryExpiresAt`.
-   - **Purpose:** Manages identity records, verification states, roles, and soft-delete recovery bounds.
+    - **Fields:** `id` (UUID PK), `firstName`, `lastName`, `email` (Unique Index), `password` (bcrypt), `profileImage`, `role` (Enum: `user`, `admin`), `emailVerified` (Boolean), `isActive` (Boolean), `isDeleted` (Boolean), `deletedAt`, `recoveryExpiresAt`.
+    - **Purpose:** Manages identity records, verification states, roles, and soft-delete recovery bounds.
 
 2. **`chats` (`chats.schema.js`):**
-   - **Fields:** `id` (UUID PK), `userId` (FK references `users.id` with cascade deletion), `guestId` (Index for guest support), `title` (Default: `'New chat'`), timestamps.
-   - **Purpose:** Represents a unique chat thread/session.
+    - **Fields:** `id` (UUID PK), `userId` (FK references `users.id` with cascade deletion), `guestId` (Index for guest support), `title` (Default: `'New chat'`), timestamps.
+    - **Purpose:** Represents a unique chat thread/session.
 
 3. **`messages` (`messages.schema.js`):**
-   - **Fields:** `id` (UUID PK), `chatId` (FK references `chats.id` with cascade deletion), `content` (Text), `role` (Enum: `user`, `ai`), timestamps.
-   - **Purpose:** Stores the dialogue logs for user inputs and AI generator responses.
+    - **Fields:** `id` (UUID PK), `chatId` (FK references `chats.id` with cascade deletion), `content` (Text), `role` (Enum: `user`, `ai`), timestamps.
+    - **Purpose:** Stores the dialogue logs for user inputs and AI generator responses.
 
 4. **`files` (`files.schema.js`):**
-   - **Fields:** `id` (UUID PK), `fileId` (ImageKit reference), `name`, `size`, `filePath`, `url`, `fileType`, `mimetype`, `messageId` (FK references `messages.id` with cascade deletion), `uploadedBy` (FK references `users.id`), `processingStatus` (Enum: `pending`, `completed`, `failed`), `ragStatus`, `metadata` (JSONB for structural summary/sections), timestamps.
-   - **Purpose:** Metadata records for user-uploaded documents/images scoped to specific messages and chats.
+    - **Fields:** `id` (UUID PK), `fileId` (ImageKit reference), `name`, `size`, `filePath`, `url`, `fileType`, `mimetype`, `messageId` (FK references `messages.id` with cascade deletion), `uploadedBy` (FK references `users.id`), `processingStatus` (Enum: `pending`, `completed`, `failed`), `ragStatus`, `metadata` (JSONB for structural summary/sections), timestamps.
+    - **Purpose:** Metadata records for user-uploaded documents/images scoped to specific messages and chats.
 
 5. **`rag_files` (`rag_files.schema.js`):**
-   - **Fields:** `id` (UUID PK), `fileId`, `name`, `size`, `filePath`, `url`, `fileType`, `mimetype`, `uploadedBy` (FK references `users.id`), `processingStatus`, `ragStatus`, `metadata` (JSONB), timestamps.
-   - **Purpose:** Administrative global reference documents uploaded by admins to provide domain context to conversational queries.
+    - **Fields:** `id` (UUID PK), `fileId`, `name`, `size`, `filePath`, `url`, `fileType`, `mimetype`, `uploadedBy` (FK references `users.id`), `processingStatus`, `ragStatus`, `metadata` (JSONB), timestamps.
+    - **Purpose:** Administrative global reference documents uploaded by admins to provide domain context to conversational queries.
 
 6. **`chunks` (`chunks.schema.js`):**
-   - **Fields:** `id` (UUID PK), `fileId` (FK references `files.id`), `chatId` (FK references `chats.id`), `ragFileId` (FK references `rag_files.id`), `text`, `markdown`, `source`, `metadata` (JSONB: pages, headers), `documentType`, timestamps.
-   - **Purpose:** Segments extracted from parsed documents. Used to retrieve text elements before calling LLMs.
+    - **Fields:** `id` (UUID PK), `fileId` (FK references `files.id`), `chatId` (FK references `chats.id`), `ragFileId` (FK references `rag_files.id`), `text`, `markdown`, `source`, `metadata` (JSONB: pages, headers), `documentType`, timestamps.
+    - **Purpose:** Segments extracted from parsed documents. Used to retrieve text elements before calling LLMs.
 
 7. **`payments` (`payments.schema.js`):**
-   - **Fields:** `id` (UUID PK), `orderId` (Unique Index), `paymentId` (Index), `signature`, `amount` (Integer in smallest currency units, e.g., cents/paise), `currency`, `status` (Enum: `pending`, `completed`, `refunded`, `partially_refunded`), timestamps.
-   - **Purpose:** Tracks transaction lifecycles verified via Razorpay APIs.
+    - **Fields:** `id` (UUID PK), `orderId` (Unique Index), `paymentId` (Index), `signature`, `amount` (Integer in smallest currency units, e.g., cents/paise), `currency`, `status` (Enum: `pending`, `completed`, `refunded`, `partially_refunded`), timestamps.
+    - **Purpose:** Tracks transaction lifecycles verified via Razorpay APIs.
 
 ---
 
@@ -301,17 +301,17 @@ flowchart LR
 
 1. **Document Parsing (`llama-parser.rag.js`):** Submits document streams/URLs to LlamaCloud API with parameters to parse embedded tables, graphics, and mathematical formats.
 2. **Segmentation & Hierarchy parsing (`markdown-chunks.rag.js`):**
-   - Tracks document bounds using standard page markers (`<!-- PAGE:n -->`).
-   - Applies LangChain's `RecursiveCharacterTextSplitter` configured with a target `chunkSize` of `700` and `chunkOverlap` of `120`.
-   - Parses the document's header hierarchy (`h1`, `h2`, `h3`) to map sections, starting pages, and ending pages to each chunk object's metadata.
+    - Tracks document bounds using standard page markers (`<!-- PAGE:n -->`).
+    - Applies LangChain's `RecursiveCharacterTextSplitter` configured with a target `chunkSize` of `700` and `chunkOverlap` of `120`.
+    - Parses the document's header hierarchy (`h1`, `h2`, `h3`) to map sections, starting pages, and ending pages to each chunk object's metadata.
 3. **Database Chunks Cache:** Inserts chunk records into the PostgreSQL database (`chunks` table) using `createChunksBulk()`.
 4. **Vector Embeddings (`data-ingestion.rag.js`):**
-   - Requests embeddings for chunk texts via Mistral AI embeddings API (`mistral-embed` model).
-   - Generates and writes Pinecone vectors matching the chunk ID, appending reference metadata: `{ file: fileId, chat: chatId, ragFile: ragFileId }`.
+    - Requests embeddings for chunk texts via Mistral AI embeddings API (`mistral-embed` model).
+    - Generates and writes Pinecone vectors matching the chunk ID, appending reference metadata: `{ file: fileId, chat: chatId, ragFile: ragFileId }`.
 5. **Session-Scoped Retrieval (`context-retrieval.rag.js`):**
-   - The agent invokes the `contextRetrieverTool` during a chat.
-   - The query query string is embedded via the Mistral AI embedding model.
-   - Pinecone index is searched for matching vectors. The query uses metadata filters (`chat: { $eq: chatId }`) to isolate query boundaries to the current chat session, preventing cross-chat document leakages.
+    - The agent invokes the `contextRetrieverTool` during a chat.
+    - The query query string is embedded via the Mistral AI embedding model.
+    - Pinecone index is searched for matching vectors. The query uses metadata filters (`chat: { $eq: chatId }`) to isolate query boundaries to the current chat session, preventing cross-chat document leakages.
 
 ---
 
@@ -383,10 +383,10 @@ The PDF generator (`makePDF`) converts HTML to PDF without headless browser over
 ```
 
 - **Guidelines:**
-  1. **User input sanitization:** Always wrap variables in `escapeHtml()`.
-  2. **Self-contained assets:** Vector paths (SVGs) or base64 data-URIs must be inline.
-  3. **Scripts:** JavaScript scripts inside templates are disabled (`allowScripts: false`) for security.
-  4. **Client Download Helper (`client/src/utils/pdfDownload.js`):** Fetches the file stream using credentials, parses the `Content-Disposition` header to extract the filename, and triggers a download link in the browser DOM.
+    1. **User input sanitization:** Always wrap variables in `escapeHtml()`.
+    2. **Self-contained assets:** Vector paths (SVGs) or base64 data-URIs must be inline.
+    3. **Scripts:** JavaScript scripts inside templates are disabled (`allowScripts: false`) for security.
+    4. **Client Download Helper (`client/src/utils/pdfDownload.js`):** Fetches the file stream using credentials, parses the `Content-Disposition` header to extract the filename, and triggers a download link in the browser DOM.
 
 ---
 
@@ -425,56 +425,52 @@ Follow these blueprints to extend the application with new features:
 ### A. How to Add a New Database Schema & Run Migrations
 
 1. Create a new schema file in `src/db/schema/` (e.g., `src/db/schema/posts.schema.js`):
-   ```js
-   import { pgTable, uuid, text, timestamp } from "drizzle-orm/pg-core";
-   import { users } from "./users.schema.js";
+    ```js
+    import { pgTable, uuid, text, timestamp } from 'drizzle-orm/pg-core';
+    import { users } from './users.schema.js';
 
-   export const posts = pgTable("posts", {
-     id: uuid("id").defaultRandom().primaryKey(),
-     userId: uuid("user_id")
-       .references(() => users.id, { onDelete: "cascade" })
-       .notNull(),
-     title: text("title").notNull(),
-     content: text("content").notNull(),
-     createdAt: timestamp("created_at", { withTimezone: true })
-       .defaultNow()
-       .notNull(),
-     updatedAt: timestamp("updated_at", { withTimezone: true })
-       .defaultNow()
-       .notNull(),
-   });
-   ```
+    export const posts = pgTable('posts', {
+        id: uuid('id').defaultRandom().primaryKey(),
+        userId: uuid('user_id')
+            .references(() => users.id, { onDelete: 'cascade' })
+            .notNull(),
+        title: text('title').notNull(),
+        content: text('content').notNull(),
+        createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+        updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+    });
+    ```
 2. Register the schema in `src/db/schema/schema.js` to expose it to the ORM generator:
-   ```js
-   export * from "./users.schema.js";
-   export * from "./posts.schema.js";
-   // Import and export other schemas here
-   ```
+    ```js
+    export * from './users.schema.js';
+    export * from './posts.schema.js';
+    // Import and export other schemas here
+    ```
 3. Generate and apply migrations using the following commands inside the `server/` directory:
-   ```bash
-   # Generate migration SQL
-   npx drizzle-kit generate
+    ```bash
+    # Generate migration SQL
+    npx drizzle-kit generate
 
-   # Apply migration to database
-   npx drizzle-kit migrate
-   ```
+    # Apply migration to database
+    npx drizzle-kit migrate
+    ```
 
 ### B. How to Create a Data Access Object (DAO)
 
 Encapsulate Drizzle database logic in the `src/dao/` directory (e.g., `src/dao/post.dao.js`):
 
 ```js
-import { db } from "../config/database.config.js";
-import { posts } from "../db/schema/posts.schema.js";
-import { eq } from "drizzle-orm";
+import { db } from '../config/database.config.js';
+import { posts } from '../db/schema/posts.schema.js';
+import { eq } from 'drizzle-orm';
 
 export async function createPost(postData) {
-  const [newPost] = await db.insert(posts).values(postData).returning();
-  return newPost;
+    const [newPost] = await db.insert(posts).values(postData).returning();
+    return newPost;
 }
 
 export async function getPostsByUserId(userId) {
-  return await db.select().from(posts).where(eq(posts.userId, userId));
+    return await db.select().from(posts).where(eq(posts.userId, userId));
 }
 ```
 
@@ -482,111 +478,111 @@ export async function getPostsByUserId(userId) {
 
 1. Create a new domain folder inside `src/modules/` (e.g., `src/modules/post/`).
 2. Add your controller (`src/modules/post/controllers/post.controller.js`):
-   ```js
-   import { createPost } from "../../../dao/post.dao.js";
-   import { sendResponse } from "../../../utils/response.utlis.js";
+    ```js
+    import { createPost } from '../../../dao/post.dao.js';
+    import { sendResponse } from '../../../utils/response.utlis.js';
 
-   export async function handleCreatePost(req, res, next) {
-     try {
-       const { title, content } = req.body;
-       const newPost = await createPost({
-         userId: req.user.id,
-         title,
-         content,
-       });
-       return sendResponse({
-         res,
-         statusCode: 201,
-         success: true,
-         message: "Post created successfully",
-         data: newPost,
-       });
-     } catch (error) {
-       return next(error);
-     }
-   }
-   ```
+    export async function handleCreatePost(req, res, next) {
+        try {
+            const { title, content } = req.body;
+            const newPost = await createPost({
+                userId: req.user.id,
+                title,
+                content,
+            });
+            return sendResponse({
+                res,
+                statusCode: 201,
+                success: true,
+                message: 'Post created successfully',
+                data: newPost,
+            });
+        } catch (error) {
+            return next(error);
+        }
+    }
+    ```
 3. Add routes (`src/modules/post/routes/post.routes.js`):
-   ```js
-   import { Router } from "express";
-   import { handleCreatePost } from "../controllers/post.controller.js";
-   import { protect } from "../../auth/index.js";
+    ```js
+    import { Router } from 'express';
+    import { handleCreatePost } from '../controllers/post.controller.js';
+    import { protect } from '../../auth/index.js';
 
-   const postRouter = Router();
-   postRouter.post("/", protect, handleCreatePost);
+    const postRouter = Router();
+    postRouter.post('/', protect, handleCreatePost);
 
-   export default postRouter;
-   ```
+    export default postRouter;
+    ```
 4. Expose the router in `src/app.js`:
-   ```js
-   import postRouter from "./modules/post/routes/post.routes.js";
-   // ...
-   app.use("/api/posts", postRouter);
-   ```
+    ```js
+    import postRouter from './modules/post/routes/post.routes.js';
+    // ...
+    app.use('/api/posts', postRouter);
+    ```
 
 ### D. How to Add a Background Cron Job
 
 1. Create a task scheduler script or edit `src/cron/cleanup.cron.js`.
 2. To create a new cron task, create a file in `src/cron/` (e.g., `src/cron/analytics.cron.js`):
-   ```js
-   import cron from "node-cron";
+    ```js
+    import cron from 'node-cron';
 
-   cron.schedule(
-     "0 0 * * *",
-     async () => {
-       try {
-         console.log("[Cron] Fetching daily statistics...");
-         // Run operations here
-       } catch (error) {
-         console.error("[Cron] Analytics calculation error:", error);
-       }
-     },
-     {
-       timezone: "Asia/Kolkata",
-     },
-   );
-   ```
+    cron.schedule(
+        '0 0 * * *',
+        async () => {
+            try {
+                console.log('[Cron] Fetching daily statistics...');
+                // Run operations here
+            } catch (error) {
+                console.error('[Cron] Analytics calculation error:', error);
+            }
+        },
+        {
+            timezone: 'Asia/Kolkata',
+        },
+    );
+    ```
 3. Import the cron file inside `server.js` to start the scheduler at server boot time:
-   ```js
-   import "./src/cron/analytics.cron.js";
-   ```
+    ```js
+    import './src/cron/analytics.cron.js';
+    ```
 
 ### E. How to Create a New HTML PDF Template
 
 1. Write a pure template function inside `src/templates/` (e.g., `src/templates/report.template.js`):
-   ```js
-   import { escapeHtml } from "./utils/escapeHtml.js";
+    ```js
+    import { escapeHtml } from './utils/escapeHtml.js';
 
-   export function reportTemplate(data = {}) {
-     return `<!DOCTYPE html>
-       <html lang="en">
-       <head>
-           <meta charset="UTF-8">
-           <title>${escapeHtml(data.title || "Summary Report")}</title>
-           <style>
-               body { font-family: sans-serif; padding: 20px; color: #333; }
-               h1 { color: #2563eb; }
-           </style>
-       </head>
-       <body>
-           <h1>${escapeHtml(data.title)}</h1>
-           <p>${escapeHtml(data.body)}</p>
-       </body>
-       </html>`;
-   }
-   ```
+    export function reportTemplate(data = {}) {
+        return `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>${escapeHtml(data.title || 'Summary Report')}</title>
+            <style>
+                body { font-family: sans-serif; padding: 20px; color: #333; }
+                h1 { color: #2563eb; }
+            </style>
+        </head>
+        <body>
+            <h1>${escapeHtml(data.title)}</h1>
+            <p>${escapeHtml(data.body)}</p>
+        </body>
+        </html>`;
+    }
+    ```
 2. Export your template inside `src/templates/index.js`.
 3. Render using `makePDF` inside your controller:
-   ```js
-   import { makePDF } from "../../../services/pdf/index.pdf.service.js";
-   import { reportTemplate } from "../../../templates/index.js";
+    ```js
+    import { makePDF } from '../../../services/pdf/index.pdf.service.js';
+    import { reportTemplate } from '../../../templates/index.js';
 
-   const html = reportTemplate({
-     title: "System Audit",
-     body: "Security review complete.",
-   });
-   const pdfBuffer = await makePDF({ html });
-   ```
+    const html = reportTemplate({
+        title: 'System Audit',
+        body: 'Security review complete.',
+    });
+    const pdfBuffer = await makePDF({ html });
+    ```
 
 ### F. How to Dispatch System Emails (Mail Service)
 
@@ -598,13 +594,13 @@ The server integrates a dual-mode dispatch mechanism inside [`src/services/mail/
 #### Usage Example:
 
 ```js
-import { sendEmail } from "../../services/mail/mail.service.js";
+import { sendEmail } from '../../services/mail/mail.service.js';
 
 await sendEmail({
-  to: "user@example.com",
-  subject: "System Alert",
-  html: "<h1>Security Update Required</h1><p>Your password is set to expire soon.</p>",
-  text: "Security Update Required. Your password is set to expire soon.",
+    to: 'user@example.com',
+    subject: 'System Alert',
+    html: '<h1>Security Update Required</h1><p>Your password is set to expire soon.</p>',
+    text: 'Security Update Required. Your password is set to expire soon.',
 });
 ```
 
@@ -617,39 +613,35 @@ The system manages secure OTP verification workflows backed by Redis using [`src
 #### 1. Issuing an OTP (Saves to Redis and Emails User)
 
 ```js
-import {
-  issueOtp,
-  OTP_PURPOSES,
-  getOtpHtml,
-} from "../../../utils/otp.utils.js";
+import { issueOtp, OTP_PURPOSES, getOtpHtml } from '../../../utils/otp.utils.js';
 
 const result = await issueOtp({
-  email: "user@example.com",
-  purpose: OTP_PURPOSES.VERIFY_EMAIL,
-  subject: "Verification Code",
-  buildHtml: getOtpHtml, // Pure template function that outputs HTML markup
+    email: 'user@example.com',
+    purpose: OTP_PURPOSES.VERIFY_EMAIL,
+    subject: 'Verification Code',
+    buildHtml: getOtpHtml, // Pure template function that outputs HTML markup
 });
 
 if (result.ok) {
-  console.log("OTP issued successfully. Dev Code:", result.otp);
+    console.log('OTP issued successfully. Dev Code:', result.otp);
 }
 ```
 
 #### 2. Verifying a Received OTP
 
 ```js
-import { verifyOtp, OTP_PURPOSES } from "../../../utils/otp.utils.js";
+import { verifyOtp, OTP_PURPOSES } from '../../../utils/otp.utils.js';
 
 const validation = await verifyOtp({
-  email: "user@example.com",
-  code: "123456",
-  purpose: OTP_PURPOSES.VERIFY_EMAIL,
+    email: 'user@example.com',
+    code: '123456',
+    purpose: OTP_PURPOSES.VERIFY_EMAIL,
 });
 
 if (validation.ok) {
-  console.log("OTP verified successfully!");
+    console.log('OTP verified successfully!');
 } else {
-  console.log("Verification failed due to:", validation.reason); // e.g. 'expired', 'mismatch', 'too-many-attempts'
+    console.log('Verification failed due to:', validation.reason); // e.g. 'expired', 'mismatch', 'too-many-attempts'
 }
 ```
 
@@ -662,37 +654,37 @@ Controllers should always return standard responses using [`src/utils/response.u
 #### 1. Standard JSON Data Response
 
 ```js
-import { sendResponse } from "../../../utils/response.utlis.js";
+import { sendResponse } from '../../../utils/response.utlis.js';
 
 return sendResponse({
-  res,
-  statusCode: 200,
-  success: true,
-  message: "Data retrieved successfully",
-  data: { items: [1, 2, 3] },
+    res,
+    statusCode: 200,
+    success: true,
+    message: 'Data retrieved successfully',
+    data: { items: [1, 2, 3] },
 });
 ```
 
 #### 2. Auth Cookie & JWT Token Response
 
 ```js
-import { sendTokenResponse } from "../../../utils/response.utlis.js";
+import { sendTokenResponse } from '../../../utils/response.utlis.js';
 
 // Signs JWT token, places HTTPOnly cookie, and returns sanitized user payload
-return sendTokenResponse(res, 200, "Login successful", userRecord, true); // true sets rememberMe (15-day expiry)
+return sendTokenResponse(res, 200, 'Login successful', userRecord, true); // true sets rememberMe (15-day expiry)
 ```
 
 #### 3. Streaming PDF Buffer Response
 
 ```js
-import { sendPdfResponse } from "../../../utils/response.utlis.js";
+import { sendPdfResponse } from '../../../utils/response.utlis.js';
 
 // Attaches correct application/pdf contentType headers and file download headers
 return sendPdfResponse({
-  res,
-  pdfBuffer: pdfBinaryData,
-  filename: "invoice-2026.pdf",
-  isInline: true, // Sets Content-Disposition header to inline (previews in browser instead of downloading)
+    res,
+    pdfBuffer: pdfBinaryData,
+    filename: 'invoice-2026.pdf',
+    isInline: true, // Sets Content-Disposition header to inline (previews in browser instead of downloading)
 });
 ```
 
@@ -705,23 +697,23 @@ Image, PDF, or document uploads are handled using [`src/services/image.service.j
 #### 1. Uploading a Single Image (e.g. Profile Avatar)
 
 ```js
-import { uploadImageOnImageKit } from "../../../services/image.service.js";
+import { uploadImageOnImageKit } from '../../../services/image.service.js';
 
 // Expects standard multer file object from req.file
 const uploadResult = await uploadImageOnImageKit({ image: req.file });
-console.log("Uploaded File URL:", uploadResult.url);
+console.log('Uploaded File URL:', uploadResult.url);
 ```
 
 #### 2. Uploading Bulk Files to Custom Category Folders
 
 ```js
-import { uploadMultipleImagesOnImageKit } from "../../../services/image.service.js";
+import { uploadMultipleImagesOnImageKit } from '../../../services/image.service.js';
 
 // Automatically places uploads into hackathon/images, hackathon/pdfs, or hackathon/others based on mimetype
 const filesArray = await uploadMultipleImagesOnImageKit(req.files);
 console.log(
-  "Bulk uploads list:",
-  filesArray.map((f) => f.url),
+    'Bulk uploads list:',
+    filesArray.map((f) => f.url),
 );
 ```
 
@@ -734,20 +726,20 @@ Use the ioredis instance inside [`src/config/cache.config.js`](../../server/src/
 #### Usage Example:
 
 ```js
-import redis from "../../../config/cache.config.js";
+import redis from '../../../config/cache.config.js';
 
 // Setting keys with expiration time (EX) in seconds
-await redis.set("custom_key:123", JSON.stringify({ active: true }), "EX", 3600);
+await redis.set('custom_key:123', JSON.stringify({ active: true }), 'EX', 3600);
 
 // Fetching cached value
-const rawData = await redis.get("custom_key:123");
+const rawData = await redis.get('custom_key:123');
 if (rawData) {
-  const cachedData = JSON.parse(rawData);
-  console.log(cachedData.active);
+    const cachedData = JSON.parse(rawData);
+    console.log(cachedData.active);
 }
 
 // Deleting keys
-await redis.del("custom_key:123");
+await redis.del('custom_key:123');
 ```
 
 ---
@@ -759,34 +751,34 @@ For uploading user files or referencing admin documents within the RAG agent vec
 #### 1. Ingestion Pipeline upload (ImageKit + Database Chunks + Pinecone Vector Upserts)
 
 ```js
-import { dataIngestion } from "../../../rag/data-ingestion.rag.js";
+import { dataIngestion } from '../../../rag/data-ingestion.rag.js';
 
 // Ingestion starts in background and updates file.ragStatus to 'completed' / 'failed'
 dataIngestion({
-  fileUrl: fileRecord.url,
-  file: fileRecord.id, // The UUID of the files/ragFiles table row
-  chat: chatId, // Scopes vector lookup boundary. Pass null for admin/global documents
-  documentType: fileRecord.mimetype,
-  source: fileRecord.name,
-  isGlobal: false, // Set to true for admin-uploaded reference documents
+    fileUrl: fileRecord.url,
+    file: fileRecord.id, // The UUID of the files/ragFiles table row
+    chat: chatId, // Scopes vector lookup boundary. Pass null for admin/global documents
+    documentType: fileRecord.mimetype,
+    source: fileRecord.name,
+    isGlobal: false, // Set to true for admin-uploaded reference documents
 }).catch((err) => {
-  console.error("Vector ingestion failed:", err);
+    console.error('Vector ingestion failed:', err);
 });
 ```
 
 #### 2. Retrieve Relevant Context Chunks from Pinecone
 
 ```js
-import { getContextChunks } from "../../../rag/context-retrieval.rag.js";
+import { getContextChunks } from '../../../rag/context-retrieval.rag.js';
 
 // Searches Pinecone for matching vectors. Scopes searches specifically to the active chatId
 const relevantContext = await getContextChunks({
-  query: "What are the core billing policies?",
-  chatId: activeChatId,
-  topK: 5, // Returns top 5 relevant semantic segments
+    query: 'What are the core billing policies?',
+    chatId: activeChatId,
+    topK: 5, // Returns top 5 relevant semantic segments
 });
 
-console.log("Ingested matching segments:", relevantContext);
+console.log('Ingested matching segments:', relevantContext);
 ```
 
 ---
@@ -798,7 +790,7 @@ The system provides a utility to generate cryptographically secure temporary pas
 #### 1. Generating a Secure Temporary Password
 
 ```js
-import { generateTempPassword } from "../../../utils/password.utils.js";
+import { generateTempPassword } from '../../../utils/password.utils.js';
 
 // Generates an 8-character (default) secure temporary password
 const tempPassword = generateTempPassword(); // e.g. "aB3!dE9#"

@@ -7,7 +7,7 @@ A standardized heading component used at the top of authentication cards, forms,
 ## 1. Import Path
 
 ```javascript
-import FormHeader from "@/components/Shared/DataDisplay/FormHeader/FormHeader";
+import FormHeader from '@/components/Shared/DataDisplay/FormHeader/FormHeader';
 ```
 
 ---
@@ -25,14 +25,11 @@ import FormHeader from "@/components/Shared/DataDisplay/FormHeader/FormHeader";
 ## 3. Usage Example
 
 ```jsx
-import FormHeader from "@/components/Shared/DataDisplay/FormHeader/FormHeader";
+import FormHeader from '@/components/Shared/DataDisplay/FormHeader/FormHeader';
 
 export default function RegisterCardHeader() {
-  return (
-    <FormHeader
-      title="Create an Account"
-      subtitle="Start managing your Odoo CRM deals today"
-    />
-  );
+    return (
+        <FormHeader title="Create an Account" subtitle="Start managing your Odoo CRM deals today" />
+    );
 }
 ```

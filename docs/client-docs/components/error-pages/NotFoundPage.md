@@ -7,7 +7,7 @@ A full-page 404 Not Found error view component with graphical illustration, help
 ## 1. Import Path
 
 ```javascript
-import NotFoundPage from "@/components/Shared/ErrorPages/NotFoundPage/NotFoundPage";
+import NotFoundPage from '@/components/Shared/ErrorPages/NotFoundPage/NotFoundPage';
 ```
 
 ---
@@ -23,9 +23,9 @@ import NotFoundPage from "@/components/Shared/ErrorPages/NotFoundPage/NotFoundPa
 ## 3. Usage Example
 
 ```jsx
-import NotFoundPage from "@/components/Shared/ErrorPages/NotFoundPage/NotFoundPage";
+import NotFoundPage from '@/components/Shared/ErrorPages/NotFoundPage/NotFoundPage';
 
 export default function CatchAllRoute() {
-  return <NotFoundPage />;
+    return <NotFoundPage />;
 }
 ```

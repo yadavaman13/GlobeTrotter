@@ -8,11 +8,11 @@ A chat bubble component rendering User and Assistant responses with support for 
 
 ```javascript
 import {
-  Message,
-  MessageContent,
-  MessageAvatar,
-  MessageActions,
-} from "@/components/ai-elements/message/message";
+    Message,
+    MessageContent,
+    MessageAvatar,
+    MessageActions,
+} from '@/components/ai-elements/message/message';
 ```
 
 ---
@@ -31,15 +31,15 @@ import {
 ## 3. Usage Example
 
 ```jsx
-import { Message } from "@/components/ai-elements/message/message";
+import { Message } from '@/components/ai-elements/message/message';
 
 export default function RenderChatMessage({ msg, isCurrentlyStreaming }) {
-  return (
-    <Message
-      role={msg.role}
-      content={msg.content}
-      isStreaming={isCurrentlyStreaming && msg.role === "assistant"}
-    />
-  );
+    return (
+        <Message
+            role={msg.role}
+            content={msg.content}
+            isStreaming={isCurrentlyStreaming && msg.role === 'assistant'}
+        />
+    );
 }
 ```

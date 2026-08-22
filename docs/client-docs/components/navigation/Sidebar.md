@@ -7,7 +7,7 @@ The primary application navigation sidebar supporting collapsible states (deskto
 ## 1. Import Path
 
 ```javascript
-import Sidebar from "@/components/Shared/Navigation/Sidebar/Sidebar";
+import Sidebar from '@/components/Shared/Navigation/Sidebar/Sidebar';
 ```
 
 ---
@@ -62,46 +62,42 @@ To ensure seamless navigation and browser history/bookmark support, sidebar acti
 ### Layout Integration Example (Feature Layer: `DashboardLayout.jsx`)
 
 ```jsx
-import { useState } from "react";
-import { Outlet, useNavigate } from "react-router";
-import Sidebar from "@/components/Shared/Navigation/Sidebar/Sidebar";
-import { useAuth } from "@/app/features/auth/hooks/useAuth";
-import { useDerivedProfile } from "@/app/features/auth/hooks/useDerivedProfile";
+import { useState } from 'react';
+import { Outlet, useNavigate } from 'react-router';
+import Sidebar from '@/components/Shared/Navigation/Sidebar/Sidebar';
+import { useAuth } from '@/app/features/auth/hooks/useAuth';
+import { useDerivedProfile } from '@/app/features/auth/hooks/useDerivedProfile';
 
 export default function DashboardLayout() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const { user, handleLogout } = useAuth();
-  const derivedProfile = useDerivedProfile();
-  const navigate = useNavigate();
+    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
+    const { user, handleLogout } = useAuth();
+    const derivedProfile = useDerivedProfile();
+    const navigate = useNavigate();
 
-  const roleSegment = user?.role?.toLowerCase() === "admin" ? "admin" : "user";
+    const roleSegment = user?.role?.toLowerCase() === 'admin' ? 'admin' : 'user';
 
-  return (
-    <div className="dashboard-layout">
-      <Sidebar
-        isCollapsed={isCollapsed}
-        onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
-        isMobileOpen={isMobileOpen}
-        onMobileClose={() => setIsMobileOpen(false)}
-        userRole={user?.role}
-        profile={derivedProfile}
-        onLogoutRequest={async () => {
-          await handleLogout();
-          navigate("/login");
-        }}
-        onNavigateGeneral={() =>
-          navigate(`/dashboard/${roleSegment}/settings/general`)
-        }
-        onNavigateAccount={() =>
-          navigate(`/dashboard/${roleSegment}/settings/account`)
-        }
-      />
-      <main className="dashboard-main">
-        <Outlet />
-      </main>
-    </div>
-  );
+    return (
+        <div className="dashboard-layout">
+            <Sidebar
+                isCollapsed={isCollapsed}
+                onToggleCollapse={() => setIsCollapsed(!isCollapsed)}
+                isMobileOpen={isMobileOpen}
+                onMobileClose={() => setIsMobileOpen(false)}
+                userRole={user?.role}
+                profile={derivedProfile}
+                onLogoutRequest={async () => {
+                    await handleLogout();
+                    navigate('/login');
+                }}
+                onNavigateGeneral={() => navigate(`/dashboard/${roleSegment}/settings/general`)}
+                onNavigateAccount={() => navigate(`/dashboard/${roleSegment}/settings/account`)}
+            />
+            <main className="dashboard-main">
+                <Outlet />
+            </main>
+        </div>
+    );
 }
 ```
 
@@ -114,26 +110,26 @@ export default function DashboardLayout() {
 ```javascript
 // Passed via navItems prop:
 const sidebarNavItems = [
-  {
-    label: "Home",
-    icon: <HomeIcon />,
-    // No roles defined = visible to all authenticated users
-  },
-  {
-    label: "Leads",
-    icon: <UsersIcon />,
-    roles: ["admin", "manager", "sales_rep"], // Hidden from Support & Accountant
-  },
-  {
-    label: "Invoices",
-    icon: <FileTextIcon />,
-    roles: ["admin", "manager", "accountant"], // Hidden from Sales Rep & Support
-  },
-  {
-    label: "Settings",
-    icon: <SettingsIcon />,
-    roles: ["admin"], // Hidden from everyone except Admin
-  },
+    {
+        label: 'Home',
+        icon: <HomeIcon />,
+        // No roles defined = visible to all authenticated users
+    },
+    {
+        label: 'Leads',
+        icon: <UsersIcon />,
+        roles: ['admin', 'manager', 'sales_rep'], // Hidden from Support & Accountant
+    },
+    {
+        label: 'Invoices',
+        icon: <FileTextIcon />,
+        roles: ['admin', 'manager', 'accountant'], // Hidden from Sales Rep & Support
+    },
+    {
+        label: 'Settings',
+        icon: <SettingsIcon />,
+        roles: ['admin'], // Hidden from everyone except Admin
+    },
 ];
 ```
 
@@ -141,11 +137,11 @@ Inside `SidebarNav.jsx`, items are filtered before rendering:
 
 ```javascript
 const { user } = useAuth();
-const userRole = user?.role?.toLowerCase() || "";
+const userRole = user?.role?.toLowerCase() || '';
 
 const authorizedNavItems = (navItems || []).filter((item) => {
-  if (!item.roles || item.roles.length === 0) return true;
-  return item.roles.some((role) => role.toLowerCase() === userRole);
+    if (!item.roles || item.roles.length === 0) return true;
+    return item.roles.some((role) => role.toLowerCase() === userRole);
 });
 ```
 

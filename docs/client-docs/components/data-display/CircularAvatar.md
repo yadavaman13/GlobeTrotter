@@ -7,7 +7,7 @@ A circular user profile avatar component displaying user profile photos with aut
 ## 1. Import Path
 
 ```javascript
-import CircularAvatar from "@/components/Shared/DataDisplay/CircularAvatar/CircularAvatar";
+import CircularAvatar from '@/components/Shared/DataDisplay/CircularAvatar/CircularAvatar';
 ```
 
 ---
@@ -27,22 +27,17 @@ import CircularAvatar from "@/components/Shared/DataDisplay/CircularAvatar/Circu
 ## 3. Usage Example
 
 ```jsx
-import CircularAvatar from "@/components/Shared/DataDisplay/CircularAvatar/CircularAvatar";
+import CircularAvatar from '@/components/Shared/DataDisplay/CircularAvatar/CircularAvatar';
 
 export default function UserHeader({ user }) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-      <CircularAvatar
-        src={user.avatarUrl}
-        name={user.name}
-        size="lg"
-        status="online"
-      />
-      <div>
-        <h4>{user.name}</h4>
-        <p>{user.role}</p>
-      </div>
-    </div>
-  );
+    return (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <CircularAvatar src={user.avatarUrl} name={user.name} size="lg" status="online" />
+            <div>
+                <h4>{user.name}</h4>
+                <p>{user.role}</p>
+            </div>
+        </div>
+    );
 }
 ```

@@ -238,11 +238,11 @@ erDiagram
 - **Schema File:** [`src/db/schema/users.schema.js`](../../server/src/db/schema/users.schema.js)
 - **Primary Key:** `id` (UUID, auto-generated using `defaultRandom()`).
 - **Indices:**
-  - `users_email_idx` on `email`
-  - `users_role_idx` on `role`
-  - `users_is_deleted_idx` on `is_deleted`
-  - `users_deleted_at_idx` on `deleted_at`
-  - `users_recovery_expires_at_idx` on `recovery_expires_at`
+    - `users_email_idx` on `email`
+    - `users_role_idx` on `role`
+    - `users_is_deleted_idx` on `is_deleted`
+    - `users_deleted_at_idx` on `deleted_at`
+    - `users_recovery_expires_at_idx` on `recovery_expires_at`
 - **Constraints:** `email` is unique and non-nullable.
 - **Enums:** Custom PostgreSQL enum `role_enum` mapping to `['user', 'admin']`.
 
@@ -251,19 +251,19 @@ erDiagram
 - **Schema File:** [`src/db/schema/chats.schema.js`](../../server/src/db/schema/chats.schema.js)
 - **Primary Key:** `id` (UUID).
 - **Foreign Keys:**
-  - `user_id` references `users.id` with `onDelete: 'cascade'`.
+    - `user_id` references `users.id` with `onDelete: 'cascade'`.
 - **Indices:**
-  - `chats_user_id_idx` on `user_id`
-  - `chats_guest_id_idx` on `guest_id`
+    - `chats_user_id_idx` on `user_id`
+    - `chats_guest_id_idx` on `guest_id`
 
 #### 3. `messages` Table
 
 - **Schema File:** [`src/db/schema/messages.schema.js`](../../server/src/db/schema/messages.schema.js)
 - **Primary Key:** `id` (UUID).
 - **Foreign Keys:**
-  - `chat_id` references `chats.id` with `onDelete: 'cascade'`.
+    - `chat_id` references `chats.id` with `onDelete: 'cascade'`.
 - **Indices:**
-  - `messages_chat_id_idx` on `chat_id`
+    - `messages_chat_id_idx` on `chat_id`
 - **Fields:** `role` is a standard text field restricted at logical level to `'user' | 'ai'`.
 
 #### 4. `files` Table
@@ -271,11 +271,11 @@ erDiagram
 - **Schema File:** [`src/db/schema/files.schema.js`](../../server/src/db/schema/files.schema.js)
 - **Primary Key:** `id` (UUID).
 - **Foreign Keys:**
-  - `message_id` references `messages.id` with `onDelete: 'cascade'`.
-  - `uploaded_by` references `users.id` with `onDelete: 'set null'`.
+    - `message_id` references `messages.id` with `onDelete: 'cascade'`.
+    - `uploaded_by` references `users.id` with `onDelete: 'set null'`.
 - **Indices:**
-  - `files_message_id_idx` on `message_id`
-  - `files_uploaded_by_idx` on `uploaded_by`
+    - `files_message_id_idx` on `message_id`
+    - `files_uploaded_by_idx` on `uploaded_by`
 - **Fields:** `processing_status` and `rag_status` default to `'pending'`. `metadata` is a `jsonb` field containing parsed page counts, document titles, semantic tags, and suggested prompts.
 
 #### 5. `rag_files` Table
@@ -283,7 +283,7 @@ erDiagram
 - **Schema File:** [`src/db/schema/rag_files.schema.js`](../../server/src/db/schema/rag_files.schema.js)
 - **Primary Key:** `id` (UUID).
 - **Foreign Keys:**
-  - `uploaded_by` references `users.id` with `onDelete: 'set null'`.
+    - `uploaded_by` references `users.id` with `onDelete: 'set null'`.
 - **Description:** Holds administrative vectors/documents utilized globally by RAG orchestrators.
 
 #### 6. `chunks` Table
@@ -291,13 +291,13 @@ erDiagram
 - **Schema File:** [`src/db/schema/chunks.schema.js`](../../server/src/db/schema/chunks.schema.js)
 - **Primary Key:** `id` (UUID).
 - **Foreign Keys:**
-  - `file_id` references `files.id` with `onDelete: 'cascade'`.
-  - `chat_id` references `chats.id` with `onDelete: 'cascade'`.
-  - `rag_file_id` references `rag_files.id` with `onDelete: 'cascade'`.
+    - `file_id` references `files.id` with `onDelete: 'cascade'`.
+    - `chat_id` references `chats.id` with `onDelete: 'cascade'`.
+    - `rag_file_id` references `rag_files.id` with `onDelete: 'cascade'`.
 - **Indices:**
-  - `chunks_file_id_idx` on `file_id`
-  - `chunks_chat_id_idx` on `chat_id`
-  - `chunks_rag_file_id_idx` on `rag_file_id`
+    - `chunks_file_id_idx` on `file_id`
+    - `chunks_chat_id_idx` on `chat_id`
+    - `chunks_rag_file_id_idx` on `rag_file_id`
 - **Description:** Contains structural segmented markdown blocks, page positions, and text extracted via parser scripts.
 
 #### 7. `payments` Table
@@ -306,8 +306,8 @@ erDiagram
 - **Primary Key:** `id` (UUID).
 - **Constraints:** `order_id` is unique and non-nullable.
 - **Indices:**
-  - `payments_order_id_idx` on `order_id`
-  - `payments_payment_id_idx` on `payment_id`
+    - `payments_order_id_idx` on `order_id`
+    - `payments_payment_id_idx` on `payment_id`
 - **Description:** Tracks order statuses, signatures, and transaction flows verified via payment gateways.
 
 ---
@@ -331,30 +331,26 @@ Create a new file inside `src/db/schema/` (e.g., `src/db/schema/posts.schema.js`
 
 ```javascript
 // File: src/db/schema/posts.schema.js
-import { pgTable, uuid, text, timestamp, index } from "drizzle-orm/pg-core";
-import { users } from "./users.schema.js";
+import { pgTable, uuid, text, timestamp, index } from 'drizzle-orm/pg-core';
+import { users } from './users.schema.js';
 
 export const posts = pgTable(
-  "posts",
-  {
-    id: uuid("id").defaultRandom().primaryKey(),
-    userId: uuid("user_id")
-      .references(() => users.id, { onDelete: "cascade" })
-      .notNull(),
-    title: text("title").notNull(),
-    content: text("content").notNull(),
-    createdAt: timestamp("created_at", { withTimezone: true })
-      .defaultNow()
-      .notNull(),
-    updatedAt: timestamp("updated_at", { withTimezone: true })
-      .defaultNow()
-      .notNull(),
-  },
-  (table) => {
-    return {
-      userIdIdx: index("posts_user_id_idx").on(table.userId),
-    };
-  },
+    'posts',
+    {
+        id: uuid('id').defaultRandom().primaryKey(),
+        userId: uuid('user_id')
+            .references(() => users.id, { onDelete: 'cascade' })
+            .notNull(),
+        title: text('title').notNull(),
+        content: text('content').notNull(),
+        createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+        updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
+    },
+    (table) => {
+        return {
+            userIdIdx: index('posts_user_id_idx').on(table.userId),
+        };
+    },
 );
 ```
 
@@ -364,14 +360,14 @@ Open [`src/db/schema/schema.js`](../../server/src/db/schema/schema.js) and impor
 
 ```javascript
 // File: src/db/schema/schema.js
-import { users } from "./users.schema.js";
-import { payments } from "./payments.schema.js";
-import { chats } from "./chats.schema.js";
-import { messages } from "./messages.schema.js";
-import { files } from "./files.schema.js";
-import { chunks } from "./chunks.schema.js";
-import { ragFiles } from "./rag_files.schema.js";
-import { posts } from "./posts.schema.js"; // <-- Import new schema
+import { users } from './users.schema.js';
+import { payments } from './payments.schema.js';
+import { chats } from './chats.schema.js';
+import { messages } from './messages.schema.js';
+import { files } from './files.schema.js';
+import { chunks } from './chunks.schema.js';
+import { ragFiles } from './rag_files.schema.js';
+import { posts } from './posts.schema.js'; // <-- Import new schema
 
 export { users, payments, chats, messages, files, chunks, ragFiles, posts }; // <-- Export new schema
 ```
@@ -406,9 +402,9 @@ Create a new file in `src/dao/` (e.g., `src/dao/post.dao.js`) to encapsulate all
 
 ```javascript
 // File: src/dao/post.dao.js
-import { db } from "../config/database.config.js";
-import { posts } from "../db/schema/posts.schema.js";
-import { eq, and } from "drizzle-orm";
+import { db } from '../config/database.config.js';
+import { posts } from '../db/schema/posts.schema.js';
+import { eq, and } from 'drizzle-orm';
 
 /**
  * Inserts a new post record
@@ -416,8 +412,8 @@ import { eq, and } from "drizzle-orm";
  * @returns {Promise<object>} New post record
  */
 export async function createPost(postData) {
-  const [newPost] = await db.insert(posts).values(postData).returning();
-  return newPost;
+    const [newPost] = await db.insert(posts).values(postData).returning();
+    return newPost;
 }
 
 /**
@@ -426,7 +422,7 @@ export async function createPost(postData) {
  * @returns {Promise<Array>} List of post records
  */
 export async function getPostsByUserId(userId) {
-  return await db.select().from(posts).where(eq(posts.userId, userId));
+    return await db.select().from(posts).where(eq(posts.userId, userId));
 }
 
 /**
@@ -436,12 +432,12 @@ export async function getPostsByUserId(userId) {
  * @returns {Promise<object|null>} Updated record or null
  */
 export async function updatePost(id, updates) {
-  const [updatedPost] = await db
-    .update(posts)
-    .set({ ...updates, updatedAt: new Date() })
-    .where(eq(posts.id, id))
-    .returning();
-  return updatedPost || null;
+    const [updatedPost] = await db
+        .update(posts)
+        .set({ ...updates, updatedAt: new Date() })
+        .where(eq(posts.id, id))
+        .returning();
+    return updatedPost || null;
 }
 ```
 
@@ -451,26 +447,26 @@ If the table requires initial bootstrap data (e.g., lookup values or default ite
 
 ```javascript
 // File: src/db/seed.js
-import { posts } from "./schema/posts.schema.js";
+import { posts } from './schema/posts.schema.js';
 // ... other imports
 
 async function seedPosts(insertedUsers) {
-  if (!insertedUsers || insertedUsers.length === 0) return;
+    if (!insertedUsers || insertedUsers.length === 0) return;
 
-  const dummyPosts = [
-    {
-      userId: insertedUsers[0].id,
-      title: "Welcome to Apex",
-      content: "This is the initial system post content.",
-    },
-  ];
+    const dummyPosts = [
+        {
+            userId: insertedUsers[0].id,
+            title: 'Welcome to Apex',
+            content: 'This is the initial system post content.',
+        },
+    ];
 
-  try {
-    await db.insert(posts).values(dummyPosts);
-    console.log("Seeded posts table successfully");
-  } catch (error) {
-    console.error("Error seeding posts:", error);
-  }
+    try {
+        await db.insert(posts).values(dummyPosts);
+        console.log('Seeded posts table successfully');
+    } catch (error) {
+        console.error('Error seeding posts:', error);
+    }
 }
 ```
 
