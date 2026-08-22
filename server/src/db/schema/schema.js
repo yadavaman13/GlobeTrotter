@@ -1,5 +1,4 @@
 export * from './users.schema.js';
-export * from './password_reset_tokens.schema.js';
 
 export * from './cities.schema.js';
 export * from './activities.schema.js';
