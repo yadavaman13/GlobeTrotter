@@ -1,0 +1,124 @@
+@use '@/styles/variables' as variables;
+
+.popular-activities-card {
+    display: flex;
+    flex-direction: column;
+    background-color: variables.$color-surface-card;
+    border: 1px solid variables.$color-hairline;
+    border-radius: variables.$radius-md;
+    padding: variables.$spacing-base;
+    box-shadow: variables.$shadow-card;
+
+    .card-header {
+        margin-bottom: variables.$spacing-md;
+
+        .card-title {
+            font-size: variables.$font-size-md;
+            font-weight: 600;
+            color: variables.$color-ink;
+            margin: 0 0 variables.$spacing-xxs;
+        }
+
+        .card-caption {
+            font-size: variables.$font-size-micro;
+            color: variables.$color-muted;
+        }
+    }
+
+    .activities-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+
+        .activities-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: variables.$font-size-caption-sm;
+
+            thead {
+                border-bottom: 1px solid variables.$color-hairline;
+
+                th {
+                    padding: variables.$spacing-sm variables.$spacing-md;
+                    font-size: variables.$font-size-badge;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.04em;
+                    color: variables.$color-muted;
+                    white-space: nowrap;
+
+                    &.th-right {
+                        text-align: right;
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    border-bottom: 1px solid variables.$color-hairline-soft;
+
+                    &:hover {
+                        background-color: variables.$color-surface-soft;
+                    }
+
+                    td {
+                        padding: variables.$spacing-sm variables.$spacing-md;
+                        vertical-align: middle;
+                        color: variables.$color-ink;
+                    }
+
+                    .activity-title-cell {
+                        display: flex;
+                        align-items: center;
+                        gap: variables.$spacing-sm;
+
+                        .compass-icon {
+                            color: variables.$color-info;
+                            flex-shrink: 0;
+                        }
+
+                        .activity-name {
+                            font-weight: 600;
+                            color: variables.$color-ink;
+                        }
+                    }
+
+                    .location-cell {
+                        .city-label {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: variables.$spacing-xxs;
+                            color: variables.$color-muted;
+                        }
+                    }
+
+                    .cost-cell {
+                        font-weight: 600;
+                        color: variables.$color-ink;
+                    }
+
+                    .count-cell {
+                        text-align: right;
+
+                        .schedule-badge {
+                            display: inline-block;
+                            font-size: variables.$font-size-micro;
+                            font-weight: 600;
+                            color: variables.$color-info;
+                            background-color: variables.$color-info-light;
+                            padding: variables.$spacing-xxs variables.$spacing-sm;
+                            border-radius: variables.$radius-xs;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.empty {
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        color: variables.$color-muted;
+    }
+}

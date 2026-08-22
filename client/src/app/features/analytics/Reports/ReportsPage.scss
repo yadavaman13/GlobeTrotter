@@ -1,0 +1,114 @@
+@use '@/styles/variables' as variables;
+
+.analytics-reports-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: variables.$spacing-base;
+    box-sizing: border-box;
+
+    .reports-header {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-xxs;
+        margin-bottom: variables.$spacing-base;
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: variables.$spacing-sm;
+
+            .header-icon {
+                color: variables.$color-info;
+            }
+
+            .header-main-title {
+                font-size: variables.$font-size-display-lg;
+                font-weight: 700;
+                color: variables.$color-ink;
+                margin: 0;
+            }
+        }
+
+        .header-subtitle {
+            font-size: variables.$font-size-sm;
+            color: variables.$color-muted;
+            margin: 0;
+        }
+    }
+
+    .reports-list-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: variables.$spacing-md;
+
+        .report-export-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: variables.$color-surface-card;
+            border: 1px solid variables.$color-hairline;
+            border-radius: variables.$radius-md;
+            padding: variables.$spacing-base;
+            gap: variables.$spacing-md;
+            box-shadow: variables.$shadow-card;
+
+            .card-top {
+                display: flex;
+                gap: variables.$spacing-base;
+
+                .doc-icon-wrapper {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: variables.$radius-sm;
+                    background-color: variables.$color-info-light;
+                    color: variables.$color-info;
+                    flex-shrink: 0;
+                }
+
+                .report-info {
+                    display: flex;
+                    flex-direction: column;
+                    gap: variables.$spacing-xxs;
+
+                    .report-name {
+                        font-size: variables.$font-size-md;
+                        font-weight: 600;
+                        color: variables.$color-ink;
+                        margin: 0;
+                    }
+
+                    .report-desc {
+                        font-size: variables.$font-size-caption-sm;
+                        color: variables.$color-muted;
+                        margin: 0;
+                        line-height: 1.4;
+                    }
+                }
+            }
+
+            .card-bottom {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding-top: variables.$spacing-base;
+                border-top: 1px solid variables.$color-hairline;
+
+                .record-count-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: variables.$spacing-xxs;
+                    font-size: variables.$font-size-micro;
+                    color: variables.$color-muted;
+                }
+
+                .download-btn {
+                    gap: variables.$spacing-xxs;
+                }
+            }
+        }
+    }
+}

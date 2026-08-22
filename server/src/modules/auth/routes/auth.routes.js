@@ -15,7 +15,7 @@ import {
 
 const router = Router();
 
-const authRateLimiter = rateLimiter({ windowMs: 15 * 60 * 1000, maxRequests: 3 }); //rate limiting
+const authRateLimiter = rateLimiter({ windowMs: 15 * 60 * 1000, maxRequests: 60 }); //rate limiting
 
 // Public Routes
 router.post('/register', authRateLimiter, registerValidator, authController.register);

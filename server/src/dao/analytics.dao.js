@@ -110,6 +110,9 @@ export async function getPlatformAnalytics() {
         })
         .from(cities)
         .leftJoin(tripStops, eq(tripStops.cityId, cities.id))
+        .where(
+            sql`${cities.name} NOT LIKE '%-178%' AND ${cities.name} NOT LIKE 'Rome-%' AND ${cities.name} NOT LIKE 'Tokyo-%' AND ${cities.name} NOT LIKE 'Kyoto-%' AND ${cities.name} NOT LIKE 'Osaka-%'`,
+        )
         .groupBy(cities.id, cities.name, cities.country, cities.region, cities.popularity, cities.costIndex)
         .orderBy(desc(count(tripStops.id)), desc(cities.popularity))
         .limit(10);
@@ -128,6 +131,9 @@ export async function getPlatformAnalytics() {
         .from(activities)
         .leftJoin(tripStopActivities, eq(tripStopActivities.activityId, activities.id))
         .leftJoin(cities, eq(activities.cityId, cities.id))
+        .where(
+            sql`${cities.name} NOT LIKE '%-178%' AND ${cities.name} NOT LIKE 'Rome-%' AND ${cities.name} NOT LIKE 'Tokyo-%' AND ${cities.name} NOT LIKE 'Kyoto-%' AND ${cities.name} NOT LIKE 'Osaka-%'`,
+        )
         .groupBy(activities.id, activities.name, activities.activityType, activities.cost, activities.currency, cities.name, cities.country)
         .orderBy(desc(count(tripStopActivities.id)))
         .limit(10);
@@ -157,6 +163,44 @@ export async function getPlatformAnalytics() {
         .from(tripCostItems)
         .groupBy(tripCostItems.category)
         .orderBy(desc(sql`SUM(${tripCostItems.amount})`));
+
+    const recentTrips = await db
+        .select({
+            id: trips.id,
+            name: trips.name,
+            description: trips.description,
+            startDate: trips.startDate,
+            endDate: trips.endDate,
+            budgetAmount: trips.budgetAmount,
+            budgetCurrency: trips.budgetCurrency,
+            status: trips.status,
+            visibility: trips.visibility,
+            publicSlug: trips.publicSlug,
+            ownerName: sql`CONCAT(${users.firstName}, ' ', ${users.lastName})`,
+            ownerEmail: users.email,
+            stopCount: count(tripStops.id),
+        })
+        .from(trips)
+        .leftJoin(users, eq(trips.ownerId, users.id))
+        .leftJoin(tripStops, eq(tripStops.tripId, trips.id))
+        .where(sql`${users.email} NOT LIKE '%@example.com' AND ${users.firstName} != 'Traveler'`)
+        .groupBy(
+            trips.id,
+            trips.name,
+            trips.description,
+            trips.startDate,
+            trips.endDate,
+            trips.budgetAmount,
+            trips.budgetCurrency,
+            trips.status,
+            trips.visibility,
+            trips.publicSlug,
+            users.firstName,
+            users.lastName,
+            users.email,
+        )
+        .orderBy(desc(trips.createdAt))
+        .limit(6);
 
     // 6. Social & Bookmarks
     const [{ totalSavedDestinations }] = await db
@@ -194,6 +238,21 @@ export async function getPlatformAnalytics() {
             totalStops: Number(totalStops),
             totalScheduledActivities: Number(totalScheduledActivities),
             totalShares: Number(totalTripShares),
+            recent: recentTrips.map((t) => ({
+                id: t.id,
+                name: t.name,
+                description: t.description,
+                startDate: t.startDate,
+                endDate: t.endDate,
+                budgetAmount: parseFloat(t.budgetAmount) || 0,
+                budgetCurrency: t.budgetCurrency || 'INR',
+                status: t.status,
+                visibility: t.visibility,
+                publicSlug: t.publicSlug,
+                ownerName: t.ownerName?.trim() || 'Traveler',
+                ownerEmail: t.ownerEmail,
+                stopCount: Number(t.stopCount),
+            })),
         },
         catalog: {
             totalCities: Number(totalCatalogCities),

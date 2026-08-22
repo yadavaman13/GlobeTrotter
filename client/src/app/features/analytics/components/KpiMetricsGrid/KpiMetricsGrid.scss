@@ -1,0 +1,49 @@
+@use '@/styles/variables' as variables;
+
+.kpi-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: variables.$spacing-md;
+    margin-bottom: variables.$spacing-base;
+
+    .kpi-card {
+        background-color: variables.$color-surface-card;
+        border: 1px solid variables.$color-hairline;
+        border-radius: variables.$radius-md;
+        box-shadow: variables.$shadow-card;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: variables.$shadow-card-hover;
+        }
+
+        &.users .stat-icon-wrapper {
+            background-color: variables.$color-info-light;
+            color: variables.$color-info;
+        }
+
+        &.trips .stat-icon-wrapper {
+            background-color: variables.$color-success-light;
+            color: variables.$color-success;
+        }
+
+        &.financials .stat-icon-wrapper {
+            background-color: variables.$color-warning-light;
+            color: variables.$color-warning;
+        }
+
+        &.catalog .stat-icon-wrapper {
+            background-color: variables.$color-purple-light;
+            color: variables.$color-purple;
+        }
+    }
+
+    .kpi-skeleton-card {
+        height: 110px;
+        border-radius: variables.$radius-md;
+        background: linear-gradient(90deg, variables.$color-surface-soft 25%, variables.$color-hairline 50%, variables.$color-surface-soft 75%);
+        background-size: 200% 100%;
+        animation: skeleton-shimmer 1.5s infinite;
+    }
+}

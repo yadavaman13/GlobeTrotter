@@ -3,9 +3,11 @@ import { db, pool } from '../config/database.config.js';
 import { users } from '../db/schema/users.schema.js';
 import redis from '../config/cache.config.js';
 
+import { like } from 'drizzle-orm';
+
 beforeEach(async () => {
     try {
-        await db.delete(users);
+        await db.delete(users).where(like(users.email, '%@example.com'));
     } catch (err) {
         console.error('Error cleaning up users table before test:', err);
     }

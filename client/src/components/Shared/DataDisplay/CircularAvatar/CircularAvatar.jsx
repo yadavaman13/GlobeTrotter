@@ -1,23 +1,58 @@
 import './CircularAvatar.scss';
 
+function parseAvatarSize(s) {
+    if (typeof s === 'number') return s;
+    const sizeMap = {
+        xs: 24,
+        sm: 28,
+        md: 36,
+        lg: 44,
+        xl: 56,
+        '2xl': 72,
+    };
+    if (typeof s === 'string') {
+        if (sizeMap[s.toLowerCase()]) return sizeMap[s.toLowerCase()];
+        const parsed = parseInt(s, 10);
+        if (!isNaN(parsed) && parsed > 0) return parsed;
+    }
+    return 36;
+}
+
+function extractInitials(name, text) {
+    if (text) return text;
+    if (!name || typeof name !== 'string') return null;
+    const parts = name.trim().split(/\s+/).filter(Boolean);
+    if (parts.length >= 2) {
+        return (parts[0][0] + parts[1][0]).toUpperCase();
+    }
+    if (parts.length === 1 && parts[0].length > 0) {
+        return parts[0].substring(0, 2).toUpperCase();
+    }
+    return null;
+}
+
 function CircularAvatar({
     text = null,
+    name = null,
     bgColor = '#8b5cf6',
-    size = 32,
+    size = 36,
     onClick,
     className = '',
     src = null,
     showStatus = false,
     status = 'online',
 }) {
+    const numericSize = parseAvatarSize(size);
+    const displayText = extractInitials(name, text);
+
     const handleClick = (e) => {
         if (onClick) onClick(e);
     };
 
     const avatarContent = src ? (
-        <img src={src} alt={text || 'User Profile'} className="avatar-image-img" />
-    ) : text ? (
-        <span className="avatar-letter">{text}</span>
+        <img src={src} alt={displayText || name || 'User Profile'} className="avatar-image-img" />
+    ) : displayText ? (
+        <span className="avatar-letter">{displayText}</span>
     ) : (
         <svg
             width="100%"
@@ -40,16 +75,23 @@ function CircularAvatar({
     return (
         <div
             className={`circular-avatar-wrapper ${className}`}
-            style={{ width: `${size}px`, height: `${size}px` }}
+            style={{
+                width: `${numericSize}px`,
+                height: `${numericSize}px`,
+                minWidth: `${numericSize}px`,
+                minHeight: `${numericSize}px`,
+                maxWidth: `${numericSize}px`,
+                maxHeight: `${numericSize}px`,
+            }}
         >
             <div
                 className={`circular-avatar-container ${onClick ? 'clickable' : ''} ${src ? 'has-image' : ''}`}
                 onClick={handleClick}
                 style={{
-                    backgroundColor: src || !text ? 'transparent' : bgColor,
+                    backgroundColor: src || !displayText ? 'transparent' : bgColor,
                     width: '100%',
                     height: '100%',
-                    fontSize: `${size * 0.42}px`,
+                    fontSize: `${numericSize * 0.4}px`,
                 }}
             >
                 {avatarContent}

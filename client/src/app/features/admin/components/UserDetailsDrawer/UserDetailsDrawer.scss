@@ -1,0 +1,197 @@
+@use '@/styles/variables' as variables;
+
+.user-details-drawer-content {
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-base;
+    padding: variables.$spacing-base;
+
+    .drawer-header-profile {
+        display: flex;
+        align-items: center;
+        gap: variables.$spacing-base;
+        padding-bottom: variables.$spacing-md;
+        border-bottom: 1px solid variables.$color-hairline;
+
+        .profile-text-meta {
+            display: flex;
+            flex-direction: column;
+            gap: variables.$spacing-xxs;
+
+            .profile-name {
+                font-size: variables.$font-size-lg;
+                font-weight: 600;
+                color: variables.$color-ink;
+                margin: 0;
+            }
+
+            .profile-email {
+                display: flex;
+                align-items: center;
+                gap: variables.$spacing-xxs;
+                font-size: variables.$font-size-caption-sm;
+                color: variables.$color-muted;
+                margin: 0;
+            }
+
+            .profile-badges-row {
+                display: flex;
+                align-items: center;
+                gap: variables.$spacing-xs;
+                margin-top: variables.$spacing-xxs;
+            }
+        }
+    }
+
+    .drawer-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: variables.$spacing-sm;
+
+        .stat-box {
+            display: flex;
+            align-items: center;
+            gap: variables.$spacing-sm;
+            padding: variables.$spacing-sm;
+            background-color: variables.$color-surface-soft;
+            border: 1px solid variables.$color-hairline;
+            border-radius: variables.$radius-sm;
+
+            .stat-icon-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                height: 36px;
+                border-radius: variables.$radius-sm;
+
+                &.trips {
+                    background-color: variables.$color-info-light;
+                    color: variables.$color-info;
+                }
+
+                &.bookmarks {
+                    background-color: variables.$color-warning-light;
+                    color: variables.$color-warning;
+                }
+            }
+
+            .stat-content {
+                display: flex;
+                flex-direction: column;
+
+                .stat-label {
+                    font-size: variables.$font-size-micro;
+                    color: variables.$color-muted;
+                }
+
+                .stat-number {
+                    font-size: variables.$font-size-lg;
+                    font-weight: 700;
+                    color: variables.$color-ink;
+                }
+            }
+        }
+    }
+
+    .drawer-section {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-sm;
+
+        .section-title {
+            font-size: variables.$font-size-sm;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: variables.$color-muted-soft;
+            margin: 0;
+        }
+
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: variables.$spacing-xs;
+
+            .info-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: variables.$spacing-xs 0;
+                border-bottom: 1px dashed variables.$color-hairline-soft;
+                font-size: variables.$font-size-caption-sm;
+
+                .info-label {
+                    display: flex;
+                    align-items: center;
+                    gap: variables.$spacing-xs;
+                    color: variables.$color-muted;
+                }
+
+                .info-value {
+                    font-weight: 500;
+                    color: variables.$color-ink;
+
+                    .verified-tag {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: variables.$spacing-xxs;
+                        color: variables.$color-success;
+                    }
+
+                    .unverified-tag {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: variables.$spacing-xxs;
+                        color: variables.$color-warning;
+                    }
+
+                    &.deleted-val {
+                        color: variables.$color-danger;
+                    }
+
+                    &.warning-val {
+                        color: variables.$color-warning;
+                    }
+                }
+            }
+        }
+    }
+
+    .drawer-actions-panel {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-sm;
+        margin-top: variables.$spacing-xs;
+
+        .section-title {
+            font-size: variables.$font-size-sm;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: variables.$color-muted-soft;
+            margin: 0;
+        }
+
+        .actions-buttons-col {
+            display: flex;
+            flex-direction: column;
+            gap: variables.$spacing-xs;
+
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+
+                &.delete-btn {
+                    color: variables.$color-danger;
+                    border-color: variables.$color-danger-border;
+
+                    &:hover {
+                        background-color: variables.$color-danger-light;
+                        border-color: variables.$color-danger;
+                    }
+                }
+            }
+        }
+    }
+}
