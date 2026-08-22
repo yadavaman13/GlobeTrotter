@@ -1,5 +1,6 @@
 @use './styles/foundation';
 @use './styles/variables' as variables;
+@use './app/features/landing/LandingPage';
 
 * {
     box-sizing: border-box;
