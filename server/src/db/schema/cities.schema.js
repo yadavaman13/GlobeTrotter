@@ -13,15 +13,11 @@ import { sql } from 'drizzle-orm';
 export const cities = pgTable(
     'cities',
     {
-        id: uuid('id')
-            .defaultRandom()
-            .primaryKey(),
+        id: uuid('id').defaultRandom().primaryKey(),
 
-        name: text('name')
-            .notNull(),
+        name: text('name').notNull(),
 
-        country: text('country')
-            .notNull(),
+        country: text('country').notNull(),
 
         region: text('region'),
 
@@ -49,21 +45,15 @@ export const cities = pgTable(
     },
 
     (table) => ({
-        nameIdx: index('cities_name_idx')
-            .on(table.name),
+        nameIdx: index('cities_name_idx').on(table.name),
 
-        countryIdx: index('cities_country_idx')
-            .on(table.country),
+        countryIdx: index('cities_country_idx').on(table.country),
 
-        regionIdx: index('cities_region_idx')
-            .on(table.region),
+        regionIdx: index('cities_region_idx').on(table.region),
 
-        popularityIdx: index('cities_popularity_idx')
-            .on(table.popularity),
+        popularityIdx: index('cities_popularity_idx').on(table.popularity),
 
-        countryNameUnique: uniqueIndex(
-            'cities_country_name_unique',
-        ).on(table.country, table.name),
+        countryNameUnique: uniqueIndex('cities_country_name_unique').on(table.country, table.name),
 
         costIndexCheck: check(
             'cities_cost_index_check',

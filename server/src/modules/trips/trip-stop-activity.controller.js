@@ -2,7 +2,7 @@ import {
     createTripStopActivity,
     findOrCreateActivity,
     getActivitiesByStopId,
-    getActivityById,
+    getTripStopActivityById,
     updateTripStopActivity,
     deleteTripStopActivity,
     reorderStopActivities,
@@ -110,7 +110,7 @@ export async function createActivity(req, res) {
             });
         }
 
-        const hydrated = await getActivityById(scheduled.id);
+        const hydrated = await getTripStopActivityById(scheduled.id);
 
         return sendResponse({
             res,
@@ -188,7 +188,7 @@ export async function updateActivity(req, res) {
             });
         }
 
-        const currentActivity = await getActivityById(activityId);
+        const currentActivity = await getTripStopActivityById(activityId);
         if (!currentActivity || currentActivity.tripStopId !== stopId) {
             return sendResponse({
                 res,
@@ -235,7 +235,7 @@ export async function updateActivity(req, res) {
         }
 
         await updateTripStopActivity(activityId, stopId, updates);
-        const updated = await getActivityById(activityId);
+        const updated = await getTripStopActivityById(activityId);
 
         return sendResponse({
             res,

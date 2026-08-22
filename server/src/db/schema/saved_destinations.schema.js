@@ -1,10 +1,4 @@
-import {
-    pgTable,
-    uuid,
-    timestamp,
-    index,
-    primaryKey,
-} from 'drizzle-orm/pg-core';
+import { pgTable, uuid, timestamp, index, primaryKey } from 'drizzle-orm/pg-core';
 
 import { users } from './users.schema.js';
 import { cities } from './cities.schema.js';
@@ -33,18 +27,11 @@ export const savedDestinations = pgTable(
 
     (table) => ({
         pk: primaryKey({
-            columns: [
-                table.userId,
-                table.cityId,
-            ],
+            columns: [table.userId, table.cityId],
         }),
 
-        cityIdx: index(
-            'saved_destinations_city_idx',
-        ).on(table.cityId),
+        cityIdx: index('saved_destinations_city_idx').on(table.cityId),
 
-        userIdx: index(
-            'saved_destinations_user_idx',
-        ).on(table.userId),
+        userIdx: index('saved_destinations_user_idx').on(table.userId),
     }),
 );
