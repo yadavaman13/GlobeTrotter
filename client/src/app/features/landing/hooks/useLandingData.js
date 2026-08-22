@@ -1,123 +1,119 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/app/features/auth/hooks/useAuth';
 import * as landingService from '../services/landing.service';
 
 export function useLandingData() {
     const { user } = useAuth();
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchSuggestions, setSearchSuggestions] = useState([]);
-    const [selectedRegion, setSelectedRegion] = useState('Europe');
+    const [selectedCategory, setSelectedCategory] = useState('Heritage');
+    const [mapViewEnabled, setMapViewEnabled] = useState(true);
+    const [activities, setActivities] = useState([]);
     const [cities, setCities] = useState([]);
-    const [upcomingTrip, setUpcomingTrip] = useState(null);
-    const [previousTrips, setPreviousTrips] = useState([]);
+    const [savedCityIds, setSavedCityIds] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Fetch cities by region
-    useEffect(() => {
-        let isMounted = true;
-        const fetchCities = async () => {
-            try {
-                const res = await landingService.getCities({
-                    region: selectedRegion,
-                    limit: 5,
-                });
-                if (isMounted) {
-                    setCities(res.data?.cities || []);
-                }
-            } catch (err) {
-                console.error('Error fetching regional selections:', err);
-            }
-        };
+    // Fetch activities directly from database via backend API
+    const fetchActivities = useCallback(async (query, category) => {
+        try {
+            setLoading(true);
+            setError(null);
+            const params = {};
+            if (query && query.trim()) params.q = query.trim();
+            if (category && category !== 'All') params.activityType = category.toLowerCase();
 
-        fetchCities();
-        return () => {
-            isMounted = false;
-        };
-    }, [selectedRegion]);
+            const res = await landingService.getActivities(params);
+            const fetched = res.data?.activities || res.activities || [];
 
-    // Fetch user's trips if logged in
-    useEffect(() => {
-        if (!user) {
-            setTimeout(() => {
-                setUpcomingTrip(null);
-                setPreviousTrips([]);
-            }, 0);
-            return;
+            setActivities(
+                fetched.map((act) => ({
+                    id: act.id,
+                    name: act.name,
+                    description: act.description || '',
+                    activityType: act.activityType || 'Sightseeing',
+                    location: act.city ? `${act.city.name}, ${act.city.country}` : 'Global',
+                    rating: 4.8,
+                    badge: act.activityType || 'Popular',
+                    tags: [act.activityType || 'Activity', `${act.durationMinutes || 60} Mins`],
+                    imageUrl: act.images && act.images.length > 0 ? act.images[0].imageUrl : '',
+                })),
+            );
+        } catch (err) {
+            console.error('Failed to fetch activities from database:', err);
+            setError(err.message || 'Failed to fetch activities');
+            setActivities([]);
+        } finally {
+            setLoading(false);
         }
+    }, []);
 
+    // Initial fetch and category change
+    useEffect(() => {
+        fetchActivities(searchQuery, selectedCategory);
+    }, [selectedCategory, fetchActivities]);
+
+    // 300ms Debounced search
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            fetchActivities(searchQuery, selectedCategory);
+        }, 300);
+
+        return () => clearTimeout(handler);
+    }, [searchQuery, selectedCategory, fetchActivities]);
+
+    // Fetch saved destinations for logged-in user
+    useEffect(() => {
+        if (!user) return;
         let isMounted = true;
-        const fetchUserTrips = async () => {
+
+        const loadSaved = async () => {
             try {
-                setLoading(true);
-                const res = await landingService.getTrips();
-                if (isMounted) {
-                    const allTrips = res.trips || [];
-
-                    // Upcoming Trip: First trip that is planned or ongoing
-                    const upcoming = allTrips.find(
-                        (t) => t.status === 'planned' || t.status === 'ongoing',
-                    );
-                    setUpcomingTrip(upcoming || null);
-
-                    // Previous Trips: All trips that are completed
-                    const completed = allTrips.filter((t) => t.status === 'completed');
-                    setPreviousTrips(completed);
+                const res = await landingService.getSavedDestinations();
+                if (isMounted && res.data?.savedDestinations) {
+                    setSavedCityIds(res.data.savedDestinations.map((d) => d.id || d.cityId));
                 }
             } catch (err) {
-                console.error('Error fetching user trips:', err);
-                if (isMounted) {
-                    setError(err.message || 'Failed to load trips');
-                }
-            } finally {
-                if (isMounted) {
-                    setLoading(false);
-                }
+                console.error('Error fetching saved destinations:', err);
             }
         };
 
-        fetchUserTrips();
+        loadSaved();
         return () => {
             isMounted = false;
         };
     }, [user]);
 
-    // Debounced search logic for destinations
-    useEffect(() => {
-        if (!searchQuery.trim()) {
-            setTimeout(() => {
-                setSearchSuggestions([]);
-            }, 0);
-            return;
-        }
-
-        const handler = setTimeout(async () => {
-            try {
-                const res = await landingService.getCities({
-                    q: searchQuery,
-                    limit: 10,
-                });
-                setSearchSuggestions(res.data?.cities || []);
-            } catch (err) {
-                console.error('Search query failed:', err);
+    // Toggle save / bookmark
+    const toggleSaveCity = async (cityId) => {
+        if (!user) return false;
+        const isSaved = savedCityIds.includes(cityId);
+        try {
+            if (isSaved) {
+                await landingService.removeSavedDestination(cityId);
+                setSavedCityIds((prev) => prev.filter((id) => id !== cityId));
+            } else {
+                await landingService.saveDestination(cityId);
+                setSavedCityIds((prev) => [...prev, cityId]);
             }
-        }, 300); // 300ms debounce loop
-
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [searchQuery]);
+            return true;
+        } catch (err) {
+            console.error('Failed to toggle save destination:', err);
+            return false;
+        }
+    };
 
     return {
         user,
         searchQuery,
         setSearchQuery,
-        searchSuggestions,
-        selectedRegion,
-        setSelectedRegion,
+        selectedCategory,
+        setSelectedCategory,
+        mapViewEnabled,
+        setMapViewEnabled,
+        activities,
         cities,
-        upcomingTrip,
-        previousTrips,
+        savedCityIds,
+        toggleSaveCity,
         loading,
         error,
     };
