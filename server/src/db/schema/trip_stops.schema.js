@@ -15,9 +15,7 @@ import { cities } from './cities.schema.js';
 export const tripStops = pgTable(
     'trip_stops',
     {
-        id: uuid('id')
-            .defaultRandom()
-            .primaryKey(),
+        id: uuid('id').defaultRandom().primaryKey(),
 
         tripId: uuid('trip_id')
             .notNull()
@@ -39,8 +37,7 @@ export const tripStops = pgTable(
             mode: 'string',
         }).notNull(),
 
-        sequenceOrder: integer('sequence_order')
-            .notNull(),
+        sequenceOrder: integer('sequence_order').notNull(),
 
         createdAt: timestamp('created_at', {
             withTimezone: true,
@@ -56,29 +53,17 @@ export const tripStops = pgTable(
     },
 
     (table) => ({
-        tripIdx: index(
-            'trip_stops_trip_idx',
-        ).on(table.tripId),
+        tripIdx: index('trip_stops_trip_idx').on(table.tripId),
 
-        cityIdx: index(
-            'trip_stops_city_idx',
-        ).on(table.cityId),
+        cityIdx: index('trip_stops_city_idx').on(table.cityId),
 
-        tripSequenceUnique: uniqueIndex(
-            'trip_stops_trip_sequence_unique',
-        ).on(
+        tripSequenceUnique: uniqueIndex('trip_stops_trip_sequence_unique').on(
             table.tripId,
             table.sequenceOrder,
         ),
 
-        datesCheck: check(
-            'trip_stops_dates_check',
-            sql`start_date <= end_date`,
-        ),
+        datesCheck: check('trip_stops_dates_check', sql`start_date <= end_date`),
 
-        sequenceCheck: check(
-            'trip_stops_sequence_check',
-            sql`sequence_order > 0`,
-        ),
+        sequenceCheck: check('trip_stops_sequence_check', sql`sequence_order > 0`),
     }),
 );

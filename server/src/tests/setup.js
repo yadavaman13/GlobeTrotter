@@ -6,6 +6,13 @@ import redis from '../config/cache.config.js';
 import { like } from 'drizzle-orm';
 
 beforeEach(async () => {
+    const testPath = expect.getState().testPath;
+    if (
+        testPath &&
+        (testPath.includes('community.test.js') || testPath.includes('dashboard.test.js'))
+    ) {
+        return;
+    }
     try {
         await db.delete(users).where(like(users.email, '%@example.com'));
     } catch (err) {

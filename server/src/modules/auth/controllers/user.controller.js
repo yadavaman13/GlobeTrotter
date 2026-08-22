@@ -25,6 +25,10 @@ export async function getMe(req, res, next) {
                     profileImage: user.profileImage,
                     isActive: user.isActive,
                     emailVerified: user.emailVerified,
+                    phone: user.phone,
+                    city: user.city,
+                    country: user.country,
+                    additionalInformation: user.additionalInformation,
                     createdAt: user.createdAt,
                     updatedAt: user.updatedAt,
                 },
@@ -40,12 +44,27 @@ export async function getMe(req, res, next) {
  */
 export async function updateProfile(req, res, next) {
     try {
-        const { email, firstName, lastName, profileImage } = req.body;
+        const {
+            email,
+            firstName,
+            lastName,
+            profileImage,
+            phone,
+            city,
+            country,
+            additionalInformation,
+            googleId,
+        } = req.body;
         const updatedUser = await userService.updateProfile(req.user.id, {
             email,
             firstName,
             lastName,
             profileImage,
+            phone,
+            city,
+            country,
+            additionalInformation,
+            googleId,
         });
         // Invalidate Redis user cache
         const cacheKey = `user:${req.user.id}`;
@@ -70,6 +89,10 @@ export async function updateProfile(req, res, next) {
                     profileImage: updatedUser.profileImage,
                     isActive: updatedUser.isActive,
                     emailVerified: updatedUser.emailVerified,
+                    phone: updatedUser.phone,
+                    city: updatedUser.city,
+                    country: updatedUser.country,
+                    additionalInformation: updatedUser.additionalInformation,
                     createdAt: updatedUser.createdAt,
                     updatedAt: updatedUser.updatedAt,
                 },

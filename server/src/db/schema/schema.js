@@ -10,6 +10,7 @@ export * from './trip_stop_activities.schema.js';
 export * from './trip_cost_items.schema.js';
 export * from './trip_shares.schema.js';
 export * from './saved_destinations.schema.js';
+export * from './community_posts.schema.js';
 
 export * from './chats.schema.js';
 export * from './messages.schema.js';
