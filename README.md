@@ -8,7 +8,7 @@ Globe Trotter is a collaborative travel planning and destination discovery platf
 - **Presentation Video Link:** [https://globetrotter.demo.com](https://globetrotter.demo.com)
 
 **Project Screenshot:**
-![Project Screenshot]([path/to/screenshot.png])
+![Project Screenshot](client/src/components/Shared/Assests/Home.png)
 
 ## Table of Contents
 
@@ -27,11 +27,12 @@ Globe Trotter is a collaborative travel planning and destination discovery platf
 
 ## Team Members & Roles
 
-| Member Name              | Role                 | Core Responsibilities                                                                 | GitHub Profile                                                                                                                                                                     |
-| :----------------------- | :------------------- | :------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Iteshkumar Prajapati** | Full Stack Developer | Landing page development, cities/activities integration, app configuration and setup. | <a href="https://github.com/iteshprajapati"><img src="https://github.com/iteshprajapati.png?size=40" width="40" height="40" style="border-radius:50%;" alt="iteshprajapati" /></a> |
-| **Aryan Patel**          | Full Stack Developer | Core trip planning, stops orchestration, activity schedules, and budget logging.      | <a href="https://github.com/aryanpatel287"><img src="https://github.com/aryanpatel287.png?size=40" width="40" height="40" style="border-radius:50%;" alt="aryanpatel287" /></a>    |
-| **Yadav Aman Singh**     | Full Stack Developer | Destination search, activity discovery module, and integration testing.               | <a href="https://github.com/yadavaman13"><img src="https://github.com/yadavaman13.png?size=40" width="40" height="40" style="border-radius:50%;" alt="yadavaman13" /></a>          |
+| Member Name              | Role                 | Core Responsibilities                                                                                    | GitHub Profile                                                                                                                                                                        |
+| :----------------------- | :------------------- | :------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Iteshkumar Prajapati** | Full Stack Developer | Landing page development, cities/activities integration, Community Feature, app configuration and setup. | <a href="https://github.com/iteshprajapati"><img src="https://github.com/iteshprajapati.png?size=40" width="40" height="40" style="border-radius:50%;" alt="iteshprajapati" /></a>    |
+| **Aryan Patel**          | Full Stack Developer | Core trip planning, stops orchestration, activity schedules, and budget logging.                         | <a href="https://github.com/aryanpatel287"><img src="https://github.com/aryanpatel287.png?size=40" width="40" height="40" style="border-radius:50%;" alt="aryanpatel287" /></a>       |
+| **Yadav Aman Singh**     | Full Stack Developer | Destination search, activity discovery module, and integration testing.                                  | <a href="https://github.com/yadavaman13"><img src="https://github.com/yadavaman13.png?size=40" width="40" height="40" style="border-radius:50%;" alt="yadavaman13" /></a>             |
+| **Ankur Singh**          | Database & Testing   | AI policy ,Database, Testing, audit logs                                                                 | <a href="https://github.com/Ankursingh018as"><img src="https://github.com/Ankursingh018as.png?size=40" width="40" height="40" style="border-radius:50%;" alt="Ankursingh018as" /></a> |
 
 ---
 
@@ -82,7 +83,15 @@ Globe Trotter is a collaborative travel planning and destination discovery platf
 ![Overall Project Architecture]([architecture.png])
 
 **Activity Diagram:**
-![Activity Diagram]([activity_diagram.png])
+
+- **Authentication Flow:**
+  ![Authentication Flow](https://ik.imagekit.io/hci5kelnn/readme/globe-trotter/GlobeTrotter/authentication_flow.svg)
+
+- **Trip Planning Flow:**
+  ![Trip Planning Flow](https://ik.imagekit.io/hci5kelnn/readme/globe-trotter/GlobeTrotter/trip_planning.png)
+
+- **Destination Flow:**
+  ![Destination Flow](https://ik.imagekit.io/hci5kelnn/readme/globe-trotter/GlobeTrotter/destination.svg)
 
 **ER Diagram:**
 ![ER Diagram]([er_diagram.png])
@@ -106,47 +115,95 @@ The project is structured into two main subdirectories:
 
 ```text
 GlobeTrotter/
-├── client/                              # Frontend client
+├── client/                                  # Frontend React application (Vite-powered SPA)
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── features/                # Domain module pages, hooks, and services
-│   │   │   │   ├── ai/
-│   │   │   │   ├── analytics/
-│   │   │   │   ├── auth/
-│   │   │   │   ├── dashboard/
-│   │   │   │   ├── landing/
-│   │   │   │   ├── settings/
-│   │   │   │   └── showcase/
-│   │   │   ├── App.jsx                  # Main client shell
-│   │   │   ├── App.routes.jsx           # Router configuration
-│   │   │   └── routes.loader.jsx        # Dynamic *.routes.jsx autodiscover loader
-│   │   ├── components/                  # Shared UI components
-│   │   ├── context/                     # Global state context providers
-│   │   ├── hooks/                       # Shared hooks
-│   │   └── main.jsx                     # DOM mount point
+│   │   │   ├── features/                    # Modular, domain-driven feature modules
+│   │   │   │   ├── admin/                   # Administrative panel views
+│   │   │   │   │   ├── components/          # Admin-specific UI elements
+│   │   │   │   │   ├── hooks/               # Admin state loaders
+│   │   │   │   │   └── pages/               # Admin analytics & log views
+│   │   │   │   ├── ai/                      # AI assistant chat interface
+│   │   │   │   │   ├── components/          # Chat message window & suggestions
+│   │   │   │   │   └── services/            # Chat history api service
+│   │   │   │   ├── analytics/               # Interactive charts panels
+│   │   │   │   │   ├── components/          # metric cards & ECharts elements
+│   │   │   │   │   └── services/            # Reports statistics fetcher
+│   │   │   │   ├── auth/                    # Verification, recovery & signup workflows
+│   │   │   │   │   ├── login/               # Password resets & LoginForm
+│   │   │   │   │   └── register/            # Email OTP validation modal
+│   │   │   │   ├── community/               # User forums & social page
+│   │   │   │   │   ├── components/          # CreatePostModal & comments drawers
+│   │   │   │   │   ├── hooks/               # useCommunityData hook
+│   │   │   │   │   └── services/            # Posts CRUD api helpers
+│   │   │   │   ├── dashboard/               # Sidebar navigation modules
+│   │   │   │   ├── landing/                 # Destination discovery grid & search bar
+│   │   │   │   │   ├── hooks/               # useLandingData hook
+│   │   │   │   │   └── services/            # Cities API interfaces
+│   │   │   │   ├── settings/                # Profile editing page
+│   │   │   │   └── userProfile/             # Personal profile page & trip cards
+│   │   │   │
+│   │   │   ├── App.jsx                      # Root application layout
+│   │   │   ├── App.routes.jsx               # Navigation route map
+│   │   │   └── routes.loader.jsx            # Autodiscovery routes aggregator
+│   │   │
+│   │   ├── components/                      # Global UI components
+│   │   │   ├── ai-elements/                 # Prompt Inputs, Suggestion pills, Codeblocks
+│   │   │   └── Shared/                      # Generic shared component library
+│   │   │       ├── Buttons/                 # Pill inputs, toggles, edit buttons
+│   │   │       ├── DataDisplay/             # AdvancedTable, KanbanBoard, Timeline
+│   │   │       ├── Feedback/                # Modal dialogs, Toast notifications, Drawers
+│   │   │       ├── Form/                    # Date picker, role selector, OTP inputs
+│   │   │       └── Navigation/              # Sidebars, Topbars, Breadcrumbs
+│   │   │
+│   │   ├── context/                         # Context API state providers
+│   │   │   ├── auth.context.jsx             # User credentials provider
+│   │   │   └── theme.context.jsx            # dark/light theme state
+│   │   ├── hooks/                           # Common helper hooks (debounce, viewport)
+│   │   ├── styles/                          # SCSS variables, mixins & resets
+│   │   │   ├── variables.scss               # Color tokens & elevation maps
+│   │   │   └── foundation.scss              # Global margins & default layouts
+│   │   └── main.jsx                         # React DOM application mount point
 │
-├── server/                               # Backend API
+├── server/                                  # Backend API Layer (Node.js + Express)
 │   ├── src/
-│   │   ├── config/                      # Database, Redis, and environment configs
-│   │   ├── dao/                         # Data Access Objects (DB mappings)
-│   │   │   ├── activity.dao.js
-│   │   │   └── city.dao.js
-│   │   ├── db/                          # Migration and seeding configurations
-│   │   │   ├── schema/                  # DB table models
-│   │   │   └── seed.js                  # Database seeder execution script
-│   │   ├── modules/                     # Modular controllers, validation, and routers
-│   │   │   ├── activity/
-│   │   │   ├── ai/
-│   │   │   ├── auth/
-│   │   │   ├── city/
-│   │   │   ├── pdf/
-│   │   │   ├── rag/
-│   │   │   └── trips/
-│   │   └── app.js                       # Express base application setup
-│   ├── server.js                        # API server entrypoint listener
-│   └── jest.config.js                   # Integration test configuration
+│   │   ├── config/                          # Configuration files
+│   │   │   ├── db.config.js                 # PostgreSQL connection pool
+│   │   │   ├── env.config.js                # env parser & validator
+│   │   │   └── redis.config.js              # Redis cache connection
+│   │   │
+│   │   ├── controllers/                     # Global routing handlers
+│   │   ├── cron/                            # Background task schedules
+│   │   ├── db/                              # Database schema definitions
+│   │   │   ├── schema/                      # PostgreSQL Drizzle ORM model schemas
+│   │   │   │   ├── auth.schema.js           # Users, sessions, & verification OTPs
+│   │   │   │   ├── city-activities.schema.js# Cities and activities definitions
+│   │   │   │   ├── community.schema.js      # Community posts, likes, and comments
+│   │   │   │   └── trips-budget.schema.js   # Trips, stops, schedules, & expense items
+│   │   │   └── seed_realistic_data.js       # Database seeder execution script
+│   │   │
+│   │   ├── modules/                         # Domain-driven backend modules
+│   │   │   ├── activity/                    # Attraction catalog controller
+│   │   │   ├── ai/                          # LangChain vector chatbot endpoints
+│   │   │   ├── auth/                        # Credentials validation & session token creation
+│   │   │   ├── city/                        # paginated discovery search
+│   │   │   ├── community/                   # Forum posts & social likes/comments
+│   │   │   │   ├── controllers/             # Post feed request handlers
+│   │   │   │   ├── routes/                  # Express path endpoints registry
+│   │   │   │   ├── services/                # Drizzle CRUD helper methods
+│   │   │   │   └── validators/              # Input validator checks
+│   │   │   ├── pdf/                         # invoice & tickets generation (PDFKit)
+│   │   │   ├── rag/                         # Pinecone vector indexing services
+│   │   │   └── trips/                       # stops orchestration, schedules & budgets
+│   │   │
+│   │   ├── utils/                           # Core utilities (response helper, hashing)
+│   │   ├── validators/                      # Shared route validation checkers
+│   │   └── app.js                           # Express base configuration setup
+│   │
+│   ├── server.js                            # HTTP backend application server listener
+│   └── package.json                         # Node dependencies index
 │
-└── README.md                            # Workspace documentation
+└── README.md                                # Root workspace documentation
 ```
 
 ---
