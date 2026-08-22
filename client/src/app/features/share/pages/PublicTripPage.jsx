@@ -33,7 +33,7 @@ export function PublicTripPage() {
                     type: 'success',
                     message: `Itinerary cloned! Welcome to your new trip builder for "${cloned.name}".`,
                 });
-                navigate(`/dashboard/user/trips/${cloned.id}/itinerary`);
+                navigate(`/trips/${cloned.id}/itinerary`);
             }
         } catch (err) {
             console.error('Failed to clone trip:', err);

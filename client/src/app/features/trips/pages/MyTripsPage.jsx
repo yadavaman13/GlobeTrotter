@@ -49,7 +49,7 @@ export function MyTripsPage() {
         try {
             const cloned = await handleCloneTrip(tripId, title);
             toast({ type: 'success', message: `Trip duplicated as "${cloned.name}"!` });
-            navigate(`/dashboard/user/trips/${cloned.id}/itinerary`);
+            navigate(`/trips/${cloned.id}/itinerary`);
         } catch (err) {
             console.error('Clone trip error:', err);
             toast({ type: 'error', message: 'Failed to duplicate trip' });
@@ -68,7 +68,7 @@ export function MyTripsPage() {
                     </p>
                 </div>
 
-                <Link to="/dashboard/user/trips/new" className="plan-new-trip-cta">
+                <Link to="/trips/new" className="plan-new-trip-cta">
                     <Plus size={18} />
                     <span>Plan New Trip</span>
                 </Link>
@@ -107,7 +107,7 @@ export function MyTripsPage() {
                             ? 'No journeys match your active filters. Try adjusting your search query.'
                             : "You haven't planned any trips yet. Start designing your first dream multi-city journey today!"}
                     </p>
-                    <Link to="/dashboard/user/trips/new" className="empty-action-btn">
+                    <Link to="/trips/new" className="empty-action-btn">
                         <Plus size={16} /> Plan a New Trip
                     </Link>
                 </div>

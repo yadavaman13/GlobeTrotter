@@ -65,10 +65,12 @@ export function StopCard({
 
                 <div className="stop-hero-text">
                     <span className="stop-index-badge">Stop {index + 1}</span>
-                    <h2 className="stop-city-name">{stop.cityName || 'Destination City'}</h2>
+                    <h2 className="stop-city-name">
+                        {stop.cityName || stop.city?.name || 'Destination City'}
+                    </h2>
                     <p className="stop-country-subtitle">
-                        {stop.country
-                            ? `${stop.country}${stop.region ? ` • ${stop.region}` : ''}`
+                        {stop.country || stop.city?.country
+                            ? `${stop.country || stop.city?.country}${stop.region || stop.city?.region ? ` • ${stop.region || stop.city?.region}` : ''}`
                             : 'Cultural destination'}
                     </p>
                 </div>
@@ -174,11 +176,12 @@ export function StopCard({
                     </div>
                     <div className="ai-suggestion-text">
                         <h5 className="suggestion-title">
-                            Curated Suggestion: {stop.cityName} Highlights Tour
+                            Curated Suggestion: {stop.cityName || stop.city?.name || 'Destination'}{' '}
+                            Highlights Tour
                         </h5>
                         <p className="suggestion-desc">
                             Top-rated experience among travelers visiting{' '}
-                            {stop.cityName || 'this city'}.
+                            {stop.cityName || stop.city?.name || 'this city'}.
                         </p>
                     </div>
                     <button
@@ -186,8 +189,14 @@ export function StopCard({
                         className="add-suggestion-btn"
                         onClick={() =>
                             onAddSuggestedActivity?.(stop.id, {
-                                name: `${stop.cityName || 'City'} Highlights Walking Tour`,
+                                name: `${stop.cityName || stop.city?.name || 'City'} Highlights Walking Tour`,
                                 category: 'Culture',
+                                activityType: 'Culture',
+                                activityDate:
+                                    stop.startDate ||
+                                    stop.arrivalDate ||
+                                    new Date().toISOString().split('T')[0],
+                                startTime: '10:00:00',
                                 durationMinutes: 120,
                                 cost: 35,
                                 notes: 'Guided exploration of historic landmarks.',

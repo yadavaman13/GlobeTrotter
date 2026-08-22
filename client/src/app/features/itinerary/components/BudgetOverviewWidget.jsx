@@ -28,7 +28,7 @@ export function BudgetOverviewWidget({
                 <button
                     type="button"
                     className="analytics-link-btn"
-                    onClick={() => navigate(`/dashboard/user/trips/${tripId}/budget`)}
+                    onClick={() => navigate(`/trips/${tripId}/budget`)}
                     title="View Analytics"
                 >
                     <PieChart size={16} />
@@ -97,7 +97,7 @@ export function BudgetOverviewWidget({
                 <button
                     type="button"
                     className="quick-action-btn"
-                    onClick={() => navigate(`/dashboard/user/trips/${tripId}/budget`)}
+                    onClick={() => navigate(`/trips/${tripId}/budget`)}
                 >
                     <PieChart size={16} />
                     <span>Cost Breakdown</span>
@@ -106,7 +106,7 @@ export function BudgetOverviewWidget({
                 <button
                     type="button"
                     className="quick-action-btn"
-                    onClick={() => navigate(`/dashboard/user/trips/${tripId}/timeline`)}
+                    onClick={() => navigate(`/trips/${tripId}/timeline`)}
                 >
                     <FileText size={16} />
                     <span>View Timeline</span>

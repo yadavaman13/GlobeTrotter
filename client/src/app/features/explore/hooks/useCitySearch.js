@@ -18,11 +18,12 @@ export function useCitySearch(initialSearch = '') {
             setError(null);
             try {
                 const res = await exploreApi.searchCities({
-                    search: debouncedSearch || undefined,
+                    q: debouncedSearch ? debouncedSearch.trim() : undefined,
                     limit: 15,
                 });
                 if (isMounted && res?.success) {
-                    setCities(res.cities || res.data || []);
+                    const cityList = res.data?.cities || res.cities || res.data || [];
+                    setCities(cityList);
                 }
             } catch (err) {
                 if (isMounted) {

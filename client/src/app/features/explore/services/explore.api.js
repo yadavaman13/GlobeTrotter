@@ -18,10 +18,16 @@ const activityApiInstance = axios.create({
 
 /**
  * Search and list destination cities
- * @param {Object} params - { search, country, region, minCostIndex, maxCostIndex, page, limit }
+ * @param {Object} params - { search, q, country, region, minCostIndex, maxCostIndex, page, limit }
  */
 export async function searchCities(params = {}) {
-    const response = await cityApiInstance.get('/', { params });
+    const { search, q, ...rest } = params;
+    const queryParams = { ...rest };
+    const query = q || search;
+    if (query !== undefined && query !== '') {
+        queryParams.q = query;
+    }
+    const response = await cityApiInstance.get('/', { params: queryParams });
     return response.data;
 }
 
@@ -51,10 +57,16 @@ export async function getCityActivities(cityId) {
 
 /**
  * Search and list activities from catalog
- * @param {Object} params - { search, cityId, activityType, minCost, maxCost, page, limit }
+ * @param {Object} params - { search, q, cityId, activityType, minCost, maxCost, page, limit }
  */
 export async function searchActivities(params = {}) {
-    const response = await activityApiInstance.get('/', { params });
+    const { search, q, ...rest } = params;
+    const queryParams = { ...rest };
+    const query = q || search;
+    if (query !== undefined && query !== '') {
+        queryParams.q = query;
+    }
+    const response = await activityApiInstance.get('/', { params: queryParams });
     return response.data;
 }
 

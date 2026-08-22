@@ -131,7 +131,7 @@ export default function LandingPage() {
     // Handle interactive button navigation
     const handleStartPlanning = () => {
         if (user) {
-            navigate('/dashboard/user/analytics/insight');
+            navigate('/trips/new');
         } else {
             navigate('/login');
         }
@@ -140,7 +140,7 @@ export default function LandingPage() {
     const handleSelectSuggestion = (city) => {
         setSearchQuery('');
         if (user) {
-            navigate(`/dashboard/user/analytics/insight?cityId=${city.id}`);
+            navigate(`/trips/new?destination=${encodeURIComponent(city.name || city.city || '')}`);
         } else {
             navigate('/login');
         }
@@ -161,8 +161,8 @@ export default function LandingPage() {
                         <a className="nav-item" href="/me/trips">
                             My Trips
                         </a>
-                        <a className="nav-item" href="/dashboard/user/analytics/insight">
-                            Discover Experiences
+                        <a className="nav-item" href="/trips/new">
+                            Plan a Trip
                         </a>
                     </nav>
                     <div className="nav-actions">
@@ -228,7 +228,11 @@ export default function LandingPage() {
 
                         {/* Glassmorphic Upcoming Trip Widget */}
                         {upcomingTrip && (
-                            <div className="hero-upcoming-trip-wrapper">
+                            <div
+                                className="hero-upcoming-trip-wrapper"
+                                onClick={() => navigate(`/trips/${upcomingTrip.id}/itinerary`)}
+                                style={{ cursor: 'pointer' }}
+                            >
                                 <div className="upcoming-trip-glass-card">
                                     <p className="widget-label">UPCOMING TRIP</p>
                                     <h3 className="widget-title">{upcomingTrip.name}</h3>
@@ -323,11 +327,8 @@ export default function LandingPage() {
                 <section className="selections-grid-section">
                     <div className="selections-header">
                         <h2 className="grid-title">Top Regional Selections</h2>
-                        <span
-                            className="view-all-trigger"
-                            onClick={() => navigate('/dashboard/user/analytics/insight')}
-                        >
-                            View all
+                        <span className="view-all-trigger" onClick={() => navigate('/trips/new')}>
+                            Plan Trip
                         </span>
                     </div>
 

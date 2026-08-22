@@ -25,13 +25,11 @@ export function TripTimelinePage() {
         <div className="trip-timeline-container">
             {/* Breadcrumbs */}
             <nav className="breadcrumbs-nav" aria-label="Breadcrumb">
-                <Link to="/dashboard/user/home">Home</Link>
+                <Link to="/">Home</Link>
                 <ChevronRight size={14} className="crumb-icon" />
-                <Link to="/dashboard/user/trips">My Trips</Link>
+                <Link to="/me/trips">My Trips</Link>
                 <ChevronRight size={14} className="crumb-icon" />
-                <Link to={`/dashboard/user/trips/${tripId}/itinerary`}>
-                    {trip?.name || 'Itinerary'}
-                </Link>
+                <Link to={`/trips/${tripId}/itinerary`}>{trip?.name || 'Itinerary'}</Link>
                 <ChevronRight size={14} className="crumb-icon" />
                 <span className="current-page">Timeline Schedule</span>
             </nav>
@@ -50,7 +48,7 @@ export function TripTimelinePage() {
                         <button
                             type="button"
                             className="tab-btn"
-                            onClick={() => navigate(`/dashboard/user/trips/${tripId}/itinerary`)}
+                            onClick={() => navigate(`/trips/${tripId}/itinerary`)}
                         >
                             <MapPin size={16} />
                             <span>Itinerary Builder</span>
@@ -62,7 +60,7 @@ export function TripTimelinePage() {
                         <button
                             type="button"
                             className="tab-btn"
-                            onClick={() => navigate(`/dashboard/user/trips/${tripId}/budget`)}
+                            onClick={() => navigate(`/trips/${tripId}/budget`)}
                         >
                             <PieChart size={16} />
                             <span>Budget</span>

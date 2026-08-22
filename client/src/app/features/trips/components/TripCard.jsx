@@ -25,10 +25,7 @@ export function TripCard({ trip, onDelete, onClone }) {
     const badge = getStatusBadge(trip.status);
 
     return (
-        <div
-            className="my-trip-card"
-            onClick={() => navigate(`/dashboard/user/trips/${trip.id}/itinerary`)}
-        >
+        <div className="my-trip-card" onClick={() => navigate(`/trips/${trip.id}/itinerary`)}>
             {/* Card Cover Media */}
             <div
                 className="card-cover-media"
@@ -59,7 +56,7 @@ export function TripCard({ trip, onDelete, onClone }) {
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     setShowMenu(false);
-                                    navigate(`/dashboard/user/trips/${trip.id}/itinerary`);
+                                    navigate(`/trips/${trip.id}/itinerary`);
                                 }}
                             >
                                 <Compass size={14} /> Open Itinerary
@@ -70,7 +67,7 @@ export function TripCard({ trip, onDelete, onClone }) {
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     setShowMenu(false);
-                                    navigate(`/dashboard/user/trips/${trip.id}/budget`);
+                                    navigate(`/trips/${trip.id}/budget`);
                                 }}
                             >
                                 <PieChart size={14} /> Budget Analytics

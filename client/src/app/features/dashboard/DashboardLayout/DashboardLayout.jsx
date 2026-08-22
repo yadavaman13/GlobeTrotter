@@ -12,7 +12,6 @@ import {
     TrendingUp as AnalyticsIcon,
     Bot as BotIcon,
     Users as UsersIcon,
-    Compass as CompassIcon,
 } from 'lucide-react';
 import './DashboardLayout.scss';
 
@@ -46,12 +45,6 @@ function DashboardLayout({ onLogout }) {
         {
             label: 'Home',
             icon: <HomeIcon />,
-        },
-        {
-            label: 'Trips',
-            icon: <CompassIcon />,
-            path: '/dashboard/user/trips',
-            subTabs: ['My Trips', 'Plan Trip'],
         },
         {
             label: 'AI',
@@ -104,13 +97,7 @@ function DashboardLayout({ onLogout }) {
     };
 
     const handleSubItemClick = (parentLabel, subTab) => {
-        if (parentLabel === 'Trips') {
-            if (subTab === 'Plan Trip') {
-                navigate(`/dashboard/${roleSegment}/trips/new`);
-            } else {
-                navigate(`/dashboard/${roleSegment}/trips`);
-            }
-        } else if (parentLabel === 'Analytics') {
+        if (parentLabel === 'Analytics') {
             const route = subTab.toLowerCase() === 'reports' ? 'reports' : 'insight';
             navigate(`/dashboard/${roleSegment}/analytics/${route}`);
         }

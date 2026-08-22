@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Plus, Search, Clock, Sparkles, Compass } from 'lucide-react';
 import { useActivitySearch } from '../../explore/hooks/useActivitySearch';
 
@@ -10,6 +10,7 @@ export function AddActivityModal({
     cityId,
     cityName,
     stopStartDate,
+    stopEndDate,
 }) {
     const [activeTab, setActiveTab] = useState('catalog'); // 'catalog' | 'custom'
 
@@ -18,6 +19,8 @@ export function AddActivityModal({
         cityId,
     });
     const [selectedCatalogActivity, setSelectedCatalogActivity] = useState(null);
+
+    const safeActivities = Array.isArray(activities) ? activities : [];
 
     // Form inputs
     const [name, setName] = useState('');
@@ -29,6 +32,12 @@ export function AddActivityModal({
     const [durationMinutes, setDurationMinutes] = useState(120);
     const [cost, setCost] = useState(0);
     const [notes, setNotes] = useState('');
+
+    useEffect(() => {
+        if (stopStartDate) {
+            setActivityDate(stopStartDate);
+        }
+    }, [stopStartDate, isOpen]);
 
     if (!isOpen) return null;
 
@@ -117,7 +126,7 @@ export function AddActivityModal({
                                     <p className="loading-state">Loading curated experiences...</p>
                                 )}
 
-                                {!loading && activities.length === 0 && (
+                                {!loading && safeActivities.length === 0 && (
                                     <div className="empty-catalog-fallback">
                                         <p>No curated experiences found matching your query.</p>
                                         <button
@@ -130,7 +139,7 @@ export function AddActivityModal({
                                     </div>
                                 )}
 
-                                {activities.map((act) => {
+                                {safeActivities.map((act) => {
                                     const isChosen = selectedCatalogActivity?.id === act.id;
                                     return (
                                         <div

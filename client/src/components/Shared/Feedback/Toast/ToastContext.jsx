@@ -54,33 +54,29 @@ export function useToast() {
     }
 
     // Return convenient helper methods for general states
-    const showToast = useCallback(
-        (message, type = 'info', duration) => {
-            return context.addToast(message, type, duration);
+    const toastFn = useCallback(
+        (msgOrObj, type = 'info', duration) => {
+            if (typeof msgOrObj === 'object' && msgOrObj !== null) {
+                return context.addToast(
+                    msgOrObj.message || msgOrObj.title || '',
+                    msgOrObj.type || 'info',
+                    msgOrObj.duration,
+                );
+            }
+            return context.addToast(msgOrObj, type, duration);
         },
         [context],
     );
 
-    const success = useCallback(
-        (message, duration) => showToast(message, 'success', duration),
-        [showToast],
-    );
-    const error = useCallback(
-        (message, duration) => showToast(message, 'error', duration),
-        [showToast],
-    );
-    const warning = useCallback(
-        (message, duration) => showToast(message, 'warning', duration),
-        [showToast],
-    );
-    const info = useCallback(
-        (message, duration) => showToast(message, 'info', duration),
-        [showToast],
-    );
+    const success = useCallback((msg, dur) => toastFn(msg, 'success', dur), [toastFn]);
+    const error = useCallback((msg, dur) => toastFn(msg, 'error', dur), [toastFn]);
+    const warning = useCallback((msg, dur) => toastFn(msg, 'warning', dur), [toastFn]);
+    const info = useCallback((msg, dur) => toastFn(msg, 'info', dur), [toastFn]);
 
     return {
         toasts: context.toasts,
-        showToast,
+        toast: toastFn,
+        showToast: toastFn,
         removeToast: context.removeToast,
         success,
         error,

@@ -113,9 +113,9 @@ export function ItineraryPage() {
             {/* Top Navigation & Header */}
             <div className="top-header-section">
                 <nav className="breadcrumbs-nav" aria-label="Breadcrumb">
-                    <Link to="/dashboard/user/home">Home</Link>
+                    <Link to="/">Home</Link>
                     <ChevronRight size={14} className="crumb-icon" />
-                    <Link to="/dashboard/user/trips">My Trips</Link>
+                    <Link to="/me/trips">My Trips</Link>
                     <ChevronRight size={14} className="crumb-icon" />
                     <span className="current-page">{trip?.name || 'Itinerary Builder'}</span>
                 </nav>
@@ -132,7 +132,7 @@ export function ItineraryPage() {
                         <button
                             type="button"
                             className="nav-tab-btn"
-                            onClick={() => navigate(`/dashboard/user/trips/${tripId}/timeline`)}
+                            onClick={() => navigate(`/trips/${tripId}/timeline`)}
                         >
                             <Calendar size={16} />
                             <span>Timeline & Calendar</span>
@@ -140,7 +140,7 @@ export function ItineraryPage() {
                         <button
                             type="button"
                             className="nav-tab-btn"
-                            onClick={() => navigate(`/dashboard/user/trips/${tripId}/budget`)}
+                            onClick={() => navigate(`/trips/${tripId}/budget`)}
                         >
                             <PieChart size={16} />
                             <span>Budget Analytics</span>
@@ -227,7 +227,7 @@ export function ItineraryPage() {
                     <button
                         type="button"
                         className="preview-btn"
-                        onClick={() => navigate(`/dashboard/user/trips/${tripId}/timeline`)}
+                        onClick={() => navigate(`/trips/${tripId}/timeline`)}
                     >
                         Preview Itinerary
                     </button>
@@ -259,9 +259,10 @@ export function ItineraryPage() {
                 }}
                 onAddActivity={handleCreateActivitySubmit}
                 stopId={selectedStopForActivity?.id}
-                cityId={selectedStopForActivity?.cityId}
-                cityName={selectedStopForActivity?.cityName}
+                cityId={selectedStopForActivity?.cityId || selectedStopForActivity?.city?.id}
+                cityName={selectedStopForActivity?.cityName || selectedStopForActivity?.city?.name}
                 stopStartDate={selectedStopForActivity?.startDate}
+                stopEndDate={selectedStopForActivity?.endDate}
             />
 
             <ShareTripModal

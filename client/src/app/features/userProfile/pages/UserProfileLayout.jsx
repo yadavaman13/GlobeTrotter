@@ -62,16 +62,16 @@ export default function UserProfileLayout() {
                             Explore
                         </a>
                         <a
-                            className={`nav-link-item ${location.pathname === '/me/trips' ? 'active' : ''}`}
+                            className={`nav-link-item ${location.pathname === '/me/trips' || (location.pathname.startsWith('/trips') && location.pathname !== '/trips/new') ? 'active' : ''}`}
                             href="/me/trips"
                         >
                             My Trips
                         </a>
                         <a
-                            className={`nav-link-item ${location.pathname.startsWith('/dashboard/user/analytics') ? 'active' : ''}`}
-                            href="/dashboard/user/analytics/insight"
+                            className={`nav-link-item ${location.pathname === '/trips/new' ? 'active' : ''}`}
+                            href="/trips/new"
                         >
-                            Discover Experiences
+                            Plan a Trip
                         </a>
                     </div>
 
@@ -173,11 +173,9 @@ export default function UserProfileLayout() {
                             </button>
                             <button
                                 className="mobile-link"
-                                onClick={() =>
-                                    handleMenuNavigation('/dashboard/user/analytics/insight')
-                                }
+                                onClick={() => handleMenuNavigation('/trips/new')}
                             >
-                                Discover Experiences
+                                Plan a Trip
                             </button>
                             <div className="mobile-divider border-t" />
                             <button

@@ -29,7 +29,14 @@ export function useActivitySearch({ cityId, category, initialSearch = '' } = {})
                     });
                 }
                 if (isMounted && res?.success) {
-                    setActivities(res.activities || res.data || []);
+                    const list = Array.isArray(res.activities)
+                        ? res.activities
+                        : Array.isArray(res.data?.activities)
+                          ? res.data.activities
+                          : Array.isArray(res.data)
+                            ? res.data
+                            : [];
+                    setActivities(list);
                 }
             } catch (err) {
                 if (isMounted) {
@@ -37,6 +44,7 @@ export function useActivitySearch({ cityId, category, initialSearch = '' } = {})
                     setError(
                         err.response?.data?.message || err.message || 'Failed to search activities',
                     );
+                    setActivities([]);
                 }
             } finally {
                 if (isMounted) {
