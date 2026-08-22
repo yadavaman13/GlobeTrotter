@@ -7,39 +7,6 @@
 
     @include variables.transition-ease;
 
-    // Login variation: centered layout with larger spacing
-    &.logo-login {
-        justify-content: center;
-        margin-bottom: 48px;
-
-        .logo-icon {
-            width: 24px;
-            height: 24px;
-            background: radial-gradient(circle, variables.$color-black 40%, transparent 41%);
-            border: 2px solid variables.$color-black;
-            border-radius: 50%;
-            position: relative;
-
-            &::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 12px;
-                height: 2px;
-                background-color: variables.$color-black;
-                transform: translate(-50%, -50%) rotate(45deg);
-            }
-        }
-
-        .logo-text {
-            font-weight: 600;
-            font-size: variables.$font-size-lg;
-            color: variables.$color-black;
-            letter-spacing: -0.01em;
-        }
-    }
-
     // Dashboard variation: left-aligned, matching sidebar grid
     &.logo-dashboard {
         justify-content: flex-start;
