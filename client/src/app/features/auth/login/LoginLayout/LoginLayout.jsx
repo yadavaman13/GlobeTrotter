@@ -15,7 +15,11 @@ function LoginLayout() {
 
     useEffect(() => {
         if (!loading && user) {
-            navigate('/dashboard', { replace: true });
+            if (user.role === 'admin') {
+                navigate('/dashboard/admin', { replace: true });
+            } else {
+                navigate('/', { replace: true });
+            }
         }
     }, [user, loading, navigate]);
 

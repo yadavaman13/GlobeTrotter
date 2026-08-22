@@ -1,0 +1,829 @@
+@use '@/styles/variables' as variables;
+
+.my-trips-page-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: variables.$spacing-lg variables.$spacing-base;
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-xl;
+    animation: my-trips-fade-in 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+    // Header layout
+    .page-header-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: variables.$spacing-md;
+
+        .title-area {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            .subtitle-tag {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-micro;
+                font-weight: 700;
+                color: variables.$color-muted;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+            }
+
+            .main-title {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-display-xl;
+                font-weight: 800;
+                color: variables.$color-ink;
+                margin: 0;
+                letter-spacing: -0.5px;
+            }
+        }
+
+        .plan-new-trip-btn {
+            border-radius: variables.$radius-full;
+            padding-inline: 24px;
+            height: 48px;
+            background-color: variables.$color-primary;
+            color: variables.$color-white;
+            font-weight: 600;
+
+            @include variables.shine-effect;
+        }
+    }
+
+    // Stats aggregates cards
+    .stats-dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: variables.$spacing-md;
+        width: 100%;
+
+        @include variables.tablet {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include variables.mobile {
+            grid-template-columns: repeat(2, 1fr);
+            gap: variables.$spacing-sm;
+        }
+
+        .stat-card-container {
+            background-color: variables.$color-surface-card;
+            border: 1px solid variables.$color-hairline;
+            border-radius: variables.$radius-large;
+            box-shadow: variables.$shadow-card;
+            padding: variables.$spacing-md;
+            display: flex;
+            align-items: center;
+            gap: variables.$spacing-base;
+            height: 100px;
+
+            @include variables.transition-ease;
+
+            &:hover {
+                box-shadow: variables.$shadow-md;
+                transform: translateY(-2px);
+                border-color: color-mix(
+                    in srgb,
+                    variables.$color-primary 20%,
+                    variables.$color-gray-200
+                );
+            }
+
+            .stat-icon-wrapper {
+                width: 44px;
+                height: 44px;
+                border-radius: variables.$radius-full;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .stat-details {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+
+                .stat-title {
+                    font-size: variables.$font-size-caption;
+                    color: variables.$color-muted;
+                    font-weight: 500;
+                }
+
+                .stat-value {
+                    font-size: variables.$font-size-xxl;
+                    font-weight: 700;
+                    color: variables.$color-ink;
+                }
+            }
+        }
+
+        // Color thematic tints for icon backgrounds
+        .stat-card--total .stat-icon-wrapper {
+            background-color: color-mix(in srgb, variables.$color-blue-accent 10%, transparent);
+            color: variables.$color-blue-accent;
+        }
+
+        .stat-card--ongoing .stat-icon-wrapper {
+            background-color: color-mix(in srgb, variables.$color-success 10%, transparent);
+            color: variables.$color-success;
+        }
+
+        .stat-card--upcoming .stat-icon-wrapper {
+            background-color: color-mix(in srgb, variables.$color-warning 12%, transparent);
+            color: variables.$color-warning-dark;
+        }
+
+        .stat-card--countries .stat-icon-wrapper {
+            background-color: color-mix(in srgb, variables.$color-purple 10%, transparent);
+            color: variables.$color-purple;
+        }
+    }
+
+    // Filter toolbar
+    .toolbar-section {
+        display: flex;
+        gap: variables.$spacing-md;
+        align-items: center;
+        flex-wrap: wrap;
+
+        .search-bar-wrapper {
+            flex-grow: 1;
+            background-color: variables.$color-white;
+            border: 1px solid variables.$color-hairline;
+            border-radius: variables.$radius-full;
+            padding: 2px 20px;
+            display: flex;
+            align-items: center;
+            height: 52px;
+            box-shadow: variables.$shadow-card;
+
+            @include variables.transition-ease;
+
+            &:focus-within {
+                border-color: variables.$color-primary;
+                box-shadow: variables.$shadow-md;
+            }
+
+            .search-icon {
+                color: variables.$color-muted;
+                margin-right: 12px;
+            }
+
+            .search-input {
+                width: 100%;
+                border: none;
+                background: transparent;
+                outline: none;
+                font-size: variables.$font-size-md;
+                color: variables.$color-ink;
+                padding: 0;
+
+                &::placeholder {
+                    color: variables.$color-muted-soft;
+                }
+            }
+        }
+
+        .filter-toggle-btn {
+            border-radius: variables.$radius-full;
+            height: 52px;
+            padding-inline: 20px;
+            border: 1px solid variables.$color-hairline;
+            background-color: variables.$color-white;
+            box-shadow: variables.$shadow-card;
+            color: variables.$color-ink;
+            font-weight: 500;
+
+            &.active {
+                border-color: variables.$color-primary;
+                background-color: color-mix(
+                    in srgb,
+                    variables.$color-primary 5%,
+                    variables.$color-white
+                );
+                color: variables.$color-primary;
+            }
+        }
+    }
+
+    // Expanded filters
+    .filters-expansion-panel {
+        background-color: variables.$color-white;
+        border: 1px solid variables.$color-hairline;
+        border-radius: variables.$radius-large;
+        padding: 24px;
+        box-shadow: variables.$shadow-card;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        animation: my-trips-slide-down 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+        @include variables.mobile {
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            label {
+                font-size: variables.$font-size-caption;
+                font-weight: 600;
+                color: variables.$color-muted;
+            }
+
+            .options-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+
+                .option-chip {
+                    border: 1px solid variables.$color-gray-200;
+                    border-radius: variables.$radius-full;
+                    background-color: variables.$color-white;
+                    padding: 6px 14px;
+                    font-size: variables.$font-size-sm;
+                    color: variables.$color-body;
+                    cursor: pointer;
+
+                    @include variables.transition-ease;
+
+                    &:hover {
+                        background-color: variables.$color-surface-soft;
+                        border-color: variables.$color-gray-400;
+                    }
+
+                    &.active {
+                        background-color: variables.$color-primary;
+                        border-color: variables.$color-primary;
+                        color: variables.$color-white;
+                    }
+                }
+            }
+        }
+    }
+
+    // Sections stack
+    .trips-sections-stack {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-xxl;
+
+        .trip-section-block {
+            display: flex;
+            flex-direction: column;
+            gap: variables.$spacing-lg;
+
+            .section-title {
+                font-size: variables.$font-size-display-lg;
+                font-weight: 700;
+                color: variables.$color-ink;
+                margin: 0;
+            }
+
+            .completed-header {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+
+                .section-desc {
+                    font-size: variables.$font-size-sm;
+                    color: variables.$color-muted;
+                    margin: 0;
+                }
+            }
+        }
+
+        // 1. Ongoing adventure hero card layout
+        .ongoing-trip-hero-card {
+            background-color: variables.$color-white;
+            border: 1px solid variables.$color-hairline;
+            border-radius: variables.$radius-large;
+            box-shadow: variables.$shadow-card;
+            display: flex;
+            overflow: hidden;
+
+            @include variables.transition-ease;
+
+            @include variables.tablet {
+                flex-direction: column;
+            }
+
+            @include variables.mobile {
+                flex-direction: column;
+            }
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: variables.$shadow-premium;
+
+                .hero-img-pane img {
+                    transform: scale(1.03);
+                }
+            }
+
+            .hero-img-pane {
+                width: 40%;
+                min-height: 250px;
+                position: relative;
+                overflow: hidden;
+
+                @include variables.tablet {
+                    width: 100%;
+                    height: 220px;
+                }
+
+                @include variables.mobile {
+                    width: 100%;
+                    height: 180px;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+
+                    @include variables.transition-smooth;
+                }
+
+                .status-badge-overlay {
+                    position: absolute;
+                    top: 16px;
+                    left: 16px;
+                    background-color: rgba(variables.$color-white, 0.9);
+                    backdrop-filter: blur(8px);
+                    border-radius: variables.$radius-full;
+                    padding: 4px 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    box-shadow: variables.$shadow-sm;
+
+                    .pulse-dot {
+                        width: 8px;
+                        height: 8px;
+                        background-color: variables.$color-success;
+                        border-radius: variables.$radius-full;
+                        box-shadow: 0 0 0 0 rgba(variables.$color-success, 0.4);
+                        animation: ongoing-pulse 1.6s infinite;
+                    }
+
+                    .badge-text {
+                        font-size: variables.$font-size-micro;
+                        font-weight: 700;
+                        color: variables.$color-ink;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+            .hero-details-pane {
+                width: 60%;
+                padding: variables.$spacing-xl;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 20px;
+
+                @include variables.tablet {
+                    width: 100%;
+                    padding: variables.$spacing-lg;
+                }
+
+                @include variables.mobile {
+                    width: 100%;
+                    padding: variables.$spacing-base;
+                }
+
+                .details-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    gap: 16px;
+
+                    .trip-name {
+                        font-size: variables.$font-size-display-md;
+                        font-weight: 700;
+                        color: variables.$color-ink;
+                        margin: 0 0 6px;
+                    }
+
+                    .trip-destination {
+                        font-size: variables.$font-size-sm;
+                        color: variables.$color-muted;
+                        margin: 0;
+                    }
+
+                    .progress-group {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+
+                        .progress-percentage {
+                            font-size: variables.$font-size-sm;
+                            font-weight: 700;
+                            color: variables.$color-body;
+                        }
+
+                        .progress-radial-placeholder {
+                            width: 32px;
+                            height: 32px;
+
+                            .radial-svg {
+                                width: 100%;
+                                height: 100%;
+                            }
+
+                            .circle-bg {
+                                fill: none;
+                                stroke: variables.$color-gray-100;
+                                stroke-width: 3.5;
+                            }
+
+                            .circle-fill {
+                                fill: none;
+                                stroke: variables.$color-primary;
+                                stroke-width: 3.5;
+                                stroke-linecap: round;
+                                animation: fill-radial 1s ease-out forwards;
+                            }
+                        }
+                    }
+                }
+
+                .meta-info-row {
+                    display: flex;
+                    gap: 16px;
+                    flex-wrap: wrap;
+
+                    .meta-tag {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        background-color: variables.$color-surface-soft;
+                        border-radius: variables.$radius-md;
+                        padding: 8px 12px;
+                        font-size: variables.$font-size-sm;
+                        color: variables.$color-ink;
+
+                        .meta-icon {
+                            color: variables.$color-primary;
+                        }
+
+                        &.weather-tag .meta-icon {
+                            color: variables.$color-blue-accent;
+                        }
+                    }
+                }
+
+                .action-row {
+                    display: flex;
+                    justify-content: flex-end;
+
+                    .resume-trip-btn {
+                        border-radius: variables.$radius-full;
+                        padding-inline: 24px;
+                        background-color: variables.$color-primary;
+                        color: variables.$color-white;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+
+        // 2. Upcoming Trips Grid Layout
+        .upcoming-trips-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: variables.$spacing-lg;
+
+            @include variables.mobile {
+                grid-template-columns: 1fr;
+                gap: variables.$spacing-base;
+            }
+
+            .upcoming-trip-card {
+                background-color: variables.$color-white;
+                border: 1px solid variables.$color-hairline;
+                border-radius: variables.$radius-large;
+                box-shadow: variables.$shadow-card;
+                overflow: hidden;
+
+                @include variables.transition-ease;
+
+                &:hover {
+                    transform: translateY(-4px);
+                    box-shadow: variables.$shadow-premium;
+
+                    .card-img-wrapper img {
+                        transform: scale(1.03);
+                    }
+                }
+
+                .card-img-wrapper {
+                    height: 200px;
+                    overflow: hidden;
+                    position: relative;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+
+                        @include variables.transition-smooth;
+                    }
+
+                    .days-tag-overlay {
+                        position: absolute;
+                        top: 14px;
+                        left: 14px;
+                        background-color: rgba(variables.$color-white, 0.95);
+                        backdrop-filter: blur(8px);
+                        border-radius: variables.$radius-full;
+                        padding: 4px 12px;
+                        font-size: variables.$font-size-micro;
+                        font-weight: 700;
+                        color: variables.$color-ink;
+                        box-shadow: variables.$shadow-sm;
+                    }
+                }
+
+                .card-content-pane {
+                    padding: variables.$spacing-lg;
+
+                    .trip-name {
+                        font-size: variables.$font-size-lg;
+                        font-weight: 700;
+                        color: variables.$color-ink;
+                        margin: 0 0 4px;
+                    }
+
+                    .trip-destination {
+                        font-size: variables.$font-size-sm;
+                        color: variables.$color-muted;
+                        margin: 0 0 16px;
+                    }
+
+                    .card-footer {
+                        padding-top: 14px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        &.border-t {
+                            border-top: 1px solid variables.$color-gray-100;
+                        }
+
+                        .budget-label {
+                            font-size: variables.$font-size-sm;
+                            color: variables.$color-muted;
+
+                            strong {
+                                color: variables.$color-ink;
+                                font-weight: 600;
+                            }
+                        }
+
+                        .edit-trip-btn {
+                            border: none;
+                            background: transparent;
+                            color: variables.$color-primary;
+                            font-size: variables.$font-size-sm;
+                            font-weight: 600;
+                            cursor: pointer;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // 3. Completed Journeys Grid Layout
+        .completed-trips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: variables.$spacing-lg;
+
+            @include variables.tablet {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @include variables.mobile {
+                grid-template-columns: 1fr;
+                gap: variables.$spacing-base;
+            }
+
+            .completed-trip-card {
+                background-color: variables.$color-white;
+                border: 1px solid variables.$color-hairline;
+                border-radius: variables.$radius-large;
+                box-shadow: variables.$shadow-card;
+                overflow: hidden;
+
+                @include variables.transition-ease;
+
+                &:hover {
+                    transform: translateY(-4px);
+                    box-shadow: variables.$shadow-premium;
+
+                    .card-img-wrapper img {
+                        transform: scale(1.03);
+                    }
+                }
+
+                .card-img-wrapper {
+                    height: 180px;
+                    overflow: hidden;
+                    position: relative;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+
+                        @include variables.transition-smooth;
+                    }
+
+                    .completed-badge-overlay {
+                        position: absolute;
+                        top: 14px;
+                        left: 14px;
+                        background-color: variables.$color-blue-accent;
+                        color: variables.$color-white;
+                        border-radius: variables.$radius-full;
+                        padding: 4px 12px;
+                        font-size: variables.$font-size-micro;
+                        font-weight: 700;
+                        box-shadow: variables.$shadow-sm;
+                        text-transform: uppercase;
+                    }
+                }
+
+                .card-content-pane {
+                    padding: variables.$spacing-md;
+
+                    .trip-name {
+                        font-size: variables.$font-size-lg;
+                        font-weight: 700;
+                        color: variables.$color-ink;
+                        margin: 0 0 4px;
+                    }
+
+                    .trip-meta {
+                        font-size: variables.$font-size-sm;
+                        color: variables.$color-muted;
+                        margin: 0 0 12px;
+                    }
+
+                    .financials-row {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 14px;
+
+                        .spent-label {
+                            font-size: variables.$font-size-sm;
+                            color: variables.$color-muted;
+
+                            strong {
+                                color: variables.$color-ink;
+                                font-weight: 600;
+                            }
+                        }
+
+                        .rating-badge {
+                            display: flex;
+                            align-items: center;
+                            gap: 4px;
+                            color: variables.$color-star-rating;
+                            font-size: variables.$font-size-sm;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .card-actions-footer {
+                        padding-top: 12px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        &.border-t {
+                            border-top: 1px solid variables.$color-gray-100;
+                        }
+
+                        button {
+                            border: none;
+                            background: transparent;
+                            font-size: variables.$font-size-sm;
+                            font-weight: 600;
+                            cursor: pointer;
+
+                            &.memories-btn {
+                                color: variables.$color-primary;
+
+                                &:hover {
+                                    text-decoration: underline;
+                                }
+                            }
+
+                            &.duplicate-btn {
+                                color: variables.$color-muted;
+
+                                &:hover {
+                                    color: variables.$color-ink;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Empty state search fallback
+    .empty-results-box {
+        background-color: variables.$color-surface-soft;
+        border: 2px dashed variables.$color-gray-200;
+        border-radius: variables.$radius-large;
+        padding: 64px 32px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+
+        .empty-icon {
+            margin-bottom: 8px;
+        }
+
+        h3 {
+            font-size: variables.$font-size-lg;
+            font-weight: 700;
+            color: variables.$color-ink;
+            margin: 0;
+        }
+
+        p {
+            font-size: variables.$font-size-sm;
+            color: variables.$color-muted;
+            margin: 0;
+            max-width: 320px;
+        }
+    }
+}
+
+// Keyframes
+@keyframes my-trips-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes my-trips-slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ongoing-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(variables.$color-success, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 6px rgba(variables.$color-success, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(variables.$color-success, 0);
+    }
+}
+
+@keyframes fill-radial {
+    from {
+        stroke-dasharray: 0, 100;
+    }
+}
