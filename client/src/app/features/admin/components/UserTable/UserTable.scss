@@ -1,0 +1,234 @@
+@use '@/styles/variables' as variables;
+
+.admin-user-table-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: variables.$color-surface-card;
+    border: 1px solid variables.$color-hairline;
+    border-radius: variables.$radius-md;
+    overflow: hidden;
+    box-shadow: variables.$shadow-card;
+
+    .table-responsive-container {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .admin-user-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: variables.$font-size-sm;
+
+        thead {
+            background-color: variables.$color-surface-soft;
+            border-bottom: 1px solid variables.$color-hairline;
+
+            th {
+                padding: variables.$spacing-sm variables.$spacing-md;
+                font-weight: 600;
+                font-size: variables.$font-size-micro;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                color: variables.$color-muted;
+                white-space: nowrap;
+
+                &.th-actions {
+                    text-align: right;
+                    padding-right: variables.$spacing-base;
+                }
+            }
+        }
+
+        tbody {
+            tr.user-table-row {
+                border-bottom: 1px solid variables.$color-hairline-soft;
+                transition: background-color 0.15s ease;
+
+                &:hover {
+                    background-color: variables.$color-surface-soft;
+                }
+
+                td {
+                    padding: variables.$spacing-md;
+                    vertical-align: middle;
+                    color: variables.$color-ink;
+                }
+
+                .user-profile-cell {
+                    display: flex;
+                    align-items: center;
+                    gap: variables.$spacing-sm;
+
+                    .circular-avatar-wrapper {
+                        width: 36px;
+                        height: 36px;
+                        min-width: 36px;
+                        max-width: 36px;
+                        min-height: 36px;
+                        max-height: 36px;
+                        flex-shrink: 0;
+                        overflow: hidden;
+                    }
+
+                    .user-info {
+                        display: flex;
+                        flex-direction: column;
+                        min-width: 0;
+
+                        .user-name {
+                            font-weight: 600;
+                            color: variables.$color-ink;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+
+                        .user-email {
+                            font-size: variables.$font-size-micro;
+                            color: variables.$color-muted;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
+
+                .verification-text {
+                    font-size: variables.$font-size-caption-sm;
+                    font-weight: 500;
+
+                    &.verified {
+                        color: variables.$color-success;
+                    }
+
+                    &.unverified {
+                        color: variables.$color-muted-soft;
+                    }
+                }
+
+                .date-cell {
+                    font-size: variables.$font-size-caption-sm;
+                    color: variables.$color-muted;
+                }
+
+                .actions-cell {
+                    text-align: right;
+                    padding-right: variables.$spacing-base;
+
+                    .row-actions {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: variables.$spacing-xxs;
+
+                        .action-icon-btn {
+                            color: variables.$color-muted;
+                            padding: 6px;
+                            border-radius: variables.$radius-xs;
+
+                            &:hover {
+                                color: variables.$color-ink;
+                                background-color: variables.$color-hairline;
+                            }
+
+                            &.delete:hover {
+                                color: variables.$color-danger;
+                                background-color: variables.$color-danger-light;
+                            }
+
+                            &.restore:hover {
+                                color: variables.$color-success;
+                                background-color: variables.$color-success-light;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .empty-table-cell {
+                text-align: center;
+                padding: variables.$spacing-xxl variables.$spacing-base;
+
+                .empty-message {
+                    h4 {
+                        margin: 0 0 variables.$spacing-xxs;
+                        font-size: variables.$font-size-md;
+                        color: variables.$color-ink;
+                    }
+
+                    p {
+                        margin: 0;
+                        font-size: variables.$font-size-sm;
+                        color: variables.$color-muted;
+                    }
+                }
+            }
+
+            .skeleton-row {
+                td {
+                    padding: variables.$spacing-md;
+                }
+
+                .skeleton-avatar {
+                    width: 36px;
+                    height: 36px;
+                    border-radius: variables.$radius-full;
+                    background: linear-gradient(90deg, variables.$color-surface-soft 25%, variables.$color-hairline 50%, variables.$color-surface-soft 75%);
+                    background-size: 200% 100%;
+                    animation: skeleton-shimmer 1.5s infinite;
+                }
+
+                .skeleton-text {
+                    height: 14px;
+                    border-radius: variables.$radius-xs;
+                    background: linear-gradient(90deg, variables.$color-surface-soft 25%, variables.$color-hairline 50%, variables.$color-surface-soft 75%);
+                    background-size: 200% 100%;
+                    animation: skeleton-shimmer 1.5s infinite;
+
+                    &.long {
+                        width: 140px;
+                    }
+
+                    &.medium {
+                        width: 90px;
+                    }
+
+                    &.short {
+                        width: 60px;
+                    }
+
+                    &.actions {
+                        width: 80px;
+                        margin-left: auto;
+                    }
+                }
+            }
+        }
+    }
+
+    .table-pagination-footer {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: variables.$spacing-base;
+        padding: variables.$spacing-sm variables.$spacing-md;
+        background-color: variables.$color-surface-card;
+        border-top: 1px solid variables.$color-hairline;
+
+        .pagination-info {
+            font-size: variables.$font-size-caption-sm;
+            color: variables.$color-muted;
+        }
+    }
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}

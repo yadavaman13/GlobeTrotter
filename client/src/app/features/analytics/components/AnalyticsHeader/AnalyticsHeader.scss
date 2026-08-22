@@ -1,0 +1,85 @@
+@use '@/styles/variables' as variables;
+
+.analytics-header-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: variables.$spacing-md;
+    padding: variables.$spacing-base;
+    background-color: variables.$color-surface-card;
+    border: 1px solid variables.$color-hairline;
+    border-radius: variables.$radius-md;
+    margin-bottom: variables.$spacing-base;
+
+    .header-titles {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-xxs;
+
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: variables.$spacing-sm;
+
+            .header-icon {
+                color: variables.$color-info;
+            }
+
+            .header-main-title {
+                font-size: variables.$font-size-display-lg;
+                font-weight: 700;
+                color: variables.$color-ink;
+                margin: 0;
+            }
+        }
+
+        .header-subtitle {
+            font-size: variables.$font-size-sm;
+            color: variables.$color-muted;
+            margin: 0;
+        }
+    }
+
+    .header-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: variables.$spacing-sm;
+
+        .last-sync-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: variables.$spacing-xs;
+            font-size: variables.$font-size-micro;
+            font-weight: 500;
+            color: variables.$color-muted;
+            background-color: variables.$color-surface-soft;
+            padding: variables.$spacing-xxs variables.$spacing-sm;
+            border-radius: variables.$radius-full;
+            border: 1px solid variables.$color-hairline;
+
+            .live-dot {
+                width: 7px;
+                height: 7px;
+                border-radius: variables.$radius-full;
+                background-color: variables.$color-success;
+                box-shadow: 0 0 0 2px variables.$color-success-light;
+            }
+        }
+    }
+}
+
+.spin-animation {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

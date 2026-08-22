@@ -1,0 +1,58 @@
+@use '@/styles/variables' as variables;
+
+.admin-users-page-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: variables.$spacing-base;
+    box-sizing: border-box;
+
+    .admin-page-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: variables.$spacing-base;
+
+        .title-group {
+            display: flex;
+            align-items: center;
+            gap: variables.$spacing-md;
+
+            .icon-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                border-radius: variables.$radius-sm;
+                background-color: variables.$color-info-light;
+                color: variables.$color-info;
+            }
+
+            .page-title {
+                font-size: variables.$font-size-display-lg;
+                font-weight: 700;
+                color: variables.$color-ink;
+                margin: 0;
+            }
+
+            .page-subtitle {
+                font-size: variables.$font-size-sm;
+                color: variables.$color-muted;
+                margin: variables.$spacing-xxs 0 0;
+            }
+        }
+    }
+
+    .admin-error-banner {
+        display: flex;
+        align-items: center;
+        padding: variables.$spacing-sm variables.$spacing-base;
+        background-color: variables.$color-danger-light;
+        border: 1px solid variables.$color-danger-border;
+        border-radius: variables.$radius-sm;
+        color: variables.$color-danger;
+        font-size: variables.$font-size-sm;
+        margin-bottom: variables.$spacing-md;
+    }
+}

@@ -1,3 +1,5 @@
+import AdminDashboardPage from '@/app/features/admin/pages/AdminDashboardPage';
+
 export default {
     userRoutes: [
         {
@@ -8,7 +10,7 @@ export default {
     adminRoutes: [
         {
             path: 'home',
-            element: <div className="main-dashboard-placeholder">This is Admin dashboard</div>,
+            element: <AdminDashboardPage />,
         },
     ],
 };

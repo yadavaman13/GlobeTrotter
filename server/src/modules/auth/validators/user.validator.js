@@ -42,7 +42,24 @@ export const adminUpdateRoleValidator = [
     validateRequest,
 ];
 
+export const adminUpdateStatusValidator = [
+    body('isActive')
+        .optional()
+        .isBoolean()
+        .withMessage('isActive must be a boolean'),
+    body('isDeleted')
+        .optional()
+        .isBoolean()
+        .withMessage('isDeleted must be a boolean'),
+    body('role')
+        .optional()
+        .isIn(['user', 'admin'])
+        .withMessage('Role must be either user or admin'),
+    validateRequest,
+];
+
 export const deleteAccountValidator = [
     body('password').notEmpty().withMessage('Password is required'),
     validateRequest,
 ];
+
