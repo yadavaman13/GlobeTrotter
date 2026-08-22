@@ -1,0 +1,8 @@
+# Ignore the AI context folder
+.ai/
+
+# Ignore node_modules
+node_modules/
+.todo
+# Ignore stylelint error output log
+client/stylelint-errors.txt
