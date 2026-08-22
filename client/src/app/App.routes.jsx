@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <Navigate to="analytics" replace />,
+                                element: <Navigate to="trips" replace />,
                             },
                             // Auto-discovered user feature routes
                             ...userRoutes,

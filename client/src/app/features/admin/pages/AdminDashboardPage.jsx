@@ -17,7 +17,6 @@ import {
     Shield,
     CheckCircle2,
     Clock,
-    Sparkles,
     RefreshCw,
 } from 'lucide-react';
 import './AdminDashboardPage.scss';
@@ -37,7 +36,8 @@ export function AdminDashboardPage() {
             setError(null);
 
             const res = await getAdminAnalyticsApi();
-            const analyticsData = res?.data?.analytics || res?.analytics || res?.data?.data?.analytics;
+            const analyticsData =
+                res?.data?.analytics || res?.analytics || res?.data?.data?.analytics;
             if (analyticsData) {
                 setAnalytics(analyticsData);
             }
@@ -80,10 +80,14 @@ export function AdminDashboardPage() {
                         <span>System Administration Console</span>
                     </div>
                     <h1 className="hero-title">
-                        Welcome back, {user?.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : 'Administrator'}
+                        Welcome back,{' '}
+                        {user?.firstName
+                            ? `${user.firstName} ${user.lastName || ''}`.trim()
+                            : 'Administrator'}
                     </h1>
                     <p className="hero-subtitle">
-                        Real-time platform overview, traveler management, catalog health, and itinerary metrics.
+                        Real-time platform overview, traveler management, catalog health, and
+                        itinerary metrics.
                     </p>
 
                     <div className="system-health-indicators">
@@ -161,7 +165,8 @@ export function AdminDashboardPage() {
                         <span className="stat-label">Created Itineraries</span>
                         <div className="stat-value">{loading ? '—' : tripStats.total}</div>
                         <span className="stat-footnote">
-                            {tripStats.byStatus?.ongoing || 0} ongoing • {tripStats.byStatus?.planned || 0} planned
+                            {tripStats.byStatus?.ongoing || 0} ongoing •{' '}
+                            {tripStats.byStatus?.planned || 0} planned
                         </span>
                     </div>
                 </div>
@@ -235,7 +240,8 @@ export function AdminDashboardPage() {
                         <div className="shortcut-info">
                             <h3 className="shortcut-title">Platform Insights</h3>
                             <p className="shortcut-desc">
-                                Explore status distributions, popular destinations, and expense ledgers.
+                                Explore status distributions, popular destinations, and expense
+                                ledgers.
                             </p>
                         </div>
                         <ArrowUpRight size={16} className="shortcut-arrow" />
@@ -257,10 +263,7 @@ export function AdminDashboardPage() {
                         <ArrowUpRight size={16} className="shortcut-arrow" />
                     </div>
 
-                    <div
-                        className="shortcut-card"
-                        onClick={() => navigate('/dashboard/admin/ai')}
-                    >
+                    <div className="shortcut-card" onClick={() => navigate('/dashboard/admin/ai')}>
                         <div className="shortcut-icon ai">
                             <Bot size={22} />
                         </div>
@@ -341,12 +344,18 @@ export function AdminDashboardPage() {
                                                 </td>
                                                 <td>
                                                     <div className="owner-cell">
-                                                        <span className="owner-name">{trip.ownerName}</span>
-                                                        <span className="owner-email">{trip.ownerEmail}</span>
+                                                        <span className="owner-name">
+                                                            {trip.ownerName}
+                                                        </span>
+                                                        <span className="owner-email">
+                                                            {trip.ownerEmail}
+                                                        </span>
                                                     </div>
                                                 </td>
                                                 <td className="budget-cell">{tripBudget}</td>
-                                                <td className="stops-cell">{trip.stopCount} stops</td>
+                                                <td className="stops-cell">
+                                                    {trip.stopCount} stops
+                                                </td>
                                                 <td>
                                                     <Badge
                                                         variant={getStatusVariant(trip.status)}
@@ -385,11 +394,15 @@ export function AdminDashboardPage() {
                                     <div className="rank-badge">#{idx + 1}</div>
                                     <div className="dest-info">
                                         <span className="dest-name">{city.name}</span>
-                                        <span className="dest-region">{city.region}, {city.country}</span>
+                                        <span className="dest-region">
+                                            {city.region}, {city.country}
+                                        </span>
                                     </div>
                                     <div className="dest-stats">
                                         <span className="stops-pill">{city.visitCount} stops</span>
-                                        <span className="rating-pill">★ {city.popularity || '9.5'}</span>
+                                        <span className="rating-pill">
+                                            ★ {city.popularity || '9.5'}
+                                        </span>
                                     </div>
                                 </div>
                             ))

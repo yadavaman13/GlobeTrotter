@@ -1,4 +1,4 @@
-import { Search, RefreshCw, Trash2, Filter } from 'lucide-react';
+import { Search, RefreshCw, Trash2 } from 'lucide-react';
 import Button from '@/components/Shared/Buttons/Button/Button';
 import Dropdown from '@/components/Shared/Form/Dropdown/Dropdown';
 import './UserFilters.scss';
@@ -82,7 +82,10 @@ export function UserFilters({
             </div>
 
             <div className="filters-right">
-                {(filters.search || filters.role || filters.isActive !== '' || filters.isDeleted !== '') && (
+                {(filters.search ||
+                    filters.role ||
+                    filters.isActive !== '' ||
+                    filters.isDeleted !== '') && (
                     <Button
                         variant="ghost"
                         size="sm"

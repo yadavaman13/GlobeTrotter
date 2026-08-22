@@ -7,7 +7,13 @@ import Dialog from '@/components/Shared/Feedback/Dialog';
 import { Drawer, NotificationFeed } from '@/components/Shared/Feedback/Drawer';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useDerivedProfile } from '../../auth/hooks/useDerivedProfile';
-import { Home as HomeIcon, TrendingUp as AnalyticsIcon, Bot as BotIcon, Users as UsersIcon } from 'lucide-react';
+import {
+    Home as HomeIcon,
+    TrendingUp as AnalyticsIcon,
+    Bot as BotIcon,
+    Users as UsersIcon,
+    Compass as CompassIcon,
+} from 'lucide-react';
 import './DashboardLayout.scss';
 
 function DashboardLayout({ onLogout }) {
@@ -40,6 +46,12 @@ function DashboardLayout({ onLogout }) {
         {
             label: 'Home',
             icon: <HomeIcon />,
+        },
+        {
+            label: 'Trips',
+            icon: <CompassIcon />,
+            path: '/dashboard/user/trips',
+            subTabs: ['My Trips', 'Plan Trip'],
         },
         {
             label: 'AI',
@@ -91,6 +103,19 @@ function DashboardLayout({ onLogout }) {
         }
     };
 
+    const handleSubItemClick = (parentLabel, subTab) => {
+        if (parentLabel === 'Trips') {
+            if (subTab === 'Plan Trip') {
+                navigate(`/dashboard/${roleSegment}/trips/new`);
+            } else {
+                navigate(`/dashboard/${roleSegment}/trips`);
+            }
+        } else if (parentLabel === 'Analytics') {
+            const route = subTab.toLowerCase() === 'reports' ? 'reports' : 'insight';
+            navigate(`/dashboard/${roleSegment}/analytics/${route}`);
+        }
+    };
+
     return (
         <div className="dashboard-layout-container">
             <div
@@ -108,6 +133,7 @@ function DashboardLayout({ onLogout }) {
                 profile={derivedProfile}
                 onNavigateGeneral={() => navigate(`/dashboard/${roleSegment}/settings/general`)}
                 onNavigateAccount={() => navigate(`/dashboard/${roleSegment}/settings/account`)}
+                onSubItemClick={handleSubItemClick}
             />
 
             <div className="dashboard-right-pane">

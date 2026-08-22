@@ -1,0 +1,386 @@
+@use '@/styles/variables' as variables;
+
+.public-trip-page-container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: variables.$color-surface-soft;
+    display: flex;
+    flex-direction: column;
+
+    // Top Brand Bar
+    .public-top-bar {
+        background-color: rgb(255 255 255 / 90%);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid variables.$color-hairline;
+        padding: variables.$spacing-md variables.$spacing-xl;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: variables.$z-sticky;
+
+        .brand-logo-link {
+            display: flex;
+            align-items: center;
+            gap: variables.$spacing-xs;
+            text-decoration: none;
+            font-size: variables.$font-size-md;
+            font-weight: 700;
+            color: variables.$color-ink;
+
+            .brand-icon {
+                color: variables.$color-primary;
+            }
+        }
+
+        .top-bar-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: variables.$color-primary;
+            color: variables.$color-white;
+            border: none;
+            border-radius: variables.$radius-full;
+            padding: variables.$spacing-xs variables.$spacing-lg;
+            font-size: variables.$font-size-sm;
+            font-weight: 600;
+            cursor: pointer;
+
+            @include variables.transition-ease;
+
+            &:hover {
+                background-color: variables.$color-primary-active;
+            }
+        }
+    }
+
+    // Hero Section
+    .public-trip-hero {
+        position: relative;
+        min-height: 380px;
+        display: flex;
+        align-items: flex-end;
+        padding: variables.$spacing-xxl variables.$spacing-xl;
+
+        .hero-background-media {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+
+            .hero-scrim-gradient {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgb(0 0 0 / 85%) 0%, rgb(0 0 0 / 30%) 100%);
+            }
+        }
+
+        .hero-content-wrapper {
+            position: relative;
+            z-index: variables.$z-raised;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            color: variables.$color-white;
+            display: flex;
+            flex-direction: column;
+            gap: variables.$spacing-sm;
+
+            .hero-meta-badge {
+                display: inline-block;
+                background: rgb(255 255 255 / 25%);
+                backdrop-filter: blur(8px);
+                padding: 2px variables.$spacing-sm;
+                border-radius: variables.$radius-full;
+                font-size: variables.$font-size-micro;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                width: fit-content;
+            }
+
+            .hero-trip-title {
+                font-size: variables.$font-size-display-xl;
+                font-weight: 700;
+                margin: 0;
+                letter-spacing: -0.5px;
+                text-shadow: 0 2px 8px rgb(0 0 0 / 50%);
+            }
+
+            .hero-trip-description {
+                font-size: variables.$font-size-md;
+                opacity: 0.9;
+                max-width: 700px;
+                margin: 0;
+                line-height: 1.5;
+            }
+
+            .hero-creator-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: variables.$spacing-lg;
+                margin-top: variables.$spacing-md;
+                padding-top: variables.$spacing-md;
+                border-top: 1px solid rgb(255 255 255 / 20%);
+
+                .creator-profile {
+                    display: flex;
+                    align-items: center;
+                    gap: variables.$spacing-sm;
+
+                    .creator-avatar {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: variables.$radius-full;
+                        background: rgb(255 255 255 / 30%);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .creator-info {
+                        .creator-label {
+                            display: block;
+                            font-size: variables.$font-size-micro;
+                            opacity: 0.8;
+                        }
+
+                        .creator-name {
+                            font-size: variables.$font-size-sm;
+                            font-weight: 700;
+                        }
+                    }
+                }
+
+                .trip-key-stats {
+                    display: flex;
+                    align-items: center;
+                    gap: variables.$spacing-lg;
+                    flex-wrap: wrap;
+
+                    .stat-item {
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        font-size: variables.$font-size-sm;
+                        opacity: 0.95;
+                    }
+                }
+
+                .copy-trip-hero-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    background-color: variables.$color-primary;
+                    color: variables.$color-white;
+                    border: none;
+                    border-radius: variables.$radius-full;
+                    padding: variables.$spacing-sm variables.$spacing-xl;
+                    font-size: variables.$font-size-md;
+                    font-weight: 600;
+                    cursor: pointer;
+                    box-shadow: 0 4px 14px rgb(255 56 92 / 40%);
+
+                    @include variables.transition-ease;
+
+                    &:hover:not(:disabled) {
+                        background-color: variables.$color-primary-active;
+                        transform: translateY(-2px);
+                    }
+                }
+            }
+        }
+    }
+
+    // Main Itinerary Content
+    .public-main-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        width: 100%;
+        padding: variables.$spacing-xxl variables.$spacing-xl;
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-xl;
+
+        .section-headline {
+            font-size: variables.$font-size-display-md;
+            font-weight: 700;
+            color: variables.$color-ink;
+            margin: 0;
+        }
+
+        .public-timeline-flow {
+            display: flex;
+            flex-direction: column;
+            gap: variables.$spacing-xl;
+
+            .public-stop-card {
+                background-color: variables.$color-surface-card;
+                border: 1px solid variables.$color-hairline;
+                border-radius: variables.$radius-lg;
+                padding: variables.$spacing-xl;
+                box-shadow: variables.$shadow-card;
+                display: flex;
+                flex-direction: column;
+                gap: variables.$spacing-lg;
+
+                .public-stop-header {
+                    border-bottom: 1px solid variables.$color-hairline;
+                    padding-bottom: variables.$spacing-md;
+
+                    .stop-badge {
+                        display: inline-block;
+                        background-color: color-mix(in srgb, variables.$color-primary 10%, white);
+                        color: variables.$color-primary;
+                        border-radius: variables.$radius-full;
+                        padding: 2px variables.$spacing-sm;
+                        font-size: variables.$font-size-micro;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        margin-bottom: 4px;
+                    }
+
+                    .stop-name {
+                        font-size: variables.$font-size-display-sm;
+                        font-weight: 700;
+                        color: variables.$color-ink;
+                        margin: 0;
+                    }
+
+                    .stop-dates {
+                        font-size: variables.$font-size-sm;
+                        color: variables.$color-muted;
+                        margin: 2px 0 0;
+                    }
+                }
+
+                .public-activities-stream {
+                    display: flex;
+                    flex-direction: column;
+                    gap: variables.$spacing-md;
+                    position: relative;
+                    padding-left: 20px;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: 8px;
+                        bottom: 8px;
+                        left: 6px;
+                        width: 2px;
+                        background-color: variables.$color-hairline;
+                    }
+
+                    .public-activity-row {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: variables.$spacing-md;
+                        position: relative;
+
+                        .activity-time {
+                            width: 80px;
+                            font-size: variables.$font-size-micro;
+                            font-weight: 600;
+                            color: variables.$color-muted;
+                            display: flex;
+                            align-items: center;
+                            gap: 4px;
+                            padding-top: 4px;
+                            flex-shrink: 0;
+                        }
+
+                        .activity-bullet-point {
+                            position: absolute;
+                            left: -20px;
+                            top: 8px;
+                            width: 10px;
+                            height: 10px;
+                            border-radius: variables.$radius-full;
+                            background-color: variables.$color-primary;
+                        }
+
+                        .activity-details-box {
+                            flex: 1;
+                            background-color: variables.$color-surface-soft;
+                            border: 1px solid variables.$color-hairline;
+                            border-radius: variables.$radius-md;
+                            padding: variables.$spacing-md;
+                            display: flex;
+                            flex-direction: column;
+                            gap: variables.$spacing-xs;
+
+                            .act-header {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+
+                                .act-name {
+                                    font-size: variables.$font-size-sm;
+                                    font-weight: 700;
+                                    color: variables.$color-ink;
+                                    margin: 0;
+                                }
+
+                                .act-type {
+                                    font-size: variables.$font-size-xxs;
+                                    font-weight: 600;
+                                    background-color: color-mix(
+                                        in srgb,
+                                        variables.$color-primary 10%,
+                                        white
+                                    );
+                                    color: variables.$color-primary;
+                                    padding: 2px 6px;
+                                    border-radius: 4px;
+                                }
+                            }
+
+                            .act-desc {
+                                font-size: variables.$font-size-sm;
+                                color: variables.$color-muted;
+                                margin: 0;
+                            }
+
+                            .act-notes {
+                                font-size: variables.$font-size-micro;
+                                color: variables.$color-muted-soft;
+                                font-style: italic;
+                                margin: 0;
+                            }
+
+                            .act-meta {
+                                display: flex;
+                                align-items: center;
+                                gap: variables.$spacing-md;
+                                font-size: variables.$font-size-micro;
+                                color: variables.$color-muted;
+                                margin-top: 4px;
+
+                                .act-cost {
+                                    font-weight: 600;
+                                    color: variables.$color-ink;
+                                }
+                            }
+                        }
+                    }
+
+                    .no-acts {
+                        color: variables.$color-muted;
+                        font-size: variables.$font-size-sm;
+                        font-style: italic;
+                    }
+                }
+            }
+        }
+    }
+}

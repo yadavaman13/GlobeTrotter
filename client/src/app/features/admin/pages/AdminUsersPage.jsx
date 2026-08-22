@@ -13,7 +13,7 @@ import {
     CleanupUsersDialog,
 } from '../components/UserActionDialogs/UserActionDialogs';
 import Drawer from '@/components/Shared/Feedback/Drawer/Drawer';
-import { Users as UsersIcon, ShieldCheck } from 'lucide-react';
+import { Users as UsersIcon } from 'lucide-react';
 import './AdminUsersPage.scss';
 
 function AdminUsersContent() {
@@ -29,20 +29,10 @@ function AdminUsersContent() {
         refetch,
     } = useAdminUsers();
 
-    const {
-        selectedUser,
-        loadingDetails,
-        openUserDetails,
-        closeUserDetails,
-    } = useUserDetails();
+    const { selectedUser, loadingDetails, openUserDetails, closeUserDetails } = useUserDetails();
 
-    const {
-        toggleActiveStatus,
-        toggleSoftDelete,
-        updateUserRole,
-        executeCleanup,
-        actionLoading,
-    } = useUserStatusMutation();
+    const { toggleActiveStatus, toggleSoftDelete, updateUserRole, executeCleanup, actionLoading } =
+        useUserStatusMutation();
 
     // Modal dialog state handlers
     const [statusModalUser, setStatusModalUser] = useState(null);
@@ -97,7 +87,8 @@ function AdminUsersContent() {
                     <div>
                         <h1 className="page-title">User Account Management</h1>
                         <p className="page-subtitle">
-                            Oversee registered traveler accounts, permissions, account verification, and status.
+                            Oversee registered traveler accounts, permissions, account verification,
+                            and status.
                         </p>
                     </div>
                 </div>

@@ -1,9 +1,8 @@
-import { useMemo, useCallback } from 'react';
 import CircularAvatar from '@/components/Shared/DataDisplay/CircularAvatar/CircularAvatar';
 import Pagination from '@/components/Shared/Navigation/Pagination/Pagination';
 import Button from '@/components/Shared/Buttons/Button/Button';
 import { UserStatusBadge, UserRoleBadge } from '../UserStatusBadge/UserStatusBadge';
-import { Eye, Shield, UserX, UserCheck, Trash2, RotateCcw, MoreVertical } from 'lucide-react';
+import { Eye, Shield, UserX, UserCheck, Trash2, RotateCcw } from 'lucide-react';
 import './UserTable.scss';
 
 export function UserTable({
@@ -101,7 +100,9 @@ export function UserTable({
                             </td>
 
                             <td>
-                                <span className={`verification-text ${user.emailVerified ? 'verified' : 'unverified'}`}>
+                                <span
+                                    className={`verification-text ${user.emailVerified ? 'verified' : 'unverified'}`}
+                                >
                                     {user.emailVerified ? 'Verified' : 'Pending'}
                                 </span>
                             </td>
@@ -127,7 +128,11 @@ export function UserTable({
                                         title={user.isActive ? 'Suspend User' : 'Activate User'}
                                         className="action-icon-btn"
                                     >
-                                        {user.isActive ? <UserX size={16} /> : <UserCheck size={16} />}
+                                        {user.isActive ? (
+                                            <UserX size={16} />
+                                        ) : (
+                                            <UserCheck size={16} />
+                                        )}
                                     </Button>
 
                                     <Button
@@ -147,7 +152,11 @@ export function UserTable({
                                         title={user.isDeleted ? 'Restore Account' : 'Soft Delete'}
                                         className={`action-icon-btn ${user.isDeleted ? 'restore' : 'delete'}`}
                                     >
-                                        {user.isDeleted ? <RotateCcw size={16} /> : <Trash2 size={16} />}
+                                        {user.isDeleted ? (
+                                            <RotateCcw size={16} />
+                                        ) : (
+                                            <Trash2 size={16} />
+                                        )}
                                     </Button>
                                 </div>
                             </td>

@@ -1,6 +1,6 @@
 import { AnalyticsProvider, useAnalyticsContext } from '../context/AnalyticsContext';
 import Button from '@/components/Shared/Buttons/Button/Button';
-import { FileText, Download, CheckCircle, Table, Database } from 'lucide-react';
+import { FileText, Download, CheckCircle, Database } from 'lucide-react';
 import './ReportsPage.scss';
 
 function ReportsContent() {
@@ -9,13 +9,15 @@ function ReportsContent() {
     const reportSummaries = [
         {
             title: 'Platform Summary & KPIs',
-            description: 'Overview of all active users, trip statuses, budgets, and destination catalogs.',
+            description:
+                'Overview of all active users, trip statuses, budgets, and destination catalogs.',
             recordsCount: `${analytics?.users?.total ?? 0} Users, ${analytics?.trips?.total ?? 0} Trips`,
             type: 'csv',
         },
         {
             title: 'Travel Financial Ledger',
-            description: 'Itemized expense distribution categorized by Transport, Stay, Activity, and Meals.',
+            description:
+                'Itemized expense distribution categorized by Transport, Stay, Activity, and Meals.',
             recordsCount: `${analytics?.financials?.expensesByCategory?.length ?? 0} Categories`,
             type: 'csv',
         },
@@ -36,7 +38,8 @@ function ReportsContent() {
                         <h1 className="header-main-title">Reports & Data Exports</h1>
                     </div>
                     <p className="header-subtitle">
-                        Generate and download audit reports, travel financial summaries, and platform metrics.
+                        Generate and download audit reports, travel financial summaries, and
+                        platform metrics.
                     </p>
                 </div>
             </div>

@@ -1,0 +1,384 @@
+@use '@/styles/variables' as variables;
+
+.budget-analytics-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: variables.$spacing-lg variables.$spacing-xl;
+    display: flex;
+    flex-direction: column;
+    gap: variables.$spacing-xl;
+
+    @include variables.mobile {
+        padding: variables.$spacing-md;
+    }
+
+    .breadcrumbs-nav {
+        display: flex;
+        align-items: center;
+        gap: variables.$spacing-xs;
+        font-size: variables.$font-size-sm;
+        color: variables.$color-muted;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+
+            @include variables.transition-ease;
+
+            &:hover {
+                color: variables.$color-primary;
+            }
+        }
+
+        .current-page {
+            color: variables.$color-ink;
+            font-weight: 600;
+        }
+
+        .crumb-icon {
+            opacity: 0.5;
+        }
+    }
+
+    .analytics-header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: variables.$spacing-md;
+
+        .heading-group {
+            .page-title {
+                font-size: variables.$font-size-display-xl;
+                font-weight: 700;
+                color: variables.$color-ink;
+                margin: 0;
+            }
+
+            .page-subtitle {
+                font-size: variables.$font-size-sm;
+                color: variables.$color-muted;
+                margin: 4px 0 0;
+            }
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: variables.$spacing-md;
+
+            .view-tabs {
+                display: flex;
+                background-color: variables.$color-surface-soft;
+                border: 1px solid variables.$color-hairline;
+                border-radius: variables.$radius-full;
+                padding: 4px;
+
+                .tab-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    background: transparent;
+                    border: none;
+                    border-radius: variables.$radius-full;
+                    padding: variables.$spacing-xs variables.$spacing-md;
+                    font-size: variables.$font-size-sm;
+                    font-weight: 600;
+                    color: variables.$color-muted;
+                    cursor: pointer;
+
+                    @include variables.transition-ease;
+
+                    &:hover {
+                        color: variables.$color-ink;
+                    }
+
+                    &.active {
+                        background-color: variables.$color-canvas;
+                        color: variables.$color-ink;
+                        box-shadow: variables.$shadow-sm;
+                    }
+                }
+            }
+
+            .log-expense-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                background-color: variables.$color-primary;
+                color: variables.$color-white;
+                border: none;
+                border-radius: variables.$radius-full;
+                padding: variables.$spacing-xs variables.$spacing-lg;
+                font-size: variables.$font-size-sm;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgb(255 56 92 / 35%);
+
+                @include variables.transition-ease;
+
+                &:hover {
+                    background-color: variables.$color-primary-active;
+                    transform: translateY(-1px);
+                }
+            }
+        }
+    }
+
+    // Over-Budget Alert Banner
+    .over-budget-alert-card {
+        background: linear-gradient(135deg, variables.$color-danger-light 0%, #fff 100%);
+        border: 1px solid variables.$color-danger-border;
+        border-radius: variables.$radius-md;
+        padding: variables.$spacing-md variables.$spacing-lg;
+        display: flex;
+        align-items: center;
+        gap: variables.$spacing-md;
+
+        .alert-icon-wrapper {
+            color: variables.$color-danger;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .alert-text {
+            flex: 1;
+
+            .alert-title {
+                font-size: variables.$font-size-md;
+                font-weight: 700;
+                color: variables.$color-danger-dark;
+                margin: 0;
+            }
+
+            .alert-desc {
+                font-size: variables.$font-size-sm;
+                color: variables.$color-ink;
+                margin: 2px 0 0;
+            }
+        }
+    }
+
+    // StatCards Grid
+    .budget-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: variables.$spacing-md;
+
+        .stat-card {
+            background-color: variables.$color-surface-card;
+            border: 1px solid variables.$color-hairline;
+            border-radius: variables.$radius-lg;
+            padding: variables.$spacing-lg;
+            box-shadow: variables.$shadow-card;
+            display: flex;
+            align-items: center;
+            gap: variables.$spacing-md;
+
+            .stat-icon-wrapper {
+                width: 48px;
+                height: 48px;
+                border-radius: variables.$radius-full;
+                background-color: variables.$color-surface-soft;
+                color: variables.$color-primary;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+
+                &.green {
+                    background-color: color-mix(in srgb, variables.$color-success 12%, white);
+                    color: variables.$color-success;
+                }
+
+                &.purple {
+                    background-color: color-mix(in srgb, variables.$color-luxe 12%, white);
+                    color: variables.$color-luxe;
+                }
+
+                &.blue {
+                    background-color: color-mix(in srgb, variables.$color-info 12%, white);
+                    color: variables.$color-info;
+                }
+            }
+
+            .stat-details {
+                .stat-label {
+                    font-size: variables.$font-size-micro;
+                    font-weight: 700;
+                    letter-spacing: 0.5px;
+                    text-transform: uppercase;
+                    color: variables.$color-muted;
+                    margin: 0;
+                }
+
+                .stat-value {
+                    font-size: variables.$font-size-display-md;
+                    font-weight: 700;
+                    color: variables.$color-ink;
+                    margin: 2px 0 0;
+                }
+            }
+        }
+    }
+
+    // Charts Two-Column Grid
+    .charts-two-column-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: variables.$spacing-xl;
+
+        @include variables.mobile {
+            grid-template-columns: 1fr;
+        }
+
+        .chart-card {
+            background-color: variables.$color-surface-card;
+            border: 1px solid variables.$color-hairline;
+            border-radius: variables.$radius-lg;
+            padding: variables.$spacing-lg;
+            box-shadow: variables.$shadow-card;
+            display: flex;
+            flex-direction: column;
+            gap: variables.$spacing-md;
+
+            .chart-card-header {
+                .chart-title {
+                    font-size: variables.$font-size-md;
+                    font-weight: 700;
+                    color: variables.$color-ink;
+                    margin: 0;
+                }
+
+                .chart-subtitle {
+                    font-size: variables.$font-size-micro;
+                    color: variables.$color-muted;
+                    margin: 2px 0 0;
+                }
+            }
+        }
+    }
+
+    // Expenses Table Section
+    .expenses-table-section {
+        background-color: variables.$color-surface-card;
+        border: 1px solid variables.$color-hairline;
+        border-radius: variables.$radius-lg;
+        padding: variables.$spacing-lg;
+        box-shadow: variables.$shadow-card;
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-md;
+
+        .section-header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .section-title {
+                font-size: variables.$font-size-md;
+                font-weight: 700;
+                color: variables.$color-ink;
+                margin: 0;
+            }
+        }
+
+        .empty-expenses-state {
+            padding: variables.$spacing-xl;
+            text-align: center;
+            color: variables.$color-muted;
+            font-size: variables.$font-size-sm;
+        }
+
+        .table-responsive-wrapper {
+            overflow-x: auto;
+
+            .expenses-data-table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: left;
+                font-size: variables.$font-size-sm;
+
+                th {
+                    padding: variables.$spacing-sm variables.$spacing-md;
+                    border-bottom: 1px solid variables.$color-hairline;
+                    font-size: variables.$font-size-micro;
+                    font-weight: 700;
+                    letter-spacing: 0.5px;
+                    text-transform: uppercase;
+                    color: variables.$color-muted;
+                }
+
+                td {
+                    padding: variables.$spacing-sm variables.$spacing-md;
+                    border-bottom: 1px solid variables.$color-hairline-soft;
+                    color: variables.$color-ink;
+                }
+
+                .text-right {
+                    text-align: right;
+                }
+
+                .text-center {
+                    text-align: center;
+                }
+
+                .expense-amount {
+                    font-weight: 600;
+                }
+
+                .category-chip {
+                    display: inline-block;
+                    padding: 2px variables.$spacing-sm;
+                    border-radius: variables.$radius-full;
+                    font-size: variables.$font-size-micro;
+                    font-weight: 600;
+
+                    &.badge-stay {
+                        background-color: color-mix(in srgb, variables.$color-luxe 12%, white);
+                        color: variables.$color-luxe;
+                    }
+
+                    &.badge-transport {
+                        background-color: color-mix(in srgb, variables.$color-info 12%, white);
+                        color: variables.$color-info;
+                    }
+
+                    &.badge-activity {
+                        background-color: color-mix(in srgb, variables.$color-primary 12%, white);
+                        color: variables.$color-primary;
+                    }
+
+                    &.badge-food {
+                        background-color: color-mix(in srgb, variables.$color-warning 15%, white);
+                        color: variables.$color-warning-dark;
+                    }
+
+                    &.badge-other {
+                        background-color: variables.$color-surface-soft;
+                        color: variables.$color-muted;
+                    }
+                }
+
+                .delete-row-btn {
+                    background: transparent;
+                    border: none;
+                    color: variables.$color-muted;
+                    cursor: pointer;
+                    padding: 4px;
+                    border-radius: variables.$radius-full;
+
+                    @include variables.transition-ease;
+
+                    &:hover {
+                        color: variables.$color-danger;
+                        background-color: variables.$color-danger-light;
+                    }
+                }
+            }
+        }
+    }
+}
