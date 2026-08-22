@@ -71,6 +71,27 @@
             "when": 1787376452928,
             "tag": "0009_special_hobgoblin",
             "breakpoints": true
+        },
+        {
+            "idx": 10,
+            "version": "7",
+            "when": 1787379479828,
+            "tag": "0010_nasty_leper_queen",
+            "breakpoints": true
+        },
+        {
+            "idx": 11,
+            "version": "7",
+            "when": 1787383395931,
+            "tag": "0011_brave_valeria_richards",
+            "breakpoints": true
+        },
+        {
+            "idx": 12,
+            "version": "7",
+            "when": 1787383915251,
+            "tag": "0012_far_blackheart",
+            "breakpoints": true
         }
     ]
 }

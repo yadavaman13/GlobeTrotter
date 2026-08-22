@@ -29,7 +29,19 @@ import {
  */
 export async function register(req, res, next) {
     try {
-        const { email, password, firstName, lastName, profileImage, role } = req.body || {};
+        const {
+            email,
+            password,
+            firstName,
+            lastName,
+            profileImage,
+            role,
+            phone,
+            city,
+            country,
+            additionalInformation,
+            googleId,
+        } = req.body || {};
         const normalizedEmail = typeof email === 'string' ? email.trim().toLowerCase() : '';
         const passwordValue = typeof password === 'string' ? password : '';
         const firstNameValue = typeof firstName === 'string' ? firstName.trim() : '';
@@ -96,6 +108,11 @@ export async function register(req, res, next) {
             emailVerified: emailVerified,
             isActive: true,
             isDeleted: false,
+            phone: typeof phone === 'string' ? phone.trim() : null,
+            city: typeof city === 'string' ? city.trim() : null,
+            country: typeof country === 'string' ? country.trim() : null,
+            additionalInformation:
+                typeof additionalInformation === 'string' ? additionalInformation.trim() : null,
         });
 
         return sendTokenResponse(res, 201, 'User registered successfully', user);
@@ -746,6 +763,11 @@ export async function getMe(req, res, next) {
                 profileImage: user.profileImage,
                 isActive: user.isActive,
                 emailVerified: user.emailVerified,
+                phone: user.phone,
+                city: user.city,
+                country: user.country,
+                additionalInformation: user.additionalInformation,
+                googleId: user.googleId,
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt,
             },
