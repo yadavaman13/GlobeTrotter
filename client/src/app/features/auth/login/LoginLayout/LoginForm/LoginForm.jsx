@@ -152,10 +152,20 @@ function LoginForm() {
         setIsSubmitting(true);
 
         try {
-            await handleLogin(trimmedEmail, trimmedPassword, rememberMe);
+            const loginResult = await handleLogin(
+                trimmedEmail,
+                trimmedPassword,
+                undefined,
+                rememberMe,
+            );
+            const userRole = loginResult?.user?.role;
             sessionStorage.removeItem(FAILED_LOGIN_EMAIL_KEY);
             success(`Successfully logged in!`);
-            navigate('/dashboard');
+            if (userRole === 'admin') {
+                navigate('/dashboard/admin');
+            } else {
+                navigate('/');
+            }
         } catch (err) {
             console.error('Login error:', err);
             const status = err.response?.status;

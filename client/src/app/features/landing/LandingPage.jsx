@@ -158,7 +158,7 @@ export default function LandingPage() {
                         <a className="nav-item active" href="/">
                             Explore
                         </a>
-                        <a className="nav-item" href="/dashboard/user/analytics/insight">
+                        <a className="nav-item" href="/me/trips">
                             My Trips
                         </a>
                         <a className="nav-item" href="/dashboard/user/analytics/insight">
@@ -172,7 +172,7 @@ export default function LandingPage() {
                         {user ? (
                             <div
                                 className="avatar-wrapper"
-                                onClick={() => navigate('/dashboard/user/analytics/insight')}
+                                onClick={() => navigate('/me/profile')}
                                 title={`Logged in as ${user.name || 'User'}`}
                             >
                                 {user.profileImage ? (
