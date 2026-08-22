@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "profile_image" text DEFAULT 'https://ik.imagekit.io/2bzzjhgkg/defaul_profile_image.jpeg';
