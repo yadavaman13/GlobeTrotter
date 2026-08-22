@@ -8,13 +8,31 @@ import { AppError } from '../utils/appError.js';
  * @param {object} updates name, email
  * @returns {object} updated user
  */
-export async function updateProfile(userId, { email, firstName, lastName, profileImage }) {
+export async function updateProfile(
+    userId,
+    {
+        email,
+        firstName,
+        lastName,
+        profileImage,
+        phone,
+        city,
+        country,
+        additionalInformation,
+        googleId,
+    },
+) {
     const updates = {};
     if (email) updates.email = email;
     if (profileImage !== undefined) updates.profileImage = profileImage;
-
     if (firstName) updates.firstName = firstName;
     if (lastName) updates.lastName = lastName;
+
+    if (phone !== undefined) updates.phone = phone;
+    if (city !== undefined) updates.city = city;
+    if (country !== undefined) updates.country = country;
+    if (additionalInformation !== undefined) updates.additionalInformation = additionalInformation;
+    if (googleId !== undefined) updates.googleId = googleId;
 
     const user = await updateUser(userId, updates);
     if (!user) {

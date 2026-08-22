@@ -24,6 +24,11 @@ export const updateProfileValidator = [
         .trim()
         .notEmpty()
         .withMessage('Profile image path cannot be empty'),
+    body('phone').optional().trim(),
+    body('city').optional().trim(),
+    body('country').optional().trim(),
+    body('additionalInformation').optional().trim(),
+    body('googleId').optional().trim(),
     validateRequest,
 ];
 

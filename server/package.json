@@ -8,6 +8,7 @@
         "test:pdf": "node --test src/tests/pdf/*.test.js src/tests/templates/*.test.js",
         "test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
         "test:jest:auth": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/tests/auth",
+        "test:jest:post": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/tests/community",
         "dev": "npx nodemon server.js",
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",

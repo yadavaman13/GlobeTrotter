@@ -4,6 +4,10 @@ import { users } from '../db/schema/users.schema.js';
 import redis from '../config/cache.config.js';
 
 beforeEach(async () => {
+    const testPath = expect.getState().testPath;
+    if (testPath && testPath.includes('community.test.js')) {
+        return;
+    }
     try {
         await db.delete(users);
     } catch (err) {
