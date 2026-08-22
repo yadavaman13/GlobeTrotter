@@ -1,6 +1,7 @@
 import { Navigate, useNavigate } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
 import Spinner from '@/components/Shared/Feedback/Spinner/Spinner';
+import NotFoundPage from '@/components/Shared/ErrorPages/NotFoundPage/NotFoundPage';
 import ForbiddenPage from '@/components/Shared/ErrorPages/ForbiddenPage/ForbiddenPage';
 
 /**
@@ -9,8 +10,14 @@ import ForbiddenPage from '@/components/Shared/ErrorPages/ForbiddenPage/Forbidde
  * @param {React.ReactNode} children - Component to render when authorized
  * @param {string[]} [allowedRoles] - Optional list of authorized roles (case-insensitive)
  * @param {string} [fallbackPath] - Optional redirect route if unauthorized
+ * @param {boolean} [showNotFoundOnForbidden=true] - If true, renders NotFoundPage instead of ForbiddenPage
  */
-const ProtectedRoute = ({ children, allowedRoles, fallbackPath }) => {
+const ProtectedRoute = ({
+    children,
+    allowedRoles,
+    fallbackPath,
+    showNotFoundOnForbidden = true,
+}) => {
     const { user, loading, error } = useAuth();
     const navigate = useNavigate();
 
@@ -33,11 +40,20 @@ const ProtectedRoute = ({ children, allowedRoles, fallbackPath }) => {
             if (fallbackPath) {
                 return <Navigate to={fallbackPath} replace />;
             }
+            if (showNotFoundOnForbidden) {
+                return (
+                    <NotFoundPage
+                        title="Page Not Found"
+                        message="The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+                        onActionClick={() => navigate('/')}
+                    />
+                );
+            }
             return (
                 <ForbiddenPage
                     title="Access Forbidden"
                     message={`Your current role (${user.role || 'User'}) does not have permission to view this section.`}
-                    onActionClick={() => navigate('/dashboard')}
+                    onActionClick={() => navigate('/')}
                 />
             );
         }
@@ -47,3 +63,4 @@ const ProtectedRoute = ({ children, allowedRoles, fallbackPath }) => {
 };
 
 export default ProtectedRoute;
+

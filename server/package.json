@@ -5,13 +5,16 @@
     "main": "index.js",
     "scripts": {
         "test": "node --test src/tests/**/*.test.js",
+        "test:e2e": "node src/tests/run-all-e2e.js",
         "test:pdf": "node --test src/tests/pdf/*.test.js src/tests/templates/*.test.js",
         "test:jest": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
         "test:jest:auth": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/tests/auth",
         "test:jest:post": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/tests/community",
         "test:jest:trips": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/tests/trips --runInBand",
         "test:jest:trips:log": "node --experimental-vm-modules node_modules/jest/bin/jest.js src/tests/trips --runInBand > test-trips.log 2>&1",
+        "seed": "node src/db/seed_realistic_data.js",
         "dev": "npx nodemon server.js",
+
         "lint": "eslint .",
         "lint:fix": "eslint . --fix",
         "format:check": "prettier . --check",
