@@ -1,0 +1,178 @@
+@use '../../../../../styles/variables';
+
+.searchbar-container {
+    // Recent Searches Dropdown Menu
+    .searchbar-history-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        width: 100%;
+        min-width: 280px;
+        background-color: variables.$color-white;
+        border: 1px solid variables.$color-gray-200;
+        border-radius: variables.$radius-small;
+        box-shadow: variables.$shadow-lg;
+        z-index: variables.$z-modal;
+        padding: 6px 0;
+        animation: fade-in-dropdown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+        .history-dropdown-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 14px 8px;
+            border-bottom: 1px solid variables.$color-gray-100;
+
+            .history-title {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: variables.$font-size-xs;
+                font-weight: 700;
+                color: variables.$color-gray-500;
+                text-transform: uppercase;
+                letter-spacing: 0.03em;
+            }
+
+            .history-clear-all-btn {
+                background: none;
+                border: none;
+                color: variables.$color-gray-400;
+                font-size: variables.$font-size-xs;
+                font-weight: 600;
+                cursor: pointer;
+                padding: 2px 6px;
+                border-radius: 4px;
+
+                @include variables.transition-ease;
+
+                &:hover {
+                    color: variables.$color-danger;
+                    background-color: rgb(239 68 68 / 6%);
+                }
+            }
+        }
+
+        .history-dropdown-list {
+            list-style: none;
+            margin: 4px 0 0;
+            padding: 0;
+
+            .history-dropdown-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 2px 8px;
+
+                &:hover {
+                    background-color: variables.$color-gray-50;
+                }
+
+                .history-item-content {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    flex: 1;
+                    background: none;
+                    border: none;
+                    padding: 8px 6px;
+                    text-align: left;
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-sm;
+                    font-weight: 500;
+                    color: variables.$color-gray-800;
+                    cursor: pointer;
+                    min-width: 0;
+
+                    .history-item-icon {
+                        color: variables.$color-gray-400;
+                        flex-shrink: 0;
+                    }
+
+                    .history-item-text {
+                        flex: 1;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    .history-item-time {
+                        font-size: variables.$font-size-xs;
+                        color: variables.$color-gray-400;
+                        white-space: nowrap;
+                        margin-left: auto;
+                        flex-shrink: 0;
+                    }
+                }
+
+                .history-item-remove {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: none;
+                    border: none;
+                    padding: 4px;
+                    color: variables.$color-gray-400;
+                    cursor: pointer;
+                    border-radius: 50%;
+
+                    @include variables.transition-ease;
+
+                    &:hover {
+                        color: variables.$color-gray-900;
+                        background-color: variables.$color-gray-200;
+                    }
+                }
+            }
+        }
+
+        .history-dropdown-footer {
+            border-top: 1px solid variables.$color-gray-100;
+            margin-top: 4px;
+            padding: 4px 6px 2px;
+
+            .history-see-all-btn {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                padding: 8px 10px;
+                background: none;
+                border: none;
+                border-radius: variables.$radius-tiny;
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-sm;
+                font-weight: 600;
+                color: variables.$color-blue-dark;
+                cursor: pointer;
+
+                @include variables.transition-ease;
+
+                &:hover {
+                    background-color: rgb(47 84 235 / 6%);
+                }
+            }
+        }
+    }
+}
+
+// ── Empty inline state ────────────────────────────────────────────────────────
+.searchbar-history-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 20px 16px;
+    pointer-events: none;
+
+    .history-empty-icon {
+        color: variables.$color-gray-300;
+    }
+
+    .history-empty-text {
+        margin: 0;
+        font-size: variables.$font-size-sm;
+        color: variables.$color-gray-400;
+        font-weight: 500;
+    }
+}

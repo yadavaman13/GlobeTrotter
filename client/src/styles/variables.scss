@@ -1,0 +1,231 @@
+// ─── Font Families ────────────────────────────────────────────────────────────
+$font-sans: var(--font-sans);
+$font-serif: var(--font-serif);
+
+// ─── Airbnb Brand & Accent Colors ──────────────────────────────────────────────
+$color-primary: var(--color-primary);
+$color-primary-active: var(--color-primary-active);
+$color-primary-disabled: var(--color-primary-disabled);
+$color-primary-error-text: var(--color-primary-error-text);
+$color-primary-error-text-hover: var(--color-primary-error-text-hover);
+
+// Aliases for explicit Airbnb token names
+$color-rausch: var(--color-primary);
+$color-rausch-active: var(--color-primary-active);
+$color-rausch-disabled: var(--color-primary-disabled);
+$color-luxe: var(--color-luxe);
+$color-plus: var(--color-plus);
+
+// ─── Airbnb Surfaces & Canvas ──────────────────────────────────────────────────
+$color-canvas: var(--color-canvas);
+$color-surface-soft: var(--color-surface-soft);
+$color-surface-card: var(--color-surface-card);
+$color-surface-strong: var(--color-surface-strong);
+
+// ─── Airbnb Hairlines & Borders ───────────────────────────────────────────────
+$color-hairline: var(--color-hairline);
+$color-hairline-soft: var(--color-hairline-soft);
+$color-border-strong: var(--color-border-strong);
+
+// ─── Airbnb Typography & Text Colors ──────────────────────────────────────────
+$color-ink: var(--color-ink);
+$color-body: var(--color-body);
+$color-muted: var(--color-muted);
+$color-muted-soft: var(--color-muted-soft);
+$color-star-rating: var(--color-star-rating);
+$color-on-primary: var(--color-on-primary);
+$color-on-dark: var(--color-on-dark);
+$color-legal-link: var(--color-legal-link);
+
+// ─── Overlays & Scrim ─────────────────────────────────────────────────────────
+$color-scrim: var(--color-scrim);
+
+// ─── Core Neutrals ────────────────────────────────────────────────────────────
+$color-black: var(--color-black);
+$color-white: var(--color-white);
+$color-gray-50: var(--color-gray-50);
+$color-gray-100: var(--color-gray-100);
+$color-gray-200: var(--color-gray-200);
+$color-gray-300: var(--color-gray-300);
+$color-gray-400: var(--color-gray-400);
+$color-gray-500: var(--color-gray-500);
+$color-gray-600: var(--color-gray-600);
+$color-gray-700: var(--color-gray-700);
+$color-gray-800: var(--color-gray-800);
+$color-gray-900: var(--color-gray-900);
+
+// ─── Status ───────────────────────────────────────────────────────────────────
+$color-success: var(--color-success);
+$color-danger: var(--color-danger);
+$color-warning: var(--color-warning);
+$color-info: var(--color-info);
+
+// ─── Brand / Secondary Accents ────────────────────────────────────────────────
+$color-blue-accent: var(--color-blue-accent);
+$color-blue-hover: var(--color-blue-hover);
+$color-blue-dark: var(--color-blue-dark);
+
+// ─── Chart ────────────────────────────────────────────────────────────────────
+$color-chart-this-month: var(--color-chart-this-month);
+$color-chart-last-month: var(--color-chart-last-month);
+$color-indigo: var(--color-indigo);
+$color-indigo-light: var(--color-indigo-light);
+
+// ─── Status Palettes ──────────────────────────────────────────────────────────
+$color-danger-light: var(--color-danger-light);
+$color-danger-border: var(--color-danger-border);
+$color-danger-dark: var(--color-danger-dark);
+$color-warning-light: var(--color-warning-light);
+$color-warning-border: var(--color-warning-border);
+$color-warning-dark: var(--color-warning-dark);
+$color-success-light: var(--color-success-light);
+$color-success-border: var(--color-success-border);
+$color-info-light: var(--color-info-light);
+$color-info-border: var(--color-info-border);
+
+// ─── Extended Palette (badges, chips, tags) ───────────────────────────────────
+$color-teal: var(--color-teal);
+$color-teal-light: var(--color-teal-light);
+$color-teal-border: var(--color-teal-border);
+$color-violet: var(--color-violet);
+$color-purple: var(--color-purple);
+$color-purple-light: var(--color-purple-light);
+$color-purple-border: var(--color-purple-border);
+$color-pink: var(--color-pink);
+$color-pink-light: var(--color-pink-light);
+$color-pink-border: var(--color-pink-border);
+$color-orange-light: var(--color-orange-light);
+$color-orange-border: var(--color-orange-border);
+
+// ─── Spacing ──────────────────────────────────────────────────────────────────
+$spacing-xxs: var(--spacing-xxs);
+$spacing-xs: var(--spacing-xs);
+$spacing-sm: var(--spacing-sm);
+$spacing-md: var(--spacing-md);
+$spacing-base: var(--spacing-base);
+$spacing-lg: var(--spacing-lg);
+$spacing-xl: var(--spacing-xl);
+$spacing-xxl: var(--spacing-xxl);
+$spacing-section: var(--spacing-section);
+
+// ─── Border Radius ────────────────────────────────────────────────────────────
+$radius-none: var(--radius-none);
+$radius-xs: var(--radius-xs);
+$radius-sm: var(--radius-sm);
+$radius-md: var(--radius-md);
+$radius-lg: var(--radius-lg);
+$radius-xl: var(--radius-xl);
+$radius-full: var(--radius-full);
+
+// Backward-compatible radius aliases
+$radius-modal: var(--radius-modal);
+$radius-xlarge: var(--radius-xlarge);
+$radius-large: var(--radius-large);
+$radius-medium: var(--radius-medium);
+$radius-small: var(--radius-small);
+$radius-tiny: var(--radius-tiny);
+
+// ─── Shadows & Elevation ──────────────────────────────────────────────────────
+$shadow-flat: var(--shadow-flat);
+$shadow-card: var(--shadow-card);
+$shadow-card-hover: var(--shadow-card-hover);
+$shadow-dropdown: var(--shadow-dropdown);
+$shadow-modal: var(--shadow-modal);
+$shadow-sm: var(--shadow-sm);
+$shadow-md: var(--shadow-md);
+$shadow-lg: var(--shadow-lg);
+$shadow-premium: var(--shadow-premium);
+
+// ─── Font Sizes ───────────────────────────────────────────────────────────────
+$font-size-tag: var(--font-size-tag); // 8px — uppercase-tag ("NEW")
+$font-size-badge: var(--font-size-badge); // 11px — badge ("Guest favorite")
+$font-size-micro: var(--font-size-micro); // 12px — micro-label
+$font-size-caption-sm: var(--font-size-caption-sm); // 13px — legal/caption-sm
+$font-size-caption: var(--font-size-caption); // 14px — search field captions
+$font-size-sm: var(--font-size-sm); // 14px — body-sm, button-sm
+$font-size-md: var(--font-size-md); // 16px — primary body, button-md
+$font-size-lg: var(--font-size-lg); // 18px — card lead text
+$font-size-display-sm: var(--font-size-display-sm); // 20px — display-sm
+$font-size-display-md: var(--font-size-display-md); // 21px — display-md
+$font-size-display-lg: var(--font-size-display-lg); // 22px — display-lg (h1)
+$font-size-display-xl: var(--font-size-display-xl); // 28px — display-xl (hero h1)
+$font-size-rating: var(--font-size-rating); // 64px — rating display
+
+// Backward-compatible font-size aliases
+$font-size-xxs: var(--font-size-xxs); // 10px
+$font-size-xs: var(--font-size-xs); // 12px
+$font-size-xl: var(--font-size-xl); // 20px
+$font-size-xxl: var(--font-size-xxl); // 24px
+
+// ─── Z-Index Layer Stack ──────────────────────────────────────────────────────
+$z-below: var(--z-below); // -1  — decorative behind-content elements
+$z-base: var(--z-base); //  0  — normal document flow
+$z-raised: var(--z-raised); // 10  — elevated cards, floating buttons
+$z-sticky: var(--z-sticky); // 100 — sticky headers, sidebars
+$z-dropdown: var(--z-dropdown); // 200 — dropdowns, popovers, select menus
+$z-overlay: var(--z-overlay); // 300 — modal backdrops / dimmer layers
+$z-modal: var(--z-modal); // 400 — dialogs, drawers, panels
+$z-toast: var(--z-toast); // 500 — toast notifications, urgent alerts
+$z-tooltip: var(--z-tooltip); // 600 — tooltips
+
+// ─── Transition Mixins ────────────────────────────────────────────────────────
+@mixin transition-ease {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@mixin transition-smooth {
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+// ─── Shine Effect Mixin ───────────────────────────────────────────────────────
+@mixin shine-effect {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -135%;
+        width: 120%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            rgb(255 255 255 / 0%) 0%,
+            rgb(255 255 255 / 6%) 20%,
+            rgb(255 255 255 / 22%) 38%,
+            rgb(255 255 255 / 45%) 50%,
+            rgb(255 255 255 / 22%) 62%,
+            rgb(255 255 255 / 6%) 80%,
+            rgb(255 255 255 / 0%) 100%
+        );
+        transform: skewX(-20deg);
+        transition: none;
+        pointer-events: none;
+        z-index: $z-raised;
+    }
+
+    &:hover:not(:disabled, .is-disabled)::after {
+        transition: left 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+        left: 145%;
+    }
+}
+
+// ─── Breakpoint Mixins ────────────────────────────────────────────────────────
+@mixin mobile {
+    @media (width < 744px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (744px <= width <= 1128px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (width > 1128px) {
+        @content;
+    }
+}

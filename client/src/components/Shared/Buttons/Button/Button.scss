@@ -1,0 +1,251 @@
+@use '../../../../styles/variables';
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    font-family: variables.$font-sans;
+    font-size: variables.$font-size-sm;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    outline: none;
+    border: none;
+    box-shadow: none;
+
+    @include variables.transition-ease;
+
+    &.btn-primary {
+        background-color: variables.$color-black;
+        color: variables.$color-white;
+        border: none;
+        box-shadow: none;
+
+        @include variables.shine-effect;
+
+        &:hover:not(:disabled, .is-disabled) {
+            background-color: variables.$color-gray-900;
+            box-shadow: none;
+        }
+    }
+
+    &.btn-secondary {
+        background-color: variables.$color-white;
+        color: variables.$color-black;
+        border: 1px solid variables.$color-gray-200;
+        box-shadow: none;
+
+        &:hover:not(:disabled, .is-disabled) {
+            background-color: variables.$color-gray-100;
+            box-shadow: none;
+        }
+
+        svg,
+        img {
+            flex-shrink: 0;
+        }
+    }
+
+    &.btn-success {
+        background-color: variables.$color-success;
+        color: variables.$color-white;
+        border: none;
+        box-shadow: none;
+
+        &:hover:not(:disabled, .is-disabled) {
+            background-color: color-mix(in srgb, variables.$color-success 85%, black);
+            box-shadow: none;
+        }
+    }
+
+    &.btn-danger {
+        background-color: variables.$color-danger;
+        color: variables.$color-white;
+        border: none;
+        box-shadow: none;
+
+        &:hover:not(:disabled, .is-disabled) {
+            background-color: color-mix(in srgb, variables.$color-danger 85%, black);
+            box-shadow: none;
+        }
+    }
+
+    &.btn-danger-outline {
+        background-color: variables.$color-white;
+        color: variables.$color-danger;
+        border: 1px solid rgba(variables.$color-danger, 0.4);
+        box-shadow: none;
+
+        &:hover:not(:disabled, .is-disabled) {
+            background-color: variables.$color-danger;
+            color: variables.$color-white;
+            border-color: variables.$color-danger;
+            box-shadow: 0 4px 12px rgba(variables.$color-danger, 0.25);
+        }
+    }
+
+    &.btn-ghost {
+        background-color: transparent;
+        color: variables.$color-gray-600;
+        border: none;
+        box-shadow: none;
+
+        &:hover:not(:disabled, .is-disabled) {
+            background-color: variables.$color-gray-100;
+            color: variables.$color-gray-900;
+            box-shadow: none;
+        }
+    }
+
+    &.btn-muted {
+        background-color: variables.$color-gray-100;
+        color: variables.$color-gray-700;
+        border: none;
+        box-shadow: none;
+
+        &:hover:not(:disabled, .is-disabled) {
+            background-color: variables.$color-gray-200;
+            color: variables.$color-black;
+            box-shadow: none;
+        }
+    }
+
+    // ── SIZES ──
+    &.btn-md {
+        width: auto;
+        height: 40px;
+        padding: 0 20px;
+        border-radius: variables.$radius-small;
+    }
+
+    &.btn-sm {
+        width: auto;
+        height: 32px;
+        padding: 0 14px;
+        border-radius: 8px;
+    }
+
+    &.btn-xs {
+        width: auto;
+        height: 24px;
+        padding: 0 10px;
+        font-size: variables.$font-size-xs;
+        border-radius: 6px;
+    }
+
+    &.btn-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        padding: 0;
+    }
+
+    &.btn-icon-sm {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        padding: 0;
+    }
+
+    // ── SHAPES ──
+    &.btn-circle {
+        border-radius: 50%;
+    }
+
+    // Spinner scaling adjustments
+    &.btn-sm,
+    &.btn-xs,
+    &.btn-icon,
+    &.btn-icon-sm {
+        .btn-spinner {
+            width: 18px;
+            height: 8px;
+            margin-right: 4px;
+
+            span {
+                width: 4px;
+                height: 4px;
+                margin: 0 1px;
+            }
+        }
+    }
+
+    &.btn-loading {
+        cursor: wait;
+
+        &::after {
+            display: none;
+        }
+
+        &.btn-icon,
+        &.btn-icon-sm {
+            .btn-spinner {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &:disabled,
+    &.is-disabled {
+        opacity: 0.55;
+        background-color: variables.$color-gray-400;
+        color: variables.$color-white;
+        cursor: not-allowed;
+        pointer-events: none;
+        box-shadow: none;
+        transform: none;
+
+        &::after {
+            display: none;
+        }
+    }
+
+    .btn-spinner {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 10px;
+        margin-right: 8px;
+    }
+
+    .btn-spinner span {
+        width: 6px;
+        height: 6px;
+        margin: 0 2px;
+        border-radius: 50%;
+        background-color: currentcolor;
+        opacity: 0.4;
+        animation: btn-spinner-pulse 0.9s infinite ease-in-out;
+    }
+
+    .btn-spinner span:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .btn-spinner span:nth-child(2) {
+        animation-delay: 0.15s;
+    }
+
+    .btn-spinner span:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    @keyframes btn-spinner-pulse {
+        0%,
+        80%,
+        100% {
+            opacity: 0.35;
+            transform: scale(0.85);
+        }
+
+        40% {
+            opacity: 1;
+            transform: scale(1.15);
+        }
+    }
+}

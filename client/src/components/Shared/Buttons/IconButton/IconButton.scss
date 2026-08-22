@@ -1,0 +1,64 @@
+@use '../../../../styles/variables';
+
+.shared-icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    box-sizing: border-box;
+    flex-shrink: 0;
+
+    @include variables.transition-ease;
+
+    .icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: currentcolor;
+
+        svg {
+            display: block;
+            width: auto;
+            height: auto;
+        }
+    }
+
+    // Plain variation (flat icon style)
+    &.plain {
+        border: none;
+        background: transparent;
+        color: variables.$color-gray-500;
+
+        &:hover {
+            background-color: rgba(variables.$color-primary, 0.05);
+            color: variables.$color-primary;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+    }
+
+    // Outline variation (circle with border, e.g. three-dots outline)
+    &.outline {
+        border: 1px solid variables.$color-gray-200;
+        background-color: variables.$color-white;
+        color: variables.$color-gray-600;
+        box-shadow: variables.$shadow-sm;
+
+        &:hover {
+            background-color: variables.$color-gray-50;
+            border-color: variables.$color-gray-300;
+            color: variables.$color-primary;
+            transform: translateY(-0.5px);
+            box-shadow: variables.$shadow-md;
+        }
+
+        &:active {
+            transform: scale(0.95) translateY(0);
+        }
+    }
+}

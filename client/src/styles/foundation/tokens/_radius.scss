@@ -1,0 +1,18 @@
+:root {
+    // ─── Airbnb Radius Tokens (Soft Shape Language) ───────────────────────────
+    --primi-radius-none: 0px;
+    --primi-radius-xs: 4px;
+    --primi-radius-sm: 8px; // Buttons (primary/secondary), text-inputs
+    --primi-radius-md: 14px; // Property cards, experience cards, reservation & host cards
+    --primi-radius-lg: 20px;
+    --primi-radius-xl: 32px; // Category strip tabs, large containers
+    --primi-radius-full: 9999px; // Pill search bar, search orb, pill CTAs, guest favorite badges
+
+    // ─── Backward-compatible Aliases ──────────────────────────────────────────
+    --primi-radius-tiny: 4px;
+    --primi-radius-small: 8px;
+    --primi-radius-medium: 14px;
+    --primi-radius-large: 20px;
+    --primi-radius-xlarge: 32px;
+    --primi-radius-modal: 14px;
+}

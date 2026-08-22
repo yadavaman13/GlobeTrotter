@@ -1,0 +1,42 @@
+@use '../../../../styles/variables';
+
+.shared-edit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background-color: variables.$color-gray-100;
+    border: 1.5px solid transparent;
+    border-radius: variables.$radius-small; // 10px to match standard components
+    color: variables.$color-gray-600;
+    font-family: variables.$font-sans;
+    font-size: variables.$font-size-sm;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+
+    @include variables.transition-ease;
+
+    .edit-btn-icon {
+        width: 13px;
+        height: 13px;
+        stroke: currentcolor;
+        flex-shrink: 0;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: variables.$color-gray-200;
+        color: variables.$color-gray-800;
+    }
+
+    &:focus-visible {
+        border-color: variables.$color-gray-300;
+        box-shadow: 0 0 0 2px rgb(71 85 105 / 5%);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

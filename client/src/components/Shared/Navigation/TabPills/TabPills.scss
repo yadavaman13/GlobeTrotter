@@ -1,0 +1,226 @@
+@use '@/styles/variables';
+
+/* Shared Clean Rounded Corner No-Border Tab Pills */
+.shared-tab-pills-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 9999px; /* Fully rounded pill shape */
+    border: none;
+    box-sizing: border-box;
+    user-select: none;
+
+    &.full-width {
+        display: flex;
+        width: 100%;
+
+        .tab-pill-item {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+
+    /* Variant 1: Subtle (Light gray track with white floating active pill) */
+    &.variant-subtle {
+        background-color: variables.$color-gray-100;
+
+        .tab-pill-item {
+            background: transparent;
+            color: variables.$color-gray-500;
+
+            &:hover:not(:disabled, .is-active) {
+                color: variables.$color-gray-900;
+                background-color: rgb(255 255 255 / 50%);
+            }
+
+            &.is-active {
+                background-color: variables.$color-white;
+                color: variables.$color-gray-900;
+                font-weight: 600;
+                box-shadow:
+                    0 1px 3px rgb(0 0 0 / 8%),
+                    0 1px 2px rgb(0 0 0 / 4%);
+            }
+        }
+    }
+
+    /* Variant 2: Solid (No shared track background, individual standalone pills) */
+    &.variant-solid {
+        background-color: transparent;
+        padding: 0;
+        gap: 6px;
+
+        .tab-pill-item {
+            background-color: variables.$color-gray-100;
+            color: variables.$color-gray-500;
+            border-radius: 9999px;
+
+            &:hover:not(:disabled, .is-active) {
+                background-color: variables.$color-gray-200;
+                color: variables.$color-gray-900;
+            }
+
+            &.is-active {
+                background-color: variables.$color-gray-900;
+                color: variables.$color-white;
+                font-weight: 600;
+
+                .pill-count-badge:not(.unread-count) {
+                    background-color: rgb(255 255 255 / 22%);
+                    color: variables.$color-white;
+                }
+            }
+        }
+    }
+
+    /* Variant 3: Ghost (Transparent background until hovered/selected) */
+    &.variant-ghost {
+        background-color: transparent;
+        padding: 0;
+
+        .tab-pill-item {
+            background: transparent;
+            color: variables.$color-gray-500;
+
+            &:hover:not(:disabled, .is-active) {
+                background-color: variables.$color-gray-100;
+                color: variables.$color-gray-900;
+            }
+
+            &.is-active {
+                background-color: variables.$color-gray-200;
+                color: variables.$color-gray-900;
+                font-weight: 600;
+            }
+        }
+    }
+
+    /* Size Variants */
+    &.size-sm {
+        padding: 3px;
+
+        .tab-pill-item {
+            padding: 4px 12px;
+            font-size: variables.$font-size-sm;
+            border-radius: 9999px;
+            gap: 6px;
+
+            .pill-icon {
+                display: inline-flex;
+                align-items: center;
+
+                svg {
+                    width: 13px;
+                    height: 13px;
+                }
+            }
+
+            .pill-count-badge {
+                font-size: variables.$font-size-xs;
+                padding: 0 6px;
+                border-radius: 9999px;
+            }
+        }
+    }
+
+    &.size-md {
+        padding: 4px;
+
+        .tab-pill-item {
+            padding: 6px 16px;
+            font-size: variables.$font-size-sm;
+            border-radius: 9999px;
+            gap: 8px;
+
+            .pill-icon {
+                display: inline-flex;
+                align-items: center;
+
+                svg {
+                    width: 15px;
+                    height: 15px;
+                }
+            }
+
+            .pill-count-badge {
+                font-size: variables.$font-size-xs;
+                padding: 1px 7px;
+                border-radius: 9999px;
+            }
+        }
+    }
+
+    &.size-lg {
+        padding: 5px;
+
+        .tab-pill-item {
+            padding: 8px 20px;
+            font-size: variables.$font-size-sm;
+            border-radius: 9999px;
+            gap: 10px;
+
+            .pill-icon {
+                display: inline-flex;
+                align-items: center;
+
+                svg {
+                    width: 17px;
+                    height: 17px;
+                }
+            }
+
+            .pill-count-badge {
+                font-size: variables.$font-size-sm;
+                padding: 2px 8px;
+                border-radius: 9999px;
+            }
+        }
+    }
+
+    /* Individual Tab Pill Button */
+    .tab-pill-item {
+        display: inline-flex;
+        align-items: center;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 500;
+        white-space: nowrap;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        -webkit-tap-highlight-color: transparent;
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pill-label {
+            line-height: 1;
+        }
+
+        /* Badge Counter */
+        .pill-count-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            line-height: 1.2;
+            background-color: variables.$color-gray-200;
+            color: variables.$color-gray-600;
+            transition: all 0.15s ease;
+
+            &.unread-count {
+                background-color: variables.$color-blue-dark;
+                color: variables.$color-white;
+            }
+
+            &.active-count:not(.unread-count) {
+                background-color: variables.$color-gray-100;
+                color: variables.$color-gray-900;
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+@use '../../../../styles/variables';
+
+.shared-delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background-color: variables.$color-danger-light;
+    border: 1px solid variables.$color-danger-border;
+    border-radius: variables.$radius-small;
+    color: variables.$color-danger;
+    font-family: variables.$font-sans;
+    font-size: variables.$font-size-sm;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+
+    @include variables.transition-ease;
+
+    .delete-btn-icon {
+        width: 13px;
+        height: 13px;
+        stroke: currentcolor;
+        flex-shrink: 0;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: color-mix(in srgb, variables.$color-danger 22%, transparent);
+        border-color: variables.$color-danger;
+        color: variables.$color-danger;
+    }
+
+    &:focus-visible {
+        border-color: variables.$color-danger-border;
+        box-shadow: 0 0 0 2px rgb(225 29 72 / 15%);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

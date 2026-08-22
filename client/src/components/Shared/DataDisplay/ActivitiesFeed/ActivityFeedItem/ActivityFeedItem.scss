@@ -1,0 +1,131 @@
+@use '../../../../../styles/variables';
+
+.activity-feed-item-container {
+    display: flex;
+    position: relative;
+    width: 100%;
+    padding-bottom: 18px;
+
+    &.is-last {
+        padding-bottom: 0;
+    }
+
+    // Left Column: Avatar & Vertical Dotted Timeline Connector Line
+    .activity-item-timeline-col {
+        position: relative;
+        width: 38px;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+
+        // The dotted line extending from this item's avatar down to the next avatar
+        .activity-timeline-line {
+            position: absolute;
+            top: 16px; // Starts behind 32px avatar center
+            bottom: -20px; // Extends down to the next item avatar
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            border-left: 2px dotted #cbd5e1;
+            z-index: variables.$z-base;
+            pointer-events: none;
+        }
+
+        // Avatar wrapper MUST NOT stretch vertically, so it only covers its 32px circle
+        .activity-item-avatar-wrapper {
+            position: relative;
+            z-index: variables.$z-raised;
+            background-color: variables.$color-white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            align-self: flex-start;
+            flex-shrink: 0;
+        }
+    }
+
+    // Right Column: Details Stack
+    .activity-item-content-col {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding-left: 6px;
+        gap: 3px;
+
+        // Status Tag Line (Flag / CheckCircle Icon + Text)
+        .activity-item-status-tag {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-xs;
+            font-weight: 700;
+            line-height: 1.2;
+
+            .status-tag-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+
+                .status-tag-icon-svg {
+                    display: block;
+                }
+            }
+
+            &.status-warning {
+                color: variables.$color-chart-last-month;
+            }
+
+            &.status-success {
+                color: variables.$color-success;
+            }
+
+            &.status-primary,
+            &.status-info {
+                color: variables.$color-blue-dark;
+            }
+        }
+
+        // User Action Description Line
+        .activity-item-action-line {
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-sm;
+            color: variables.$color-gray-700;
+            line-height: 1.35;
+
+            .user-name {
+                font-weight: 700;
+                color: variables.$color-gray-900;
+            }
+
+            .action-text {
+                font-weight: 400;
+                color: variables.$color-gray-600;
+            }
+
+            .action-highlight {
+                font-weight: 700;
+                color: variables.$color-gray-900;
+            }
+        }
+
+        // Timestamp
+        .activity-item-timestamp {
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-xs;
+            font-weight: 500;
+            color: variables.$color-gray-400;
+        }
+
+        // Embedded Detail Card Slot
+        .activity-item-detail-slot {
+            margin-top: 8px;
+            width: 100%;
+        }
+    }
+}

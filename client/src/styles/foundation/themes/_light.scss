@@ -1,0 +1,165 @@
+:root,
+[data-theme='light'] {
+    // ─── Airbnb Brand & Accent Colors ──────────────────────────────────────────
+    --color-primary: var(--primi-rausch);
+    --color-primary-active: var(--primi-rausch-active);
+    --color-primary-disabled: var(--primi-rausch-disabled);
+    --color-primary-error-text: var(--primi-primary-error-text);
+    --color-primary-error-text-hover: var(--primi-primary-error-text-hover);
+
+    // Sub-brand accents
+    --color-luxe: var(--primi-luxe);
+    --color-plus: var(--primi-plus);
+
+    // ─── Airbnb Surfaces & Canvas ──────────────────────────────────────────────
+    --color-canvas: var(--primi-canvas);
+    --color-surface-soft: var(--primi-surface-soft);
+    --color-surface-card: var(--primi-surface-card);
+    --color-surface-strong: var(--primi-surface-strong);
+
+    // ─── Airbnb Hairlines & Borders ───────────────────────────────────────────
+    --color-hairline: var(--primi-hairline);
+    --color-hairline-soft: var(--primi-hairline-soft);
+    --color-border-strong: var(--primi-border-strong);
+
+    // ─── Airbnb Typography & Text Colors ──────────────────────────────────────
+    --color-ink: var(--primi-ink);
+    --color-body: var(--primi-body);
+    --color-muted: var(--primi-muted);
+    --color-muted-soft: var(--primi-muted-soft);
+    --color-star-rating: var(--primi-star-rating);
+    --color-on-primary: var(--primi-on-primary);
+    --color-on-dark: var(--primi-on-dark);
+    --color-legal-link: var(--primi-legal-link);
+
+    // ─── Overlays & Scrim ─────────────────────────────────────────────────────
+    --color-scrim: var(--primi-scrim);
+
+    // ─── Core Neutrals ────────────────────────────────────────────────────────
+    --color-black: var(--primi-black);
+    --color-white: var(--primi-white);
+    --color-gray-50: var(--primi-gray-50);
+    --color-gray-100: var(--primi-gray-100);
+    --color-gray-200: var(--primi-gray-200);
+    --color-gray-300: var(--primi-gray-300);
+    --color-gray-400: var(--primi-gray-400);
+    --color-gray-500: var(--primi-gray-500);
+    --color-gray-600: var(--primi-gray-600);
+    --color-gray-700: var(--primi-gray-700);
+    --color-gray-800: var(--primi-gray-800);
+    --color-gray-900: var(--primi-gray-900);
+
+    // ─── Status ───────────────────────────────────────────────────────────────
+    --color-success: var(--primi-success);
+    --color-danger: var(--primi-danger);
+    --color-warning: var(--primi-warning);
+    --color-info: var(--primi-info);
+
+    // ─── Brand / Secondary Accents ────────────────────────────────────────────
+    --color-blue-accent: var(--primi-blue-accent);
+    --color-blue-hover: var(--primi-blue-hover);
+    --color-blue-dark: var(--primi-blue-dark);
+
+    // ─── Chart ────────────────────────────────────────────────────────────────
+    --color-chart-this-month: var(--primi-chart-this-month);
+    --color-chart-last-month: var(--primi-chart-last-month);
+    --color-indigo: var(--primi-indigo);
+    --color-indigo-light: var(--primi-indigo-light);
+
+    // ─── Status Palettes ──────────────────────────────────────────────────────
+    --color-danger-light: var(--primi-danger-light);
+    --color-danger-border: var(--primi-danger-border);
+    --color-danger-dark: var(--primi-danger-dark);
+    --color-warning-light: var(--primi-warning-light);
+    --color-warning-border: var(--primi-warning-border);
+    --color-warning-dark: var(--primi-warning-dark);
+    --color-success-light: var(--primi-success-light);
+    --color-success-border: var(--primi-success-border);
+    --color-info-light: var(--primi-info-light);
+    --color-info-border: var(--primi-info-border);
+
+    // ─── Extended Palette ─────────────────────────────────────────────────────
+    --color-teal: var(--primi-teal);
+    --color-teal-light: var(--primi-teal-light);
+    --color-teal-border: var(--primi-teal-border);
+    --color-violet: var(--primi-violet);
+    --color-purple: var(--primi-purple);
+    --color-purple-light: var(--primi-purple-light);
+    --color-purple-border: var(--primi-purple-border);
+    --color-pink: var(--primi-pink);
+    --color-pink-light: var(--primi-pink-light);
+    --color-pink-border: var(--primi-pink-border);
+    --color-orange-light: var(--primi-orange-light);
+    --color-orange-border: var(--primi-orange-border);
+
+    // ─── Semantic Spacing ─────────────────────────────────────────────────────
+    --spacing-xxs: var(--primi-spacing-xxs);
+    --spacing-xs: var(--primi-spacing-xs);
+    --spacing-sm: var(--primi-spacing-sm);
+    --spacing-md: var(--primi-spacing-md);
+    --spacing-base: var(--primi-spacing-base);
+    --spacing-lg: var(--primi-spacing-lg);
+    --spacing-xl: var(--primi-spacing-xl);
+    --spacing-xxl: var(--primi-spacing-xxl);
+    --spacing-section: var(--primi-spacing-section);
+
+    // ─── Semantic Radius ──────────────────────────────────────────────────────
+    --radius-none: var(--primi-radius-none);
+    --radius-xs: var(--primi-radius-xs);
+    --radius-sm: var(--primi-radius-sm);
+    --radius-md: var(--primi-radius-md);
+    --radius-lg: var(--primi-radius-lg);
+    --radius-xl: var(--primi-radius-xl);
+    --radius-full: var(--primi-radius-full);
+    --radius-modal: var(--primi-radius-modal);
+    --radius-xlarge: var(--primi-radius-xlarge);
+    --radius-large: var(--primi-radius-large);
+    --radius-medium: var(--primi-radius-medium);
+    --radius-small: var(--primi-radius-small);
+    --radius-tiny: var(--primi-radius-tiny);
+
+    // ─── Semantic Shadows ─────────────────────────────────────────────────────
+    --shadow-flat: var(--primi-shadow-flat);
+    --shadow-card: var(--primi-shadow-card);
+    --shadow-card-hover: var(--primi-shadow-card-hover);
+    --shadow-dropdown: var(--primi-shadow-dropdown);
+    --shadow-modal: var(--primi-shadow-modal);
+    --shadow-sm: var(--primi-shadow-sm);
+    --shadow-md: var(--primi-shadow-md);
+    --shadow-lg: var(--primi-shadow-lg);
+    --shadow-premium: var(--primi-shadow-premium);
+
+    // ─── Semantic Font Families ───────────────────────────────────────────────
+    --font-serif: var(--primi-font-serif);
+    --font-sans: var(--primi-font-sans);
+
+    // ─── Semantic Font Sizes ──────────────────────────────────────────────────
+    --font-size-tag: var(--primi-font-size-tag);
+    --font-size-badge: var(--primi-font-size-badge);
+    --font-size-micro: var(--primi-font-size-micro);
+    --font-size-caption-sm: var(--primi-font-size-caption-sm);
+    --font-size-caption: var(--primi-font-size-caption);
+    --font-size-xxs: var(--primi-font-size-xxs);
+    --font-size-xs: var(--primi-font-size-xs);
+    --font-size-sm: var(--primi-font-size-sm);
+    --font-size-md: var(--primi-font-size-md);
+    --font-size-lg: var(--primi-font-size-lg);
+    --font-size-xl: var(--primi-font-size-xl);
+    --font-size-xxl: var(--primi-font-size-xxl);
+    --font-size-display-sm: var(--primi-font-size-display-sm);
+    --font-size-display-md: var(--primi-font-size-display-md);
+    --font-size-display-lg: var(--primi-font-size-display-lg);
+    --font-size-display-xl: var(--primi-font-size-display-xl);
+    --font-size-rating: var(--primi-font-size-rating);
+
+    // ─── Semantic Z-Index ─────────────────────────────────────────────────────
+    --z-below: var(--primi-z-below);
+    --z-base: var(--primi-z-base);
+    --z-raised: var(--primi-z-raised);
+    --z-sticky: var(--primi-z-sticky);
+    --z-dropdown: var(--primi-z-dropdown);
+    --z-overlay: var(--primi-z-overlay);
+    --z-modal: var(--primi-z-modal);
+    --z-toast: var(--primi-z-toast);
+    --z-tooltip: var(--primi-z-tooltip);
+}
