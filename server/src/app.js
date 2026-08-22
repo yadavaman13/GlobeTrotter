@@ -11,6 +11,7 @@ import { communityRouter } from './modules/community/index.js';
 import { tripRouter } from './modules/trips/index.js';
 import { cityRouter } from './modules/city/index.js';
 import { activityRouter } from './modules/activity/index.js';
+import { dashboardRouter } from './modules/dashboard/index.js';
 import { errorHandler } from './modules/auth/middleware/errorHandler.js';
 
 const app = express();
@@ -35,6 +36,7 @@ app.use('/api/pdf', pdfRouter);
 app.use('/api/community', communityRouter);
 app.use('/api/cities', cityRouter);
 app.use('/api/activities', activityRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 app.use(errorHandler);
 
