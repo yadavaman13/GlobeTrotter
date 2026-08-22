@@ -4,9 +4,19 @@ import assert from 'node:assert';
 import { createCity, getCityById, listCities } from '../../dao/city.dao.js';
 import { db } from '../../config/database.config.js';
 import { cities } from '../../db/schema/cities.schema.js';
+import { activities } from '../../db/schema/activities.schema.js';
+import { activityImages } from '../../db/schema/activity_images.schema.js';
+import { trips } from '../../db/schema/trips.schema.js';
+import { tripStops } from '../../db/schema/trip_stops.schema.js';
+import { tripStopActivities } from '../../db/schema/trip_stop_activities.schema.js';
 
 test('City DAO Tests', async (t) => {
-    // Clear cities table before run
+    // Clear tables in reverse dependency order
+    await db.delete(tripStopActivities);
+    await db.delete(tripStops);
+    await db.delete(trips);
+    await db.delete(activityImages);
+    await db.delete(activities);
     await db.delete(cities);
 
     await t.test('should create and retrieve a city', async () => {

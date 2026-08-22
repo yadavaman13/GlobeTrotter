@@ -12,9 +12,15 @@ import { db } from '../../config/database.config.js';
 import { cities } from '../../db/schema/cities.schema.js';
 import { activities } from '../../db/schema/activities.schema.js';
 import { activityImages } from '../../db/schema/activity_images.schema.js';
+import { trips } from '../../db/schema/trips.schema.js';
+import { tripStops } from '../../db/schema/trip_stops.schema.js';
+import { tripStopActivities } from '../../db/schema/trip_stop_activities.schema.js';
 
 test('Activity DAO Tests', async (t) => {
     // Clear tables
+    await db.delete(tripStopActivities);
+    await db.delete(tripStops);
+    await db.delete(trips);
     await db.delete(activityImages);
     await db.delete(activities);
     await db.delete(cities);
