@@ -315,15 +315,8 @@ export default function LandingPage() {
                                           </button>
                                       </div>
                                       <div className="selection-item-info">
-                                          <span className="country-flag-badge">
-                                              {getCountryFlag(city.country)}
-                                          </span>
                                           <h4 className="selection-item-name">{city.name}</h4>
                                       </div>
-                                      <p className="selection-itinerary-count">
-                                          {Math.round(parseFloat(city.popularity || '4') * 18)}+
-                                          Itineraries
-                                      </p>
                                   </div>
                               ))
                             : mockRegionalSelections.map((selection, idx) => (
@@ -345,14 +338,8 @@ export default function LandingPage() {
                                           </button>
                                       </div>
                                       <div className="selection-item-info">
-                                          <span className="country-flag-badge">
-                                              {selection.flag}
-                                          </span>
                                           <h4 className="selection-item-name">{selection.name}</h4>
                                       </div>
-                                      <p className="selection-itinerary-count">
-                                          {selection.itineraries}
-                                      </p>
                                   </div>
                               ))}
                     </div>

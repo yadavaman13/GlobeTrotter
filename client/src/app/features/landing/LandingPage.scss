@@ -505,6 +505,7 @@
                 .selection-item-info {
                     display: flex;
                     align-items: center;
+                    justify-content: center;
                     gap: variables.$spacing-xs;
                     margin-bottom: 2px;
 
@@ -516,6 +517,7 @@
                         font-size: variables.$font-size-sm;
                         font-weight: 600;
                         color: variables.$color-ink;
+                        text-align: center;
                     }
                 }
 
