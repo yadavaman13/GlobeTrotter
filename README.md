@@ -80,7 +80,60 @@ Globe Trotter is a collaborative travel planning and destination discovery platf
 ---
 
 **Overall Project Architecture:**
-![Overall Project Architecture]([architecture.png])
+### Overall Project Architecture
+
+```mermaid
+flowchart TB
+    subgraph Presentation_Layer["🖥️ Presentation & Client Layer"]
+        AdminPortal["Admin / HR Dashboard"]
+        EmpPortal["Employee Self-Service Portal"]
+        BioApp["Biometric Device / Mobile Check-in"]
+    end
+
+    subgraph Gateway_Layer["🛡️ API Gateway & Security Layer"]
+        AuthMiddleware["JWT & Refresh Token Validator"]
+        RBAC["Role-Based Access Control (Admin | HR | Employee)"]
+        AuditInterceptor["Audit Log Interceptor"]
+    end
+
+    subgraph Core_Services["⚙️ HRMS Domain Services"]
+        OrgService["Organization & Setup Service"]
+        EmpService["Employee & Lifecycle Service"]
+        WorkScheduleService["Shift & Schedule Engine"]
+        AttendanceEngine["Attendance & Overtime Engine"]
+        LeaveLedgerEngine["Leave & Balance Ledger Engine"]
+        PayrollEngine["Payroll & Deduction Computation Engine"]
+        NotificationService["Notification Dispatcher"]
+    end
+
+    subgraph Data_Layer["🗄️ PostgreSQL Database (pgcrypto & Drizzle ORM)"]
+        direction TB
+        OrgTables["Organizations, Departments, Locations"]
+        UserTables["Users, Refresh Tokens"]
+        EmpTables["Employees, Private Info, Identifiers, Documents"]
+        ScheduleTables["Work Schedules, Shift Days, Holidays"]
+        AttendanceTables["Attendance Records, Sessions, Adjustments"]
+        LeaveTables["Leave Allocations, Requests, Balance Ledger"]
+        PayrollTables["Salary Structures, Periods, Payslips, Lines"]
+        AuditTables["Audit Logs, Notifications"]
+    end
+
+    Presentation_Layer --> Gateway_Layer
+    Gateway_Layer --> Core_Services
+
+    OrgService --> OrgTables
+    EmpService --> UserTables & EmpTables
+    WorkScheduleService --> ScheduleTables
+    AttendanceEngine --> AttendanceTables
+    LeaveLedgerEngine --> LeaveTables
+    PayrollEngine --> PayrollTables
+    NotificationService --> AuditTables
+    AuditInterceptor --> AuditTables
+
+    AttendanceEngine -.->|"Syncs Payable Days"| PayrollEngine
+    LeaveLedgerEngine -.->|"Syncs Unpaid Leaves"| PayrollEngine
+    EmpService -.->|"Triggers Welcome"| NotificationService
+    LeaveLedgerEngine -.->|"Approval Alerts"| NotificationService
 
 **Activity Diagram:**
 
