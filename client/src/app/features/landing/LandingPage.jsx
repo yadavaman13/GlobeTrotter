@@ -62,12 +62,12 @@ export default function LandingPage() {
         user,
         searchQuery,
         setSearchQuery,
-        searchSuggestions,
-        selectedRegion,
-        setSelectedRegion,
-        cities,
-        upcomingTrip,
-        previousTrips,
+        searchSuggestions = [],
+        selectedRegion = 'Europe',
+        setSelectedRegion = () => {},
+        cities = [],
+        upcomingTrip = null,
+        previousTrips = [],
     } = useLandingData();
 
     // Dynamically load Google Material Icons stylesheet

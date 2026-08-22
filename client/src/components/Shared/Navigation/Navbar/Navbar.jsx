@@ -87,15 +87,14 @@ export default function Navbar() {
                         My Trips
                     </a>
                     <a
-                        className={`nav-link-item ${
-                            location.pathname.startsWith('/dashboard/user/analytics')
-                                ? 'active'
-                                : ''
-                        }`}
-                        href="#search-anchor"
-                        onClick={handleDiscoverClick}
+                        className={`nav-link-item ${location.pathname === '/community' ? 'active' : ''}`}
+                        href="/community"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            navigate('/community');
+                        }}
                     >
-                        Discover Experiences
+                        Community
                     </a>
                 </div>
 

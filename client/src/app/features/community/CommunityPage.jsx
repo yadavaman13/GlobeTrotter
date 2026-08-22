@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { useCommunityData } from './hooks/useCommunityData';
 import { CommunityProvider } from './context/CommunityContext';
 import CreatePostModal from './components/CreatePostModal';
+import Navbar from '@/components/Shared/Navigation/Navbar/Navbar';
 import './CommunityPage.scss';
 
 export default function CommunityPage() {
@@ -119,49 +120,7 @@ export default function CommunityPage() {
                 )}
 
                 {/* Top Navigation Bar */}
-                <nav className="community-top-nav">
-                    <div className="nav-container">
-                        <a className="brand-logo" onClick={() => navigate('/')}>
-                            GlobeTrotter
-                        </a>
-                        <div className="nav-links-center">
-                            <span className="nav-item" onClick={() => navigate('/')}>
-                                Explore
-                            </span>
-                            <span className="nav-item active">Community</span>
-                            <span
-                                className="nav-item"
-                                onClick={() =>
-                                    navigate(user ? '/dashboard/user/analytics/insight' : '/login')
-                                }
-                            >
-                                Trips
-                            </span>
-                        </div>
-                        <div className="nav-actions-right">
-                            <button type="button" className="icon-btn" aria-label="Notifications">
-                                <span className="material-symbols-outlined">notifications</span>
-                            </button>
-                            <button type="button" className="icon-btn" aria-label="Settings">
-                                <span className="material-symbols-outlined">settings</span>
-                            </button>
-                            <div
-                                className="user-avatar-pill"
-                                onClick={() =>
-                                    navigate(user ? '/dashboard/user/analytics/insight' : '/login')
-                                }
-                            >
-                                {user?.profileImage ? (
-                                    <img src={user.profileImage} alt={user.name} />
-                                ) : (
-                                    <span className="material-symbols-outlined fallback-avatar">
-                                        account_circle
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </nav>
+                <Navbar />
 
                 <main className="community-main-canvas">
                     {/* Hero Section */}
