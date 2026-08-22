@@ -149,15 +149,6 @@ flowchart TB
 - **Destination Flow:**
   ![Destination Flow](https://ik.imagekit.io/hci5kelnn/readme/globe-trotter/GlobeTrotter/destination.svg)
 
-**ER Diagram:**
-![ER Diagram]([er_diagram.png])
-
-**Frontend Data Flow:**
-![Frontend Data Flow]([frontend_data_flow.png])
-
-**Backend Architecture Data Flow:**
-![Backend Architecture Data Flow]([backend_architecture_data_flow.png])
-
 ---
 
 ## Project Structure
