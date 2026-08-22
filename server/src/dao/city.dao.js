@@ -23,6 +23,46 @@ export async function getCityById(id) {
 }
 
 /**
+ * Find city by exact name and country (case-insensitive)
+ * @param {string} name
+ * @param {string} country
+ * @returns {Promise<object|null>}
+ */
+export async function findCityByNameAndCountry(name, country) {
+    const [city] = await db
+        .select()
+        .from(cities)
+        .where(and(ilike(cities.name, name.trim()), ilike(cities.country, country.trim())));
+    return city || null;
+}
+
+/**
+ * Search cities with optional filters
+ * @param {object} params
+ */
+export async function searchCities({ query, country, region, limit = 20, offset = 0 } = {}) {
+    const conditions = [];
+
+    if (query) {
+        conditions.push(
+            sql`(${cities.name} ILIKE ${`%${query}%`} OR ${cities.country} ILIKE ${`%${query}%`})`,
+        );
+    }
+
+    if (country) {
+        conditions.push(ilike(cities.country, `%${country}%`));
+    }
+
+    if (region) {
+        conditions.push(ilike(cities.region, `%${region}%`));
+    }
+
+    const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
+
+    return db.select().from(cities).where(whereClause).limit(limit).offset(offset);
+}
+
+/**
  * Lists cities with pagination, sorting, search, and numeric filters.
  * @param {object} options
  * @returns {Promise<{ cities: Array, total: number }>} List of city records and total count matching filters
