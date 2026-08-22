@@ -1,5 +1,9 @@
 import { db } from '../../../config/database.config.js';
-import { communityPosts } from '../../../db/schema/community_posts.schema.js';
+import {
+    communityPosts,
+    communityLikes,
+    communityComments,
+} from '../../../db/schema/community_posts.schema.js';
 import { users } from '../../../db/schema/users.schema.js';
 import { trips } from '../../../db/schema/trips.schema.js';
 import { activities } from '../../../db/schema/activities.schema.js';
@@ -8,8 +12,6 @@ import { eq, and, or, ilike, desc, asc, sql } from 'drizzle-orm';
 
 /**
  * Fetch a single community post by its ID with full author and target metadata
- * @param {string} postId
- * @returns {Promise<object|null>}
  */
 export async function getPostById(postId) {
     const [post] = await db
@@ -46,8 +48,6 @@ export async function getPostById(postId) {
 
 /**
  * Create a new community post
- * @param {string} authorId - ID of authenticated user
- * @param {object} data - Post payload
  */
 export async function createPost(authorId, data) {
     const { postType, title, content, tripId, activityId } = data;
@@ -84,9 +84,6 @@ export async function createPost(authorId, data) {
 
 /**
  * Update an existing post's title and/or content
- * @param {string} postId
- * @param {string} userId - ID of authenticated user requesting update
- * @param {object} updates
  */
 export async function updatePost(postId, userId, updates) {
     const [existingPost] = await db
@@ -119,8 +116,6 @@ export async function updatePost(postId, userId, updates) {
 
 /**
  * Delete a community post
- * @param {string} postId
- * @param {string} userId - ID of authenticated user requesting deletion
  */
 export async function deletePost(postId, userId) {
     const [existingPost] = await db
@@ -140,8 +135,95 @@ export async function deletePost(postId, userId) {
 }
 
 /**
+ * Toggle like on a community post
+ */
+export async function toggleLikePost(postId, userId) {
+    const [existingLike] = await db
+        .select()
+        .from(communityLikes)
+        .where(and(eq(communityLikes.postId, postId), eq(communityLikes.userId, userId)));
+
+    let isLiked;
+    if (existingLike) {
+        await db.delete(communityLikes).where(eq(communityLikes.id, existingLike.id));
+        isLiked = false;
+    } else {
+        await db.insert(communityLikes).values({ postId, userId });
+        isLiked = true;
+    }
+
+    const [countRes] = await db
+        .select({ count: sql`count(*)` })
+        .from(communityLikes)
+        .where(eq(communityLikes.postId, postId));
+
+    const likesCount = parseInt(countRes?.count || '0', 10);
+    return { isLiked, likesCount };
+}
+
+/**
+ * Add a comment to a community post
+ */
+export async function addComment(postId, authorId, content) {
+    const [post] = await db.select().from(communityPosts).where(eq(communityPosts.id, postId));
+    if (!post) {
+        throw new Error('Post not found');
+    }
+
+    const [newComment] = await db
+        .insert(communityComments)
+        .values({
+            postId,
+            authorId,
+            content,
+        })
+        .returning();
+
+    const [commentWithAuthor] = await db
+        .select({
+            id: communityComments.id,
+            postId: communityComments.postId,
+            content: communityComments.content,
+            createdAt: communityComments.createdAt,
+            author: {
+                id: users.id,
+                firstName: users.firstName,
+                lastName: users.lastName,
+                profileImage: users.profileImage,
+            },
+        })
+        .from(communityComments)
+        .innerJoin(users, eq(communityComments.authorId, users.id))
+        .where(eq(communityComments.id, newComment.id));
+
+    return commentWithAuthor;
+}
+
+/**
+ * Fetch comments for a community post
+ */
+export async function getComments(postId) {
+    return db
+        .select({
+            id: communityComments.id,
+            postId: communityComments.postId,
+            content: communityComments.content,
+            createdAt: communityComments.createdAt,
+            author: {
+                id: users.id,
+                firstName: users.firstName,
+                lastName: users.lastName,
+                profileImage: users.profileImage,
+            },
+        })
+        .from(communityComments)
+        .innerJoin(users, eq(communityComments.authorId, users.id))
+        .where(eq(communityComments.postId, postId))
+        .orderBy(asc(communityComments.createdAt));
+}
+
+/**
  * Retrieve community feed with optional filters, search, sorting, and pagination
- * @param {object} filters
  */
 export async function getPosts(filters = {}) {
     const { search, type, cityId, activityId, sortBy = 'recent', page = 1, limit = 20 } = filters;
@@ -181,7 +263,6 @@ export async function getPosts(filters = {}) {
 
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
 
-    // Build the query
     const baseQuery = db
         .select({
             id: communityPosts.id,
@@ -204,6 +285,8 @@ export async function getPosts(filters = {}) {
                 id: activities.id,
                 name: activities.name,
             },
+            likesCount: sql`(select count(*) from ${communityLikes} where ${communityLikes.postId} = ${communityPosts.id})::int`,
+            commentsCount: sql`(select count(*) from ${communityComments} where ${communityComments.postId} = ${communityPosts.id})::int`,
         })
         .from(communityPosts)
         .innerJoin(users, eq(communityPosts.authorId, users.id))
@@ -211,17 +294,13 @@ export async function getPosts(filters = {}) {
         .leftJoin(activities, eq(communityPosts.activityId, activities.id))
         .where(whereClause);
 
-    // Sorting
     const sortOrder =
         sortBy === 'oldest' ? asc(communityPosts.createdAt) : desc(communityPosts.createdAt);
 
-    // Pagination
     const offset = (page - 1) * limit;
 
-    // Fetch items
     const items = await baseQuery.orderBy(sortOrder).limit(limit).offset(offset);
 
-    // Fetch total count for pagination
     const countRes = await db
         .select({ count: sql`count(*)` })
         .from(communityPosts)

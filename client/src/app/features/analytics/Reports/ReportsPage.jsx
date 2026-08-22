@@ -1,6 +1,7 @@
 import { AnalyticsProvider, useAnalyticsContext } from '../context/AnalyticsContext';
 import Button from '@/components/Shared/Buttons/Button/Button';
 import { FileText, Download, CheckCircle, Database } from 'lucide-react';
+
 import './ReportsPage.scss';
 
 function ReportsContent() {

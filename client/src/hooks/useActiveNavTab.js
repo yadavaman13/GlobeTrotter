@@ -46,6 +46,9 @@ export function useActiveNavTab() {
         } else if (primary === 'settings') {
             activeTab = 'Settings';
             activeSubTab = secondary === 'account' ? 'Account' : 'General';
+        } else if (primary === 'users') {
+            activeTab = 'Users';
+            activeSubTab = '';
         }
 
         return { activeTab, activeSubTab };

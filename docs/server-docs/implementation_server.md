@@ -544,3 +544,65 @@ All routes are prefixed with `/api/community`.
 
 - **City-based Feed Filtering:** When filtering the community feed by `cityId`, the service joins `activities` for activity-type posts, and checks for `tripStops` city matching via an EXISTS subquery for trip-type posts.
 - **Client Grouping:** If `groupBy=type` is provided on GET, the controller formats the feed items sorted under `trips` and `activities` groups.
+
+---
+
+## 7. Admin & Analytics Module
+
+### Feature Description
+
+Provides administrative oversight, user lifecycle control, and real-time analytical telemetry across all platform domains (users, trips, itineraries, destinations, bookings, expense ledgers).
+
+### Routings & API Contracts
+
+All admin endpoints are protected by `protect` and `restrictTo('admin')` middlewares.
+
+- **`GET /api/admin/analytics`**
+  - **Description:** Aggregates live system-wide KPIs, growth trends, catalog totals, financial ledgers, and timeframe-scoped time-series metrics.
+  - **Query Parameters:**
+    - `timeframe` (optional): `'7d'` | `'30d'` | `'ytd'` (default: `'30d'`).
+    - `search` (optional): Keyword search for analytics records.
+  - **Response (200 OK):**
+    ```json
+    {
+      "success": true,
+      "message": "Analytics retrieved successfully",
+      "data": {
+        "analytics": {
+          "users": { "total": 18540, "active": 18000, "deleted": 540, "newThisMonth": 2200 },
+          "trips": { "total": 42318, "byStatus": {}, "byVisibility": {}, "publicCount": 7320 },
+          "catalog": { "totalCities": 560, "totalActivities": 1240, "popularCities": [], "popularActivities": [] },
+          "financials": { "totalExpensesRecorded": 1500000, "expensesByCategory": [] },
+          "kpis": {
+            "totalUsers": 18540,
+            "usersTrend": "+12%",
+            "tripsCreated": 42318,
+            "tripsTrend": "+8%",
+            "publicItineraries": 7320,
+            "publicTrend": "Static",
+            "activeCities": 560,
+            "activitiesBookmarked": 84900,
+            "bookmarksTrend": "+24%",
+            "communityEngagement": 95
+          },
+          "timeSeries": [
+            { "date": "2026-08-16", "label": "Mon", "trips": 230, "users": 105, "bookmarks": 420 }
+          ],
+          "timeframe": "30d"
+        }
+      }
+    }
+    ```
+
+- **`GET /api/admin/users`**
+  - **Description:** Lists users with search, role filters, and pagination.
+
+- **`PATCH /api/admin/users/:userId/status`**
+  - **Description:** Updates active/soft-deleted user status.
+
+- **`PATCH /api/admin/users/:id/role`**
+  - **Description:** Updates user role (`admin` vs `user`).
+
+- **`POST /api/admin/users/cleanup`**
+  - **Description:** Cleans up expired soft-deleted users beyond the 30-day retention window.
+

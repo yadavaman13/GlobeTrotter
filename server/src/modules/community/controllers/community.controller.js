@@ -184,3 +184,71 @@ export async function deletePost(req, res, next) {
         next(error);
     }
 }
+
+/**
+ * Toggle like status on a post
+ */
+export async function toggleLikePost(req, res, next) {
+    try {
+        const { postId } = req.params;
+        const userId = req.user.id;
+        const result = await communityService.toggleLikePost(postId, userId);
+        return sendResponse({
+            res,
+            statusCode: 200,
+            message: result.isLiked ? 'Post liked' : 'Post unliked',
+            success: true,
+            data: result,
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+/**
+ * Add a comment to a post
+ */
+export async function addComment(req, res, next) {
+    try {
+        const { postId } = req.params;
+        const authorId = req.user.id;
+        const { content } = req.body;
+        if (!content || !content.trim()) {
+            return sendResponse({
+                res,
+                statusCode: 400,
+                message: 'Comment content is required',
+                success: false,
+            });
+        }
+        const comment = await communityService.addComment(postId, authorId, content.trim());
+        return sendResponse({
+            res,
+            statusCode: 201,
+            message: 'Comment added successfully',
+            success: true,
+            data: { comment },
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+/**
+ * Get comments for a post
+ */
+export async function getComments(req, res, next) {
+    try {
+        const { postId } = req.params;
+        const comments = await communityService.getComments(postId);
+        return sendResponse({
+            res,
+            statusCode: 200,
+            message: 'Comments retrieved successfully',
+            success: true,
+            data: { comments },
+        });
+    } catch (error) {
+        next(error);
+    }
+}

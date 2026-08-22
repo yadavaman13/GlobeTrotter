@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { Star } from 'lucide-react';
+
 import './PopularCitiesBarChart.scss';
 
 export function PopularCitiesBarChart({ cities = [] }) {

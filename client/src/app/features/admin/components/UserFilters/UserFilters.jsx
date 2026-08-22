@@ -1,5 +1,6 @@
 import { Search, RefreshCw, Trash2 } from 'lucide-react';
 import Button from '@/components/Shared/Buttons/Button/Button';
+
 import Dropdown from '@/components/Shared/Form/Dropdown/Dropdown';
 import './UserFilters.scss';
 

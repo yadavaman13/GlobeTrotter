@@ -1,0 +1,187 @@
+@use '../../../../../styles/variables';
+
+$pink-bg: #ffe4e6;
+$pink-icon: #e11d48;
+$purple-bg: #ede9fe;
+$purple-icon: #7c3aed;
+$gray-bg: #f1f5f9;
+$gray-icon: #64748b;
+$teal-bg: #ccfbf1;
+$teal-icon: #0d9488;
+$coral-bg: #fee2e2;
+$coral-icon: #ef4444;
+$dark-icon-bg: #1e293b;
+$positive-badge-bg: #ecfdf5;
+$positive-badge-color: #059669;
+$progress-track-bg: #fee2e2;
+$progress-grad-start: #991b1b;
+$progress-grad-end: #e11d48;
+
+.sleek-metric-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 28px;
+
+    .sleek-metric-card {
+        background-color: variables.$color-white;
+        border: 1px solid variables.$color-gray-200;
+        border-radius: variables.$radius-lg;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 156px;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 2%);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgb(0 0 0 / 5%);
+            border-color: variables.$color-gray-300;
+        }
+
+        .card-top-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+
+            .metric-icon-circle {
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+
+                &.icon-pink {
+                    background-color: $pink-bg;
+                    color: $pink-icon;
+                }
+
+                &.icon-purple {
+                    background-color: $purple-bg;
+                    color: $purple-icon;
+                }
+
+                &.icon-gray {
+                    background-color: $gray-bg;
+                    color: $gray-icon;
+                }
+
+                &.icon-teal {
+                    background-color: $teal-bg;
+                    color: $teal-icon;
+                }
+
+                &.icon-coral {
+                    background-color: $coral-bg;
+                    color: $coral-icon;
+                }
+
+                &.icon-dark {
+                    background-color: $dark-icon-bg;
+                    color: variables.$color-white;
+                }
+            }
+
+            .metric-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 3px;
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-badge;
+                font-weight: 600;
+                padding: 3px 8px;
+                border-radius: variables.$radius-full;
+
+                .trend-arrow {
+                    flex-shrink: 0;
+                }
+
+                &.positive {
+                    background-color: $positive-badge-bg;
+                    color: $positive-badge-color;
+                }
+
+                &.neutral {
+                    background-color: $gray-bg;
+                    color: $gray-icon;
+                }
+            }
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+
+            .metric-label {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-caption-sm;
+                font-weight: 500;
+                color: variables.$color-gray-600;
+                margin-bottom: 6px;
+            }
+
+            .metric-value {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-xxl;
+                font-weight: 800;
+                color: variables.$color-black;
+                letter-spacing: -0.02em;
+                line-height: 1.1;
+
+                .value-skeleton {
+                    display: inline-block;
+                    width: 90px;
+                    height: 24px;
+                    background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+                    background-size: 200% 100%;
+                    animation: skeleton-wave 1.5s infinite;
+                    border-radius: variables.$radius-xs;
+                }
+            }
+
+            .metric-progress-wrapper {
+                margin-top: 14px;
+                width: 100%;
+                height: 5px;
+                background-color: $progress-track-bg;
+                border-radius: variables.$radius-full;
+                overflow: hidden;
+
+                .metric-progress-bar {
+                    height: 100%;
+                    background: linear-gradient(90deg, $progress-grad-start, $progress-grad-end);
+                    border-radius: variables.$radius-full;
+                    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+            }
+        }
+    }
+}
+
+@keyframes skeleton-wave {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@media (width <= 1024px) {
+    .sleek-metric-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (width <= 640px) {
+    .sleek-metric-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+}

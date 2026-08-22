@@ -15,7 +15,7 @@ import './UserDetailsDrawer.scss';
 
 export function UserDetailsDrawer({
     user,
-    onClose,
+    _onClose,
     onToggleActive,
     onToggleDelete,
     onChangeRole,

@@ -1,14 +1,14 @@
-const baseStyles = `font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #fafafb; padding: 20px; color: #111827; margin: 0;`;
-const cardStyles = `max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);`;
-const headerStyles = `background-color: #111827; color: #ffffff; padding: 30px; text-align: center;`;
+const baseStyles = `font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f7f7f7; padding: 20px; color: #222222; margin: 0;`;
+const cardStyles = `max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #dddddd; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);`;
+const headerStyles = `background-color: #ff385c; color: #ffffff; padding: 30px; text-align: center;`;
 const titleStyles = `margin: 0; font-size: 24px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;`;
 const contentStyles = `padding: 40px 30px; text-align: left;`;
-const textStyles = `font-size: 16px; line-height: 1.6; margin-bottom: 24px; color: #374151;`;
-const buttonStyles = `display: inline-block; padding: 14px 32px; background-color: #111827; color: #ffffff !important; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; letter-spacing: 0.5px;`;
-const linkFallbackStyles = `font-size: 13px; color: #6b7280; margin-top: 20px; word-break: break-all; line-height: 1.5;`;
-const footerStyles = `padding: 20px; text-align: center; font-size: 12px; color: #6b7280; border-top: 1px solid #e5e7eb; background-color: #f3f4f6;`;
-const noteStyles = `font-size: 14px; color: #6b7280; margin-top: 30px; line-height: 1.5;`;
-const otpBoxStyles = `display: block; font-family: monospace; font-size: 32px; font-weight: 700; letter-spacing: 6px; color: #111827; background-color: #f3f4f6; padding: 16px 24px; border-radius: 8px; border: 1px solid #e5e7eb; margin: 24px auto; text-align: center; width: max-content;`;
+const textStyles = `font-size: 16px; line-height: 1.6; margin-bottom: 24px; color: #3f3f3f;`;
+const buttonStyles = `display: inline-block; padding: 14px 32px; background-color: #ff385c; color: #ffffff !important; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; letter-spacing: 0.5px;`;
+const linkFallbackStyles = `font-size: 13px; color: #6a6a6a; margin-top: 20px; word-break: break-all; line-height: 1.5;`;
+const footerStyles = `padding: 20px; text-align: center; font-size: 12px; color: #6a6a6a; border-top: 1px solid #dddddd; background-color: #f7f7f7;`;
+const noteStyles = `font-size: 14px; color: #6a6a6a; margin-top: 30px; line-height: 1.5;`;
+const otpBoxStyles = `display: block; font-family: monospace; font-size: 32px; font-weight: 700; letter-spacing: 6px; color: #222222; background-color: #f7f7f7; padding: 16px 24px; border-radius: 8px; border: 1px solid #dddddd; margin: 24px auto; text-align: center; width: max-content;`;
 
 const emailStyles = `
   body { ${baseStyles} }

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useLandingData } from './hooks/useLandingData';
+import Navbar from '@/components/Shared/Navigation/Navbar/Navbar';
 import './LandingPage.scss';
 
 // Mock collections matching the exact design specification fallback
@@ -61,12 +62,12 @@ export default function LandingPage() {
         user,
         searchQuery,
         setSearchQuery,
-        searchSuggestions,
-        selectedRegion,
-        setSelectedRegion,
-        cities,
-        upcomingTrip,
-        previousTrips,
+        searchSuggestions = [],
+        selectedRegion = 'Europe',
+        setSelectedRegion = () => {},
+        cities = [],
+        upcomingTrip = null,
+        previousTrips = [],
     } = useLandingData();
 
     // Dynamically load Google Material Icons stylesheet
@@ -149,52 +150,7 @@ export default function LandingPage() {
     return (
         <div className="landing-page-root">
             {/* Header / Navigation */}
-            <header className="landing-header">
-                <div className="landing-header-container">
-                    <div className="logo-brand" onClick={() => navigate('/')}>
-                        GlobeTrotter
-                    </div>
-                    <nav className="nav-menu">
-                        <a className="nav-item active" href="/">
-                            Explore
-                        </a>
-                        <a className="nav-item" href="/me/trips">
-                            My Trips
-                        </a>
-                        <a className="nav-item" href="/trips/new">
-                            Plan a Trip
-                        </a>
-                    </nav>
-                    <div className="nav-actions">
-                        <button className="icon-btn">
-                            <span className="material-symbols-outlined">favorite</span>
-                        </button>
-                        {user ? (
-                            <div
-                                className="avatar-wrapper"
-                                onClick={() => navigate('/me/profile')}
-                                title={`Logged in as ${user.name || 'User'}`}
-                            >
-                                {user.profileImage ? (
-                                    <img
-                                        src={user.profileImage}
-                                        alt={user.name}
-                                        className="user-avatar"
-                                    />
-                                ) : (
-                                    <span className="material-symbols-outlined avatar-fallback">
-                                        account_circle
-                                    </span>
-                                )}
-                            </div>
-                        ) : (
-                            <button className="icon-btn" onClick={() => navigate('/login')}>
-                                <span className="material-symbols-outlined">account_circle</span>
-                            </button>
-                        )}
-                    </div>
-                </div>
-            </header>
+            <Navbar />
 
             {/* Hero / Banner */}
             <main className="landing-main-content">
@@ -360,15 +316,8 @@ export default function LandingPage() {
                                           </button>
                                       </div>
                                       <div className="selection-item-info">
-                                          <span className="country-flag-badge">
-                                              {getCountryFlag(city.country)}
-                                          </span>
                                           <h4 className="selection-item-name">{city.name}</h4>
                                       </div>
-                                      <p className="selection-itinerary-count">
-                                          {Math.round(parseFloat(city.popularity || '4') * 18)}+
-                                          Itineraries
-                                      </p>
                                   </div>
                               ))
                             : mockRegionalSelections.map((selection, idx) => (
@@ -390,14 +339,8 @@ export default function LandingPage() {
                                           </button>
                                       </div>
                                       <div className="selection-item-info">
-                                          <span className="country-flag-badge">
-                                              {selection.flag}
-                                          </span>
                                           <h4 className="selection-item-name">{selection.name}</h4>
                                       </div>
-                                      <p className="selection-itinerary-count">
-                                          {selection.itineraries}
-                                      </p>
                                   </div>
                               ))}
                     </div>

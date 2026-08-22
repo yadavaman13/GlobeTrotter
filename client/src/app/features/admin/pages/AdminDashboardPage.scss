@@ -1,100 +1,77 @@
 @use '@/styles/variables' as variables;
 
+$page-bg: #fafaf9;
+$crimson-tag: #e11d48;
+$title-dark: #0f172a;
+
+
 .admin-dashboard-page {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: variables.$spacing-base;
+    min-height: 100vh;
+    background-color: $page-bg;
     box-sizing: border-box;
-    gap: variables.$spacing-base;
 
-    .admin-hero-banner {
+    .admin-page-body-container {
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 32px;
+        box-sizing: border-box;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: linear-gradient(135deg, variables.$color-gray-900 0%, variables.$color-black 100%);
-        border-radius: variables.$radius-lg;
-        padding: variables.$spacing-lg;
-        color: variables.$color-white;
-        box-shadow: variables.$shadow-card;
+        flex-direction: column;
+        gap: variables.$spacing-base;
+    }
 
-        .hero-content {
+    .admin-page-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding-bottom: variables.$spacing-xs;
+
+        .header-title-group {
             display: flex;
             flex-direction: column;
-            gap: variables.$spacing-xs;
+            gap: 6px;
 
-            .hero-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: variables.$spacing-xxs;
-                background-color: variables.$color-info-light;
-                border: 1px solid variables.$color-info-border;
-                color: variables.$color-info;
+            .control-center-tag {
+                font-family: variables.$font-sans;
                 font-size: variables.$font-size-micro;
-                font-weight: 600;
-                padding: variables.$spacing-xxs variables.$spacing-sm;
-                border-radius: variables.$radius-full;
-                width: fit-content;
+                font-weight: 800;
+                color: $crimson-tag;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
             }
 
-            .hero-title {
+            .main-page-title {
+                font-family: variables.$font-sans;
                 font-size: variables.$font-size-display-xl;
-                font-weight: 700;
-                margin: variables.$spacing-xxs 0 0;
-                color: variables.$color-white;
-                letter-spacing: -0.02em;
-            }
-
-            .hero-subtitle {
-                font-size: variables.$font-size-sm;
-                color: variables.$color-muted-soft;
+                font-weight: 800;
+                color: $title-dark;
+                letter-spacing: -0.03em;
                 margin: 0;
-                max-width: 600px;
+                line-height: 1.15;
             }
 
-            .system-health-indicators {
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-                gap: variables.$spacing-xs;
-                margin-top: variables.$spacing-sm;
-
-                .health-pill {
-                    display: inline-flex;
-                    align-items: center;
-                    gap: variables.$spacing-xxs;
-                    background-color: variables.$color-surface-soft;
-                    border: 1px solid variables.$color-hairline;
-                    padding: variables.$spacing-xxs variables.$spacing-sm;
-                    border-radius: variables.$radius-xs;
-                    font-size: variables.$font-size-micro;
-                    color: variables.$color-muted;
-
-                    .dot {
-                        width: 6px;
-                        height: 6px;
-                        border-radius: variables.$radius-full;
-                        background-color: variables.$color-success;
-                        box-shadow: 0 0 6px variables.$color-success;
-                    }
-
-                    &.protected {
-                        border-color: variables.$color-success-border;
-                        color: variables.$color-success;
-                    }
-                }
+            .page-subtitle {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-sm;
+                color: variables.$color-muted;
+                margin: 2px 0 0;
             }
         }
 
-        .hero-actions {
-            .refresh-hero-btn {
-                background-color: variables.$color-surface-soft;
-                border: 1px solid variables.$color-hairline;
-                color: variables.$color-white;
+        .header-actions {
+            display: flex;
+            align-items: center;
 
-                &:hover {
-                    background-color: variables.$color-surface-strong;
-                }
+            .refresh-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: variables.$spacing-xs;
+                border-radius: variables.$radius-full;
+                font-weight: 600;
 
                 .spinning {
                     animation: spin 1s linear infinite;
@@ -108,6 +85,7 @@
             gap: variables.$spacing-md;
         }
     }
+
 
     .admin-error-alert {
         display: flex;
