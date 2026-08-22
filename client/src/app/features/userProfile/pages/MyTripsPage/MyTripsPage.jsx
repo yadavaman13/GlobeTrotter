@@ -52,8 +52,7 @@ export default function MyTripsPage() {
     const completedTrips = trips.filter((t) => t.status === 'completed');
 
     const handlePlanTrip = () => {
-        // Navigate to the AI trip planning panel
-        navigate('/dashboard/user/analytics/insight');
+        navigate('/trips/new');
     };
 
     const handleDuplicateTrip = (trip) => {
@@ -61,11 +60,11 @@ export default function MyTripsPage() {
     };
 
     const handleViewMemories = (trip) => {
-        success(`Opening travel journal for "${trip.name}"`);
+        navigate(`/trips/${trip.id}/timeline`);
     };
 
     const handleEditTrip = (trip) => {
-        navigate(`/dashboard/user/analytics/insight?editTripId=${trip.id}`);
+        navigate(`/trips/${trip.id}/itinerary`);
     };
 
     return (
@@ -284,9 +283,7 @@ export default function MyTripsPage() {
                                                 <Button
                                                     variant="primary"
                                                     onClick={() =>
-                                                        navigate(
-                                                            '/dashboard/user/analytics/insight',
-                                                        )
+                                                        navigate(`/trips/${trip.id}/itinerary`)
                                                     }
                                                     className="resume-trip-btn"
                                                 >

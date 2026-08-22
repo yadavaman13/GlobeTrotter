@@ -17,33 +17,14 @@ import AdminFooter from '@/app/features/analytics/components/AdminFooter/AdminFo
 import { Users as UsersIcon } from 'lucide-react';
 import './AdminUsersPage.scss';
 
-
 function AdminUsersContent() {
-    const {
-        users,
-        pagination,
-        filters,
-        updateFilterField,
-        resetFilters,
-        setPage,
-        loading,
-        error,
-    } = useAdminUsers();
+    const { users, pagination, filters, updateFilterField, resetFilters, setPage, loading, error } =
+        useAdminUsers();
 
-    const {
-        selectedUser,
-        openUserDetails,
-        closeUserDetails,
-    } = useUserDetails();
+    const { selectedUser, openUserDetails, closeUserDetails } = useUserDetails();
 
-
-    const {
-        toggleActiveStatus,
-        toggleSoftDelete,
-        updateUserRole,
-        executeCleanup,
-        actionLoading,
-    } = useUserStatusMutation();
+    const { toggleActiveStatus, toggleSoftDelete, updateUserRole, executeCleanup, actionLoading } =
+        useUserStatusMutation();
 
     // Modal dialog state handlers
     const [statusModalUser, setStatusModalUser] = useState(null);
@@ -91,7 +72,6 @@ function AdminUsersContent() {
     return (
         <div className="admin-users-page-container">
             <div className="admin-users-body-content">
-
                 <div className="admin-page-header">
                     <div className="title-group">
                         <div className="icon-wrapper">
@@ -100,7 +80,8 @@ function AdminUsersContent() {
                         <div>
                             <h1 className="page-title">User Account Management</h1>
                             <p className="page-subtitle">
-                                Oversee registered traveler accounts, permissions, account verification, and status.
+                                Oversee registered traveler accounts, permissions, account
+                                verification, and status.
                             </p>
                         </div>
                     </div>
@@ -136,7 +117,9 @@ function AdminUsersContent() {
                     isOpen={Boolean(selectedUser)}
                     onClose={closeUserDetails}
                     title="Traveler Profile & Activity"
-                    subtitle={selectedUser ? `${selectedUser.firstName} ${selectedUser.lastName}` : ''}
+                    subtitle={
+                        selectedUser ? `${selectedUser.firstName} ${selectedUser.lastName}` : ''
+                    }
                     size="md"
                 >
                     {selectedUser && (
@@ -187,7 +170,6 @@ function AdminUsersContent() {
             </div>
         </div>
     );
-
 }
 
 export default function AdminUsersPage() {

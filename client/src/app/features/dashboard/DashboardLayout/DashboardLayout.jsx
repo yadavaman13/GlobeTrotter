@@ -48,7 +48,6 @@ function DashboardLayout({ onLogout }) {
         },
     ];
 
-
     const sidebarNavItems =
         user?.role?.toLowerCase() === 'admin'
             ? [
@@ -88,6 +87,13 @@ function DashboardLayout({ onLogout }) {
         }
     };
 
+    const handleSubItemClick = (parentLabel, subTab) => {
+        if (parentLabel === 'Analytics') {
+            const route = subTab.toLowerCase() === 'reports' ? 'reports' : 'insight';
+            navigate(`/dashboard/${roleSegment}/analytics/${route}`);
+        }
+    };
+
     return (
         <div className="dashboard-layout-container">
             <div
@@ -105,6 +111,7 @@ function DashboardLayout({ onLogout }) {
                 profile={derivedProfile}
                 onNavigateGeneral={() => navigate(`/dashboard/${roleSegment}/settings/general`)}
                 onNavigateAccount={() => navigate(`/dashboard/${roleSegment}/settings/account`)}
+                onSubItemClick={handleSubItemClick}
             />
 
             <div className="dashboard-right-pane">

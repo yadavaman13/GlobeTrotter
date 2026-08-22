@@ -35,7 +35,8 @@ export function AdminDashboardPage() {
             setError(null);
 
             const res = await getAdminAnalyticsApi();
-            const analyticsData = res?.data?.analytics || res?.analytics || res?.data?.data?.analytics;
+            const analyticsData =
+                res?.data?.analytics || res?.analytics || res?.data?.data?.analytics;
             if (analyticsData) {
                 setAnalytics(analyticsData);
             }
@@ -76,10 +77,14 @@ export function AdminDashboardPage() {
                     <div className="header-title-group">
                         <span className="control-center-tag">SYSTEM ADMINISTRATION CONSOLE</span>
                         <h1 className="main-page-title">
-                            Welcome back, {user?.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : 'Administrator'}
+                            Welcome back,{' '}
+                            {user?.firstName
+                                ? `${user.firstName} ${user.lastName || ''}`.trim()
+                                : 'Administrator'}
                         </h1>
                         <p className="page-subtitle">
-                            Real-time platform overview, traveler management, catalog health, and itinerary metrics.
+                            Real-time platform overview, traveler management, catalog health, and
+                            itinerary metrics.
                         </p>
                     </div>
 
@@ -96,8 +101,6 @@ export function AdminDashboardPage() {
                         </Button>
                     </div>
                 </div>
-
-
 
                 {error && (
                     <div className="admin-error-alert">
@@ -140,7 +143,8 @@ export function AdminDashboardPage() {
                             <span className="stat-label">Created Itineraries</span>
                             <div className="stat-value">{loading ? '—' : tripStats.total}</div>
                             <span className="stat-footnote">
-                                {tripStats.byStatus?.ongoing || 0} ongoing • {tripStats.byStatus?.planned || 0} planned
+                                {tripStats.byStatus?.ongoing || 0} ongoing •{' '}
+                                {tripStats.byStatus?.planned || 0} planned
                             </span>
                         </div>
                     </div>
@@ -158,7 +162,9 @@ export function AdminDashboardPage() {
                         <div className="stat-body">
                             <span className="stat-label">Recorded Expenses</span>
                             <div className="stat-value">{loading ? '—' : formattedExpenses}</div>
-                            <span className="stat-footnote positive">Tracked across Indian trips</span>
+                            <span className="stat-footnote positive">
+                                Tracked across Indian trips
+                            </span>
                         </div>
                     </div>
 
@@ -198,7 +204,8 @@ export function AdminDashboardPage() {
                             <div className="shortcut-info">
                                 <h3 className="shortcut-title">Manage Users</h3>
                                 <p className="shortcut-desc">
-                                    Oversee registered accounts, assign roles, and handle verification.
+                                    Oversee registered accounts, assign roles, and handle
+                                    verification.
                                 </p>
                             </div>
                             <ArrowUpRight size={16} className="shortcut-arrow" />
@@ -214,7 +221,8 @@ export function AdminDashboardPage() {
                             <div className="shortcut-info">
                                 <h3 className="shortcut-title">Platform Insights</h3>
                                 <p className="shortcut-desc">
-                                    Explore status distributions, popular destinations, and expense ledgers.
+                                    Explore status distributions, popular destinations, and expense
+                                    ledgers.
                                 </p>
                             </div>
                             <ArrowUpRight size={16} className="shortcut-arrow" />
@@ -230,14 +238,14 @@ export function AdminDashboardPage() {
                             <div className="shortcut-info">
                                 <h3 className="shortcut-title">PDF Reports</h3>
                                 <p className="shortcut-desc">
-                                    Generate and download executive platform analytics in PDF format.
+                                    Generate and download executive platform analytics in PDF
+                                    format.
                                 </p>
                             </div>
                             <ArrowUpRight size={16} className="shortcut-arrow" />
                         </div>
                     </div>
                 </div>
-
 
                 {/* Live Recent Itineraries & Trending Snapshot Grid */}
                 <div className="admin-content-split-grid">
@@ -305,12 +313,18 @@ export function AdminDashboardPage() {
                                                     </td>
                                                     <td>
                                                         <div className="owner-cell">
-                                                            <span className="owner-name">{trip.ownerName}</span>
-                                                            <span className="owner-email">{trip.ownerEmail}</span>
+                                                            <span className="owner-name">
+                                                                {trip.ownerName}
+                                                            </span>
+                                                            <span className="owner-email">
+                                                                {trip.ownerEmail}
+                                                            </span>
                                                         </div>
                                                     </td>
                                                     <td className="budget-cell">{tripBudget}</td>
-                                                    <td className="stops-cell">{trip.stopCount} stops</td>
+                                                    <td className="stops-cell">
+                                                        {trip.stopCount} stops
+                                                    </td>
                                                     <td>
                                                         <Badge
                                                             variant={getStatusVariant(trip.status)}
@@ -349,11 +363,17 @@ export function AdminDashboardPage() {
                                         <div className="rank-badge">#{idx + 1}</div>
                                         <div className="dest-info">
                                             <span className="dest-name">{city.name}</span>
-                                            <span className="dest-region">{city.region}, {city.country}</span>
+                                            <span className="dest-region">
+                                                {city.region}, {city.country}
+                                            </span>
                                         </div>
                                         <div className="dest-stats">
-                                            <span className="stops-pill">{city.visitCount} stops</span>
-                                            <span className="rating-pill">★ {city.popularity || '9.5'}</span>
+                                            <span className="stops-pill">
+                                                {city.visitCount} stops
+                                            </span>
+                                            <span className="rating-pill">
+                                                ★ {city.popularity || '9.5'}
+                                            </span>
                                         </div>
                                     </div>
                                 ))
@@ -370,7 +390,6 @@ export function AdminDashboardPage() {
             </div>
         </div>
     );
-
 }
 
 export default AdminDashboardPage;

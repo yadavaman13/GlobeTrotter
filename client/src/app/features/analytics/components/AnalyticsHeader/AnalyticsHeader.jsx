@@ -45,7 +45,12 @@ export function AnalyticsHeader({
                     Refresh
                 </Button>
 
-                <Button variant="primary" size="sm" onClick={() => onExport('csv')} className="export-btn">
+                <Button
+                    variant="primary"
+                    size="sm"
+                    onClick={() => onExport('csv')}
+                    className="export-btn"
+                >
                     <Download size={14} />
                     Export CSV
                 </Button>

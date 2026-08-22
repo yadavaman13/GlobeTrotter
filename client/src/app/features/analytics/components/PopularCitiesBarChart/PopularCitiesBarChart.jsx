@@ -24,7 +24,9 @@ export function PopularCitiesBarChart({ cities = [] }) {
             <div className="card-header">
                 <div>
                     <h3 className="chart-title">Most Popular Destinations</h3>
-                    <span className="chart-caption">Ranked by traveler itineraries & popularity score</span>
+                    <span className="chart-caption">
+                        Ranked by traveler itineraries & popularity score
+                    </span>
                 </div>
             </div>
 
@@ -44,10 +46,7 @@ export function PopularCitiesBarChart({ cities = [] }) {
                             </div>
 
                             <div className="bar-track-wrapper">
-                                <div
-                                    className="bar-fill"
-                                    style={{ width: `${percentage}%` }}
-                                />
+                                <div className="bar-fill" style={{ width: `${percentage}%` }} />
                                 <span className="visits-count">{visits} stops</span>
                             </div>
 

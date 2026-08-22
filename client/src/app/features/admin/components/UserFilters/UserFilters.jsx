@@ -83,7 +83,10 @@ export function UserFilters({
             </div>
 
             <div className="filters-right">
-                {(filters.search || filters.role || filters.isActive !== '' || filters.isDeleted !== '') && (
+                {(filters.search ||
+                    filters.role ||
+                    filters.isActive !== '' ||
+                    filters.isDeleted !== '') && (
                     <Button
                         variant="ghost"
                         size="sm"

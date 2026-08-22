@@ -1,4 +1,13 @@
-import { Mail, Calendar, Compass, Bookmark, Shield, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
+import {
+    Mail,
+    Calendar,
+    Compass,
+    Bookmark,
+    Shield,
+    AlertTriangle,
+    CheckCircle,
+    Clock,
+} from 'lucide-react';
 import CircularAvatar from '@/components/Shared/DataDisplay/CircularAvatar/CircularAvatar';
 import Button from '@/components/Shared/Buttons/Button/Button';
 import { UserStatusBadge, UserRoleBadge } from '../UserStatusBadge/UserStatusBadge';
@@ -12,7 +21,6 @@ export function UserDetailsDrawer({
     onChangeRole,
     actionLoading,
 }) {
-
     if (!user) return null;
 
     const formattedCreatedAt = user.createdAt
@@ -82,7 +90,9 @@ export function UserDetailsDrawer({
                     </div>
                     <div className="stat-content">
                         <span className="stat-label">Saved Cities</span>
-                        <span className="stat-number">{user.stats?.totalSavedDestinations ?? 0}</span>
+                        <span className="stat-number">
+                            {user.stats?.totalSavedDestinations ?? 0}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -127,7 +137,9 @@ export function UserDetailsDrawer({
                                 <span className="info-label">
                                     <Clock size={14} /> Recovery Deadline
                                 </span>
-                                <span className="info-value warning-val">{formattedRecoveryExpires}</span>
+                                <span className="info-value warning-val">
+                                    {formattedRecoveryExpires}
+                                </span>
                             </div>
                         </>
                     )}
@@ -154,7 +166,9 @@ export function UserDetailsDrawer({
                         disabled={actionLoading}
                         className="action-btn delete-btn"
                     >
-                        {user.isDeleted ? 'Restore Soft-Deleted Account' : 'Soft-Delete User Account'}
+                        {user.isDeleted
+                            ? 'Restore Soft-Deleted Account'
+                            : 'Soft-Delete User Account'}
                     </Button>
 
                     <Button
@@ -164,7 +178,9 @@ export function UserDetailsDrawer({
                         disabled={actionLoading}
                         className="action-btn role-btn"
                     >
-                        {user.role === 'admin' ? 'Demote to Standard User' : 'Promote to Platform Admin'}
+                        {user.role === 'admin'
+                            ? 'Demote to Standard User'
+                            : 'Promote to Platform Admin'}
                     </Button>
                 </div>
             </div>

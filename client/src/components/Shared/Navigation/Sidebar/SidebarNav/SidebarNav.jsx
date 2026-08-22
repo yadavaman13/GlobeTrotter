@@ -73,6 +73,9 @@ function SidebarNav({
             case 'Home':
                 navigate(`/dashboard/${roleSegment}/home`);
                 break;
+            case 'Trips':
+                navigate(`/dashboard/${roleSegment}/trips`);
+                break;
             case 'AI':
                 navigate(`/dashboard/${roleSegment}/ai`);
                 break;

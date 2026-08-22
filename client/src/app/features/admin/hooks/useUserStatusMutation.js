@@ -26,7 +26,8 @@ export function useUserStatusMutation() {
                     return { success: true, user: res.data.user };
                 }
             } catch (err) {
-                const msg = err.response?.data?.message || err.message || 'Failed to update user status';
+                const msg =
+                    err.response?.data?.message || err.message || 'Failed to update user status';
                 setActionError(msg);
                 throw new Error(msg, { cause: err });
             } finally {
@@ -53,7 +54,8 @@ export function useUserStatusMutation() {
                     return { success: true, user: res.data.user };
                 }
             } catch (err) {
-                const msg = err.response?.data?.message || err.message || 'Failed to update delete state';
+                const msg =
+                    err.response?.data?.message || err.message || 'Failed to update delete state';
                 setActionError(msg);
                 throw new Error(msg, { cause: err });
             } finally {
@@ -78,7 +80,8 @@ export function useUserStatusMutation() {
                     return { success: true, user: res.data.user };
                 }
             } catch (err) {
-                const msg = err.response?.data?.message || err.message || 'Failed to update user role';
+                const msg =
+                    err.response?.data?.message || err.message || 'Failed to update user role';
                 setActionError(msg);
                 throw new Error(msg, { cause: err });
             } finally {
@@ -102,7 +105,8 @@ export function useUserStatusMutation() {
             }
             return { success: true, count: 0, deletedUsers: [] };
         } catch (err) {
-            const msg = err.response?.data?.message || err.message || 'Failed to clean up expired users';
+            const msg =
+                err.response?.data?.message || err.message || 'Failed to clean up expired users';
             setActionError(msg);
             throw new Error(msg, { cause: err });
         } finally {
@@ -110,7 +114,6 @@ export function useUserStatusMutation() {
             setMutating(false);
         }
     }, [removeUsersFromList, setMutating]);
-
 
     return {
         toggleActiveStatus,
