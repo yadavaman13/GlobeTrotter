@@ -1,0 +1,219 @@
+@use '../../../../../styles/variables';
+
+$nav-crimson: #e11d48;
+$nav-input-bg: #f8fafc;
+$nav-avatar-bg: #f1f5f9;
+$nav-avatar-hover-bg: #e2e8f0;
+
+.globetrotter-admin-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0 32px;
+    background-color: variables.$color-white;
+    border-bottom: 1px solid variables.$color-gray-200;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: variables.$z-sticky;
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+
+        .brand-logo {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+
+            .brand-text {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-display-sm;
+                font-weight: 800;
+                color: $nav-crimson;
+                letter-spacing: -0.03em;
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+
+            .nav-item {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-sm;
+                font-weight: 500;
+                color: variables.$color-gray-600;
+                text-decoration: none;
+                padding: 20px 2px;
+                position: relative;
+                transition: color 0.15s ease;
+
+                &:hover {
+                    color: variables.$color-black;
+                }
+
+                &.active {
+                    color: variables.$color-black;
+                    font-weight: 700;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        height: 2.5px;
+                        background-color: $nav-crimson;
+                        border-radius: 2px 2px 0 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .nav-search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .search-icon {
+                position: absolute;
+                left: 12px;
+                color: variables.$color-gray-400;
+                pointer-events: none;
+            }
+
+            .search-input {
+                height: 38px;
+                width: 220px;
+                padding: 0 14px 0 34px;
+                background-color: $nav-input-bg;
+                border: 1px solid variables.$color-gray-200;
+                border-radius: variables.$radius-full;
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-sm;
+                color: variables.$color-gray-800;
+                outline: none;
+                transition: all 0.2s ease;
+
+                &::placeholder {
+                    color: variables.$color-gray-400;
+                }
+
+                &:focus {
+                    background-color: variables.$color-white;
+                    border-color: $nav-crimson;
+                    width: 260px;
+                    box-shadow: 0 0 0 3px rgb(225 29 72 / 10%);
+                }
+            }
+        }
+
+        .icon-action-btn {
+            position: relative;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: variables.$color-gray-600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+
+            &:hover {
+                background-color: variables.$color-gray-100;
+                color: variables.$color-black;
+            }
+
+            .bell-badge-dot {
+                position: absolute;
+                top: 7px;
+                right: 7px;
+                width: 7px;
+                height: 7px;
+                background-color: $nav-crimson;
+                border-radius: 50%;
+                border: 1.5px solid variables.$color-white;
+            }
+
+            &.avatar-btn {
+                background-color: $nav-avatar-bg;
+                color: variables.$color-gray-700;
+
+                &:hover {
+                    background-color: $nav-avatar-hover-bg;
+                }
+            }
+        }
+
+        .admin-settings-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            height: 38px;
+            padding: 0 16px;
+            background-color: $nav-input-bg;
+            border: 1px solid variables.$color-gray-200;
+            border-radius: variables.$radius-full;
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-xs;
+            font-weight: 600;
+            color: variables.$color-gray-800;
+            cursor: pointer;
+            transition: all 0.15s ease;
+
+            .settings-icon {
+                color: variables.$color-gray-500;
+            }
+
+            &:hover {
+                background-color: $nav-avatar-bg;
+                border-color: variables.$color-gray-300;
+                color: variables.$color-black;
+            }
+        }
+    }
+}
+
+@media (width <= 900px) {
+    .globetrotter-admin-nav {
+        padding: 0 16px;
+
+        .nav-left {
+            gap: 18px;
+
+            .nav-links {
+                gap: 14px;
+            }
+        }
+
+        .nav-right {
+            gap: 8px;
+
+            .nav-search-wrapper .search-input {
+                width: 150px;
+
+                &:focus {
+                    width: 180px;
+                }
+            }
+
+            .admin-settings-pill span {
+                display: none;
+            }
+        }
+    }
+}

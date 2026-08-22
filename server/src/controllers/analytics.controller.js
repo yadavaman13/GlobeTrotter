@@ -7,7 +7,8 @@ import { sendResponse } from '../utils/response.utlis.js';
  */
 export async function getAdminAnalytics(req, res, next) {
     try {
-        const analytics = await analyticsDao.getPlatformAnalytics();
+        const { timeframe = '30d' } = req.query;
+        const analytics = await analyticsDao.getPlatformAnalytics(timeframe);
 
         return sendResponse({
             res,
@@ -22,3 +23,4 @@ export async function getAdminAnalytics(req, res, next) {
         next(error);
     }
 }
+
