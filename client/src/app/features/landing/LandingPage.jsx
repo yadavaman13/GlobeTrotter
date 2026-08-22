@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useLandingData } from './hooks/useLandingData';
+import Navbar from '@/components/Shared/Navigation/Navbar/Navbar';
 import './LandingPage.scss';
 
 // Mock collections matching the exact design specification fallback
@@ -149,97 +150,7 @@ export default function LandingPage() {
     return (
         <div className="landing-page-root">
             {/* Header / Navigation */}
-            <header className="landing-header">
-                <div className="landing-header-container">
-                    <div className="logo-brand" onClick={() => navigate('/')}>
-                        GlobeTrotter
-                    </div>
-                    <nav className="nav-menu">
-                        <a
-                            className="nav-item active"
-                            href="/"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                navigate('/');
-                            }}
-                        >
-                            Explore
-                        </a>
-                        <a
-                            className="nav-item"
-                            href="/me/trips"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                navigate('/me/trips');
-                            }}
-                        >
-                            My Trips
-                        </a>
-                        <a
-                            className="nav-item"
-                            href="#search-anchor"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                const searchEl = document.getElementById('search-anchor');
-                                if (searchEl) {
-                                    searchEl.scrollIntoView({ behavior: 'smooth' });
-                                }
-                            }}
-                        >
-                            Discover Experiences
-                        </a>
-                        {user?.role?.toLowerCase() === 'admin' && (
-                            <a
-                                className="nav-item"
-                                href="/dashboard/admin/home"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    navigate('/dashboard/admin/home');
-                                }}
-                            >
-                                Dashboard
-                            </a>
-                        )}
-                    </nav>
-                    <div className="nav-actions">
-                        <button className="icon-btn">
-                            <span className="material-symbols-outlined">favorite</span>
-                        </button>
-                        {user ? (
-                            <div
-                                className="avatar-wrapper"
-                                onClick={() =>
-                                    navigate(
-                                        user?.role?.toLowerCase() === 'admin'
-                                            ? '/dashboard/admin/home'
-                                            : '/me/profile',
-                                    )
-                                }
-                                title={`Logged in as ${user.name || user.firstName || 'User'}`}
-                            >
-                                {user.profileImage ? (
-                                    <img
-                                        src={user.profileImage}
-                                        alt={user.name || user.firstName || 'User'}
-                                        className="user-avatar"
-                                    />
-                                ) : (
-                                    <span className="material-symbols-outlined avatar-fallback">
-                                        account_circle
-                                    </span>
-                                )}
-                            </div>
-                        ) : (
-                            <button className="icon-btn" onClick={() => navigate('/login')}>
-                                <span className="material-symbols-outlined">account_circle</span>
-                            </button>
-                        )}
-                    </div>
-
-
-
-                </div>
-            </header>
+            <Navbar />
 
             {/* Hero / Banner */}
             <main className="landing-main-content">
