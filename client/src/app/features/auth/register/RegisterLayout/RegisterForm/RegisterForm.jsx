@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import Logo from '@/components/Shared/DataDisplay/Logo/Logo';
 import FormHeader from '@/components/Shared/DataDisplay/FormHeader/FormHeader';
 import InputField from '@/components/Shared/Form/InputField/InputField';
-import RoleSelector from '@/components/Shared/Form/RoleSelector/RoleSelector';
 import Button from '@/components/Shared/Buttons/Button/Button';
 import SigninPrompt from './SigninPrompt/SigninPrompt';
 import { useToast } from '@/components/Shared/Feedback/Toast';
@@ -45,7 +44,6 @@ function RegisterForm() {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('');
     const [avatar, setAvatar] = useState(null);
     const [otp, setOtp] = useState(['', '', '', '', '', '']);
     const [attemptsLeft, setAttemptsLeft] = useState(undefined);
@@ -56,7 +54,6 @@ function RegisterForm() {
     const [emailError, setEmailError] = useState('');
     const [otpError, setOtpError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [roleError, setRoleError] = useState('');
 
     const getPasswordValidationMessage = (password) => {
         return validatePassword(password, email).message;
@@ -66,7 +63,6 @@ function RegisterForm() {
     const lastNameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    const roleRef = useRef(null);
 
     // Step 1: Details Submit
     const handleDetailsSubmit = async (e) => {
@@ -190,21 +186,12 @@ function RegisterForm() {
         e.preventDefault();
         let hasError = false;
         setPasswordError('');
-        setRoleError('');
 
         const passwordValidation = validatePassword(password, email);
         if (!passwordValidation.isValid) {
             setPasswordError(passwordValidation.message);
             hasError = true;
             passwordRef.current?.focus();
-        }
-
-        if (!role) {
-            setRoleError('Please select a workspace role');
-            hasError = true;
-            if (passwordValidation.isValid) {
-                roleRef.current?.focus();
-            }
         }
 
         if (hasError) return;
@@ -223,16 +210,20 @@ function RegisterForm() {
         const fullName = `${trimmedFirst} ${trimmedLast}`;
 
         try {
-            await handleRegister({
+            const registerResult = await handleRegister({
                 firstName: trimmedFirst,
                 lastName: trimmedLast,
                 email: trimmedEmail,
                 password: trimmedPassword,
-                role,
                 profileImage: avatar || DEFAULT_AVATAR_URL,
             });
+            const userRole = registerResult?.user?.role || registerResult?.data?.user?.role;
             success(`Welcome, ${fullName}! Account created successfully.`);
-            navigate('/dashboard');
+            if (userRole === 'admin') {
+                navigate('/dashboard/admin');
+            } else {
+                navigate('/');
+            }
         } catch (err) {
             const msg = err.response?.data?.message || err.message || 'Registration failed';
             toastError(msg);
@@ -378,17 +369,6 @@ function RegisterForm() {
                                 autoComplete="new-password"
                                 error={passwordError}
                                 inputRef={passwordRef}
-                                disabled={authLoading}
-                            />
-
-                            <RoleSelector
-                                value={role}
-                                onChange={(selectedRole) => {
-                                    setRole(selectedRole);
-                                    if (roleError) setRoleError('');
-                                }}
-                                error={roleError}
-                                triggerRef={roleRef}
                                 disabled={authLoading}
                             />
 

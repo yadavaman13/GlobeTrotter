@@ -167,6 +167,16 @@ export default function LandingPage() {
                         </a>
                         <a
                             className="nav-item"
+                            href="/me/trips"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                navigate('/me/trips');
+                            }}
+                        >
+                            My Trips
+                        </a>
+                        <a
+                            className="nav-item"
                             href="#search-anchor"
                             onClick={(e) => {
                                 e.preventDefault();
@@ -198,11 +208,13 @@ export default function LandingPage() {
                         {user ? (
                             <div
                                 className="avatar-wrapper"
-                                onClick={() => {
-                                    if (user?.role?.toLowerCase() === 'admin') {
-                                        navigate('/dashboard/admin/home');
-                                    }
-                                }}
+                                onClick={() =>
+                                    navigate(
+                                        user?.role?.toLowerCase() === 'admin'
+                                            ? '/dashboard/admin/home'
+                                            : '/me/profile',
+                                    )
+                                }
                                 title={`Logged in as ${user.name || user.firstName || 'User'}`}
                             >
                                 {user.profileImage ? (
@@ -223,6 +235,7 @@ export default function LandingPage() {
                             </button>
                         )}
                     </div>
+
 
 
                 </div>
