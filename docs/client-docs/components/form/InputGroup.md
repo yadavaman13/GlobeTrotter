@@ -7,7 +7,7 @@ A compound input component that binds text fields with attached leading or trail
 ## 1. Import Path
 
 ```javascript
-import InputGroup from "@/components/Shared/Form/InputGroup/InputGroup";
+import InputGroup from '@/components/Shared/Form/InputGroup/InputGroup';
 ```
 
 ---
@@ -26,18 +26,13 @@ import InputGroup from "@/components/Shared/Form/InputGroup/InputGroup";
 ## 3. Usage Example
 
 ```jsx
-import InputGroup from "@/components/Shared/Form/InputGroup/InputGroup";
+import InputGroup from '@/components/Shared/Form/InputGroup/InputGroup';
 
 export default function CurrencyInput({ value, onChange }) {
-  return (
-    <InputGroup prefix="$" suffix="USD">
-      <input
-        type="number"
-        value={value}
-        onChange={onChange}
-        placeholder="0.00"
-      />
-    </InputGroup>
-  );
+    return (
+        <InputGroup prefix="$" suffix="USD">
+            <input type="number" value={value} onChange={onChange} placeholder="0.00" />
+        </InputGroup>
+    );
 }
 ```

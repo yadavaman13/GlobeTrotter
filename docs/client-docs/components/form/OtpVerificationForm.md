@@ -7,7 +7,7 @@ A complete, self-contained OTP verification card component with 6-digit input, s
 ## 1. Import Path
 
 ```javascript
-import OtpVerificationForm from "@/components/Shared/Form/OtpVerificationForm/OtpVerificationForm";
+import OtpVerificationForm from '@/components/Shared/Form/OtpVerificationForm/OtpVerificationForm';
 ```
 
 ---
@@ -27,23 +27,23 @@ import OtpVerificationForm from "@/components/Shared/Form/OtpVerificationForm/Ot
 ## 3. Usage Example
 
 ```jsx
-import OtpVerificationForm from "@/components/Shared/Form/OtpVerificationForm/OtpVerificationForm";
+import OtpVerificationForm from '@/components/Shared/Form/OtpVerificationForm/OtpVerificationForm';
 
 export default function VerifyStep({
-  email,
-  handleVerifyOtp,
-  handleResendCode,
-  isSubmitting,
-  errorMessage,
+    email,
+    handleVerifyOtp,
+    handleResendCode,
+    isSubmitting,
+    errorMessage,
 }) {
-  return (
-    <OtpVerificationForm
-      email={email}
-      onVerify={handleVerifyOtp}
-      onResend={handleResendCode}
-      loading={isSubmitting}
-      error={errorMessage}
-    />
-  );
+    return (
+        <OtpVerificationForm
+            email={email}
+            onVerify={handleVerifyOtp}
+            onResend={handleResendCode}
+            loading={isSubmitting}
+            error={errorMessage}
+        />
+    );
 }
 ```

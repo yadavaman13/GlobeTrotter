@@ -1,0 +1,62 @@
+@use '../../../../styles/variables';
+
+.circular-avatar-wrapper {
+    position: relative;
+    flex-shrink: 0;
+
+    .circular-avatar-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: variables.$color-white;
+        font-family: variables.$font-sans;
+        font-weight: 700;
+        user-select: none;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 8%);
+
+        @include variables.transition-ease;
+
+        &.has-image {
+            border: 1px solid rgb(0 0 0 / 8%);
+        }
+
+        .avatar-letter {
+            line-height: 1;
+            text-transform: uppercase;
+        }
+
+        .avatar-image-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &.clickable {
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(1.08);
+                box-shadow: variables.$shadow-md;
+            }
+        }
+    }
+
+    .status-dot {
+        position: absolute;
+        bottom: -1px;
+        right: -1px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        z-index: variables.$z-base;
+
+        &.online {
+            background-color: variables.$color-success;
+        }
+    }
+}

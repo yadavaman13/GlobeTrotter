@@ -10,7 +10,7 @@ A segmented icon-button toggle control used for switching between Table view and
 ## 1. Import Path
 
 ```javascript
-import ViewToggle from "@/components/Shared/Buttons/ViewToggle/ViewToggle";
+import ViewToggle from '@/components/Shared/Buttons/ViewToggle/ViewToggle';
 ```
 
 ---
@@ -31,38 +31,38 @@ import ViewToggle from "@/components/Shared/Buttons/ViewToggle/ViewToggle";
 ### A. Automatic Integration via AdvancedTable
 
 ```jsx
-import AdvancedTable from "@/components/Shared/DataDisplay/AdvancedTable/AdvancedTable";
+import AdvancedTable from '@/components/Shared/DataDisplay/AdvancedTable/AdvancedTable';
 
 export default function LeadsTable({ leads, columns }) {
-  return (
-    <AdvancedTable
-      data={leads}
-      columns={columns}
-      showViewToggle={true}
-      defaultViewMode="table"
-      gridColumns={4}
-      cardTitleKey="name"
-      cardSubtitleKey="company"
-      cardStatusKey="status"
-    />
-  );
+    return (
+        <AdvancedTable
+            data={leads}
+            columns={columns}
+            showViewToggle={true}
+            defaultViewMode="table"
+            gridColumns={4}
+            cardTitleKey="name"
+            cardSubtitleKey="company"
+            cardStatusKey="status"
+        />
+    );
 }
 ```
 
 ### B. Standalone Usage
 
 ```jsx
-import { useState } from "react";
-import ViewToggle from "@/components/Shared/Buttons/ViewToggle/ViewToggle";
+import { useState } from 'react';
+import ViewToggle from '@/components/Shared/Buttons/ViewToggle/ViewToggle';
 
 export default function CustomViewSwitcher() {
-  const [viewMode, setViewMode] = useState("table");
+    const [viewMode, setViewMode] = useState('table');
 
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-      <span>Layout:</span>
-      <ViewToggle view={viewMode} onViewChange={setViewMode} size="sm" />
-    </div>
-  );
+    return (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <span>Layout:</span>
+            <ViewToggle view={viewMode} onViewChange={setViewMode} size="sm" />
+        </div>
+    );
 }
 ```

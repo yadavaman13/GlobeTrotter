@@ -7,7 +7,7 @@ A card-encapsulated empty state placeholder component tailored for dashboards, s
 ## 1. Import Path
 
 ```javascript
-import EmptyStateCard from "@/components/Shared/DataDisplay/EmptyStateCard/EmptyStateCard";
+import EmptyStateCard from '@/components/Shared/DataDisplay/EmptyStateCard/EmptyStateCard';
 ```
 
 ---
@@ -25,20 +25,20 @@ import EmptyStateCard from "@/components/Shared/DataDisplay/EmptyStateCard/Empty
 ## 3. Usage Example
 
 ```jsx
-import EmptyStateCard from "@/components/Shared/DataDisplay/EmptyStateCard/EmptyStateCard";
-import Button from "@/components/Shared/Buttons/Button/Button";
+import EmptyStateCard from '@/components/Shared/DataDisplay/EmptyStateCard/EmptyStateCard';
+import Button from '@/components/Shared/Buttons/Button/Button';
 
 export default function FeedEmptyState() {
-  return (
-    <EmptyStateCard
-      title="No Recent Activity"
-      subtitle="Recent actions across leads and deals will appear here."
-      action={
-        <Button size="sm" variant="outline">
-          Refresh Feed
-        </Button>
-      }
-    />
-  );
+    return (
+        <EmptyStateCard
+            title="No Recent Activity"
+            subtitle="Recent actions across leads and deals will appear here."
+            action={
+                <Button size="sm" variant="outline">
+                    Refresh Feed
+                </Button>
+            }
+        />
+    );
 }
 ```

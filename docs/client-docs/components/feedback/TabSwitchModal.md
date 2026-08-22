@@ -7,7 +7,7 @@ A confirmation modal dialog that prompts users when they attempt to navigate awa
 ## 1. Import Path
 
 ```javascript
-import TabSwitchModal from "@/components/Shared/Feedback/TabSwitchModal/TabSwitchModal";
+import TabSwitchModal from '@/components/Shared/Feedback/TabSwitchModal/TabSwitchModal';
 ```
 
 ---
@@ -26,20 +26,9 @@ import TabSwitchModal from "@/components/Shared/Feedback/TabSwitchModal/TabSwitc
 ## 3. Usage Example
 
 ```jsx
-import TabSwitchModal from "@/components/Shared/Feedback/TabSwitchModal/TabSwitchModal";
+import TabSwitchModal from '@/components/Shared/Feedback/TabSwitchModal/TabSwitchModal';
 
-export default function DirtyFormGuard({
-  isDirty,
-  showModal,
-  handleLeave,
-  handleStay,
-}) {
-  return (
-    <TabSwitchModal
-      isOpen={showModal}
-      onConfirm={handleLeave}
-      onCancel={handleStay}
-    />
-  );
+export default function DirtyFormGuard({ isDirty, showModal, handleLeave, handleStay }) {
+    return <TabSwitchModal isOpen={showModal} onConfirm={handleLeave} onCancel={handleStay} />;
 }
 ```

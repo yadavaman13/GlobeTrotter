@@ -8,11 +8,11 @@ The core chat viewport container managing message scroll pinning, auto-scroll to
 
 ```javascript
 import {
-  Conversation,
-  ConversationContent,
-  ConversationEmptyState,
-  ConversationScrollButton,
-} from "@/components/ai-elements/conversation/conversation";
+    Conversation,
+    ConversationContent,
+    ConversationEmptyState,
+    ConversationScrollButton,
+} from '@/components/ai-elements/conversation/conversation';
 ```
 
 ---
@@ -32,19 +32,19 @@ import {
 
 ```jsx
 import {
-  Conversation,
-  ConversationScrollButton,
-} from "@/components/ai-elements/conversation/conversation";
-import { Message } from "@/components/ai-elements/message/message";
+    Conversation,
+    ConversationScrollButton,
+} from '@/components/ai-elements/conversation/conversation';
+import { Message } from '@/components/ai-elements/message/message';
 
 export default function ChatWindow({ messages, activeChatId }) {
-  return (
-    <Conversation chatId={activeChatId} messagesCount={messages.length}>
-      {messages.map((msg) => (
-        <Message key={msg.id} role={msg.role} content={msg.content} />
-      ))}
-      <ConversationScrollButton />
-    </Conversation>
-  );
+    return (
+        <Conversation chatId={activeChatId} messagesCount={messages.length}>
+            {messages.map((msg) => (
+                <Message key={msg.id} role={msg.role} content={msg.content} />
+            ))}
+            <ConversationScrollButton />
+        </Conversation>
+    );
 }
 ```

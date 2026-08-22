@@ -1,0 +1,449 @@
+@use '../../../../../styles/variables';
+
+// ── Search History Modal ──────────────────────────────────────────────────────
+.history-modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+
+    // ── Text keyword filter ──────────────────────────────────────────────────
+    .history-modal-filter-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        background-color: variables.$color-gray-50;
+        border: 1px solid variables.$color-gray-200;
+        border-radius: 9999px;
+
+        @include variables.transition-ease;
+
+        &:focus-within {
+            border-color: variables.$color-blue-dark;
+            background-color: variables.$color-white;
+            box-shadow: 0 0 0 3px rgb(47 84 235 / 8%);
+        }
+
+        .history-modal-search-icon {
+            color: variables.$color-gray-400;
+            flex-shrink: 0;
+        }
+
+        .history-modal-filter-input {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-sm;
+            color: variables.$color-gray-900;
+
+            &::placeholder {
+                color: variables.$color-gray-400;
+            }
+        }
+
+        .history-modal-clear-filter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: variables.$color-gray-400;
+            cursor: pointer;
+            padding: 3px;
+            border-radius: 50%;
+
+            &:hover {
+                color: variables.$color-gray-900;
+                background-color: variables.$color-gray-200;
+            }
+        }
+    }
+
+    // ── Date range + sort row ────────────────────────────────────────────────
+    .history-modal-controls-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 16px;
+        flex-wrap: wrap;
+        padding: 12px 16px;
+        background-color: variables.$color-gray-50;
+        border: 1px solid variables.$color-gray-100;
+        border-radius: variables.$radius-small;
+
+        .history-modal-date-pickers {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            flex: 1;
+            min-width: 0;
+
+            .history-modal-date-field {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                flex: 1;
+                min-width: 0;
+
+                .history-date-field-label {
+                    font-size: variables.$font-size-xs;
+                    font-weight: 700;
+                    color: variables.$color-gray-500;
+                    text-transform: uppercase;
+                    letter-spacing: 0.04em;
+                }
+
+                // Override DateTimePicker max-width to fill available space
+                .dtp-component-container {
+                    max-width: 100%;
+                }
+            }
+
+            .history-date-separator {
+                font-size: variables.$font-size-lg;
+                color: variables.$color-gray-300;
+                padding-bottom: 8px;
+                flex-shrink: 0;
+            }
+        }
+
+        // ── Sort toggle ────────────────────────────────────────────────────────
+        .history-modal-sort-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .history-sort-label {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                font-size: variables.$font-size-xs;
+                font-weight: 700;
+                color: variables.$color-gray-500;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+            }
+
+            .history-sort-toggle {
+                display: flex;
+                border: 1px solid variables.$color-gray-200;
+                border-radius: variables.$radius-tiny;
+                overflow: hidden;
+                background-color: variables.$color-white;
+
+                .sort-btn {
+                    padding: 6px 14px;
+                    border: none;
+                    background: none;
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-xs;
+                    font-weight: 600;
+                    color: variables.$color-gray-500;
+                    cursor: pointer;
+
+                    @include variables.transition-ease;
+
+                    &.active {
+                        background-color: variables.$color-blue-dark;
+                        color: variables.$color-white;
+                    }
+
+                    &:not(.active):hover {
+                        background-color: variables.$color-gray-100;
+                        color: variables.$color-gray-900;
+                    }
+                }
+            }
+        }
+    }
+
+    // ── Validation alerts ────────────────────────────────────────────────────
+    .history-modal-alert {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        border-radius: variables.$radius-tiny;
+        font-size: variables.$font-size-sm;
+        font-weight: 500;
+
+        &--error {
+            background-color: rgb(239 68 68 / 7%);
+            border: 1px solid rgb(239 68 68 / 20%);
+            color: variables.$color-danger;
+        }
+
+        &--warn {
+            background-color: rgb(245 158 11 / 7%);
+            border: 1px solid rgb(245 158 11 / 20%);
+            color: variables.$color-warning-dark;
+        }
+    }
+
+    // ── Active filter chips ──────────────────────────────────────────────────
+    .history-modal-active-filters {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+
+        .active-filter-label {
+            font-size: variables.$font-size-xs;
+            font-weight: 600;
+            color: variables.$color-gray-500;
+            margin-right: 2px;
+        }
+
+        .filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px 3px 10px;
+            background-color: rgb(47 84 235 / 7%);
+            border: 1px solid rgb(47 84 235 / 20%);
+            border-radius: 9999px;
+            font-size: variables.$font-size-xs;
+            font-weight: 600;
+            color: variables.$color-blue-dark;
+
+            button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                background: none;
+                border: none;
+                padding: 2px;
+                color: variables.$color-blue-dark;
+                cursor: pointer;
+                border-radius: 50%;
+                opacity: 0.7;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+
+        .filter-reset-all-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: none;
+            border: none;
+            padding: 4px 8px;
+            font-size: variables.$font-size-xs;
+            font-weight: 600;
+            color: variables.$color-gray-500;
+            cursor: pointer;
+            border-radius: 9999px;
+
+            @include variables.transition-ease;
+
+            margin-left: auto;
+
+            &:hover {
+                background-color: variables.$color-gray-100;
+                color: variables.$color-gray-900;
+            }
+        }
+    }
+
+    // ── Results meta line ────────────────────────────────────────────────────
+    .history-modal-results-meta {
+        font-size: variables.$font-size-xs;
+        color: variables.$color-gray-500;
+        padding: 0 2px;
+
+        strong {
+            color: variables.$color-gray-800;
+        }
+    }
+
+    // ── List wrapper ─────────────────────────────────────────────────────────
+    .history-modal-list-wrapper {
+        max-height: 240px;
+        overflow-y: auto;
+        border: 1px solid variables.$color-gray-100;
+        border-radius: variables.$radius-small;
+
+        .history-modal-list {
+            list-style: none;
+            margin: 0;
+            padding: 4px 0;
+
+            .history-modal-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 4px 10px;
+                border-radius: variables.$radius-tiny;
+
+                @include variables.transition-ease;
+
+                &:hover {
+                    background-color: variables.$color-gray-50;
+                }
+
+                .history-modal-item-btn {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    flex: 1;
+                    min-width: 0;
+                    background: none;
+                    border: none;
+                    padding: 7px 4px;
+                    text-align: left;
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-sm;
+                    font-weight: 500;
+                    color: variables.$color-gray-800;
+                    cursor: pointer;
+
+                    .history-item-icon {
+                        color: variables.$color-gray-400;
+                        flex-shrink: 0;
+                    }
+
+                    .history-item-text {
+                        flex: 1;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                }
+
+                .history-modal-item-time {
+                    font-size: variables.$font-size-xs;
+                    color: variables.$color-gray-400;
+                    white-space: nowrap;
+                    flex-shrink: 0;
+                }
+
+                .history-modal-item-remove {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: none;
+                    border: none;
+                    padding: 6px;
+                    color: variables.$color-gray-400;
+                    cursor: pointer;
+                    border-radius: 50%;
+                    flex-shrink: 0;
+
+                    @include variables.transition-ease;
+
+                    &:hover {
+                        color: variables.$color-danger;
+                        background-color: rgb(239 68 68 / 8%);
+                    }
+                }
+            }
+        }
+
+        // ── Empty states ────────────────────────────────────────────────────────
+        .history-modal-empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 40px 24px;
+            text-align: center;
+
+            .empty-icon {
+                color: variables.$color-gray-300;
+                margin-bottom: 4px;
+            }
+
+            .empty-title {
+                margin: 0;
+                font-size: variables.$font-size-sm;
+                font-weight: 700;
+                color: variables.$color-gray-700;
+            }
+
+            .empty-sub {
+                margin: 0;
+                font-size: variables.$font-size-sm;
+                color: variables.$color-gray-400;
+                max-width: 260px;
+                line-height: 1.5;
+            }
+
+            .empty-reset-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                margin-top: 8px;
+                padding: 7px 16px;
+                background-color: variables.$color-gray-100;
+                border: 1px solid variables.$color-gray-200;
+                border-radius: 9999px;
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-sm;
+                font-weight: 600;
+                color: variables.$color-gray-700;
+                cursor: pointer;
+
+                @include variables.transition-ease;
+
+                &:hover {
+                    background-color: variables.$color-gray-200;
+                }
+            }
+        }
+    }
+
+    // ── Modal footer ────────────────────────────────────────────────────────
+    .history-modal-footer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 12px;
+        border-top: 1px solid variables.$color-gray-100;
+
+        .history-modal-clear-all-btn {
+            background: none;
+            border: none;
+            color: variables.$color-danger;
+            font-size: variables.$font-size-sm;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: variables.$radius-tiny;
+
+            @include variables.transition-ease;
+
+            &:hover:not(:disabled) {
+                background-color: rgb(239 68 68 / 8%);
+            }
+
+            &:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+            }
+        }
+
+        .history-modal-close-btn {
+            padding: 7px 20px;
+            background-color: variables.$color-gray-100;
+            border: 1px solid variables.$color-gray-200;
+            border-radius: variables.$radius-tiny;
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-sm;
+            font-weight: 600;
+            color: variables.$color-gray-800;
+            cursor: pointer;
+
+            @include variables.transition-ease;
+
+            &:hover {
+                background-color: variables.$color-gray-200;
+            }
+        }
+    }
+}

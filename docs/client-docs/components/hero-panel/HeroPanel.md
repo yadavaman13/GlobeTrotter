@@ -7,7 +7,7 @@ A visual branding split-panel component displayed alongside login, registration,
 ## 1. Import Path
 
 ```javascript
-import HeroPanel from "@/components/Shared/HeroPanel/HeroPanel";
+import HeroPanel from '@/components/Shared/HeroPanel/HeroPanel';
 ```
 
 ---
@@ -25,17 +25,17 @@ import HeroPanel from "@/components/Shared/HeroPanel/HeroPanel";
 ## 3. Usage Example
 
 ```jsx
-import HeroPanel from "@/components/Shared/HeroPanel/HeroPanel";
-import LoginForm from "@/app/features/auth/components/LoginForm";
+import HeroPanel from '@/components/Shared/HeroPanel/HeroPanel';
+import LoginForm from '@/app/features/auth/components/LoginForm';
 
 export default function LoginLayout() {
-  return (
-    <div className="auth-split-layout">
-      <HeroPanel />
-      <div className="auth-form-container">
-        <LoginForm />
-      </div>
-    </div>
-  );
+    return (
+        <div className="auth-split-layout">
+            <HeroPanel />
+            <div className="auth-form-container">
+                <LoginForm />
+            </div>
+        </div>
+    );
 }
 ```

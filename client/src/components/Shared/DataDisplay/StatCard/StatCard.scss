@@ -1,0 +1,90 @@
+@use '../../../../styles/variables';
+
+.stat-card-container {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+    padding: 8px 16px;
+
+    @include variables.transition-ease;
+
+    .stat-icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1px solid variables.$color-gray-200;
+        color: variables.$color-primary;
+        background-color: variables.$color-white;
+        flex-shrink: 0;
+
+        @include variables.transition-ease;
+    }
+
+    .stat-details {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex-grow: 1;
+        min-width: 0;
+
+        .stat-title {
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-sm;
+            font-weight: 500;
+            color: variables.$color-gray-500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .stat-value-row {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+
+            .stat-value {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-xl;
+                font-weight: 700;
+                color: variables.$color-primary;
+            }
+
+            .stat-trend {
+                display: inline-flex;
+                align-items: center;
+                gap: 3px;
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-xs;
+                font-weight: 600;
+                padding: 2px 6px;
+                border-radius: variables.$radius-tiny;
+                flex-shrink: 0;
+
+                .trend-arrow {
+                    display: flex;
+                    align-items: center;
+                }
+
+                &.positive {
+                    color: variables.$color-success;
+                    background-color: rgba(variables.$color-success, 0.08);
+                }
+
+                &.negative {
+                    color: variables.$color-danger;
+                    background-color: rgba(variables.$color-danger, 0.08);
+                }
+            }
+        }
+    }
+}
+
+@media (width <= 600px) {
+    .stat-card-container {
+        padding: 12px 0;
+    }
+}

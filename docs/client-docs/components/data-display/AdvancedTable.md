@@ -7,7 +7,7 @@ A high-performance enterprise data table component designed with a **minimal-by-
 ## 1. Import Path
 
 ```javascript
-import AdvancedTable from "@/components/Shared/DataDisplay/AdvancedTable/AdvancedTable";
+import AdvancedTable from '@/components/Shared/DataDisplay/AdvancedTable/AdvancedTable';
 ```
 
 ---
@@ -73,13 +73,13 @@ import AdvancedTable from "@/components/Shared/DataDisplay/AdvancedTable/Advance
 
 ```typescript
 interface ColumnConfig {
-  key: string; // Field property key in row object
-  label: string; // Column header title
-  sortable?: boolean; // Controls if column is sortable
-  collapsible?: boolean; // Controls if column can be collapsed/hidden
-  width?: string; // Fixed or min width (e.g. '180px', '220px')
-  type?: "text" | "numeric" | "date" | "badge";
-  render?: (value: any, row: object) => ReactNode; // Custom cell renderer
+    key: string; // Field property key in row object
+    label: string; // Column header title
+    sortable?: boolean; // Controls if column is sortable
+    collapsible?: boolean; // Controls if column can be collapsed/hidden
+    width?: string; // Fixed or min width (e.g. '180px', '220px')
+    type?: 'text' | 'numeric' | 'date' | 'badge';
+    render?: (value: any, row: object) => ReactNode; // Custom cell renderer
 }
 ```
 
@@ -90,78 +90,74 @@ interface ColumnConfig {
 ### A. Minimal Table (Clean & Basic)
 
 ```jsx
-import AdvancedTable from "@/components/Shared/DataDisplay/AdvancedTable/AdvancedTable";
+import AdvancedTable from '@/components/Shared/DataDisplay/AdvancedTable/AdvancedTable';
 
 const columns = [
-  { key: "name", label: "Name" },
-  { key: "role", label: "Role" },
-  { key: "department", label: "Department" },
+    { key: 'name', label: 'Name' },
+    { key: 'role', label: 'Role' },
+    { key: 'department', label: 'Department' },
 ];
 
 export default function BasicEmployeeTable({ employees }) {
-  return <AdvancedTable columns={columns} data={employees} />;
+    return <AdvancedTable columns={columns} data={employees} />;
 }
 ```
 
 ### B. Enterprise Power Table (All Features Enabled)
 
 ```jsx
-import AdvancedTable from "@/components/Shared/DataDisplay/AdvancedTable/AdvancedTable";
-import Badge from "@/components/Shared/DataDisplay/Badge/Badge";
+import AdvancedTable from '@/components/Shared/DataDisplay/AdvancedTable/AdvancedTable';
+import Badge from '@/components/Shared/DataDisplay/Badge/Badge';
 
 const columns = [
-  { key: "employeeId", label: "Employee ID", sortable: true },
-  { key: "name", label: "Full Name", sortable: true },
-  { key: "role", label: "Designation", sortable: true },
-  {
-    key: "salary",
-    label: "Monthly CTC",
-    sortable: true,
-    render: (val) => `₹${Number(val).toLocaleString()}`,
-  },
-  {
-    key: "status",
-    label: "Status",
-    render: (val) => (
-      <Badge
-        variant={
-          val === "Active" ? "success" : val === "Leave" ? "warning" : "danger"
-        }
-      >
-        {val}
-      </Badge>
-    ),
-  },
+    { key: 'employeeId', label: 'Employee ID', sortable: true },
+    { key: 'name', label: 'Full Name', sortable: true },
+    { key: 'role', label: 'Designation', sortable: true },
+    {
+        key: 'salary',
+        label: 'Monthly CTC',
+        sortable: true,
+        render: (val) => `₹${Number(val).toLocaleString()}`,
+    },
+    {
+        key: 'status',
+        label: 'Status',
+        render: (val) => (
+            <Badge variant={val === 'Active' ? 'success' : val === 'Leave' ? 'warning' : 'danger'}>
+                {val}
+            </Badge>
+        ),
+    },
 ];
 
 export default function EmployeeWorkbench({ employees, isLoading, onRefresh }) {
-  return (
-    <AdvancedTable
-      columns={columns}
-      data={employees}
-      loading={isLoading}
-      tabFilterKey="status"
-      showSerialNumber={true}
-      showSortDropdown={true}
-      showColumnSorting={true}
-      showColumnToggle={true}
-      showFilter={true}
-      searchable={true}
-      searchPlaceholder="Search employees..."
-      initialRowsPerPage={10}
-      selectable={true}
-      showRefresh={true}
-      showExport={true}
-      showRowsPerPage={true}
-      showResultsCount={true}
-      showViewToggle={true}
-      gridColumns={4}
-      cardTitleKey="name"
-      cardSubtitleKey="role"
-      cardStatusKey="status"
-      cardBodyKeys={["salary", "employeeId"]}
-      onRefresh={onRefresh}
-    />
-  );
+    return (
+        <AdvancedTable
+            columns={columns}
+            data={employees}
+            loading={isLoading}
+            tabFilterKey="status"
+            showSerialNumber={true}
+            showSortDropdown={true}
+            showColumnSorting={true}
+            showColumnToggle={true}
+            showFilter={true}
+            searchable={true}
+            searchPlaceholder="Search employees..."
+            initialRowsPerPage={10}
+            selectable={true}
+            showRefresh={true}
+            showExport={true}
+            showRowsPerPage={true}
+            showResultsCount={true}
+            showViewToggle={true}
+            gridColumns={4}
+            cardTitleKey="name"
+            cardSubtitleKey="role"
+            cardStatusKey="status"
+            cardBodyKeys={['salary', 'employeeId']}
+            onRefresh={onRefresh}
+        />
+    );
 }
 ```

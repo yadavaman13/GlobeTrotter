@@ -1,0 +1,100 @@
+:root {
+    // ─── Airbnb Brand & Accent Colors ──────────────────────────────────────────
+    --primi-rausch: #ff385c;
+    --primi-rausch-active: #e00b41;
+    --primi-rausch-disabled: #ffd1da;
+    --primi-primary-error-text: #c13515;
+    --primi-primary-error-text-hover: #b32505;
+
+    // Sub-brand accents
+    --primi-luxe: #460479;
+    --primi-plus: #92174d;
+
+    // ─── Airbnb Surfaces & Canvas ──────────────────────────────────────────────
+    --primi-canvas: #fff;
+    --primi-surface-soft: #f7f7f7;
+    --primi-surface-card: #fff;
+    --primi-surface-strong: #f2f2f2;
+
+    // ─── Airbnb Hairlines & Borders ───────────────────────────────────────────
+    --primi-hairline: #ddd;
+    --primi-hairline-soft: #ebebeb;
+    --primi-border-strong: #c1c1c1;
+
+    // ─── Airbnb Typography & Text Colors ──────────────────────────────────────
+    --primi-ink: #222;
+    --primi-body: #3f3f3f;
+    --primi-muted: #6a6a6a;
+    --primi-muted-soft: #929292;
+    --primi-star-rating: #222;
+    --primi-on-primary: #fff;
+    --primi-on-dark: #fff;
+    --primi-legal-link: #428bff;
+
+    // ─── Overlays & Scrim ─────────────────────────────────────────────────────
+    --primi-scrim: #000;
+
+    // ─── Absolute Neutrals ────────────────────────────────────────────────────
+    --primi-black: #000;
+    --primi-white: #fff;
+
+    // ─── Gray Scale (Mapped to Design Tokens) ─────────────────────────────────
+    --primi-gray-50: #f7f7f7; // surface-soft
+    --primi-gray-100: #f2f2f2; // surface-strong
+    --primi-gray-200: #ebebeb; // hairline-soft
+    --primi-gray-300: #ddd; // hairline
+    --primi-gray-400: #c1c1c1; // border-strong
+    --primi-gray-500: #929292; // muted-soft
+    --primi-gray-600: #6a6a6a; // muted
+    --primi-gray-700: #3f3f3f; // body
+    --primi-gray-800: #222; // ink
+    --primi-gray-900: #141414; // high-contrast ink
+
+    // ─── Status Colors ────────────────────────────────────────────────────────
+    --primi-success: #10b981;
+    --primi-danger: #c13515;
+    --primi-warning: #f59e0b;
+    --primi-info: #428bff;
+
+    // ─── Brand Accents & Chart Colors ─────────────────────────────────────────
+    --primi-blue-accent: #a2c8fd;
+    --primi-blue-hover: #b9d7fe;
+    --primi-blue-dark: #2f54eb;
+    --primi-chart-this-month: #ff385c;
+    --primi-chart-last-month: #460479;
+    --primi-indigo: #4f46e5;
+    --primi-indigo-light: #6366f1;
+
+    // ─── Status Color Palettes ────────────────────────────────────────────────
+    // Danger
+    --primi-danger-light: #fff0f2;
+    --primi-danger-border: #ffd1da;
+    --primi-danger-dark: #b32505;
+
+    // Warning
+    --primi-warning-light: #fffbeb;
+    --primi-warning-border: #fde68a;
+    --primi-warning-dark: #854d0e;
+
+    // Success
+    --primi-success-light: #f0fdf4;
+    --primi-success-border: #bbf7d0;
+
+    // Info
+    --primi-info-light: #eff6ff;
+    --primi-info-border: #bfdbfe;
+
+    // ─── Extended Palette (badges/chips/tags) ─────────────────────────────────
+    --primi-teal: #0d9488;
+    --primi-teal-light: #f0fdfa;
+    --primi-teal-border: #99f6e4;
+    --primi-violet: #7c3aed;
+    --primi-purple: #460479;
+    --primi-purple-light: #faf5ff;
+    --primi-purple-border: #e9d5ff;
+    --primi-pink: #92174d;
+    --primi-pink-light: #fdf2f8;
+    --primi-pink-border: #fbcfe8;
+    --primi-orange-light: #fff7ed;
+    --primi-orange-border: #ffedd5;
+}

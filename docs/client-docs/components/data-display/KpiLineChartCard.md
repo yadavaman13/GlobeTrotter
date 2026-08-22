@@ -7,7 +7,7 @@ A dedicated KPI metric trend chart card combining numerical stats with an intera
 ## 1. Import Path
 
 ```javascript
-import KpiLineChartCard from "@/components/Shared/DataDisplay/KpiLineChartCard/KpiLineChartCard";
+import KpiLineChartCard from '@/components/Shared/DataDisplay/KpiLineChartCard/KpiLineChartCard';
 ```
 
 ---
@@ -28,17 +28,17 @@ import KpiLineChartCard from "@/components/Shared/DataDisplay/KpiLineChartCard/K
 ## 3. Usage Example
 
 ```jsx
-import KpiLineChartCard from "@/components/Shared/DataDisplay/KpiLineChartCard/KpiLineChartCard";
+import KpiLineChartCard from '@/components/Shared/DataDisplay/KpiLineChartCard/KpiLineChartCard';
 
 export default function SalesTrend() {
-  return (
-    <KpiLineChartCard
-      title="Monthly Sales Volume"
-      currentValue="₹4,25,000"
-      trendPercentage="+12.4%"
-      dataPoints={[30, 45, 60, 50, 75, 90, 110]}
-      labels={["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"]}
-    />
-  );
+    return (
+        <KpiLineChartCard
+            title="Monthly Sales Volume"
+            currentValue="₹4,25,000"
+            trendPercentage="+12.4%"
+            dataPoints={[30, 45, 60, 50, 75, 90, 110]}
+            labels={['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']}
+        />
+    );
 }
 ```

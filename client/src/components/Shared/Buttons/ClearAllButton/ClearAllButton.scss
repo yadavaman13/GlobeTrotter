@@ -1,0 +1,171 @@
+@use 'sass:color';
+@use '../../../../styles/variables';
+
+.shared-clear-all-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-family: variables.$font-sans;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    box-sizing: border-box;
+    white-space: nowrap;
+    user-select: none;
+    box-shadow: none;
+
+    @include variables.transition-ease;
+
+    .clear-btn-icon {
+        flex-shrink: 0;
+        stroke-width: 2.2px;
+
+        @include variables.transition-ease;
+    }
+
+    .clear-btn-label {
+        line-height: 1;
+    }
+
+    .clear-btn-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: variables.$font-size-xs;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 9999px;
+        line-height: 1;
+        margin-left: 2px;
+    }
+
+    /* Sizes */
+    &.size-sm {
+        height: auto;
+        font-size: variables.$font-size-sm;
+
+        .clear-btn-icon {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    &.size-md {
+        height: auto;
+        font-size: variables.$font-size-sm;
+
+        .clear-btn-icon {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    &.size-lg {
+        height: auto;
+        font-size: variables.$font-size-sm;
+
+        .clear-btn-icon {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    /* Variant: Danger (Clean Red) */
+    &.variant-danger {
+        background: transparent;
+        border: none;
+        color: variables.$color-danger;
+
+        .clear-btn-count {
+            background-color: rgb(225 29 72 / 10%);
+            color: variables.$color-danger;
+        }
+
+        &:hover:not(:disabled) {
+            background: transparent;
+            border: none;
+            color: variables.$color-danger;
+            box-shadow: none;
+            transform: none;
+            opacity: 0.85;
+        }
+    }
+
+    /* Variant: Warning (Clean Amber) */
+    &.variant-warning {
+        background: transparent;
+        border: none;
+        color: variables.$color-warning;
+
+        .clear-btn-count {
+            background-color: rgb(217 119 6 / 10%);
+            color: variables.$color-warning;
+        }
+
+        &:hover:not(:disabled) {
+            background: transparent;
+            border: none;
+            color: variables.$color-warning;
+            box-shadow: none;
+            transform: none;
+            opacity: 0.85;
+        }
+    }
+
+    /* Variant: Neutral (Clean Slate) */
+    &.variant-neutral {
+        background: transparent;
+        border: none;
+        color: variables.$color-gray-500;
+
+        .clear-btn-count {
+            background-color: variables.$color-gray-100;
+            color: variables.$color-gray-700;
+        }
+
+        &:hover:not(:disabled) {
+            background: transparent;
+            border: none;
+            color: variables.$color-gray-900;
+            box-shadow: none;
+            transform: none;
+            opacity: 0.85;
+        }
+    }
+
+    /* Variant: Info (Clean Blue) */
+    &.variant-info {
+        background: transparent;
+        border: none;
+        color: variables.$color-blue-dark;
+
+        .clear-btn-count {
+            background-color: rgb(37 99 235 / 10%);
+            color: variables.$color-blue-dark;
+        }
+
+        &:hover:not(:disabled) {
+            background: transparent;
+            border: none;
+            color: variables.$color-blue-dark;
+            box-shadow: none;
+            transform: none;
+            opacity: 0.85;
+        }
+    }
+
+    /* Disabled state */
+    &:disabled,
+    &.is-disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        background: transparent;
+        border: none;
+        transform: none;
+        box-shadow: none;
+    }
+}

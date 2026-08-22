@@ -7,7 +7,7 @@ A multi-line text input field matching the design language of `InputField`. Supp
 ## 1. Import Path
 
 ```javascript
-import Textarea from "@/components/Shared/Form/Textarea/Textarea";
+import Textarea from '@/components/Shared/Form/Textarea/Textarea';
 ```
 
 ---
@@ -36,24 +36,24 @@ import Textarea from "@/components/Shared/Form/Textarea/Textarea";
 ## 3. Usage Example
 
 ```jsx
-import { useState } from "react";
-import Textarea from "@/components/Shared/Form/Textarea/Textarea";
+import { useState } from 'react';
+import Textarea from '@/components/Shared/Form/Textarea/Textarea';
 
 export default function FeedbackForm() {
-  const [comments, setComments] = useState("");
+    const [comments, setComments] = useState('');
 
-  return (
-    <Textarea
-      label="Feedback & Notes"
-      id="user-feedback"
-      placeholder="Share your experience or bug report..."
-      value={comments}
-      onChange={(e) => setComments(e.target.value)}
-      maxLength={500}
-      autoResize
-      hint="Maximum 500 characters"
-      required
-    />
-  );
+    return (
+        <Textarea
+            label="Feedback & Notes"
+            id="user-feedback"
+            placeholder="Share your experience or bug report..."
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
+            maxLength={500}
+            autoResize
+            hint="Maximum 500 characters"
+            required
+        />
+    );
 }
 ```

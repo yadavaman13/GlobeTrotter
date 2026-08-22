@@ -7,7 +7,7 @@ A capsule/pill-styled tab selector component used for view filtering and section
 ## 1. Import Path
 
 ```javascript
-import TabPills from "@/components/Shared/Navigation/TabPills/TabPills";
+import TabPills from '@/components/Shared/Navigation/TabPills/TabPills';
 ```
 
 ---
@@ -25,22 +25,22 @@ import TabPills from "@/components/Shared/Navigation/TabPills/TabPills";
 ## 3. Usage Example
 
 ```jsx
-import { useState } from "react";
-import TabPills from "@/components/Shared/Navigation/TabPills/TabPills";
+import { useState } from 'react';
+import TabPills from '@/components/Shared/Navigation/TabPills/TabPills';
 
 export default function PeriodFilter() {
-  const [period, setPeriod] = useState("month");
+    const [period, setPeriod] = useState('month');
 
-  return (
-    <TabPills
-      tabs={[
-        { id: "day", label: "Daily" },
-        { id: "week", label: "Weekly" },
-        { id: "month", label: "Monthly" },
-      ]}
-      activeTab={period}
-      onTabChange={setPeriod}
-    />
-  );
+    return (
+        <TabPills
+            tabs={[
+                { id: 'day', label: 'Daily' },
+                { id: 'week', label: 'Weekly' },
+                { id: 'month', label: 'Monthly' },
+            ]}
+            activeTab={period}
+            onTabChange={setPeriod}
+        />
+    );
 }
 ```

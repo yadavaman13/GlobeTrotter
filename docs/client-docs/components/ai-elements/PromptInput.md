@@ -8,10 +8,10 @@ A feature-rich multi-line chat prompt input bar supporting voice input triggers,
 
 ```javascript
 import {
-  PromptInput,
-  PromptInputTextarea,
-  PromptInputActions,
-} from "@/components/ai-elements/prompt-input/prompt-input";
+    PromptInput,
+    PromptInputTextarea,
+    PromptInputActions,
+} from '@/components/ai-elements/prompt-input/prompt-input';
 ```
 
 ---
@@ -32,29 +32,29 @@ import {
 ## 3. Usage Example
 
 ```jsx
-import { useState } from "react";
-import { PromptInput } from "@/components/ai-elements/prompt-input/prompt-input";
-import { useChat } from "@/app/features/ai/hooks/useChat";
+import { useState } from 'react';
+import { PromptInput } from '@/components/ai-elements/prompt-input/prompt-input';
+import { useChat } from '@/app/features/ai/hooks/useChat';
 
 export default function ChatBar() {
-  const { sendMessage, isStreaming, stopStream } = useChat();
-  const [input, setInput] = useState("");
+    const { sendMessage, isStreaming, stopStream } = useChat();
+    const [input, setInput] = useState('');
 
-  const handleSend = () => {
-    if (!input.trim() || isStreaming) return;
-    sendMessage(input);
-    setInput("");
-  };
+    const handleSend = () => {
+        if (!input.trim() || isStreaming) return;
+        sendMessage(input);
+        setInput('');
+    };
 
-  return (
-    <PromptInput
-      value={input}
-      onChange={(e) => setInput(e.target.value)}
-      onSubmit={handleSend}
-      isStreaming={isStreaming}
-      onStop={stopStream}
-      placeholder="Ask anything about your Odoo CRM deals..."
-    />
-  );
+    return (
+        <PromptInput
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onSubmit={handleSend}
+            isStreaming={isStreaming}
+            onStop={stopStream}
+            placeholder="Ask anything about your Odoo CRM deals..."
+        />
+    );
 }
 ```

@@ -7,7 +7,7 @@ A smooth loading spinner component supporting multiple sizes, colors, and center
 ## 1. Import Path
 
 ```javascript
-import Spinner from "@/components/Shared/Feedback/Spinner/Spinner";
+import Spinner from '@/components/Shared/Feedback/Spinner/Spinner';
 ```
 
 ---
@@ -26,12 +26,12 @@ import Spinner from "@/components/Shared/Feedback/Spinner/Spinner";
 ## 3. Usage Example
 
 ```jsx
-import Spinner from "@/components/Shared/Feedback/Spinner/Spinner";
+import Spinner from '@/components/Shared/Feedback/Spinner/Spinner';
 
 export default function LoadingContainer({ isLoading, children }) {
-  if (isLoading) {
-    return <Spinner size="lg" centered />;
-  }
-  return children;
+    if (isLoading) {
+        return <Spinner size="lg" centered />;
+    }
+    return children;
 }
 ```
