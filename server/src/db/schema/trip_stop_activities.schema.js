@@ -17,9 +17,7 @@ import { activities } from './activities.schema.js';
 export const tripStopActivities = pgTable(
     'trip_stop_activities',
     {
-        id: uuid('id')
-            .defaultRandom()
-            .primaryKey(),
+        id: uuid('id').defaultRandom().primaryKey(),
 
         tripStopId: uuid('trip_stop_id')
             .notNull()
@@ -41,9 +39,7 @@ export const tripStopActivities = pgTable(
 
         endTime: time('end_time'),
 
-        sequenceOrder: integer('sequence_order')
-            .default(1)
-            .notNull(),
+        sequenceOrder: integer('sequence_order').default(1).notNull(),
 
         notes: text('notes'),
 
@@ -61,41 +57,25 @@ export const tripStopActivities = pgTable(
     },
 
     (table) => ({
-        stopIdx: index(
-            'trip_stop_activities_stop_idx',
-        ).on(table.tripStopId),
+        stopIdx: index('trip_stop_activities_stop_idx').on(table.tripStopId),
 
-        activityIdx: index(
-            'trip_stop_activities_activity_idx',
-        ).on(table.activityId),
+        activityIdx: index('trip_stop_activities_activity_idx').on(table.activityId),
 
-        dateIdx: index(
-            'trip_stop_activities_date_idx',
-        ).on(
-            table.tripStopId,
-            table.activityDate,
-        ),
+        dateIdx: index('trip_stop_activities_date_idx').on(table.tripStopId, table.activityDate),
 
-        sequenceIdx: index(
-            'trip_stop_activities_sequence_idx',
-        ).on(
+        sequenceIdx: index('trip_stop_activities_sequence_idx').on(
             table.tripStopId,
             table.sequenceOrder,
         ),
 
-        duplicateActivityUnique: uniqueIndex(
-            'trip_stop_activities_unique',
-        ).on(
+        duplicateActivityUnique: uniqueIndex('trip_stop_activities_unique').on(
             table.tripStopId,
             table.activityId,
             table.activityDate,
             table.startTime,
         ),
 
-        sequenceCheck: check(
-            'trip_stop_activities_sequence_check',
-            sql`sequence_order > 0`,
-        ),
+        sequenceCheck: check('trip_stop_activities_sequence_check', sql`sequence_order > 0`),
 
         timeCheck: check(
             'trip_stop_activities_time_check',

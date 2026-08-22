@@ -1,10 +1,4 @@
-import {
-    pgTable,
-    uuid,
-    timestamp,
-    index,
-    uniqueIndex,
-} from 'drizzle-orm/pg-core';
+import { pgTable, uuid, timestamp, index, uniqueIndex } from 'drizzle-orm/pg-core';
 
 import { trips } from './trips.schema.js';
 import { users } from './users.schema.js';
@@ -12,9 +6,7 @@ import { users } from './users.schema.js';
 export const tripShares = pgTable(
     'trip_shares',
     {
-        id: uuid('id')
-            .defaultRandom()
-            .primaryKey(),
+        id: uuid('id').defaultRandom().primaryKey(),
 
         tripId: uuid('trip_id')
             .notNull()
@@ -42,19 +34,10 @@ export const tripShares = pgTable(
     },
 
     (table) => ({
-        tripIdx: index(
-            'trip_shares_trip_idx',
-        ).on(table.tripId),
+        tripIdx: index('trip_shares_trip_idx').on(table.tripId),
 
-        sharedWithUserIdx: index(
-            'trip_shares_shared_with_user_idx',
-        ).on(table.sharedWithUserId),
+        sharedWithUserIdx: index('trip_shares_shared_with_user_idx').on(table.sharedWithUserId),
 
-        uniqueShare: uniqueIndex(
-            'trip_shares_unique_idx',
-        ).on(
-            table.tripId,
-            table.sharedWithUserId,
-        ),
+        uniqueShare: uniqueIndex('trip_shares_unique_idx').on(table.tripId, table.sharedWithUserId),
     }),
 );

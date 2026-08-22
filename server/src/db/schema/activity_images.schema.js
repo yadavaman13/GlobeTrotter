@@ -1,21 +1,11 @@
-import {
-    pgTable,
-    uuid,
-    text,
-    integer,
-    timestamp,
-    index,
-    check,
-} from 'drizzle-orm/pg-core';
+import { pgTable, uuid, text, integer, timestamp, index, check } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { activities } from './activities.schema.js';
 
 export const activityImages = pgTable(
     'activity_images',
     {
-        id: uuid('id')
-            .defaultRandom()
-            .primaryKey(),
+        id: uuid('id').defaultRandom().primaryKey(),
 
         activityId: uuid('activity_id')
             .notNull()
@@ -23,12 +13,9 @@ export const activityImages = pgTable(
                 onDelete: 'cascade',
             }),
 
-        imageUrl: text('image_url')
-            .notNull(),
+        imageUrl: text('image_url').notNull(),
 
-        displayOrder: integer('display_order')
-            .default(0)
-            .notNull(),
+        displayOrder: integer('display_order').default(0).notNull(),
 
         createdAt: timestamp('created_at', {
             withTimezone: true,
@@ -38,20 +25,10 @@ export const activityImages = pgTable(
     },
 
     (table) => ({
-        activityIdx: index(
-            'activity_images_activity_idx',
-        ).on(table.activityId),
+        activityIdx: index('activity_images_activity_idx').on(table.activityId),
 
-        orderIdx: index(
-            'activity_images_order_idx',
-        ).on(
-            table.activityId,
-            table.displayOrder,
-        ),
+        orderIdx: index('activity_images_order_idx').on(table.activityId, table.displayOrder),
 
-        orderCheck: check(
-            'activity_images_order_check',
-            sql`display_order >= 0`,
-        ),
+        orderCheck: check('activity_images_order_check', sql`display_order >= 0`),
     }),
 );
