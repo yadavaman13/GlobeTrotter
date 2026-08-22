@@ -1,10 +1,10 @@
-import { useMemo, useCallback } from 'react';
 import CircularAvatar from '@/components/Shared/DataDisplay/CircularAvatar/CircularAvatar';
 import Pagination from '@/components/Shared/Navigation/Pagination/Pagination';
 import Button from '@/components/Shared/Buttons/Button/Button';
 import { UserStatusBadge, UserRoleBadge } from '../UserStatusBadge/UserStatusBadge';
-import { Eye, Shield, UserX, UserCheck, Trash2, RotateCcw, MoreVertical } from 'lucide-react';
+import { Eye, Shield, UserX, UserCheck, Trash2, RotateCcw } from 'lucide-react';
 import './UserTable.scss';
+
 
 export function UserTable({
     users = [],

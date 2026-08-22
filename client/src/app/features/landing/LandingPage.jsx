@@ -155,15 +155,51 @@ export default function LandingPage() {
                         GlobeTrotter
                     </div>
                     <nav className="nav-menu">
-                        <a className="nav-item active" href="/">
+                        <a
+                            className="nav-item active"
+                            href="/"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                navigate('/');
+                            }}
+                        >
                             Explore
                         </a>
-                        <a className="nav-item" href="/me/trips">
+                        <a
+                            className="nav-item"
+                            href="/me/trips"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                navigate('/me/trips');
+                            }}
+                        >
                             My Trips
                         </a>
-                        <a className="nav-item" href="/dashboard/user/analytics/insight">
+                        <a
+                            className="nav-item"
+                            href="#search-anchor"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                const searchEl = document.getElementById('search-anchor');
+                                if (searchEl) {
+                                    searchEl.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
+                        >
                             Discover Experiences
                         </a>
+                        {user?.role?.toLowerCase() === 'admin' && (
+                            <a
+                                className="nav-item"
+                                href="/dashboard/admin/home"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    navigate('/dashboard/admin/home');
+                                }}
+                            >
+                                Dashboard
+                            </a>
+                        )}
                     </nav>
                     <div className="nav-actions">
                         <button className="icon-btn">
@@ -172,13 +208,19 @@ export default function LandingPage() {
                         {user ? (
                             <div
                                 className="avatar-wrapper"
-                                onClick={() => navigate('/me/profile')}
-                                title={`Logged in as ${user.name || 'User'}`}
+                                onClick={() =>
+                                    navigate(
+                                        user?.role?.toLowerCase() === 'admin'
+                                            ? '/dashboard/admin/home'
+                                            : '/me/profile',
+                                    )
+                                }
+                                title={`Logged in as ${user.name || user.firstName || 'User'}`}
                             >
                                 {user.profileImage ? (
                                     <img
                                         src={user.profileImage}
-                                        alt={user.name}
+                                        alt={user.name || user.firstName || 'User'}
                                         className="user-avatar"
                                     />
                                 ) : (
@@ -193,6 +235,9 @@ export default function LandingPage() {
                             </button>
                         )}
                     </div>
+
+
+
                 </div>
             </header>
 

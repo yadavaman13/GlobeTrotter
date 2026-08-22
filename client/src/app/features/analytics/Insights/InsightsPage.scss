@@ -1,50 +1,271 @@
 @use '@/styles/variables' as variables;
 
+$page-bg: #fafaf9;
+$crimson-tag: #e11d48;
+$title-dark: #0f172a;
+$export-btn-bg: #991b1b;
+$export-btn-hover: #7f1d1d;
+$pill-active-bg: #1e293b;
+
 .analytics-insights-page {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: variables.$spacing-base;
+    min-height: 100vh;
+    background-color: $page-bg;
     box-sizing: border-box;
 
-    .analytics-error-banner {
-        display: flex;
-        align-items: center;
-        padding: variables.$spacing-sm variables.$spacing-base;
-        background-color: variables.$color-danger-light;
-        border: 1px solid variables.$color-danger-border;
-        border-radius: variables.$radius-sm;
-        color: variables.$color-danger;
-        font-size: variables.$font-size-sm;
-        margin-bottom: variables.$spacing-md;
+    .analytics-main-container {
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 36px 32px;
+        box-sizing: border-box;
+
+        .analytics-hero-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: variables.$spacing-lg;
+
+            .hero-title-group {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+
+                .control-center-tag {
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-micro;
+                    font-weight: 800;
+                    color: $crimson-tag;
+                    letter-spacing: 0.06em;
+                    text-transform: uppercase;
+                }
+
+                .main-page-title {
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-display-xl;
+                    font-weight: 800;
+                    color: $title-dark;
+                    letter-spacing: -0.03em;
+                    margin: 0;
+                    line-height: 1.15;
+                }
+            }
+
+            .hero-action-buttons {
+                display: flex;
+                align-items: center;
+                gap: variables.$spacing-sm;
+
+                .btn-download-pdf {
+                    display: flex;
+                    align-items: center;
+                    gap: variables.$spacing-xs;
+                    height: 42px;
+                    padding: 0 20px;
+                    background-color: variables.$color-white;
+                    border: 1px solid variables.$color-gray-200;
+                    border-radius: variables.$radius-full;
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-caption-sm;
+                    font-weight: 600;
+                    color: variables.$color-gray-800;
+                    cursor: pointer;
+                    box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
+                    transition: all 0.15s ease;
+
+                    &:hover {
+                        background-color: variables.$color-gray-50;
+                        border-color: variables.$color-gray-300;
+                        color: variables.$color-black;
+                    }
+                }
+
+                .btn-export-report {
+                    display: flex;
+                    align-items: center;
+                    gap: variables.$spacing-xs;
+                    height: 42px;
+                    padding: 0 22px;
+                    background-color: $export-btn-bg;
+                    border: none;
+                    border-radius: variables.$radius-full;
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-caption-sm;
+                    font-weight: 600;
+                    color: variables.$color-white;
+                    cursor: pointer;
+                    box-shadow: 0 2px 6px rgb(153 27 27 / 25%);
+                    transition: all 0.15s ease;
+
+                    &:hover {
+                        background-color: $export-btn-hover;
+                        transform: translateY(-1px);
+                        box-shadow: 0 4px 12px rgb(153 27 27 / 35%);
+                    }
+                }
+            }
+        }
+
+        .analytics-filter-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: variables.$color-white;
+            border: 1px solid variables.$color-gray-200;
+            border-radius: variables.$radius-full;
+            padding: 8px 16px 8px 20px;
+            margin-bottom: variables.$spacing-lg;
+            box-shadow: 0 1px 3px rgb(0 0 0 / 2%);
+
+            .analytics-search-input-box {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                flex: 1;
+                max-width: 320px;
+
+                .search-icon {
+                    color: variables.$color-gray-400;
+                    flex-shrink: 0;
+                }
+
+                .search-input {
+                    border: none;
+                    background: transparent;
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-caption-sm;
+                    color: variables.$color-gray-800;
+                    outline: none;
+                    width: 100%;
+
+                    &::placeholder {
+                        color: variables.$color-gray-400;
+                    }
+                }
+            }
+
+            .date-range-filter-group {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+
+                .date-range-label {
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-caption-sm;
+                    font-weight: 700;
+                    color: $title-dark;
+                }
+
+                .date-range-pills {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+
+                    .date-pill {
+                        padding: 7px 16px;
+                        border-radius: variables.$radius-full;
+                        border: 1px solid transparent;
+                        background: transparent;
+                        font-family: variables.$font-sans;
+                        font-size: variables.$font-size-caption-sm;
+                        font-weight: 600;
+                        color: variables.$color-gray-700;
+                        cursor: pointer;
+                        transition: all 0.15s ease;
+
+                        &:hover {
+                            background-color: variables.$color-gray-100;
+                            color: variables.$color-black;
+                        }
+
+                        &.active {
+                            background-color: $pill-active-bg;
+                            color: variables.$color-white;
+                            box-shadow: 0 2px 6px rgb(30 41 59 / 20%);
+                        }
+                    }
+                }
+            }
+        }
+
+        .analytics-error-banner {
+            display: flex;
+            align-items: center;
+            padding: variables.$spacing-sm variables.$spacing-base;
+            background-color: variables.$color-danger-light;
+            border: 1px solid variables.$color-danger-border;
+            border-radius: variables.$radius-sm;
+            color: variables.$color-danger;
+            font-size: variables.$font-size-sm;
+            margin-bottom: variables.$spacing-md;
+        }
+
+        .analytics-charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: variables.$spacing-base;
+            margin-bottom: variables.$spacing-base;
+
+            @include variables.tablet {
+                grid-template-columns: 1fr;
+            }
+
+            @include variables.mobile {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .analytics-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: variables.$spacing-base;
+
+            @include variables.tablet {
+                grid-template-columns: 1fr;
+            }
+
+            @include variables.mobile {
+                grid-template-columns: 1fr;
+            }
+        }
     }
+}
 
-    .analytics-charts-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: variables.$spacing-base;
-        margin-bottom: variables.$spacing-base;
+@media (width <= 900px) {
+    .analytics-insights-page .analytics-main-container {
+        padding: 24px 16px;
 
-        @include variables.tablet {
-            grid-template-columns: 1fr;
+        .analytics-hero-header {
+            flex-direction: column;
+            gap: 16px;
+
+            .hero-action-buttons {
+                width: 100%;
+                justify-content: flex-start;
+            }
         }
 
-        @include variables.mobile {
-            grid-template-columns: 1fr;
-        }
-    }
+        .analytics-filter-toolbar {
+            flex-direction: column;
+            border-radius: variables.$radius-lg;
+            padding: 16px;
+            gap: 14px;
+            align-items: flex-start;
 
-    .analytics-details-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: variables.$spacing-base;
+            .analytics-search-input-box {
+                max-width: 100%;
+                width: 100%;
+                border-bottom: 1px solid variables.$color-gray-100;
+                padding-bottom: 10px;
+            }
 
-        @include variables.tablet {
-            grid-template-columns: 1fr;
-        }
-
-        @include variables.mobile {
-            grid-template-columns: 1fr;
+            .date-range-filter-group {
+                width: 100%;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
         }
     }
 }

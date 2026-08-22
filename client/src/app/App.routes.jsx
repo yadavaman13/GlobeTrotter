@@ -3,6 +3,7 @@ import App from './App';
 import DashboardLayout from '@/app/features/dashboard/DashboardLayout/DashboardLayout';
 import DashboardIndex from '@/app/features/dashboard/DashboardIndex';
 import ProtectedRoute from '@/app/features/auth/components/ProtectedRoute';
+import NotFoundPage from '@/components/Shared/ErrorPages/NotFoundPage/NotFoundPage';
 import { loadFeatureRoutes } from './routes.loader';
 import LandingPage from '@/app/features/landing/LandingPage';
 
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
             {
                 path: 'dashboard',
                 element: (
-                    <ProtectedRoute>
+                    <ProtectedRoute allowedRoles={['admin']}>
                         <DashboardLayout />
                     </ProtectedRoute>
                 ),
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: 'user',
+                        element: (
+                            <ProtectedRoute allowedRoles={['admin']}>
+                                <Outlet />
+                            </ProtectedRoute>
+                        ),
                         children: [
                             {
                                 index: true,
@@ -63,8 +69,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '*',
-                element: <Navigate to="/login" replace />,
+                element: <NotFoundPage onActionClick={() => window.location.replace('/')} />,
             },
         ],
     },
 ]);
+
