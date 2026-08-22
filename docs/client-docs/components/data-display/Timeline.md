@@ -7,7 +7,7 @@ A vertical event timeline stream component displaying milestones, audit history,
 ## 1. Import Path
 
 ```javascript
-import Timeline from "@/components/Shared/DataDisplay/Timeline/Timeline";
+import Timeline from '@/components/Shared/DataDisplay/Timeline/Timeline';
 ```
 
 ---
@@ -24,9 +24,9 @@ import Timeline from "@/components/Shared/DataDisplay/Timeline/Timeline";
 ## 3. Usage Example
 
 ```jsx
-import Timeline from "@/components/Shared/DataDisplay/Timeline/Timeline";
+import Timeline from '@/components/Shared/DataDisplay/Timeline/Timeline';
 
 export default function OrderAuditTrail({ events }) {
-  return <Timeline events={events} />;
+    return <Timeline events={events} />;
 }
 ```

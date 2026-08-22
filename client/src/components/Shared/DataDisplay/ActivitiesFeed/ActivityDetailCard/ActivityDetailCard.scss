@@ -1,0 +1,60 @@
+@use '../../../../../styles/variables';
+
+.activity-detail-card-container {
+    background-color: variables.$color-white;
+    border: 1px solid variables.$color-gray-200;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 3%);
+    transition: all 0.25s ease;
+    width: 100%;
+    box-sizing: border-box;
+
+    &.is-clickable {
+        cursor: pointer;
+
+        &:hover {
+            border-color: variables.$color-gray-300;
+            box-shadow: 0 4px 14px rgb(0 0 0 / 5%);
+            transform: translateY(-1px);
+        }
+    }
+
+    .activity-detail-title-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .activity-detail-title {
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-sm;
+            font-weight: 700;
+            color: variables.$color-gray-900;
+            letter-spacing: -0.01em;
+        }
+
+        .activity-detail-code {
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-xs;
+            font-weight: 500;
+            color: variables.$color-gray-400;
+        }
+    }
+
+    .activity-detail-badge-row {
+        display: flex;
+        align-items: center;
+
+        .badge-container {
+            font-size: variables.$font-size-xxs;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 9999px;
+        }
+    }
+}

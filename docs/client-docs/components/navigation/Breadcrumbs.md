@@ -7,7 +7,7 @@ A hierarchical trail navigation component linking parent routes with active chil
 ## 1. Import Path
 
 ```javascript
-import Breadcrumbs from "@/components/Shared/Navigation/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from '@/components/Shared/Navigation/Breadcrumbs/Breadcrumbs';
 ```
 
 ---
@@ -23,17 +23,17 @@ import Breadcrumbs from "@/components/Shared/Navigation/Breadcrumbs/Breadcrumbs"
 ## 3. Usage Example
 
 ```jsx
-import Breadcrumbs from "@/components/Shared/Navigation/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from '@/components/Shared/Navigation/Breadcrumbs/Breadcrumbs';
 
 export default function AnalyticsBreadcrumb() {
-  return (
-    <Breadcrumbs
-      items={[
-        { label: "Dashboard", path: "/dashboard" },
-        { label: "Analytics", path: "/dashboard/user/analytics" },
-        { label: "Revenue Insights" },
-      ]}
-    />
-  );
+    return (
+        <Breadcrumbs
+            items={[
+                { label: 'Dashboard', path: '/dashboard' },
+                { label: 'Analytics', path: '/dashboard/user/analytics' },
+                { label: 'Revenue Insights' },
+            ]}
+        />
+    );
 }
 ```

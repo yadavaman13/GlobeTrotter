@@ -7,7 +7,7 @@ A standalone, accessible monthly calendar grid widget supporting single-date sel
 ## 1. Import Path
 
 ```javascript
-import Calendar from "@/components/Shared/Form/Calendar/Calendar";
+import Calendar from '@/components/Shared/Form/Calendar/Calendar';
 ```
 
 ---
@@ -27,16 +27,16 @@ import Calendar from "@/components/Shared/Form/Calendar/Calendar";
 ## 3. Usage Example
 
 ```jsx
-import { useState } from "react";
-import Calendar from "@/components/Shared/Form/Calendar/Calendar";
+import { useState } from 'react';
+import Calendar from '@/components/Shared/Form/Calendar/Calendar';
 
 export default function CalendarWidget() {
-  const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(new Date());
 
-  return (
-    <div className="calendar-panel">
-      <Calendar selectedDate={date} onSelectDate={setDate} />
-    </div>
-  );
+    return (
+        <div className="calendar-panel">
+            <Calendar selectedDate={date} onSelectDate={setDate} />
+        </div>
+    );
 }
 ```

@@ -7,7 +7,7 @@ An interactive tool approval prompt rendered in the chat stream when an AI agent
 ## 1. Import Path
 
 ```javascript
-import { Confirmation } from "@/components/ai-elements/confirmation/confirmation";
+import { Confirmation } from '@/components/ai-elements/confirmation/confirmation';
 ```
 
 ---
@@ -27,20 +27,16 @@ import { Confirmation } from "@/components/ai-elements/confirmation/confirmation
 ## 3. Usage Example
 
 ```jsx
-import { Confirmation } from "@/components/ai-elements/confirmation/confirmation";
+import { Confirmation } from '@/components/ai-elements/confirmation/confirmation';
 
-export default function ToolApprovalCard({
-  toolCall,
-  handleApprove,
-  handleReject,
-}) {
-  return (
-    <Confirmation
-      title="Update Lead Stage"
-      description="Move deal 'Acme Corp' to Closed Won with value ₹1,50,000?"
-      onApprove={handleApprove}
-      onReject={handleReject}
-    />
-  );
+export default function ToolApprovalCard({ toolCall, handleApprove, handleReject }) {
+    return (
+        <Confirmation
+            title="Update Lead Stage"
+            description="Move deal 'Acme Corp' to Closed Won with value ₹1,50,000?"
+            onApprove={handleApprove}
+            onReject={handleReject}
+        />
+    );
 }
 ```

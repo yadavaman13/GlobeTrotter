@@ -53,77 +53,77 @@ These routes handle signups, verification states, credentials verification, pass
 - **Middlewares:** `authRateLimiter` (sliding-window, max 3 requests per 15 minutes).
 - **Validators:** `registerValidator` (asserts `firstName`, `lastName`, `email`, and `password` min 6 characters).
 - **Execution Flow:**
-  - Standardizes the email parameter (`normalizeEmail`).
-  - Verifies that the email isn't already registered in the DB.
-  - Checks Redis caching key `verified_email:${normalizedEmail}` to verify if registration email verification was completed pre-emptively.
-  - If verified, sets user state `emailVerified = true`. If unverified, issues an OTP code to the email address.
-  - Hashes password via bcrypt (salt work factor: 10).
-  - Creates the user table record.
-  - Signs a JWT and places it in an HttpOnly cookie (`token`). Returns a successful payload response.
+    - Standardizes the email parameter (`normalizeEmail`).
+    - Verifies that the email isn't already registered in the DB.
+    - Checks Redis caching key `verified_email:${normalizedEmail}` to verify if registration email verification was completed pre-emptively.
+    - If verified, sets user state `emailVerified = true`. If unverified, issues an OTP code to the email address.
+    - Hashes password via bcrypt (salt work factor: 10).
+    - Creates the user table record.
+    - Signs a JWT and places it in an HttpOnly cookie (`token`). Returns a successful payload response.
 
 #### 2. Send Verification OTP (`POST /send-verification-otp`)
 
 - **Middlewares:** `authRateLimiter`.
 - **Validators:** `sendVerificationOtpValidator` (asserts valid `email`).
 - **Execution Flow:**
-  - Standardizes email.
-  - Invokes `issueOtp` with purpose `verify`. This caches the OTP values inside Redis under key `verify:${email}` and triggers an email dispatch.
+    - Standardizes email.
+    - Invokes `issueOtp` with purpose `verify`. This caches the OTP values inside Redis under key `verify:${email}` and triggers an email dispatch.
 
 #### 3. Log In (`POST /login`)
 
 - **Middlewares:** `authRateLimiter`.
 - **Validators:** `loginValidator` (asserts `email` and `password` presence).
 - **Execution Flow:**
-  - Fetches the user record by email, including soft-deleted entries.
-  - If the user has soft-delete enabled (`isDeleted = true`) and is within the 15-day recovery window, returns a `403 Forbidden` response offering account recovery.
-  - If the recovery window has expired, returns a `410 Gone` response.
-  - Compares credentials using `bcrypt.compare`.
-  - Sets an HttpOnly cookie containing the signed JWT payload. If `rememberMe = true` is passed, set cookie expiration for 15 days (default: 1 day).
+    - Fetches the user record by email, including soft-deleted entries.
+    - If the user has soft-delete enabled (`isDeleted = true`) and is within the 15-day recovery window, returns a `403 Forbidden` response offering account recovery.
+    - If the recovery window has expired, returns a `410 Gone` response.
+    - Compares credentials using `bcrypt.compare`.
+    - Sets an HttpOnly cookie containing the signed JWT payload. If `rememberMe = true` is passed, set cookie expiration for 15 days (default: 1 day).
 
 #### 4. Account Soft-Delete Request Recovery (`POST /recover-account/request`)
 
 - **Middlewares:** `authRateLimiter`.
 - **Validators:** `recoverAccountValidator`.
 - **Execution Flow:**
-  - Verifies that the account is flagged as soft-deleted in Postgres.
-  - Generates and dispatches an account recovery verification OTP to the user's email, caching it under Redis key `recover-account:${email}`.
+    - Verifies that the account is flagged as soft-deleted in Postgres.
+    - Generates and dispatches an account recovery verification OTP to the user's email, caching it under Redis key `recover-account:${email}`.
 
 #### 5. Verify Account Recovery (`POST /recover-account/verify`)
 
 - **Validators:** `verifyRecoverAccountValidator` (asserts `email` and 6-char `otp`).
 - **Execution Flow:**
-  - Validates the code against Redis cache value `recover-account:${email}`.
-  - If valid, sets user state fields: `isDeleted = false`, `isActive = true`, `deletedAt = null`, `recoveryExpiresAt = null`.
-  - Sends a confirmation notification email to the user.
+    - Validates the code against Redis cache value `recover-account:${email}`.
+    - If valid, sets user state fields: `isDeleted = false`, `isActive = true`, `deletedAt = null`, `recoveryExpiresAt = null`.
+    - Sends a confirmation notification email to the user.
 
 #### 6. Forgot Password (`POST /forgot-password`)
 
 - **Middlewares:** `authRateLimiter`.
 - **Validators:** `forgotPasswordValidator`.
 - **Execution Flow:**
-  - Generates and sends a reset password OTP using cache key `forgot-password:${email}`.
+    - Generates and sends a reset password OTP using cache key `forgot-password:${email}`.
 
 #### 7. Verify Forgot Password OTP (`POST /verify-forgot-password-otp`)
 
 - **Validators:** `verifyForgotPasswordOtpValidator`.
 - **Execution Flow:**
-  - Validates the token against Redis key `forgot-password:${email}`. Returns a validation success message.
+    - Validates the token against Redis key `forgot-password:${email}`. Returns a validation success message.
 
 #### 8. Reset Password (`POST /reset-password`)
 
 - **Validators:** `resetPasswordValidator` (asserts `email`, 6-char `otp`, `password` meeting complexity guidelines, and matching `confirmPassword`).
 - **Execution Flow:**
-  - Verifies the OTP cached under Redis key `forgot-password:${email}`.
-  - Hashes the new password via bcrypt and updates the user table record.
-  - Deletes the cached Redis OTP key.
+    - Verifies the OTP cached under Redis key `forgot-password:${email}`.
+    - Hashes the new password via bcrypt and updates the user table record.
+    - Deletes the cached Redis OTP key.
 
 #### 9. Log Out (`POST /logout`)
 
 - **Execution Flow:**
-  - Extracts the JWT `token` from incoming cookies or headers.
-  - Computes the remaining TTL validity of the token.
-  - Caches the token inside the Redis blacklist (`blacklist:${token}`) using the calculated TTL.
-  - Clears the client-side cookie `token`.
+    - Extracts the JWT `token` from incoming cookies or headers.
+    - Computes the remaining TTL validity of the token.
+    - Caches the token inside the Redis blacklist (`blacklist:${token}`) using the calculated TTL.
+    - Clears the client-side cookie `token`.
 
 ---
 
@@ -134,29 +134,29 @@ All routes require authentication via the [`protect`](../../server/src/modules/a
 #### 1. Retrieve Current Profile (`GET /get-me`)
 
 - **Execution Flow:**
-  - Reads the active user payload attached to `req.user` by the `protect` middleware and returns a sanitized JSON user profile object.
+    - Reads the active user payload attached to `req.user` by the `protect` middleware and returns a sanitized JSON user profile object.
 
 #### 2. Update Profile Properties (`PATCH /profile`)
 
 - **Validators:** `updateProfileValidator` (asserts string formats for optional properties `firstName`, `lastName`, `email`, and `profileImage`).
 - **Execution Flow:**
-  - Performs an update query on the `users` table scoped to `req.user.id`.
-  - Returns the updated, sanitized user profile document.
+    - Performs an update query on the `users` table scoped to `req.user.id`.
+    - Returns the updated, sanitized user profile document.
 
 #### 3. Upload Profile Avatar (`PATCH /profile/avatar`)
 
 - **Middlewares:** Multer middleware configuration `upload.single('avatar')` (buffers standard incoming images to system RAM memory).
 - **Execution Flow:**
-  - Invokes `uploadImageOnImageKit()` using the buffered file.
-  - Performs a Drizzle table update mapping `req.user.id`'s `profileImage` to the returned ImageKit asset CDN URL.
+    - Invokes `uploadImageOnImageKit()` using the buffered file.
+    - Performs a Drizzle table update mapping `req.user.id`'s `profileImage` to the returned ImageKit asset CDN URL.
 
 #### 4. Delete Account / Soft-Delete Trigger (`DELETE /me`)
 
 - **Validators:** `deleteAccountValidator` (asserts current user `password` payload to confirm intent).
 - **Execution Flow:**
-  - Verifies password authenticity via bcrypt.
-  - Calls `softDeleteUser(req.user.id)`. This sets `isDeleted = true`, `isActive = false`, and sets `recoveryExpiresAt = NOW + 15 days`.
-  - Logs the user out by blacklisting their active JWT in Redis and clearing the cookie context.
+    - Verifies password authenticity via bcrypt.
+    - Calls `softDeleteUser(req.user.id)`. This sets `isDeleted = true`, `isActive = false`, and sets `recoveryExpiresAt = NOW + 15 days`.
+    - Logs the user out by blacklisting their active JWT in Redis and clearing the cookie context.
 
 ---
 
@@ -167,20 +167,20 @@ These administrative routes require both [`protect`](../../server/src/modules/au
 #### 1. List Users (`GET /users`)
 
 - **Execution Flow:**
-  - Reads all users from Postgres (`users` table). Accepts query filters to include or exclude soft-deleted entries.
+    - Reads all users from Postgres (`users` table). Accepts query filters to include or exclude soft-deleted entries.
 
 #### 2. Admin Trigger Soft-Deleted Cleanup Sweep (`POST /users/cleanup`)
 
 - **Execution Flow:**
-  - Intercepts and triggers the cleanup job on-demand.
-  - Permanently deletes users from the database whose soft-delete recovery bounds (`recoveryExpiresAt`) are in the past.
-  - Returns a list of permanently removed profiles and a deletion count.
+    - Intercepts and triggers the cleanup job on-demand.
+    - Permanently deletes users from the database whose soft-delete recovery bounds (`recoveryExpiresAt`) are in the past.
+    - Returns a list of permanently removed profiles and a deletion count.
 
 #### 3. Modify Role (`PATCH /users/:id/role`)
 
 - **Validators:** `adminUpdateRoleValidator` (asserts body `role` is either `user` or `admin`).
 - **Execution Flow:**
-  - Performs a target update modifying `users.role` on the user referenced in path parameter `id`.
+    - Performs a target update modifying `users.role` on the user referenced in path parameter `id`.
 
 ---
 
@@ -194,53 +194,50 @@ Add validation sequences to [`src/modules/auth/validators/auth.validator.js`](..
 
 ```js
 export const customActionValidator = [
-  body("username")
-    .trim()
-    .notEmpty()
-    .withMessage("Username is required")
-    .isAlphanumeric()
-    .withMessage("Username must be alphanumeric")
-    .isLength({ min: 4, max: 15 })
-    .withMessage("Username must be 4-15 characters long"),
-  body("age")
-    .optional()
-    .isInt({ min: 18 })
-    .withMessage("Must be at least 18 years of age"),
-  validateRequest, // Validates constraints and throws a 400 error if validation fails
+    body('username')
+        .trim()
+        .notEmpty()
+        .withMessage('Username is required')
+        .isAlphanumeric()
+        .withMessage('Username must be alphanumeric')
+        .isLength({ min: 4, max: 15 })
+        .withMessage('Username must be 4-15 characters long'),
+    body('age').optional().isInt({ min: 18 }).withMessage('Must be at least 18 years of age'),
+    validateRequest, // Validates constraints and throws a 400 error if validation fails
 ];
 ```
 
 ### B. Registering and Mounting New Routing Files
 
 1. Create a route file (e.g., `src/modules/auth/routes/session.routes.js`):
-   ```js
-   import { Router } from "express";
-   import { protect } from "../middleware/auth.middleware.js";
-   import { sendResponse } from "../../../utils/response.utlis.js";
+    ```js
+    import { Router } from 'express';
+    import { protect } from '../middleware/auth.middleware.js';
+    import { sendResponse } from '../../../utils/response.utlis.js';
 
-   const sessionRouter = Router();
+    const sessionRouter = Router();
 
-   sessionRouter.get("/active", protect, (req, res) => {
-     return sendResponse({
-       res,
-       statusCode: 200,
-       success: true,
-       message: "Session is active",
-       data: { userId: req.user.id },
-     });
-   });
+    sessionRouter.get('/active', protect, (req, res) => {
+        return sendResponse({
+            res,
+            statusCode: 200,
+            success: true,
+            message: 'Session is active',
+            data: { userId: req.user.id },
+        });
+    });
 
-   export default sessionRouter;
-   ```
+    export default sessionRouter;
+    ```
 2. Mount the router in the module index (`src/modules/auth/index.js`):
-   ```js
-   import sessionRouter from "./routes/session.routes.js";
-   // ...
-   export { authRouter, userRouter, adminRouter, sessionRouter };
-   ```
+    ```js
+    import sessionRouter from './routes/session.routes.js';
+    // ...
+    export { authRouter, userRouter, adminRouter, sessionRouter };
+    ```
 3. Expose the router in the primary express router mount pipeline ([`src/app.js`](../../server/src/app.js)):
-   ```js
-   import { sessionRouter } from "./modules/auth/index.js";
-   // ...
-   app.use("/api/sessions", sessionRouter);
-   ```
+    ```js
+    import { sessionRouter } from './modules/auth/index.js';
+    // ...
+    app.use('/api/sessions', sessionRouter);
+    ```

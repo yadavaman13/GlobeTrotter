@@ -7,7 +7,7 @@ A trigger-anchored popup container component for context overlays, quick preview
 ## 1. Import Path
 
 ```javascript
-import Popover from "@/components/Shared/Feedback/Popover/Popover";
+import Popover from '@/components/Shared/Feedback/Popover/Popover';
 ```
 
 ---
@@ -25,22 +25,22 @@ import Popover from "@/components/Shared/Feedback/Popover/Popover";
 ## 3. Usage Example
 
 ```jsx
-import Popover from "@/components/Shared/Feedback/Popover/Popover";
-import Button from "@/components/Shared/Buttons/Button/Button";
+import Popover from '@/components/Shared/Feedback/Popover/Popover';
+import Button from '@/components/Shared/Buttons/Button/Button';
 
 export default function QuickHelpPopover() {
-  return (
-    <Popover
-      trigger={
-        <Button size="sm" variant="ghost">
-          Help
-        </Button>
-      }
-    >
-      <div style={{ padding: "12px", maxWidth: "240px" }}>
-        <p>Press Ctrl+K to open global command search at any time.</p>
-      </div>
-    </Popover>
-  );
+    return (
+        <Popover
+            trigger={
+                <Button size="sm" variant="ghost">
+                    Help
+                </Button>
+            }
+        >
+            <div style={{ padding: '12px', maxWidth: '240px' }}>
+                <p>Press Ctrl+K to open global command search at any time.</p>
+            </div>
+        </Popover>
+    );
 }
 ```

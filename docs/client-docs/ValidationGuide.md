@@ -28,9 +28,9 @@ Validates an email address against 17 sequential checks (RFC 5321 / RFC 5322 ali
 ### Signature
 
 ```js
-import { validateEmail } from "@/utils/validation";
+import { validateEmail } from '@/utils/validation';
 
-const result = validateEmail("user@example.com");
+const result = validateEmail('user@example.com');
 // -> { isValid: true, message: '' }
 ```
 
@@ -84,27 +84,27 @@ const result = validateEmail("user@example.com");
 ### Valid / Invalid Examples
 
 ```js
-validateEmail(""); // INVALID — Please enter your email address
-validateEmail("   "); // INVALID — Please enter your email address
-validateEmail("nodomain"); // INVALID — Email address must contain an '@' symbol
-validateEmail("a@@b.com"); // INVALID — Email address can only contain one '@' symbol
-validateEmail("@domain.com"); // INVALID — Email address must have a username before the '@' symbol
-validateEmail(".user@domain.com"); // INVALID — Email address cannot begin with a dot
-validateEmail("user.@domain.com"); // INVALID — The username part cannot end with a dot
-validateEmail("us..er@domain.com"); // INVALID — Email address cannot contain consecutive dots
-validateEmail("u$er@domain.com"); // INVALID — Email username contains invalid characters
-validateEmail("wewe@.com.in"); // INVALID — Email domain cannot start with a dot
-validateEmail("user@domain."); // INVALID — Email domain cannot end with a dot
-validateEmail("user@-domain.com"); // INVALID — Email domain cannot start or end with a hyphen
-validateEmail("user@localhost"); // INVALID — Email address is missing a top-level domain (e.g. .com)
-validateEmail("user@x..com"); // INVALID — Email domain contains consecutive or misplaced dots
-validateEmail("user@x.c0m"); // INVALID — Top-level domain must contain only letters
-validateEmail("user@x.a"); // INVALID — Top-level domain must be at least 2 characters
+validateEmail(''); // INVALID — Please enter your email address
+validateEmail('   '); // INVALID — Please enter your email address
+validateEmail('nodomain'); // INVALID — Email address must contain an '@' symbol
+validateEmail('a@@b.com'); // INVALID — Email address can only contain one '@' symbol
+validateEmail('@domain.com'); // INVALID — Email address must have a username before the '@' symbol
+validateEmail('.user@domain.com'); // INVALID — Email address cannot begin with a dot
+validateEmail('user.@domain.com'); // INVALID — The username part cannot end with a dot
+validateEmail('us..er@domain.com'); // INVALID — Email address cannot contain consecutive dots
+validateEmail('u$er@domain.com'); // INVALID — Email username contains invalid characters
+validateEmail('wewe@.com.in'); // INVALID — Email domain cannot start with a dot
+validateEmail('user@domain.'); // INVALID — Email domain cannot end with a dot
+validateEmail('user@-domain.com'); // INVALID — Email domain cannot start or end with a hyphen
+validateEmail('user@localhost'); // INVALID — Email address is missing a top-level domain (e.g. .com)
+validateEmail('user@x..com'); // INVALID — Email domain contains consecutive or misplaced dots
+validateEmail('user@x.c0m'); // INVALID — Top-level domain must contain only letters
+validateEmail('user@x.a'); // INVALID — Top-level domain must be at least 2 characters
 
-validateEmail("user@example.com"); // VALID
-validateEmail("first.last@sub.co.in"); // VALID
-validateEmail("user+tag@domain.org"); // VALID
-validateEmail("u_1%2+3@x-y.io"); // VALID
+validateEmail('user@example.com'); // VALID
+validateEmail('first.last@sub.co.in'); // VALID
+validateEmail('user+tag@domain.org'); // VALID
+validateEmail('u_1%2+3@x-y.io'); // VALID
 ```
 
 ---
@@ -116,9 +116,9 @@ Validates a password against 12 sequential security checks. No passphrase bypass
 ### Signature
 
 ```js
-import { validatePassword } from "@/utils/validation";
+import { validatePassword } from '@/utils/validation';
 
-const result = validatePassword("MyPass@1", "user@example.com");
+const result = validatePassword('MyPass@1', 'user@example.com');
 // -> { isValid: true, message: '' }
 ```
 
@@ -208,25 +208,25 @@ Character/pattern repeats:
 ### Valid / Invalid Examples
 
 ```js
-validatePassword(""); // INVALID — Please enter a password
-validatePassword("my pass"); // INVALID — Password cannot contain spaces
-validatePassword("abc"); // INVALID — Password must be at least 6 characters
-validatePassword("thispasswordiswaytoolong!"); // INVALID — Password cannot exceed 20 characters
-validatePassword("password", "user@example.com"); // INVALID — Password is too common or weak
-validatePassword("johndoe", "johndoe@example.com"); // INVALID — Password cannot be the same as your email username
-validatePassword("mypass@1"); // INVALID — Password must include at least one uppercase letter (A–Z)
-validatePassword("MYPASS@1"); // INVALID — Password must include at least one lowercase letter (a–z)
-validatePassword("MyPass@!"); // INVALID — Password must include at least one number (0–9)
-validatePassword("MyPassword1"); // INVALID — Password must include at least one special character
-validatePassword("aaaa@B2x"); // INVALID — Password cannot contain more than 3 consecutive identical characters
-validatePassword("abcd@B2x"); // INVALID — Password cannot contain sequential characters
-validatePassword("1234@Bx!"); // INVALID — Password cannot contain sequential characters
-validatePassword("qwer@B2x"); // INVALID — Password cannot contain sequential characters
+validatePassword(''); // INVALID — Please enter a password
+validatePassword('my pass'); // INVALID — Password cannot contain spaces
+validatePassword('abc'); // INVALID — Password must be at least 6 characters
+validatePassword('thispasswordiswaytoolong!'); // INVALID — Password cannot exceed 20 characters
+validatePassword('password', 'user@example.com'); // INVALID — Password is too common or weak
+validatePassword('johndoe', 'johndoe@example.com'); // INVALID — Password cannot be the same as your email username
+validatePassword('mypass@1'); // INVALID — Password must include at least one uppercase letter (A–Z)
+validatePassword('MYPASS@1'); // INVALID — Password must include at least one lowercase letter (a–z)
+validatePassword('MyPass@!'); // INVALID — Password must include at least one number (0–9)
+validatePassword('MyPassword1'); // INVALID — Password must include at least one special character
+validatePassword('aaaa@B2x'); // INVALID — Password cannot contain more than 3 consecutive identical characters
+validatePassword('abcd@B2x'); // INVALID — Password cannot contain sequential characters
+validatePassword('1234@Bx!'); // INVALID — Password cannot contain sequential characters
+validatePassword('qwer@B2x'); // INVALID — Password cannot contain sequential characters
 
-validatePassword("MyPass@1"); // VALID
-validatePassword("X9#mK2pL"); // VALID
-validatePassword("Tr0ub4dor&"); // VALID
-validatePassword("P@ssw0rd!"); // VALID
+validatePassword('MyPass@1'); // VALID
+validatePassword('X9#mK2pL'); // VALID
+validatePassword('Tr0ub4dor&'); // VALID
+validatePassword('P@ssw0rd!'); // VALID
 ```
 
 ---
@@ -236,16 +236,16 @@ validatePassword("P@ssw0rd!"); // VALID
 Both functions are consumed by [`LoginForm.jsx`](file:///d:/Hackathon-UI/UI/src/components/Login/LoginLayout/LoginForm/LoginForm.jsx) during form submission:
 
 ```js
-import { validateEmail, validatePassword } from "@/utils/validation";
+import { validateEmail, validatePassword } from '@/utils/validation';
 
 const emailValidation = validateEmail(trimmedEmail);
 if (!emailValidation.isValid) {
-  setEmailError(emailValidation.message);
+    setEmailError(emailValidation.message);
 }
 
 const passwordValidation = validatePassword(trimmedPassword, trimmedEmail);
 if (!passwordValidation.isValid) {
-  setPasswordError(passwordValidation.message);
+    setPasswordError(passwordValidation.message);
 }
 ```
 

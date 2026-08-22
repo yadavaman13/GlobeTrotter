@@ -7,7 +7,7 @@ A full-page 500 Internal Server Error view component with retry triggers and sta
 ## 1. Import Path
 
 ```javascript
-import ServerErrorPage from "@/components/Shared/ErrorPages/ServerErrorPage/ServerErrorPage";
+import ServerErrorPage from '@/components/Shared/ErrorPages/ServerErrorPage/ServerErrorPage';
 ```
 
 ---
@@ -24,11 +24,9 @@ import ServerErrorPage from "@/components/Shared/ErrorPages/ServerErrorPage/Serv
 ## 3. Usage Example
 
 ```jsx
-import ServerErrorPage from "@/components/Shared/ErrorPages/ServerErrorPage/ServerErrorPage";
+import ServerErrorPage from '@/components/Shared/ErrorPages/ServerErrorPage/ServerErrorPage';
 
 export default function ErrorBoundaryFallback({ error, resetErrorBoundary }) {
-  return (
-    <ServerErrorPage message={error?.message} onRetry={resetErrorBoundary} />
-  );
+    return <ServerErrorPage message={error?.message} onRetry={resetErrorBoundary} />;
 }
 ```

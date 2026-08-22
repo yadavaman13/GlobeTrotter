@@ -50,16 +50,16 @@ $color-text-primary: var(--color-text-primary);
 
 ```scss
 // ✅ CORRECT
-@use "@/styles/variables" as variables;
+@use '@/styles/variables' as variables;
 
 .my-card {
-  background-color: variables.$color-bg-card;
-  border-radius: variables.$radius-medium;
-  padding: variables.$spacing-md;
+    background-color: variables.$color-bg-card;
+    border-radius: variables.$radius-medium;
+    padding: variables.$spacing-md;
 }
 
 // ❌ WRONG
-@import "@/styles/variables.scss";
+@import '@/styles/variables.scss';
 ```
 
 ### Rule 2: Never Hardcode Hex Codes or Pixels
@@ -69,16 +69,16 @@ Always use design tokens for colors, spacing, and radii:
 ```scss
 // ❌ WRONG
 .custom-btn {
-  background-color: #111827;
-  padding: 12px 16px;
-  border-radius: 8px;
+    background-color: #111827;
+    padding: 12px 16px;
+    border-radius: 8px;
 }
 
 // ✅ CORRECT
 .custom-btn {
-  background-color: variables.$color-primary;
-  padding: variables.$spacing-sm variables.$spacing-md;
-  border-radius: variables.$radius-small;
+    background-color: variables.$color-primary;
+    padding: variables.$spacing-sm variables.$spacing-md;
+    border-radius: variables.$radius-small;
 }
 ```
 
@@ -89,17 +89,13 @@ Because Sass variables resolve to CSS custom properties at runtime, Sass compila
 ```scss
 // ✅ CORRECT: Modern native CSS color blending
 .custom-card {
-  background-color: color-mix(
-    in srgb,
-    variables.$color-primary 10%,
-    transparent
-  );
-  border-color: color-mix(in srgb, variables.$color-gray-200 80%, black);
+    background-color: color-mix(in srgb, variables.$color-primary 10%, transparent);
+    border-color: color-mix(in srgb, variables.$color-gray-200 80%, black);
 }
 
 // ❌ WRONG: Will fail at build time
 .custom-card {
-  background-color: lighten(variables.$color-primary, 10%);
+    background-color: lighten(variables.$color-primary, 10%);
 }
 ```
 
@@ -108,22 +104,22 @@ Because Sass variables resolve to CSS custom properties at runtime, Sass compila
 Use the predefined mixins in `variables.scss`:
 
 ```scss
-@use "@/styles/variables" as variables;
+@use '@/styles/variables' as variables;
 
 .responsive-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: variables.$spacing-lg;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: variables.$spacing-lg;
 
-  @include variables.tablet {
-    grid-template-columns: repeat(2, 1fr);
-    gap: variables.$spacing-md;
-  }
+    @include variables.tablet {
+        grid-template-columns: repeat(2, 1fr);
+        gap: variables.$spacing-md;
+    }
 
-  @include variables.mobile {
-    grid-template-columns: 1fr;
-    gap: variables.$spacing-sm;
-  }
+    @include variables.mobile {
+        grid-template-columns: 1fr;
+        gap: variables.$spacing-sm;
+    }
 }
 ```
 
@@ -131,12 +127,12 @@ Use the predefined mixins in `variables.scss`:
 
 ```scss
 .interactive-element {
-  @include variables.transition-ease;
+    @include variables.transition-ease;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: variables.$shadow-md;
-  }
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: variables.$shadow-md;
+    }
 }
 ```
 
@@ -149,24 +145,24 @@ The Apex Template codebase enforces **0 `!important` occurrences across all styl
 To override styles cleanly without `!important`:
 
 1. **Increase Specificity Naturally**: Chain classes or parent containers:
-   ```scss
-   // Better specificity without !important
-   .data-view-container .table-header {
-     background-color: variables.$color-gray-100;
-   }
-   ```
+    ```scss
+    // Better specificity without !important
+    .data-view-container .table-header {
+        background-color: variables.$color-gray-100;
+    }
+    ```
 2. **Use Component Props for Variants**: Pass a prop (e.g. `variant="secondary"`, `size="sm"`) rather than writing CSS overrides.
 3. **Use CSS Custom Property Holes**: Allow parent components to override custom properties:
-   ```scss
-   .custom-widget {
-     --widget-bg: #{variables.$color-bg-card};
-     background-color: var(--widget-bg);
-   }
+    ```scss
+    .custom-widget {
+        --widget-bg: #{variables.$color-bg-card};
+        background-color: var(--widget-bg);
+    }
 
-   .custom-widget--highlighted {
-     --widget-bg: #{variables.$color-blue-accent};
-   }
-   ```
+    .custom-widget--highlighted {
+        --widget-bg: #{variables.$color-blue-accent};
+    }
+    ```
 
 ---
 
@@ -177,8 +173,8 @@ Dark mode is controlled dynamically via the `data-theme` attribute on the `<html
 ```html
 <!-- Light Mode -->
 <html data-theme="light">
-  <!-- Dark Mode -->
-  <html data-theme="dark"></html>
+    <!-- Dark Mode -->
+    <html data-theme="dark"></html>
 </html>
 ```
 

@@ -7,7 +7,7 @@ A modal dialog primitive with backdrop blur, focus trapping, smooth entry/exit a
 ## 1. Import Path
 
 ```javascript
-import Dialog from "@/components/Shared/Feedback/Dialog/Dialog";
+import Dialog from '@/components/Shared/Feedback/Dialog/Dialog';
 ```
 
 ---
@@ -28,35 +28,33 @@ import Dialog from "@/components/Shared/Feedback/Dialog/Dialog";
 ## 3. Usage Example
 
 ```jsx
-import { useState } from "react";
-import Dialog from "@/components/Shared/Feedback/Dialog/Dialog";
-import Button from "@/components/Shared/Buttons/Button/Button";
-import CancelButton from "@/components/Shared/Buttons/CancelButton/CancelButton";
+import { useState } from 'react';
+import Dialog from '@/components/Shared/Feedback/Dialog/Dialog';
+import Button from '@/components/Shared/Buttons/Button/Button';
+import CancelButton from '@/components/Shared/Buttons/CancelButton/CancelButton';
 
 export default function EditUserModal({ user, onSave }) {
-  const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <>
-      <Button onClick={() => setIsOpen(true)}>Edit User</Button>
-      <Dialog
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        title="Edit User Profile"
-        footer={
-          <div
-            style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}
-          >
-            <CancelButton onClick={() => setIsOpen(false)} />
-            <Button variant="primary" onClick={onSave}>
-              Save Changes
-            </Button>
-          </div>
-        }
-      >
-        <p>Editing profile details for {user?.name}</p>
-      </Dialog>
-    </>
-  );
+    return (
+        <>
+            <Button onClick={() => setIsOpen(true)}>Edit User</Button>
+            <Dialog
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                title="Edit User Profile"
+                footer={
+                    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+                        <CancelButton onClick={() => setIsOpen(false)} />
+                        <Button variant="primary" onClick={onSave}>
+                            Save Changes
+                        </Button>
+                    </div>
+                }
+            >
+                <p>Editing profile details for {user?.name}</p>
+            </Dialog>
+        </>
+    );
 }
 ```

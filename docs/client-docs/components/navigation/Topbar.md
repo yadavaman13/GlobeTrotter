@@ -7,7 +7,7 @@ The global header navigation bar featuring dynamic page titles derived from curr
 ## 1. Import Path
 
 ```javascript
-import Topbar from "@/components/Shared/Navigation/Topbar/Topbar";
+import Topbar from '@/components/Shared/Navigation/Topbar/Topbar';
 ```
 
 ---
@@ -26,19 +26,19 @@ import Topbar from "@/components/Shared/Navigation/Topbar/Topbar";
 ## 3. Usage Example
 
 ```jsx
-import Topbar from "@/components/Shared/Navigation/Topbar/Topbar";
-import { useAuth } from "@/app/features/auth/hooks/useAuth";
+import Topbar from '@/components/Shared/Navigation/Topbar/Topbar';
+import { useAuth } from '@/app/features/auth/hooks/useAuth';
 
 export default function DashboardHeader({ onToggleMobile }) {
-  const { user, handleLogout } = useAuth();
+    const { user, handleLogout } = useAuth();
 
-  return (
-    <Topbar
-      user={user}
-      onLogout={handleLogout}
-      onMobileMenuToggle={onToggleMobile}
-      unreadCount={3}
-    />
-  );
+    return (
+        <Topbar
+            user={user}
+            onLogout={handleLogout}
+            onMobileMenuToggle={onToggleMobile}
+            unreadCount={3}
+        />
+    );
 }
 ```

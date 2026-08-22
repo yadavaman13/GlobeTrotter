@@ -7,7 +7,7 @@ An inline status banner component for prominent warnings, success notifications,
 ## 1. Import Path
 
 ```javascript
-import Alert from "@/components/Shared/Feedback/Alert/Alert";
+import Alert from '@/components/Shared/Feedback/Alert/Alert';
 ```
 
 ---
@@ -26,13 +26,13 @@ import Alert from "@/components/Shared/Feedback/Alert/Alert";
 ## 3. Usage Example
 
 ```jsx
-import Alert from "@/components/Shared/Feedback/Alert/Alert";
+import Alert from '@/components/Shared/Feedback/Alert/Alert';
 
 export default function MaintenanceBanner() {
-  return (
-    <Alert type="warning" title="Scheduled Maintenance">
-      Database indexing is scheduled for tonight at 2:00 AM UTC.
-    </Alert>
-  );
+    return (
+        <Alert type="warning" title="Scheduled Maintenance">
+            Database indexing is scheduled for tonight at 2:00 AM UTC.
+        </Alert>
+    );
 }
 ```

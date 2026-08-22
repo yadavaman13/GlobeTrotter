@@ -7,7 +7,7 @@ A lightweight reset button with clear/refresh icon designed for resetting form i
 ## 1. Import Path
 
 ```javascript
-import ClearAllButton from "@/components/Shared/Buttons/ClearAllButton/ClearAllButton";
+import ClearAllButton from '@/components/Shared/Buttons/ClearAllButton/ClearAllButton';
 ```
 
 ---
@@ -26,14 +26,14 @@ import ClearAllButton from "@/components/Shared/Buttons/ClearAllButton/ClearAllB
 ## 3. Usage Example
 
 ```jsx
-import ClearAllButton from "@/components/Shared/Buttons/ClearAllButton/ClearAllButton";
+import ClearAllButton from '@/components/Shared/Buttons/ClearAllButton/ClearAllButton';
 
 export default function TableFilterBar({ onResetFilters }) {
-  return (
-    <div className="filter-bar">
-      <span>Active Filters (3)</span>
-      <ClearAllButton onClick={onResetFilters} />
-    </div>
-  );
+    return (
+        <div className="filter-bar">
+            <span>Active Filters (3)</span>
+            <ClearAllButton onClick={onResetFilters} />
+        </div>
+    );
 }
 ```

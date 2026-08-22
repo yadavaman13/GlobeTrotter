@@ -1,0 +1,69 @@
+@use '../../../../styles/variables';
+
+.pagination-next-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 16px;
+    background-color: variables.$color-gray-100;
+    border: none;
+    border-radius: 9999px; // Capsule shape
+    cursor: pointer;
+    color: variables.$color-gray-700;
+    font-family: variables.$font-sans;
+    font-size: variables.$font-size-sm;
+    font-weight: 600;
+
+    @include variables.transition-ease;
+
+    .next-arrow-svg {
+        display: flex;
+        align-items: center;
+        color: variables.$color-gray-600;
+        transition: transform 0.2s ease;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: variables.$color-gray-200;
+        color: variables.$color-black;
+
+        .next-arrow-svg {
+            transform: translateX(3px);
+        }
+    }
+
+    &.icon-only {
+        padding: 8px;
+        border-radius: variables.$radius-tiny;
+        border: 1px solid variables.$color-gray-200;
+        background-color: variables.$color-white;
+        width: 36px;
+        height: 36px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0;
+
+        .next-arrow-svg {
+            color: variables.$color-gray-600;
+            transition: transform 0.2s ease;
+        }
+
+        &:hover:not(:disabled) {
+            background-color: variables.$color-gray-50;
+            border-color: variables.$color-gray-300;
+            color: variables.$color-black;
+
+            .next-arrow-svg {
+                transform: translateX(2px);
+            }
+        }
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}

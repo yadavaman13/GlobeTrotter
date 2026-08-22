@@ -7,11 +7,7 @@ A tool execution status step and collapsible payload inspector component display
 ## 1. Import Path
 
 ```javascript
-import {
-  Tool,
-  ToolHeader,
-  ToolContent,
-} from "@/components/ai-elements/tool/tool";
+import { Tool, ToolHeader, ToolContent } from '@/components/ai-elements/tool/tool';
 ```
 
 ---
@@ -30,16 +26,9 @@ import {
 ## 3. Usage Example
 
 ```jsx
-import { Tool } from "@/components/ai-elements/tool/tool";
+import { Tool } from '@/components/ai-elements/tool/tool';
 
 export default function AgentToolStep({ step }) {
-  return (
-    <Tool
-      name={step.tool}
-      status={step.status}
-      input={step.args}
-      output={step.result}
-    />
-  );
+    return <Tool name={step.tool} status={step.status} input={step.args} output={step.result} />;
 }
 ```

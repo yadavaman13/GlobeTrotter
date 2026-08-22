@@ -1,0 +1,29 @@
+:root {
+    // ─── Font Families ────────────────────────────────────────────────────────
+    --primi-font-sans:
+        'Airbnb Cereal VF', circular, -apple-system, blinkmacsystemfont, roboto, 'Helvetica Neue',
+        inter, 'Plus Jakarta Sans', sans-serif;
+    --primi-font-serif: 'Bodoni Moda', serif;
+
+    // ─── Airbnb Typography Scale ──────────────────────────────────────────────
+    --primi-font-size-tag: 0.5rem; // 8px — uppercase-tag ("NEW" badges)
+    --primi-font-size-badge: 0.6875rem; // 11px — badge ("Guest favorite")
+    --primi-font-size-micro: 0.75rem; // 12px — micro-label
+    --primi-font-size-caption-sm: 0.8125rem; // 13px — caption-sm / footer legal
+    --primi-font-size-caption: 0.875rem; // 14px — search field captions
+    --primi-font-size-sm: 0.875rem; // 14px — body-sm, buttons-sm, links
+    --primi-font-size-md: 1rem; // 16px — body-md, title-md, title-sm, button-md
+    --primi-font-size-lg: 1.125rem; // 18px — card lead text
+    --primi-font-size-display-sm: 1.25rem; // 20px — display-sm ("Things to know")
+    --primi-font-size-display-md: 1.3125rem; // 21px — display-md ("What this place offers")
+    --primi-font-size-display-lg: 1.375rem; // 22px — display-lg (Listing h1)
+    --primi-font-size-display-xl: 1.75rem; // 28px — display-xl (Homepage h1)
+    --primi-font-size-rating: 4rem; // 64px — rating-display ("4.81")
+
+    // ─── Core Type Scale Aliases ──────────────────────────────────────────────
+    --primi-font-size-xxs: 0.625rem; // 10px — tiny meta
+    --primi-font-size-xs: 0.75rem; // 12px — captions
+    --primi-font-size-xl: 1.25rem; // 20px — section headings
+    --primi-font-size-xxl: 1.5rem; // 24px — page headings
+    --primi-font-size-display-hero: 7.5rem; // 120px — large decorative numbers
+}

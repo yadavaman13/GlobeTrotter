@@ -7,7 +7,7 @@ A collapsible citation and document vector source viewer component rendering sea
 ## 1. Import Path
 
 ```javascript
-import { Sources, SourceItem } from "@/components/ai-elements/sources/sources";
+import { Sources, SourceItem } from '@/components/ai-elements/sources/sources';
 ```
 
 ---
@@ -24,11 +24,11 @@ import { Sources, SourceItem } from "@/components/ai-elements/sources/sources";
 ## 3. Usage Example
 
 ```jsx
-import { Sources } from "@/components/ai-elements/sources/sources";
+import { Sources } from '@/components/ai-elements/sources/sources';
 
 export default function CitedSources({ citedDocuments }) {
-  if (!citedDocuments || citedDocuments.length === 0) return null;
+    if (!citedDocuments || citedDocuments.length === 0) return null;
 
-  return <Sources sources={citedDocuments} />;
+    return <Sources sources={citedDocuments} />;
 }
 ```

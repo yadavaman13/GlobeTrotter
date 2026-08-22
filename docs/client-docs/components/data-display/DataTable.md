@@ -7,7 +7,7 @@ A lightweight data table primitive suited for standard tabular grids with sortab
 ## 1. Import Path
 
 ```javascript
-import DataTable from "@/components/Shared/DataDisplay/DataTable/DataTable";
+import DataTable from '@/components/Shared/DataDisplay/DataTable/DataTable';
 ```
 
 ---
@@ -28,23 +28,23 @@ import DataTable from "@/components/Shared/DataDisplay/DataTable/DataTable";
 ## 3. Usage Example
 
 ```jsx
-import DataTable from "@/components/Shared/DataDisplay/DataTable/DataTable";
+import DataTable from '@/components/Shared/DataDisplay/DataTable/DataTable';
 
 export default function SimpleUsersTable({ users, loading }) {
-  const columns = [
-    { key: "name", label: "Full Name", sortable: true },
-    { key: "email", label: "Email Address" },
-    { key: "role", label: "Role", sortable: true },
-  ];
+    const columns = [
+        { key: 'name', label: 'Full Name', sortable: true },
+        { key: 'email', label: 'Email Address' },
+        { key: 'role', label: 'Role', sortable: true },
+    ];
 
-  return (
-    <DataTable
-      data={users}
-      columns={columns}
-      loading={loading}
-      pageSize={10}
-      onRowClick={(user) => console.log("Selected user:", user)}
-    />
-  );
+    return (
+        <DataTable
+            data={users}
+            columns={columns}
+            loading={loading}
+            pageSize={10}
+            onRowClick={(user) => console.log('Selected user:', user)}
+        />
+    );
 }
 ```

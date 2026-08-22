@@ -87,56 +87,54 @@ src/app/features/
 
 ```jsx
 // Example: UI Component following the Read vs Action separation
-import { useState, useContext } from "react";
-import { AuthContext } from "@/app/features/auth/context/auth.context";
-import { useAuth } from "@/app/features/auth/hooks/useAuth";
-import InputField from "@/components/Shared/Form/InputField/InputField";
-import Button from "@/components/Shared/Buttons/Button/Button";
-import Spinner from "@/components/Shared/Feedback/Spinner/Spinner";
+import { useState, useContext } from 'react';
+import { AuthContext } from '@/app/features/auth/context/auth.context';
+import { useAuth } from '@/app/features/auth/hooks/useAuth';
+import InputField from '@/components/Shared/Form/InputField/InputField';
+import Button from '@/components/Shared/Buttons/Button/Button';
+import Spinner from '@/components/Shared/Feedback/Spinner/Spinner';
 
 export default function LoginForm() {
-  // 1. Read Path: UI reads states and derived values directly from Context
-  const { loading, error } = useContext(AuthContext);
+    // 1. Read Path: UI reads states and derived values directly from Context
+    const { loading, error } = useContext(AuthContext);
 
-  // 2. Action Path: UI calls orchestration hook for action handlers ONLY
-  const { handleLogin } = useAuth();
+    // 2. Action Path: UI calls orchestration hook for action handlers ONLY
+    const { handleLogin } = useAuth();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await handleLogin(email, password);
-    } catch (err) {
-      // UI only handles visual feedback
-    }
-  };
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await handleLogin(email, password);
+        } catch (err) {
+            // UI only handles visual feedback
+        }
+    };
 
-  return (
-    <form onSubmit={onSubmit} className="login-form">
-      <InputField
-        label="Email Address"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <InputField
-        label="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      {error && (
-        <p className="error-message">{error.message || "Login failed"}</p>
-      )}
-      <Button type="submit" disabled={loading}>
-        {loading ? <Spinner size="sm" /> : "Sign In"}
-      </Button>
-    </form>
-  );
+    return (
+        <form onSubmit={onSubmit} className="login-form">
+            <InputField
+                label="Email Address"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+            />
+            <InputField
+                label="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+            />
+            {error && <p className="error-message">{error.message || 'Login failed'}</p>}
+            <Button type="submit" disabled={loading}>
+                {loading ? <Spinner size="sm" /> : 'Sign In'}
+            </Button>
+        </form>
+    );
 }
 ```
 
@@ -155,55 +153,55 @@ export default function LoginForm() {
 
 ```javascript
 // Example: src/app/features/auth/hooks/useAuth.js (Corrected Pattern)
-import { useCallback, useContext } from "react";
-import { AuthContext } from "../context/auth.context";
-import { login, logout } from "../services/api";
+import { useCallback, useContext } from 'react';
+import { AuthContext } from '../context/auth.context';
+import { login, logout } from '../services/api';
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-
-  // Hook ONLY consumes setters from the State layer
-  const { setUser, setLoading, setError } = context;
-
-  const handleLogin = useCallback(
-    async (email, password) => {
-      setLoading(true);
-      setError(null);
-      try {
-        const data = await login({ email, password });
-        setUser(data.user);
-        return data;
-      } catch (err) {
-        const formattedError = err.response?.data || { message: err.message };
-        setError(formattedError);
-        throw formattedError;
-      } finally {
-        setLoading(false);
-      }
-    },
-    [setError, setLoading, setUser],
-  );
-
-  const handleLogout = useCallback(async () => {
-    setLoading(true);
-    try {
-      await logout();
-      setUser(null);
-    } catch (err) {
-      setError(err);
-    } finally {
-      setLoading(false);
+    const context = useContext(AuthContext);
+    if (!context) {
+        throw new Error('useAuth must be used within an AuthProvider');
     }
-  }, [setError, setLoading, setUser]);
 
-  // Hook exports ACTION HANDLERS ONLY. No state variables, no setters!
-  return {
-    handleLogin,
-    handleLogout,
-  };
+    // Hook ONLY consumes setters from the State layer
+    const { setUser, setLoading, setError } = context;
+
+    const handleLogin = useCallback(
+        async (email, password) => {
+            setLoading(true);
+            setError(null);
+            try {
+                const data = await login({ email, password });
+                setUser(data.user);
+                return data;
+            } catch (err) {
+                const formattedError = err.response?.data || { message: err.message };
+                setError(formattedError);
+                throw formattedError;
+            } finally {
+                setLoading(false);
+            }
+        },
+        [setError, setLoading, setUser],
+    );
+
+    const handleLogout = useCallback(async () => {
+        setLoading(true);
+        try {
+            await logout();
+            setUser(null);
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    }, [setError, setLoading, setUser]);
+
+    // Hook exports ACTION HANDLERS ONLY. No state variables, no setters!
+    return {
+        handleLogin,
+        handleLogout,
+    };
 }
 ```
 
@@ -222,32 +220,32 @@ export function useAuth() {
 
 ```jsx
 // Example: src/app/features/auth/context/auth.context.jsx
-import { createContext, useState, useMemo } from "react";
+import { createContext, useState, useMemo } from 'react';
 
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-  const value = useMemo(
-    () => ({
-      // Read-only values (consumed by UI)
-      user,
-      isAuthenticated: Boolean(user),
-      loading,
-      error,
+    const value = useMemo(
+        () => ({
+            // Read-only values (consumed by UI)
+            user,
+            isAuthenticated: Boolean(user),
+            loading,
+            error,
 
-      // Setters (consumed by Hooks only)
-      setUser,
-      setLoading,
-      setError,
-    }),
-    [user, loading, error],
-  );
+            // Setters (consumed by Hooks only)
+            setUser,
+            setLoading,
+            setError,
+        }),
+        [user, loading, error],
+    );
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 ```
 
@@ -265,21 +263,21 @@ export function AuthProvider({ children }) {
 
 ```javascript
 // Example: src/app/features/auth/services/api.js
-import axios from "axios";
+import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: "/api/auth",
-  withCredentials: true,
+    baseURL: '/api/auth',
+    withCredentials: true,
 });
 
 export const login = async (credentials) => {
-  const response = await apiClient.post("/login", credentials);
-  return response.data;
+    const response = await apiClient.post('/login', credentials);
+    return response.data;
 };
 
 export const logout = async () => {
-  const response = await apiClient.post("/logout");
-  return response.data;
+    const response = await apiClient.post('/logout');
+    return response.data;
 };
 ```
 
@@ -292,9 +290,9 @@ export const logout = async () => {
 >
 > - **Legacy Pattern (found in parts of existing code)**: Hooks were returning everything together: `{ user, setUser, loading, setLoading, error, setError, handleLogin, ... }`. This leaked setters to the UI and coupled state reading to hook exports.
 > - **Corrected Pattern (Standard for all new and upcoming features)**:
->   - **UI**: Reads state directly via `useContext(FeatureContext)` (read-only states/derived values only; never calls setters).
->   - **Hooks**: Consume setters from Context and export **action handlers only** (`return { handleAction1, handleAction2 }`).
->   - **Setters**: Are never called by UI components; only invoked inside Hook async flows.
+>     - **UI**: Reads state directly via `useContext(FeatureContext)` (read-only states/derived values only; never calls setters).
+>     - **Hooks**: Consume setters from Context and export **action handlers only** (`return { handleAction1, handleAction2 }`).
+>     - **Setters**: Are never called by UI components; only invoked inside Hook async flows.
 
 ---
 
@@ -324,32 +322,32 @@ Every new feature defines its RBAC permissions, optional sidebar metadata, and r
 
 ```jsx
 // src/app/features/leads/leads.routes.jsx
-import { LeadsProvider } from "./context/leads.context";
-import LeadsPage from "./pages/LeadsPage";
+import { LeadsProvider } from './context/leads.context';
+import LeadsPage from './pages/LeadsPage';
 
 export default {
-  // 🛡️ Multi-Role RBAC: roles authorized to access this feature
-  allowedRoles: ["admin", "manager", "sales_rep"],
+    // 🛡️ Multi-Role RBAC: roles authorized to access this feature
+    allowedRoles: ['admin', 'manager', 'sales_rep'],
 
-  // 🧭 Optional Navigation Metadata for the Sidebar
-  navItem: {
-    label: "Leads",
-    path: "/dashboard/user/leads",
-    icon: "Users",
-    roles: ["admin", "manager", "sales_rep"],
-  },
-
-  // 🛣️ Feature Routes (automatically wrapped with ProtectedRoute)
-  routes: [
-    {
-      path: "leads",
-      element: (
-        <LeadsProvider>
-          <LeadsPage />
-        </LeadsProvider>
-      ),
+    // 🧭 Optional Navigation Metadata for the Sidebar
+    navItem: {
+        label: 'Leads',
+        path: '/dashboard/user/leads',
+        icon: 'Users',
+        roles: ['admin', 'manager', 'sales_rep'],
     },
-  ],
+
+    // 🛣️ Feature Routes (automatically wrapped with ProtectedRoute)
+    routes: [
+        {
+            path: 'leads',
+            element: (
+                <LeadsProvider>
+                    <LeadsPage />
+                </LeadsProvider>
+            ),
+        },
+    ],
 };
 ```
 
@@ -358,10 +356,10 @@ export default {
 Our routing and navigation implement enterprise-grade Unified RBAC:
 
 1. **Route Level (`ProtectedRoute.jsx`)**:
-   - Accepts `allowedRoles` (e.g. `allowedRoles={['admin', 'manager', 'sales_rep']}`).
-   - Automatically checks `user.role` (case-insensitive).
-   - If unauthorized, displays `<ForbiddenPage />` (403) with a safe return CTA without triggering redirect loops.
+    - Accepts `allowedRoles` (e.g. `allowedRoles={['admin', 'manager', 'sales_rep']}`).
+    - Automatically checks `user.role` (case-insensitive).
+    - If unauthorized, displays `<ForbiddenPage />` (403) with a safe return CTA without triggering redirect loops.
 
 2. **Navigation Level (`SidebarNav.jsx`)**:
-   - Inspects each `navItem.roles` array against `user.role`.
-   - Unauthorized navigation items are automatically filtered and hidden from the sidebar.
+    - Inspects each `navItem.roles` array against `user.role`.
+    - Unauthorized navigation items are automatically filtered and hidden from the sidebar.

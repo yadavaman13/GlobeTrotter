@@ -7,7 +7,7 @@ An interactive drag-and-drop task status board component for managing CRM pipeli
 ## 1. Import Path
 
 ```javascript
-import KanbanBoard from "@/components/Shared/DataDisplay/KanbanBoard/KanbanBoard";
+import KanbanBoard from '@/components/Shared/DataDisplay/KanbanBoard/KanbanBoard';
 ```
 
 ---
@@ -27,27 +27,23 @@ import KanbanBoard from "@/components/Shared/DataDisplay/KanbanBoard/KanbanBoard
 ## 3. Usage Example
 
 ```jsx
-import KanbanBoard from "@/components/Shared/DataDisplay/KanbanBoard/KanbanBoard";
+import KanbanBoard from '@/components/Shared/DataDisplay/KanbanBoard/KanbanBoard';
 
 const columns = [
-  { id: "lead", title: "New Lead" },
-  { id: "qualified", title: "Qualified" },
-  { id: "proposal", title: "Proposal Sent" },
-  { id: "won", title: "Closed Won" },
+    { id: 'lead', title: 'New Lead' },
+    { id: 'qualified', title: 'Qualified' },
+    { id: 'proposal', title: 'Proposal Sent' },
+    { id: 'won', title: 'Closed Won' },
 ];
 
-export default function PipelineKanban({
-  deals,
-  handleMoveDeal,
-  handleSelectDeal,
-}) {
-  return (
-    <KanbanBoard
-      columns={columns}
-      items={deals}
-      onItemMove={handleMoveDeal}
-      onItemClick={handleSelectDeal}
-    />
-  );
+export default function PipelineKanban({ deals, handleMoveDeal, handleSelectDeal }) {
+    return (
+        <KanbanBoard
+            columns={columns}
+            items={deals}
+            onItemMove={handleMoveDeal}
+            onItemClick={handleSelectDeal}
+        />
+    );
 }
 ```

@@ -7,7 +7,7 @@ A compact, accessible icon-only button container supporting circular or rounded-
 ## 1. Import Path
 
 ```javascript
-import IconButton from "@/components/Shared/Buttons/IconButton/IconButton";
+import IconButton from '@/components/Shared/Buttons/IconButton/IconButton';
 ```
 
 ---
@@ -30,19 +30,19 @@ import IconButton from "@/components/Shared/Buttons/IconButton/IconButton";
 ## 3. Usage Example
 
 ```jsx
-import IconButton from "@/components/Shared/Buttons/IconButton/IconButton";
-import { Settings, Bell } from "lucide-react";
+import IconButton from '@/components/Shared/Buttons/IconButton/IconButton';
+import { Settings, Bell } from 'lucide-react';
 
 export default function HeaderActions() {
-  return (
-    <div style={{ display: "flex", gap: "8px" }}>
-      <IconButton ariaLabel="Notifications" shape="circle" size="md">
-        <Bell size={18} />
-      </IconButton>
-      <IconButton ariaLabel="Settings" shape="circle" size="md">
-        <Settings size={18} />
-      </IconButton>
-    </div>
-  );
+    return (
+        <div style={{ display: 'flex', gap: '8px' }}>
+            <IconButton ariaLabel="Notifications" shape="circle" size="md">
+                <Bell size={18} />
+            </IconButton>
+            <IconButton ariaLabel="Settings" shape="circle" size="md">
+                <Settings size={18} />
+            </IconButton>
+        </div>
+    );
 }
 ```

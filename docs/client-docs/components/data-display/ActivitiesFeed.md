@@ -7,7 +7,7 @@ An activity feed container component rendering chronological logs, user avatar b
 ## 1. Import Path
 
 ```javascript
-import ActivitiesFeedCard from "@/components/Shared/DataDisplay/ActivitiesFeed/ActivitiesFeedCard";
+import ActivitiesFeedCard from '@/components/Shared/DataDisplay/ActivitiesFeed/ActivitiesFeedCard';
 ```
 
 ---
@@ -25,11 +25,9 @@ import ActivitiesFeedCard from "@/components/Shared/DataDisplay/ActivitiesFeed/A
 ## 3. Usage Example
 
 ```jsx
-import ActivitiesFeedCard from "@/components/Shared/DataDisplay/ActivitiesFeed/ActivitiesFeedCard";
+import ActivitiesFeedCard from '@/components/Shared/DataDisplay/ActivitiesFeed/ActivitiesFeedCard';
 
 export default function RecentTeamFeed({ activities }) {
-  return (
-    <ActivitiesFeedCard title="Team Activity Log" activities={activities} />
-  );
+    return <ActivitiesFeedCard title="Team Activity Log" activities={activities} />;
 }
 ```

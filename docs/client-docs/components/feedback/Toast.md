@@ -7,7 +7,7 @@ A floating system notification toast component supporting multiple status types 
 ## 1. Import Path
 
 ```javascript
-import Toast from "@/components/Shared/Feedback/Toast/Toast";
+import Toast from '@/components/Shared/Feedback/Toast/Toast';
 ```
 
 ---
@@ -26,17 +26,11 @@ import Toast from "@/components/Shared/Feedback/Toast/Toast";
 ## 3. Usage Example
 
 ```jsx
-import Toast from "@/components/Shared/Feedback/Toast/Toast";
+import Toast from '@/components/Shared/Feedback/Toast/Toast';
 
 export default function NotificationToast({ toast, setToast }) {
-  if (!toast) return null;
+    if (!toast) return null;
 
-  return (
-    <Toast
-      message={toast.message}
-      type={toast.type}
-      onClose={() => setToast(null)}
-    />
-  );
+    return <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />;
 }
 ```

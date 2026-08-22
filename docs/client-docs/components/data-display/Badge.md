@@ -7,7 +7,7 @@ A compact status pill and counter badge primitive supporting semantic status var
 ## 1. Import Path
 
 ```javascript
-import Badge from "@/components/Shared/DataDisplay/Badge/Badge";
+import Badge from '@/components/Shared/DataDisplay/Badge/Badge';
 ```
 
 ---
@@ -27,22 +27,22 @@ import Badge from "@/components/Shared/DataDisplay/Badge/Badge";
 ## 3. Usage Example
 
 ```jsx
-import Badge from "@/components/Shared/DataDisplay/Badge/Badge";
+import Badge from '@/components/Shared/DataDisplay/Badge/Badge';
 
 export default function StatusBadges() {
-  return (
-    <div style={{ display: "flex", gap: "8px" }}>
-      <Badge variant="success" dot>
-        Active
-      </Badge>
-      <Badge variant="warning" dot>
-        Pending
-      </Badge>
-      <Badge variant="danger" dot>
-        Overdue
-      </Badge>
-      <Badge variant="info">Beta</Badge>
-    </div>
-  );
+    return (
+        <div style={{ display: 'flex', gap: '8px' }}>
+            <Badge variant="success" dot>
+                Active
+            </Badge>
+            <Badge variant="warning" dot>
+                Pending
+            </Badge>
+            <Badge variant="danger" dot>
+                Overdue
+            </Badge>
+            <Badge variant="info">Beta</Badge>
+        </div>
+    );
 }
 ```

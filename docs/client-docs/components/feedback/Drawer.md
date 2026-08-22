@@ -7,7 +7,7 @@ A slide-in side drawer panel primitive designed for detail views, record editors
 ## 1. Import Path
 
 ```javascript
-import Drawer from "@/components/Shared/Feedback/Drawer/Drawer";
+import Drawer from '@/components/Shared/Feedback/Drawer/Drawer';
 ```
 
 ---
@@ -28,21 +28,16 @@ import Drawer from "@/components/Shared/Feedback/Drawer/Drawer";
 ## 3. Usage Example
 
 ```jsx
-import Drawer from "@/components/Shared/Feedback/Drawer/Drawer";
+import Drawer from '@/components/Shared/Feedback/Drawer/Drawer';
 
 export default function LeadDetailDrawer({ isOpen, onClose, lead }) {
-  return (
-    <Drawer
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Lead Overview"
-      placement="right"
-    >
-      <div>
-        <h3>{lead?.name}</h3>
-        <p>Company: {lead?.company}</p>
-      </div>
-    </Drawer>
-  );
+    return (
+        <Drawer isOpen={isOpen} onClose={onClose} title="Lead Overview" placement="right">
+            <div>
+                <h3>{lead?.name}</h3>
+                <p>Company: {lead?.company}</p>
+            </div>
+        </Drawer>
+    );
 }
 ```

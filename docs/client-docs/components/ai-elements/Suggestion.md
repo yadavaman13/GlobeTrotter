@@ -7,10 +7,7 @@ A clickable suggested prompt pill component for quick starter questions and conv
 ## 1. Import Path
 
 ```javascript
-import {
-  Suggestion,
-  SuggestionsList,
-} from "@/components/ai-elements/suggestion/suggestion";
+import { Suggestion, SuggestionsList } from '@/components/ai-elements/suggestion/suggestion';
 ```
 
 ---
@@ -27,17 +24,15 @@ import {
 ## 3. Usage Example
 
 ```jsx
-import { SuggestionsList } from "@/components/ai-elements/suggestion/suggestion";
+import { SuggestionsList } from '@/components/ai-elements/suggestion/suggestion';
 
 const samplePrompts = [
-  "Summarize this quarter’s top 5 revenue deals",
-  "Which leads are overdue for follow-up?",
-  "Generate an invoice PDF for Acme Corp",
+    'Summarize this quarter’s top 5 revenue deals',
+    'Which leads are overdue for follow-up?',
+    'Generate an invoice PDF for Acme Corp',
 ];
 
 export default function StarterPrompts({ onChoosePrompt }) {
-  return (
-    <SuggestionsList suggestions={samplePrompts} onSelect={onChoosePrompt} />
-  );
+    return <SuggestionsList suggestions={samplePrompts} onSelect={onChoosePrompt} />;
 }
 ```

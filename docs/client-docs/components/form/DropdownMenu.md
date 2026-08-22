@@ -7,7 +7,7 @@ A floating contextual action menu that anchors to a trigger button, providing ac
 ## 1. Import Path
 
 ```javascript
-import DropdownMenu from "@/components/Shared/Form/DropdownMenu/DropdownMenu";
+import DropdownMenu from '@/components/Shared/Form/DropdownMenu/DropdownMenu';
 ```
 
 ---
@@ -26,31 +26,31 @@ import DropdownMenu from "@/components/Shared/Form/DropdownMenu/DropdownMenu";
 ## 3. Usage Example
 
 ```jsx
-import DropdownMenu from "@/components/Shared/Form/DropdownMenu/DropdownMenu";
-import IconButton from "@/components/Shared/Buttons/IconButton/IconButton";
-import { MoreVertical, Edit, Trash2, Download } from "lucide-react";
+import DropdownMenu from '@/components/Shared/Form/DropdownMenu/DropdownMenu';
+import IconButton from '@/components/Shared/Buttons/IconButton/IconButton';
+import { MoreVertical, Edit, Trash2, Download } from 'lucide-react';
 
 export default function RowActionMenu({ item, onEdit, onDelete, onExport }) {
-  const menuItems = [
-    { label: "Edit Details", icon: Edit, onClick: () => onEdit(item) },
-    { label: "Export PDF", icon: Download, onClick: () => onExport(item) },
-    {
-      label: "Delete Record",
-      icon: Trash2,
-      danger: true,
-      onClick: () => onDelete(item),
-    },
-  ];
+    const menuItems = [
+        { label: 'Edit Details', icon: Edit, onClick: () => onEdit(item) },
+        { label: 'Export PDF', icon: Download, onClick: () => onExport(item) },
+        {
+            label: 'Delete Record',
+            icon: Trash2,
+            danger: true,
+            onClick: () => onDelete(item),
+        },
+    ];
 
-  return (
-    <DropdownMenu
-      trigger={
-        <IconButton ariaLabel="More options" variant="ghost" size="sm">
-          <MoreVertical size={16} />
-        </IconButton>
-      }
-      items={menuItems}
-    />
-  );
+    return (
+        <DropdownMenu
+            trigger={
+                <IconButton ariaLabel="More options" variant="ghost" size="sm">
+                    <MoreVertical size={16} />
+                </IconButton>
+            }
+            items={menuItems}
+        />
+    );
 }
 ```

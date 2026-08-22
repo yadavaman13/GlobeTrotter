@@ -1,0 +1,303 @@
+@use '../../../styles/variables';
+
+.analytics-chart-card {
+    background-color: variables.$color-gray-50;
+    border: none;
+    border-radius: variables.$radius-medium;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 100%;
+
+    @include variables.transition-ease;
+
+    .card-top-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .card-header-icon {
+                color: variables.$color-gray-500;
+                display: flex;
+                align-items: center;
+            }
+
+            .card-title-text {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-sm;
+                font-weight: 600;
+                color: variables.$color-gray-800;
+            }
+
+            .info-icon {
+                color: variables.$color-gray-400;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+
+                @include variables.transition-ease;
+
+                &:hover {
+                    color: variables.$color-primary;
+                }
+            }
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+
+            .action-dot-btn,
+            .action-link-btn {
+                border: none;
+                background: transparent;
+                padding: 4px;
+                cursor: pointer;
+                color: variables.$color-gray-400;
+                display: flex;
+                align-items: center;
+                border-radius: 4px;
+
+                @include variables.transition-ease;
+
+                &:hover {
+                    color: variables.$color-primary;
+                    background-color: variables.$color-gray-50;
+                }
+            }
+        }
+    }
+
+    .card-value-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 8px;
+
+        .large-value {
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-xxl;
+            font-weight: 700;
+            color: variables.$color-primary;
+        }
+
+        .trend-badge {
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-xxl;
+            font-weight: 700;
+            padding: 0;
+            background: transparent;
+
+            &.positive {
+                color: variables.$color-success;
+            }
+
+            &.negative {
+                color: variables.$color-danger;
+            }
+        }
+    }
+
+    .card-subtitle-line {
+        margin-bottom: 16px;
+
+        .dashed-underline {
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-sm;
+            font-weight: 600;
+            color: variables.$color-gray-400;
+            border-bottom: 1px dashed variables.$color-gray-300;
+            padding-bottom: 2px;
+            cursor: help;
+        }
+    }
+
+    .card-chart-wrapper {
+        position: relative;
+        width: 100%;
+        margin-top: auto;
+
+        .svg-line-chart {
+            width: 100%;
+            height: auto;
+            display: block;
+
+            .y-grid-line-group {
+                .y-tick-label {
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-xxs;
+                    fill: #4b5563;
+                    font-weight: 600;
+                    text-anchor: end;
+                }
+
+                .grid-line {
+                    stroke: #dcdcdc;
+                    stroke-width: 1.2;
+                    stroke-dasharray: 2 2;
+                }
+            }
+
+            .x-tick-label {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-xxs;
+                fill: #4b5563;
+                font-weight: 600;
+                text-anchor: middle;
+            }
+
+            .chart-hover-line {
+                stroke: #9ca3af;
+                stroke-width: 1.2;
+                stroke-dasharray: 2 2;
+            }
+
+            .chart-path-line {
+                fill: none;
+                stroke-width: 2.6;
+                stroke-linecap: round;
+
+                &.primary-solid {
+                    stroke: #6366f1; // Solid Indigo primary curve color
+                }
+
+                &.secondary-dashed {
+                    stroke: #3b82f6; // Blue secondary curve color
+                    stroke-dasharray: 3 3;
+                    stroke-width: 2;
+                }
+            }
+
+            .anchor-circle {
+                &.primary {
+                    fill: #6366f1;
+                    stroke: variables.$color-white;
+                    stroke-width: 1.5;
+                }
+
+                &.secondary {
+                    fill: #3b82f6;
+                    stroke: variables.$color-white;
+                    stroke-width: 1.5;
+                }
+            }
+        }
+
+        .chart-legend-row {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+
+            .legend-item {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                .legend-line {
+                    width: 20px;
+                    height: 4px;
+                    border-radius: 2px;
+                    display: block;
+
+                    &.solid-purple {
+                        background-color: variables.$color-indigo-light;
+                    }
+
+                    &.dashed-blue {
+                        border-top: 3px dashed #3b82f6;
+                        height: 0;
+                        width: 20px;
+                    }
+                }
+
+                .legend-label {
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-xs;
+                    font-weight: 600;
+                    color: variables.$color-gray-500;
+                }
+            }
+        }
+    }
+
+    // Loading skeleton layouts
+    &.loading-skeleton-state {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .skeleton-header-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .skeleton-circle-icon {
+                width: 16px;
+                height: 16px;
+                border-radius: 4px;
+            }
+
+            .skeleton-title-text {
+                width: 100px;
+                height: 14px;
+                border-radius: 4px;
+            }
+        }
+
+        .skeleton-value-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .skeleton-value {
+                width: 120px;
+                height: 32px;
+                border-radius: 6px;
+            }
+
+            .skeleton-trend {
+                width: 50px;
+                height: 18px;
+                border-radius: 4px;
+            }
+        }
+
+        .skeleton-subtitle {
+            width: 140px;
+            height: 12px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+
+        .skeleton-chart-box {
+            width: 100%;
+            height: 130px;
+            border-radius: 8px;
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, #f1f1f1 25%, #f9f9f9 50%, #f1f1f1 75%);
+            background-size: 200% 100%;
+            animation: skeleton-shimmer 1.5s infinite linear;
+        }
+    }
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}

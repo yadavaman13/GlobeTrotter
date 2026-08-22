@@ -1,0 +1,165 @@
+@use '../../../../styles/variables';
+
+.kpi-line-chart-card {
+    background-color: variables.$color-white;
+    border-radius: 18px;
+    border: 1px solid variables.$color-gray-100;
+    padding: 20px 24px 18px;
+    box-shadow: 0 4px 20px rgb(0 0 0 / 3%);
+    width: 100%;
+    max-width: 480px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    // Header Row
+    .kpi-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+
+        .kpi-card-title {
+            font-family: variables.$font-sans;
+            font-size: variables.$font-size-lg;
+            font-weight: 700;
+            color: variables.$color-gray-900;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .kpi-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .kpi-period-dropdown {
+                width: auto;
+
+                .shared-dropdown-trigger {
+                    height: 32px;
+                    padding: 4px 12px;
+                    font-size: variables.$font-size-sm;
+                    font-weight: 600;
+                    color: variables.$color-gray-900;
+                    border-radius: 10px;
+                    border: none;
+                    outline: none;
+                    box-shadow: none;
+                    background-color: variables.$color-gray-100;
+                    gap: 6px;
+
+                    &:hover:not(:disabled) {
+                        background-color: variables.$color-gray-200;
+                    }
+
+                    &:focus-visible {
+                        border: none;
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            .kpi-expand-btn {
+                width: 32px;
+                height: 32px;
+                border-radius: 10px;
+                border: 1px solid variables.$color-gray-100;
+                background-color: variables.$color-white;
+                color: variables.$color-gray-800;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                flex-shrink: 0;
+
+                &:hover {
+                    background-color: variables.$color-gray-50;
+                    border-color: variables.$color-gray-200;
+                    color: variables.$color-gray-900;
+                }
+            }
+        }
+    }
+
+    // Chart Canvas Container
+    .kpi-chart-body {
+        width: 100%;
+        margin-left: -10px; // Offset left padding for grid text alignment
+
+        .shared-chart-container {
+            padding: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+
+            .chart-grid-group {
+                .grid-line {
+                    stroke: #f1f5f9;
+                    stroke-dasharray: 4 4;
+                }
+
+                .y-axis-text {
+                    font-family: variables.$font-sans;
+                    font-size: variables.$font-size-sm;
+                    fill: #94a3b8;
+                    font-weight: 500;
+                }
+            }
+
+            .x-axis-text {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-sm;
+                fill: #64748b;
+                font-weight: 500;
+
+                &.hovered {
+                    fill: #0f172a;
+                    font-weight: 700;
+                }
+            }
+
+            .chart-line {
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+        }
+    }
+
+    // Bottom Custom Legend Row
+    .kpi-card-legend {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        margin-top: 10px;
+        padding-top: 8px;
+
+        .kpi-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .legend-solid-line {
+                width: 16px;
+                height: 2.5px;
+                border-radius: 2px;
+                background-color: variables.$color-blue-dark;
+            }
+
+            .legend-dashed-line {
+                width: 16px;
+                height: 0;
+                border-bottom: 2px dashed #cbd5e1;
+            }
+
+            .legend-text {
+                font-family: variables.$font-sans;
+                font-size: variables.$font-size-sm;
+                font-weight: 600;
+                color: variables.$color-gray-600;
+            }
+        }
+    }
+}

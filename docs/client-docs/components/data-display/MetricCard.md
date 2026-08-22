@@ -7,7 +7,7 @@ A standalone numerical metric display card designed for summary analytics, badge
 ## 1. Import Path
 
 ```javascript
-import MetricCard from "@/components/Shared/DataDisplay/MetricCard/MetricCard";
+import MetricCard from '@/components/Shared/DataDisplay/MetricCard/MetricCard';
 ```
 
 ---
@@ -27,17 +27,17 @@ import MetricCard from "@/components/Shared/DataDisplay/MetricCard/MetricCard";
 ## 3. Usage Example
 
 ```jsx
-import MetricCard from "@/components/Shared/DataDisplay/MetricCard/MetricCard";
+import MetricCard from '@/components/Shared/DataDisplay/MetricCard/MetricCard';
 
 export default function AnalyticsSummary() {
-  return (
-    <MetricCard
-      label="Avg. Deal Velocity"
-      value="14.2 Days"
-      subtitle="Calculated over past 90 days"
-      badgeText="Fast"
-      badgeVariant="success"
-    />
-  );
+    return (
+        <MetricCard
+            label="Avg. Deal Velocity"
+            value="14.2 Days"
+            subtitle="Calculated over past 90 days"
+            badgeText="Fast"
+            badgeVariant="success"
+        />
+    );
 }
 ```

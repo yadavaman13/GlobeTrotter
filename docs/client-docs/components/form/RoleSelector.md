@@ -7,7 +7,7 @@ A visual selection component allowing users to choose an organizational role (e.
 ## 1. Import Path
 
 ```javascript
-import RoleSelector from "@/components/Shared/Form/RoleSelector/RoleSelector";
+import RoleSelector from '@/components/Shared/Form/RoleSelector/RoleSelector';
 ```
 
 ---
@@ -26,20 +26,20 @@ import RoleSelector from "@/components/Shared/Form/RoleSelector/RoleSelector";
 ## 3. Usage Example
 
 ```jsx
-import { useState } from "react";
-import RoleSelector from "@/components/Shared/Form/RoleSelector/RoleSelector";
+import { useState } from 'react';
+import RoleSelector from '@/components/Shared/Form/RoleSelector/RoleSelector';
 
 export default function OnboardingRoleStep({ onSelectRole }) {
-  const [role, setRole] = useState("developer");
+    const [role, setRole] = useState('developer');
 
-  return (
-    <RoleSelector
-      selectedRole={role}
-      onChange={(newRole) => {
-        setRole(newRole);
-        onSelectRole(newRole);
-      }}
-    />
-  );
+    return (
+        <RoleSelector
+            selectedRole={role}
+            onChange={(newRole) => {
+                setRole(newRole);
+                onSelectRole(newRole);
+            }}
+        />
+    );
 }
 ```

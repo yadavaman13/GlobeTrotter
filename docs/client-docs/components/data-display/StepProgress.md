@@ -7,7 +7,7 @@ A multi-step progress indicator for onboarding wizards, registration steps, and 
 ## 1. Import Path
 
 ```javascript
-import StepProgress from "@/components/Shared/DataDisplay/StepProgress/StepProgress";
+import StepProgress from '@/components/Shared/DataDisplay/StepProgress/StepProgress';
 ```
 
 ---
@@ -24,15 +24,15 @@ import StepProgress from "@/components/Shared/DataDisplay/StepProgress/StepProgr
 ## 3. Usage Example
 
 ```jsx
-import StepProgress from "@/components/Shared/DataDisplay/StepProgress/StepProgress";
+import StepProgress from '@/components/Shared/DataDisplay/StepProgress/StepProgress';
 
 const wizardSteps = [
-  { id: 1, title: "Account Details" },
-  { id: 2, title: "Company Setup" },
-  { id: 3, title: "Review & Confirm" },
+    { id: 1, title: 'Account Details' },
+    { id: 2, title: 'Company Setup' },
+    { id: 3, title: 'Review & Confirm' },
 ];
 
 export default function OnboardingWizard({ activeStep }) {
-  return <StepProgress steps={wizardSteps} currentStep={activeStep} />;
+    return <StepProgress steps={wizardSteps} currentStep={activeStep} />;
 }
 ```

@@ -1,0 +1,327 @@
+@use '@/styles/variables';
+
+/* Shared Accordion Main Container */
+.shared-accordion-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+
+    /* Variant 1: Default (Clean dividing lines between items) */
+    &.variant-default {
+        gap: 0;
+
+        .shared-accordion-item {
+            border-bottom: 1px solid #e2e8f0;
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .accordion-header {
+                padding: 16px 0;
+                background: transparent;
+
+                &:hover:not([aria-disabled='true']) {
+                    .header-title {
+                        color: variables.$color-blue-dark;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Variant 2: Bordered (Clean separated rounded card items) */
+    &.variant-bordered {
+        gap: 12px;
+
+        .shared-accordion-item {
+            border: 1px solid variables.$color-gray-200;
+            border-radius: 12px;
+            background-color: variables.$color-white;
+            overflow: hidden;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+
+            &:hover:not(.is-disabled) {
+                border-color: variables.$color-gray-300;
+            }
+
+            &.is-expanded {
+                border-color: variables.$color-gray-300;
+                box-shadow: 0 4px 12px rgb(0 0 0 / 4%);
+            }
+
+            .accordion-header {
+                padding: 16px 20px;
+                background-color: variables.$color-white;
+            }
+
+            .accordion-content-body {
+                padding: 0 20px 20px;
+            }
+        }
+    }
+
+    /* Variant 3: Filled (Soft light track headers with smooth active highlight) */
+    &.variant-filled {
+        gap: 8px;
+
+        .shared-accordion-item {
+            border-radius: 10px;
+            background-color: variables.$color-gray-50;
+            overflow: hidden;
+            transition: background-color 0.2s ease;
+
+            &.is-expanded {
+                background-color: variables.$color-gray-100;
+            }
+
+            .accordion-header {
+                padding: 14px 18px;
+                background-color: transparent;
+
+                &:hover:not([aria-disabled='true']) {
+                    background-color: variables.$color-gray-100;
+                }
+            }
+
+            .accordion-content-body {
+                padding: 0 18px 18px;
+            }
+        }
+    }
+
+    /* Variant 4: Ghost (Minimal zero-border presentation) */
+    &.variant-ghost {
+        gap: 4px;
+
+        .shared-accordion-item {
+            border: none;
+            background: transparent;
+
+            .accordion-header {
+                padding: 12px 14px;
+                border-radius: 8px;
+                background: transparent;
+
+                &:hover:not([aria-disabled='true']) {
+                    background-color: variables.$color-gray-50;
+                }
+            }
+
+            .accordion-content-body {
+                padding: 0 14px 14px;
+            }
+        }
+    }
+
+    /* Size Variants */
+    &.size-sm {
+        .shared-accordion-item {
+            .accordion-header {
+                min-height: 44px;
+
+                .header-title {
+                    font-size: variables.$font-size-sm;
+                }
+
+                .header-subtitle {
+                    font-size: variables.$font-size-xs;
+                }
+            }
+
+            .accordion-content-body {
+                font-size: variables.$font-size-sm;
+            }
+        }
+    }
+
+    &.size-md {
+        .shared-accordion-item {
+            .accordion-header {
+                min-height: 52px;
+
+                .header-title {
+                    font-size: variables.$font-size-sm;
+                }
+
+                .header-subtitle {
+                    font-size: variables.$font-size-sm;
+                }
+            }
+
+            .accordion-content-body {
+                font-size: variables.$font-size-sm;
+            }
+        }
+    }
+
+    &.size-lg {
+        .shared-accordion-item {
+            .accordion-header {
+                min-height: 60px;
+
+                .header-title {
+                    font-size: variables.$font-size-md;
+                }
+
+                .header-subtitle {
+                    font-size: variables.$font-size-sm;
+                }
+            }
+
+            .accordion-content-body {
+                font-size: variables.$font-size-sm;
+            }
+        }
+    }
+}
+
+/* Individual Accordion Item Styles */
+.shared-accordion-item {
+    box-sizing: border-box;
+
+    &.is-disabled {
+        opacity: 0.5;
+
+        .accordion-header {
+            cursor: not-allowed;
+        }
+    }
+
+    /* Header Trigger */
+    .accordion-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        cursor: pointer;
+        user-select: none;
+        outline: none;
+        transition: background-color 0.15s ease-in-out;
+        box-sizing: border-box;
+
+        &:focus-visible {
+            box-shadow: inset 0 0 0 2px #2563eb;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 0;
+
+            .header-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 20px;
+                height: 20px;
+                color: variables.$color-gray-600;
+                flex-shrink: 0;
+                backface-visibility: hidden;
+
+                svg {
+                    display: block;
+                    width: 18px;
+                    height: 18px;
+                    transform: translateZ(0);
+                    backface-visibility: hidden;
+                }
+            }
+
+            .header-text-group {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+
+                .header-title {
+                    font-weight: 600;
+                    color: variables.$color-gray-900;
+                    line-height: 1.35;
+                    transition: color 0.15s ease;
+                }
+
+                .header-subtitle {
+                    color: variables.$color-gray-500;
+                    line-height: 1.3;
+                }
+            }
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+
+            .header-extra-actions {
+                display: flex;
+                align-items: center;
+            }
+
+            .accordion-chevron {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 20px;
+                height: 20px;
+                color: variables.$color-gray-500;
+                transform-origin: center center;
+                will-change: transform;
+                backface-visibility: hidden;
+                transition:
+                    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                    color 0.15s ease;
+
+                svg {
+                    display: block;
+                    width: 16px;
+                    height: 16px;
+                    transform: translateZ(0);
+                    backface-visibility: hidden;
+                }
+            }
+        }
+    }
+
+    &.is-expanded {
+        .accordion-header {
+            .header-right {
+                .accordion-chevron {
+                    transform: rotate(180deg);
+                    color: variables.$color-gray-900;
+                }
+            }
+        }
+
+        .accordion-content-wrapper {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+    }
+
+    /* Accordion Content Expand Wrapper - Jitter Free */
+    .accordion-content-wrapper {
+        display: grid;
+        grid-template-rows: 0fr;
+        opacity: 0;
+        will-change: grid-template-rows, opacity;
+        transition:
+            grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+
+        .accordion-content-body {
+            min-height: 0;
+            color: variables.$color-gray-700;
+            line-height: 1.6;
+            box-sizing: border-box;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+    }
+}
