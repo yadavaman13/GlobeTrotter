@@ -10,6 +10,8 @@ import { pdfRouter } from './modules/pdf/index.js';
 import { tripRouter } from './modules/trips/index.js';
 import { cityRouter } from './modules/city/index.js';
 import { activityRouter } from './modules/activity/index.js';
+import { publicRouter } from './modules/public/index.js';
+import { savedDestinationRouter } from './modules/saved-destinations/index.js';
 import { errorHandler } from './modules/auth/middleware/errorHandler.js';
 
 const app = express();
@@ -33,6 +35,8 @@ app.use('/api/rag', ragRouter);
 app.use('/api/pdf', pdfRouter);
 app.use('/api/cities', cityRouter);
 app.use('/api/activities', activityRouter);
+app.use('/api/public', publicRouter);
+app.use('/api/saved-destinations', savedDestinationRouter);
 
 app.use(errorHandler);
 

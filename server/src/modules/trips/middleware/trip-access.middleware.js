@@ -1,4 +1,5 @@
 import { getTripById } from '../../../dao/trip.dao.js';
+import { isTripSharedWithUser } from '../../../dao/tripShare.dao.js';
 import { sendResponse } from '../../../utils/response.utlis.js';
 
 /**
@@ -79,6 +80,13 @@ export async function verifyTripAccess(req, res, next) {
             trip.visibility === 'public' ||
             req.user.role === 'admin'
         ) {
+            req.trip = trip;
+            return next();
+        }
+
+        // Allow if trip is shared with user
+        const isShared = await isTripSharedWithUser(trip.id, req.user.id);
+        if (isShared) {
             req.trip = trip;
             return next();
         }
