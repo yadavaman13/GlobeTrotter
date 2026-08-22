@@ -8,7 +8,7 @@ Globe Trotter is a collaborative travel planning and destination discovery platf
 - **Presentation Video Link:** [https://globetrotter.demo.com](https://globetrotter.demo.com)
 
 **Project Screenshot:**
-![Project Screenshot](client/src/components/Shared/Assests/Home.png)
+![Project Screenshot](https://ik.imagekit.io/cuq3fe9wm/sheryians-backend/Globetrotter-landing-page.png)
 
 ## Table of Contents
 
