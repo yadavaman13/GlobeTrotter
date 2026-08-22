@@ -326,7 +326,7 @@ export default function MyTripsPage() {
                                                 <span className="budget-label">
                                                     Budget:{' '}
                                                     <strong className="text-ink">
-                                                        ${trip.budgetAmount || '0'}
+                                                        ₹{trip.budgetAmount || '0'}
                                                     </strong>
                                                 </span>
                                                 <button
@@ -372,7 +372,7 @@ export default function MyTripsPage() {
                                                 <span className="spent-label">
                                                     Spent:{' '}
                                                     <strong className="text-ink">
-                                                        ${trip.spent || trip.budgetAmount || '0'}
+                                                        ₹{trip.spent || trip.budgetAmount || '0'}
                                                     </strong>
                                                 </span>
                                                 {trip.rating && (
