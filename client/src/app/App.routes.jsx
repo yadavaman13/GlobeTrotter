@@ -4,6 +4,7 @@ import DashboardLayout from '@/app/features/dashboard/DashboardLayout/DashboardL
 import DashboardIndex from '@/app/features/dashboard/DashboardIndex';
 import ProtectedRoute from '@/app/features/auth/components/ProtectedRoute';
 import { loadFeatureRoutes } from './routes.loader';
+import LandingPage from '@/app/features/landing/LandingPage';
 
 // Auto-discover all *.routes.jsx across all feature modules
 const { userRoutes, adminRoutes, publicRoutes } = loadFeatureRoutes();
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Navigate to="/login" replace />,
+                element: <LandingPage />,
             },
             // Auto-discovered public feature routes (auth, showcase, etc.)
             ...publicRoutes,
