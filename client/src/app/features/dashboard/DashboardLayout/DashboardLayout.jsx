@@ -7,7 +7,7 @@ import Dialog from '@/components/Shared/Feedback/Dialog';
 import { Drawer, NotificationFeed } from '@/components/Shared/Feedback/Drawer';
 import { useAuth } from '../../auth/hooks/useAuth';
 import { useDerivedProfile } from '../../auth/hooks/useDerivedProfile';
-import { Home as HomeIcon, TrendingUp as AnalyticsIcon, Bot as BotIcon } from 'lucide-react';
+import { Home as HomeIcon, TrendingUp as AnalyticsIcon, Bot as BotIcon, Users as UsersIcon } from 'lucide-react';
 import './DashboardLayout.scss';
 
 function DashboardLayout({ onLogout }) {
@@ -36,7 +36,7 @@ function DashboardLayout({ onLogout }) {
 
     const roleSegment = user?.role?.toLowerCase() === 'admin' ? 'admin' : 'user';
 
-    const sidebarNavItems = [
+    const baseNavItems = [
         {
             label: 'Home',
             icon: <HomeIcon />,
@@ -51,6 +51,19 @@ function DashboardLayout({ onLogout }) {
             icon: <AnalyticsIcon />,
         },
     ];
+
+    const sidebarNavItems =
+        user?.role?.toLowerCase() === 'admin'
+            ? [
+                  ...baseNavItems,
+                  {
+                      label: 'Users',
+                      icon: <UsersIcon />,
+                      path: '/dashboard/admin/users',
+                      roles: ['admin'],
+                  },
+              ]
+            : baseNavItems;
 
     const handleToggleSidebar = () => {
         setIsSidebarCollapsed((prev) => {

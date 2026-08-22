@@ -22,6 +22,11 @@ export const registerValidator = [
     body('password')
         .isLength({ min: 6 })
         .withMessage('Password must be at least 6 characters long'),
+    body('phone').optional().trim(),
+    body('city').optional().trim(),
+    body('country').optional().trim(),
+    body('additionalInformation').optional().trim(),
+    body('googleId').optional().trim(),
     validateRequest,
 ];
 

@@ -1,0 +1,72 @@
+@use '@/styles/variables' as variables;
+
+.action-dialog-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: variables.$spacing-base 0;
+    gap: variables.$spacing-sm;
+
+    .dialog-icon-badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        border-radius: variables.$radius-full;
+        margin-bottom: variables.$spacing-sm;
+
+        &.success {
+            background-color: variables.$color-success-light;
+            color: variables.$color-success;
+        }
+
+        &.warning {
+            background-color: variables.$color-warning-light;
+            color: variables.$color-warning;
+        }
+
+        &.primary {
+            background-color: variables.$color-info-light;
+            color: variables.$color-info;
+        }
+
+        &.danger {
+            background-color: variables.$color-danger-light;
+            color: variables.$color-danger;
+        }
+    }
+
+    .dialog-description {
+        font-size: variables.$font-size-md;
+        color: variables.$color-ink;
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .dialog-subtext {
+        font-size: variables.$font-size-caption-sm;
+        color: variables.$color-muted;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    .dialog-actions-row {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: variables.$spacing-sm;
+        width: 100%;
+        margin-top: variables.$spacing-base;
+
+        .danger-action-btn {
+            color: variables.$color-danger;
+            border-color: variables.$color-danger;
+
+            &:hover {
+                background-color: variables.$color-danger-light;
+            }
+        }
+    }
+}

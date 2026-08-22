@@ -1,0 +1,118 @@
+@use '@/styles/variables' as variables;
+
+.popular-cities-chart-card {
+    display: flex;
+    flex-direction: column;
+    background-color: variables.$color-surface-card;
+    border: 1px solid variables.$color-hairline;
+    border-radius: variables.$radius-md;
+    padding: variables.$spacing-base;
+    box-shadow: variables.$shadow-card;
+
+    .card-header {
+        margin-bottom: variables.$spacing-md;
+
+        .chart-title {
+            font-size: variables.$font-size-md;
+            font-weight: 600;
+            color: variables.$color-ink;
+            margin: 0 0 variables.$spacing-xxs;
+        }
+
+        .chart-caption {
+            font-size: variables.$font-size-micro;
+            color: variables.$color-muted;
+        }
+    }
+
+    .cities-bar-list {
+        display: flex;
+        flex-direction: column;
+        gap: variables.$spacing-sm;
+
+        .city-bar-row {
+            display: flex;
+            align-items: center;
+            gap: variables.$spacing-base;
+
+            .city-info-col {
+                display: flex;
+                align-items: center;
+                gap: variables.$spacing-xs;
+                min-width: 130px;
+
+                .city-rank {
+                    font-size: variables.$font-size-micro;
+                    font-weight: 700;
+                    color: variables.$color-muted-soft;
+                    width: 20px;
+                }
+
+                .city-meta {
+                    display: flex;
+                    flex-direction: column;
+
+                    .city-name {
+                        font-size: variables.$font-size-caption-sm;
+                        font-weight: 600;
+                        color: variables.$color-ink;
+                    }
+
+                    .city-country {
+                        font-size: variables.$font-size-badge;
+                        color: variables.$color-muted;
+                    }
+                }
+            }
+
+            .bar-track-wrapper {
+                position: relative;
+                flex: 1;
+                height: 24px;
+                background-color: variables.$color-surface-soft;
+                border-radius: variables.$radius-xs;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+
+                .bar-fill {
+                    height: 100%;
+                    background: linear-gradient(90deg, variables.$color-info, variables.$color-info-border);
+                    border-radius: variables.$radius-xs;
+                    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+
+                .visits-count {
+                    position: absolute;
+                    right: variables.$spacing-xs;
+                    font-size: variables.$font-size-badge;
+                    font-weight: 600;
+                    color: variables.$color-muted;
+                }
+            }
+
+            .popularity-badge {
+                display: flex;
+                align-items: center;
+                gap: variables.$spacing-xxs;
+                font-size: variables.$font-size-micro;
+                font-weight: 600;
+                color: variables.$color-warning;
+                background-color: variables.$color-warning-light;
+                padding: variables.$spacing-xxs variables.$spacing-xs;
+                border-radius: variables.$radius-xs;
+
+                .star-icon {
+                    fill: variables.$color-warning;
+                }
+            }
+        }
+    }
+
+    &.empty {
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+        color: variables.$color-muted;
+    }
+}

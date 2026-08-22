@@ -16,6 +16,7 @@ import {
     reorderActivitiesValidator,
     createCostValidator,
     updateCostValidator,
+    shareTripValidator,
 } from './trip.validator.js';
 
 // Controllers
@@ -27,6 +28,7 @@ import {
     deleteTrip,
     updateTripStatus,
     updateTripVisibility,
+    cloneTrip,
 } from './trip.controller.js';
 
 import {
@@ -54,6 +56,9 @@ import {
     deleteCost,
 } from './trip-cost.controller.js';
 
+import { getTripTimeline } from './trip-timeline.controller.js';
+import { shareTrip, listTripShares, revokeTripShare } from './trip-share.controller.js';
+
 const router = express.Router();
 
 // Require authentication for all trip management endpoints
@@ -70,6 +75,7 @@ router.patch('/:tripId', verifyTripOwner, updateTripValidator, updateTrip);
 router.delete('/:tripId', verifyTripOwner, deleteTrip);
 router.patch('/:tripId/status', verifyTripOwner, tripStatusValidator, updateTripStatus);
 router.patch('/:tripId/visibility', verifyTripOwner, tripVisibilityValidator, updateTripVisibility);
+router.post('/:tripId/clone', verifyTripAccess, cloneTrip);
 
 // ----------------------------------------------------
 // MODULE 7: TRIP STOPS / MULTI-CITY ITINERARY
@@ -116,5 +122,19 @@ router.get('/:tripId/costs', verifyTripAccess, listCosts);
 router.get('/:tripId/budget', verifyTripAccess, getBudgetSummary);
 router.patch('/:tripId/costs/:costId', verifyTripOwner, updateCostValidator, updateCost);
 router.delete('/:tripId/costs/:costId', verifyTripOwner, deleteCost);
+
+// ----------------------------------------------------
+// MODULE 10: TRIP TIMELINE & CALENDAR VIEWS
+// ----------------------------------------------------
+
+router.get('/:tripId/timeline', verifyTripAccess, getTripTimeline);
+
+// ----------------------------------------------------
+// MODULE 11: TRIP SHARING & COLLABORATION
+// ----------------------------------------------------
+
+router.post('/:tripId/shares', verifyTripOwner, shareTripValidator, shareTrip);
+router.get('/:tripId/shares', verifyTripAccess, listTripShares);
+router.delete('/:tripId/shares/:userId', verifyTripOwner, revokeTripShare);
 
 export default router;

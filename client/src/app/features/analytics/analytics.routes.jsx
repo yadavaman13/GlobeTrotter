@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router';
 import InsightsPage from './Insights/InsightsPage';
+import ReportsPage from './Reports/ReportsPage';
 
 export default {
     userRoutes: [
@@ -16,9 +17,7 @@ export default {
                 },
                 {
                     path: 'reports',
-                    element: (
-                        <div className="reports-section-placeholder">This is Reports Section</div>
-                    ),
+                    element: <ReportsPage />,
                 },
             ],
         },
@@ -37,9 +36,7 @@ export default {
                 },
                 {
                     path: 'reports',
-                    element: (
-                        <div className="reports-section-placeholder">This is Reports Section</div>
-                    ),
+                    element: <ReportsPage />,
                 },
             ],
         },
