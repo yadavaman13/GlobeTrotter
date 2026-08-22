@@ -77,63 +77,66 @@ Globe Trotter is a collaborative travel planning and destination discovery platf
 - **Test Runner Framework** --> Jest (`jest` v30) for integration tests, Node.js native test runner (`node --test`) for unit tests.
 - **API Integration Asserts** --> Supertest (`supertest` v7)
 
----
-
-**Overall Project Architecture:**
 ### Overall Project Architecture
 
 ```mermaid
 flowchart TB
     subgraph Presentation_Layer["🖥️ Presentation & Client Layer"]
-        AdminPortal["Admin / HR Dashboard"]
-        EmpPortal["Employee Self-Service Portal"]
-        BioApp["Biometric Device / Mobile Check-in"]
+        LandingPage["Landing Page (Discovery & Search)"]
+        Dashboard["Traveler Dashboard"]
+        CommunityPage["Community Feed (CRUD, Likes, Comments)"]
+        AiChat["Intelligent AI Travel Assistant Chat"]
+        InsightsPage["Analytics & Budget Insights (ECharts)"]
     end
 
     subgraph Gateway_Layer["🛡️ API Gateway & Security Layer"]
-        AuthMiddleware["JWT & Refresh Token Validator"]
-        RBAC["Role-Based Access Control (Admin | HR | Employee)"]
-        AuditInterceptor["Audit Log Interceptor"]
+        AuthMiddleware["JWT HTTPOnly Cookie Validator"]
+        RBAC["Role-Based Access Control (User / Admin)"]
+        ValidationMiddleware["Request Validations (Express Validator / Zod)"]
     end
 
-    subgraph Core_Services["⚙️ HRMS Domain Services"]
-        OrgService["Organization & Setup Service"]
-        EmpService["Employee & Lifecycle Service"]
-        WorkScheduleService["Shift & Schedule Engine"]
-        AttendanceEngine["Attendance & Overtime Engine"]
-        LeaveLedgerEngine["Leave & Balance Ledger Engine"]
-        PayrollEngine["Payroll & Deduction Computation Engine"]
-        NotificationService["Notification Dispatcher"]
+    subgraph Core_Services["⚙️ GlobeTrotter Domain Services"]
+        AuthService["Auth & Verification OTP Service"]
+        CityService["City & Region Discovery Service"]
+        ActivityService["Activity Catalog Service"]
+        TripService["Trip & Stops Itinerary Planner"]
+        BudgetService["Expense Tracker & Calculation Service"]
+        AiRAGService["LangChain RAG Context Service"]
+        PdfService["Invoice & Receipts Engine (PDFKit)"]
     end
 
-    subgraph Data_Layer["🗄️ PostgreSQL Database (pgcrypto & Drizzle ORM)"]
+    subgraph Data_Layer["🗄️ PostgreSQL Database (Drizzle ORM) & Redis"]
         direction TB
-        OrgTables["Organizations, Departments, Locations"]
-        UserTables["Users, Refresh Tokens"]
-        EmpTables["Employees, Private Info, Identifiers, Documents"]
-        ScheduleTables["Work Schedules, Shift Days, Holidays"]
-        AttendanceTables["Attendance Records, Sessions, Adjustments"]
-        LeaveTables["Leave Allocations, Requests, Balance Ledger"]
-        PayrollTables["Salary Structures, Periods, Payslips, Lines"]
-        AuditTables["Audit Logs, Notifications"]
+        UserTables["Users & Verification OTPs"]
+        CityTables["Cities & Categories"]
+        ActivityTables["Activities & Images"]
+        TripTables["Trips, Stops & Schedules"]
+        BudgetTables["Expense Categories & Logs"]
+        CommunityTables["Community Posts, Likes & Comments"]
+        RedisCache["Redis Blacklist & Sessions Cache"]
+    end
+
+    subgraph Third_Party["☁️ Third-Party Integrations"]
+        GoogleAI["Pinecone & Gemini (LLM RAG)"]
+        Mailjet["Mailjet SMTP (OTP Emails)"]
+        ImageKit["ImageKit Storage"]
     end
 
     Presentation_Layer --> Gateway_Layer
     Gateway_Layer --> Core_Services
 
-    OrgService --> OrgTables
-    EmpService --> UserTables & EmpTables
-    WorkScheduleService --> ScheduleTables
-    AttendanceEngine --> AttendanceTables
-    LeaveLedgerEngine --> LeaveTables
-    PayrollEngine --> PayrollTables
-    NotificationService --> AuditTables
-    AuditInterceptor --> AuditTables
+    AuthService --> UserTables & RedisCache & Mailjet
+    CityService --> CityTables
+    ActivityService --> ActivityTables & ImageKit
+    TripService --> TripTables
+    BudgetService --> BudgetTables
+    AiRAGService --> GoogleAI
+    PdfService --> TripTables
 
-    AttendanceEngine -.->|"Syncs Payable Days"| PayrollEngine
-    LeaveLedgerEngine -.->|"Syncs Unpaid Leaves"| PayrollEngine
-    EmpService -.->|"Triggers Welcome"| NotificationService
-    LeaveLedgerEngine -.->|"Approval Alerts"| NotificationService
+    TripService -.->|"Aggregates Expenses"| BudgetService
+    TripService -.->|"Exports PDF"| PdfService
+    AiRAGService -.->|"Reads Context"| TripTables & CityTables
+```
 
 **Activity Diagram:**
 
