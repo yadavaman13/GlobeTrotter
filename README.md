@@ -4,8 +4,8 @@ We are team **ByteBuilders** and we building **Globe Trotter**.
 
 Globe Trotter is a collaborative travel planning and destination discovery platform. It provides users with destination discovery, nested activity curation, multi-city stops scheduling, trip sharing, budget logging, and an intelligent context-aware AI travel assistant. Built on a modern tech stack utilizing React, Node.js, Express, PostgreSQL, Drizzle ORM, and Redis, the platform focuses on modular features, strong RBAC middleware, and optimized page speed performance.
 
-- **Project Hosted Link:** [http://localhost:5173](http://localhost:5173)
-- **Presentation Video Link:** [https://globetrotter.demo.com](https://globetrotter.demo.com)
+- **Project Hosted Link:** Will be added soon
+- **Presentation Video Link:** (https://drive.google.com/drive/folders/1bDo_W6TpQ6SvcA6N0bBELn6hQhF7T3QH?usp=drive_link)
 
 **Project Screenshot:**
 ![Project Screenshot](https://ik.imagekit.io/cuq3fe9wm/sheryians-backend/Globetrotter-landing-page.png)
